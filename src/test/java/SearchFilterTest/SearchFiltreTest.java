@@ -7,8 +7,18 @@ import org.junit.jupiter.api.Test;
 class SearchFiltreTest {
 
 	@Test
-	void test() {
+	void UserCouldAddAFilter() {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	void UserCouldDeleteAFilter() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void FilterAreCorrect() {
+		fail("Not yet implemented");
+	}
+	
 }

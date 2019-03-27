@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class DFSDirectoryTest {
 
 	@Test
-	void test() {
+	void DfsShouldBeRight() {
 		fail("Not yet implemented");
 	}
 
