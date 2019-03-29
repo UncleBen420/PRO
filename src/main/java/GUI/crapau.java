@@ -2,6 +2,10 @@ package GUI;
 import java.io.File;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -229,17 +233,30 @@ public class crapau extends javax.swing.JFrame {
          GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGap(0, 269, Short.MAX_VALUE)
       );
+      
+      JButton btnQuit = new JButton("Quit");
+      btnQuit.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		System.exit(0);
+      	}
+      });
 
       javax.swing.GroupLayout EditLayout = new javax.swing.GroupLayout(Edit);
-      Edit.setLayout(EditLayout);
       EditLayout.setHorizontalGroup(
-         EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 0, Short.MAX_VALUE)
+      	EditLayout.createParallelGroup(Alignment.LEADING)
+      		.addGroup(Alignment.TRAILING, EditLayout.createSequentialGroup()
+      			.addContainerGap(472, Short.MAX_VALUE)
+      			.addComponent(btnQuit)
+      			.addGap(25))
       );
       EditLayout.setVerticalGroup(
-         EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 259, Short.MAX_VALUE)
+      	EditLayout.createParallelGroup(Alignment.LEADING)
+      		.addGroup(Alignment.TRAILING, EditLayout.createSequentialGroup()
+      			.addContainerGap(197, Short.MAX_VALUE)
+      			.addComponent(btnQuit)
+      			.addGap(37))
       );
+      Edit.setLayout(EditLayout);
 
       javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
       BackGround.setLayout(BackGroundLayout);
@@ -334,5 +351,4 @@ public class crapau extends javax.swing.JFrame {
    private javax.swing.JScrollPane jScrollPane1;
    private javax.swing.JTree jTree1;
    private javax.swing.JPanel jTree_Panel;
-   // End of variables declaration//GEN-END:variables
 }
