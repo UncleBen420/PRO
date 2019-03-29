@@ -1,4 +1,4 @@
-
+package GUI;
 import java.io.File;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -91,7 +91,7 @@ public class crapau extends javax.swing.JFrame {
       Filters.setBackground(new java.awt.Color(85, 65, 118));
 
       jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-      jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_filter_25px.png"))); // NOI18N
+      jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("./images/icons8_filter_25px.png"))); // NOI18N
       jLabel4.setText("Filters");
 
       javax.swing.GroupLayout FiltersLayout = new javax.swing.GroupLayout(Filters);
@@ -111,7 +111,7 @@ public class crapau extends javax.swing.JFrame {
       Settings.setBackground(new java.awt.Color(85, 65, 118));
 
       jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-      jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_settings_25px.png"))); // NOI18N
+      jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("./images/icons8_settings_25px.png"))); // NOI18N
       jLabel5.setText("Settings");
 
       javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
@@ -131,7 +131,7 @@ public class crapau extends javax.swing.JFrame {
       Navigate_Titre.setBackground(new java.awt.Color(85, 65, 118));
 
       jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-      jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_opened_folder_25px_2.png"))); // NOI18N
+      jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("./images/icons8_opened_folder_25px_2.png"))); // NOI18N
       jLabel3.setText("Navigate");
       jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
          public void mouseClicked(java.awt.event.MouseEvent evt) {
