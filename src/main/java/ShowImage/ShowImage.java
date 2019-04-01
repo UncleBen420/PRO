@@ -1,64 +1,32 @@
 package ShowImage;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.swing.*;
+import javax.imageio.ImageIO;
 
-@SuppressWarnings("serial")
-public class ShowImage extends JFrame {
 
-	public ShowImage() {
+public class ShowImage {
 
-        initUI();
-    }
+     public static void main(String[] arguments) throws IOException {
 
-    private void initUI() {
+        JPanel panel = new JPanel();
 
-        ImageIcon ii = loadImage();
+        BufferedImage image = ImageIO.read(new File("src/main/java/ShowImage/images/ftl.jpg"));
+        JLabel label = new JLabel(new ImageIcon(image));
+        panel.add(label);
 
-        JLabel label = new JLabel(ii);
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("JPanel Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        createLayout(label);
+        // add the Jpanel to the main window
+        frame.add(panel);
 
-        setTitle("Image");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
+        frame.pack();
+        frame.setVisible(true);
 
-    private ImageIcon loadImage() {
-
-        ImageIcon ii = new ImageIcon("src/main/java/ShowImage/images/ftl.jpg");
-        return ii;
-    }
-
-    private void createLayout(JComponent... arg) {
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-        );
-
-        gl.setVerticalGroup(gl.createParallelGroup()
-                .addComponent(arg[0])
-        );
-
-        pack();
-    }
-
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-        	ShowImage ex = new ShowImage();
-            ex.setVisible(true);
-        });
     }
 }
