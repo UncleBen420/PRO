@@ -1,12 +1,14 @@
 package DirectoryTree;
 
 import Image.Image;
+
 import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
-
+import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Arrays;
 
 public class DirectoryTree implements Filtrable {
 	
@@ -60,6 +62,33 @@ public class DirectoryTree implements Filtrable {
 		
 	}
 	
+	
+   public void setDirectoryTree(File rootDirectory) {
+		
+	    
+
+		if (rootDirectory.isDirectory()) {
+
+			File[] childrenDir = rootDirectory.listFiles();
+			Arrays.sort(childrenDir);
+
+			for (File child : childrenDir) {
+				
+				if (child.isDirectory()) {
+					DirectoryTree temp = this.addChild(child.getName());
+					temp.setDirectoryTree(child);
+					
+				}else {
+					Image temp = new Image(child.getName());
+					this.addImage(temp);
+				}
+
+			}
+		}
+		
+	}
+	
+	
 	public void Filtre(SearchFilter filter) {
 		isFiltred = filter;
 	}
@@ -90,6 +119,10 @@ public class DirectoryTree implements Filtrable {
 	
 	public SearchFilter getFilter() {
 		return isFiltred;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
