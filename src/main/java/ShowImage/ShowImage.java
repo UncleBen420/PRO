@@ -1,63 +1,31 @@
 package ShowImage;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.swing.*;
+import javax.imageio.ImageIO;
 
-public class ShowImage extends JFrame {
+public class ShowImage {
 
-	public ShowImage() {
+    public static void main(String[] arguments) throws IOException {
 
-        initUI();
-    }
+        JPanel panel = new JPanel();
 
-    private void initUI() {
+        BufferedImage image = ImageIO.read(new File("src/main/java/ShowImage/images/ftl.jpg"));
+        JLabel label = new JLabel(new ImageIcon(image));
+        panel.add(label);
 
-        ImageIcon ii = loadImage();
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("JPanel Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JLabel label = new JLabel(ii);
+        // add the Jpanel to the main window
+        frame.add(panel);
 
-        createLayout(label);
+        frame.pack();
+        frame.setVisible(true);
 
-        setTitle("Image");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-    private ImageIcon loadImage() {
-
-        ImageIcon ii = new ImageIcon("images/ftl.jpg");
-        return ii;
-    }
-
-    private void createLayout(JComponent... arg) {
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-        );
-
-        gl.setVerticalGroup(gl.createParallelGroup()
-                .addComponent(arg[0])
-        );
-
-        pack();
-    }
-
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-        	ShowImage ex = new ShowImage();
-            ex.setVisible(true);
-        });
     }
 }
