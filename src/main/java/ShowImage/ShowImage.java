@@ -8,6 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class ShowImage extends JFrame {
 
 	public ShowImage() {
@@ -30,7 +31,7 @@ public class ShowImage extends JFrame {
 
     private ImageIcon loadImage() {
 
-        ImageIcon ii = new ImageIcon("images/ftl.jpg");
+        ImageIcon ii = new ImageIcon("src/main/java/ShowImage/images/ftl.jpg");
         return ii;
     }
 
