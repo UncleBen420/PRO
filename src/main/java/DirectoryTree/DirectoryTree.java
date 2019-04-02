@@ -9,6 +9,9 @@ import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Arrays;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 
 public class DirectoryTree implements Filtrable {
 	
@@ -61,6 +64,34 @@ public class DirectoryTree implements Filtrable {
 		}
 		
 	}
+	
+	public JTree setJtree() {
+		
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode(this);
+		
+		JTreeNode(node);
+		
+		return new JTree(node);
+		
+		
+	}
+	
+	private void JTreeNode(DefaultMutableTreeNode parent) {
+		
+		for(Image i : images) {
+			parent.add(new DefaultMutableTreeNode(i.getPath()));
+		}
+		
+		for(DirectoryTree c : children) {
+			
+			DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c);
+			
+			parent.add(temp);
+			c.JTreeNode(temp);
+		}
+	}
+	
+	
 	
 	
    public void setDirectoryTree(File rootDirectory) {

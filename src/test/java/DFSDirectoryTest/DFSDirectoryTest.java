@@ -10,6 +10,11 @@ import interfaces.Filtrable;
 import interfaces.Visitor;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 
 class DFSDirectoryTest {
 
@@ -40,15 +45,6 @@ class DFSDirectoryTest {
 			
 			
 		});
-		
-		/*test2.Filtre(new SearchFilter () {
-
-			public void visit(Filtrable f) {
-				
-				
-			}
-			
-		});*/
 		
 		assertArrayEquals(espected, actual);
 	}
