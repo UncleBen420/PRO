@@ -6,9 +6,10 @@ import java.io.*;
 import javax.swing.*;
 import javax.imageio.ImageIO;
 
+
 public class ShowImage {
 
-    public static void main(String[] arguments) throws IOException {
+     public static void main(String[] arguments) throws IOException {
 
         JPanel panel = new JPanel();
 
