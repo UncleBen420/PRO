@@ -24,7 +24,7 @@ public class ViewerTable extends JPanel {
         Object[] columnNames = {"Animal", "Size", "Sexe", "Enter tunnel"};
         AbstractTableModel model = new AbstractTableModel(){
              private String[] columnNames = {"Animal", "Size", "Sexe", "Enter tunnel"};
-            private Object[][] data ={{"", new Double(0), new Boolean(false), new Boolean(false)}};
+            private Object[][] data ={{"", new Double(1.5), new Boolean(false), new Boolean(false)}};
 
              @Override
     public int getColumnCount() {
