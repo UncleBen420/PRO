@@ -2,13 +2,19 @@ package DFSDirectoryTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import DirectoryTree.DirectoryTree;
-import Image.Image;
+import Image.NodeImage;
 import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
 
 import org.junit.jupiter.api.Test;
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 
 class DFSDirectoryTest {
 
@@ -17,41 +23,33 @@ class DFSDirectoryTest {
 
 		DirectoryTree test = new DirectoryTree();
 		
-		DirectoryTree test2 = test.addChild("s1");
+		File temp = new File("C:\\Users\\remyv\\Documents\\Heig-VD\\PRO\\PRO\\src\\test\\java\\DFSDirectoryTest");
 		
+		test.setDirectoryTree(temp);
 		
-		test.addImage(new Image("image1"));
+		final String[] actual = {""};
+		final String[] espected = {"root test sousdossier ssdosisser suosdossier2 "};
 		
-		test2.addImage(new Image("images1"));
+
+		
 		
 		test.explore(new Visitor(){
-			
-			public void visit(Filtrable f) {
-				System.out.println(f);
-			}
-			
-			
-		});
-		
-		test2.Filtre(new SearchFilter () {
 
 			public void visit(Filtrable f) {
 				
+				if(!(f instanceof NodeImage)) {
+					System.out.println(f);
+					actual[0] += f + " ";
+				}
+						
 				
 			}
-			
+	
 		});
 		
-		test.explore(new Visitor(){
-			
-			public void visit(Filtrable f) {
-				System.out.println(f);
-			}
-			
-			
-		});
 		
-		fail("Not yet implemented");
+		
+		assertArrayEquals(espected, actual);
 	}
 	
 	
