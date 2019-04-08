@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import DirectoryTree.DirectoryTree;
-import Image.Image;
+import Image.NodeImage;
 import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
-import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import javax.swing.JFrame;
 import javax.swing.JTree;
@@ -30,21 +30,24 @@ class DFSDirectoryTest {
 		final String[] actual = {""};
 		final String[] espected = {"root test sousdossier ssdosisser suosdossier2 "};
 		
+
+		
 		
 		test.explore(new Visitor(){
 
 			public void visit(Filtrable f) {
 				
-				if(!(f instanceof Image)) {
+				if(!(f instanceof NodeImage)) {
 					System.out.println(f);
 					actual[0] += f + " ";
 				}
-				
+						
 				
 			}
-			
-			
+	
 		});
+		
+		
 		
 		assertArrayEquals(espected, actual);
 	}

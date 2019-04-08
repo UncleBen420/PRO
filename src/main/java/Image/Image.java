@@ -33,9 +33,10 @@ public class Image implements Filtrable {
 		
 	}
 
-	public void unFiltre() {
-		isFiltred = null;
-		
+	public void unFiltre(SearchFilter filter) {
+		if (filter.equals(getFilter())) {
+			isFiltred = null;			
+		}
 	}
 
 	public SearchFilter getFilter() {

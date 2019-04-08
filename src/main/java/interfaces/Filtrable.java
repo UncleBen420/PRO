@@ -8,7 +8,7 @@ public interface Filtrable {
 	
 	public void Filtre(SearchFilter filter);
 	
-	public void unFiltre();
+	public void unFiltre(SearchFilter filter);
 	
 	public SearchFilter getFilter();
 	

@@ -1,102 +1,102 @@
 package DirectoryTree;
 
-import Image.Image;
+import Image.NodeImage;
 
 import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
+import interfaces.Explorable;
 import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Arrays;
-import javax.swing.JTree;
+import java.util.Comparator;
+
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
+public class DirectoryTree extends DefaultMutableTreeNode implements Filtrable, Explorable {
 
-public class DirectoryTree implements Filtrable {
-	
-	private List<DirectoryTree> children = new LinkedList<DirectoryTree>();
-	private List<Image> images = new LinkedList<Image>();
+	private List<DirectoryTree> childrenFiltred = new LinkedList<DirectoryTree>();
+	private DirectoryTree oldParent;
 	private SearchFilter isFiltred;
-	private String name;
-	
+
 	public DirectoryTree() {
-		name = "root";
+		super("root");
+
 		isFiltred = null;
 	}
-	
+
 	public DirectoryTree(String name) {
-		this.name = name;
+		super(name);
 		isFiltred = null;
 	}
-	
-	public DirectoryTree addChild(String directoryName) {
-		DirectoryTree temp = new DirectoryTree(directoryName);
-		children.add(temp);
-		return temp;
-	}
-	
-	public void addImage(Image image) {
-		images.add(image);
-	}
-	
+
 	public boolean isFiltred() {
-		if(isFiltred != null) {
+		if (isFiltred != null) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void explore(Visitor visitor) {
-		
+
 		visitor.visit(this);
-		
-		for(Image i : images) {
-			if(!i.isFiltred()) {
-				visitor.visit(i);
+		this.explore(this, visitor);
+	}
+
+	public void explore(DirectoryTree e, Visitor visitor) {
+
+		int j;
+		if (e.children != null)
+			for (int i = 0; i < (j = e.children.size()); i++){	
+				
+				Object temp = e.children.elementAt(i);
+				if(temp instanceof Filtrable) {
+					
+						visitor.visit((Filtrable)temp);
+						if (((Filtrable)temp).isFiltred()) {
+							i--;
+							j--;
+						}else if (!((Filtrable)temp).isFiltred() && temp instanceof DirectoryTree) {
+							explore(((DirectoryTree)temp),visitor);
+						}
+						
+
+				}
+				
 			}
-		}
+	}
+	
+
+
+	public void exploreFiltredChildren(Visitor visitor) {
 		
-		for(DirectoryTree d : children) {
-			if(!d.isFiltred()) {
-				d.explore(visitor);
+		final Visitor temp = visitor;
+
+		explore(new Visitor(){
+
+			public void visit(Filtrable f) {
+				
+				if(f instanceof DirectoryTree && ((DirectoryTree)f).childrenFiltred != null)
+				for(Filtrable t : ((DirectoryTree)f).childrenFiltred) {
+
+					
+					temp.visit(t);
+					
+					if(t instanceof DirectoryTree) {
+						
+						explore(((DirectoryTree)t),temp);
+						
+					}
+					
+				}
 			}
-		}
-		
+	
+		});
 	}
-	
-	public JTree setJtree() {
-		
-		DefaultMutableTreeNode node = new DefaultMutableTreeNode(this);
-		
-		JTreeNode(node);
-		
-		return new JTree(node);
-		
-		
-	}
-	
-	private void JTreeNode(DefaultMutableTreeNode parent) {
-		
-		for(Image i : images) {
-			parent.add(new DefaultMutableTreeNode(i.getPath()));
-		}
-		
-		for(DirectoryTree c : children) {
-			
-			DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c);
-			
-			parent.add(temp);
-			c.JTreeNode(temp);
-		}
-	}
-	
-	
-	
-	
-   public void setDirectoryTree(File rootDirectory) {
-		
-	    
+
+	public void setDirectoryTree(File rootDirectory) {
 
 		if (rootDirectory.isDirectory()) {
 
@@ -104,63 +104,88 @@ public class DirectoryTree implements Filtrable {
 			Arrays.sort(childrenDir);
 
 			for (File child : childrenDir) {
-				
+
 				if (child.isDirectory()) {
-					DirectoryTree temp = this.addChild(child.getName());
+					DirectoryTree temp = new DirectoryTree(child.getName());
+					this.add(temp);
 					temp.setDirectoryTree(child);
-					
-				}else {
-					Image temp = new Image(child.getName());
-					this.addImage(temp);
+
+				} else {
+					NodeImage temp = new NodeImage(child.getName());
+					this.add(temp);
 				}
 
 			}
 		}
-		
+
 	}
-	
-	
+
 	public void Filtre(SearchFilter filter) {
 		isFiltred = filter;
+
+		if(getParent() != null) {
+	
+			
+			DirectoryTree parent = (DirectoryTree)getParent();
+			parent.remove(this);
+			parent.childrenFiltred.add(this);
+			oldParent = parent;
+
+		}
+		
 	}
 	
+
+
 	public void unFiltre(SearchFilter filter) {
-		
+
 		final SearchFilter temp = filter;
-		
-		explore(new Visitor() {
-			
+
+		exploreFiltredChildren(new Visitor() {
+
 			public void visit(Filtrable f) {
-				
-				if(temp.equals(f.getFilter())) {
-					f.unFiltre();
+
+				if (temp.equals(f.getFilter())) {
+					((DirectoryTree)f).isFiltred = null;
 				}
 				
+				if(!f.isFiltred() && f instanceof DirectoryTree && ((DirectoryTree)f).oldParent != null) {
+					((DirectoryTree)f).oldParent.childrenFiltred.remove((DirectoryTree)f);
+					((DirectoryTree)f).oldParent.add((DirectoryTree)f);
+					((DirectoryTree)f).oldParent = null;	
+				}
+
 			}
-			
-			
+
+		});
+		
+		sortTree();
+	}
+	
+	
+public void sortTree() {
+		
+		explore(new Visitor(){
+
+			@SuppressWarnings("unchecked")
+			public void visit(Filtrable f) {
+				
+				if(f instanceof DirectoryTree && ((DirectoryTree)f).children != null) {
+					((DirectoryTree)f).children.sort(new Comparator() {
+						public int compare(Object o1, Object o2) {
+							return o1.toString().compareTo(o2.toString());
+						}	
+					});
+				}
+					
+			}
 		});
 	}
-	
-	public void unFiltre() {
-		
-		isFiltred = null;
-		
-	}
-	
+
+
+
 	public SearchFilter getFilter() {
 		return isFiltred;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
-	public String toString() {
-		return name;
-	}
-	
-	
 
 }
