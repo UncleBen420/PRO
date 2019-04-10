@@ -1,19 +1,17 @@
 package DirectoryTree;
 
 import Image.NodeImage;
-
-import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
+import searchfilters.SearchFilter;
 import interfaces.Explorable;
 import java.io.File;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Comparator;
-
+import org.apache.commons.io.FilenameUtils;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
 
 public class DirectoryTree extends DefaultMutableTreeNode implements Filtrable, Explorable {
 
@@ -111,8 +109,11 @@ public class DirectoryTree extends DefaultMutableTreeNode implements Filtrable, 
 					temp.setDirectoryTree(child);
 
 				} else {
-					NodeImage temp = new NodeImage(child.getName());
-					this.add(temp);
+					
+					if(FilenameUtils.getExtension(child.getName()).equals("jpg")){
+						NodeImage temp = new NodeImage(child.getName());
+						this.add(temp);
+					}
 				}
 
 			}

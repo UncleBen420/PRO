@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import DirectoryTree.DirectoryTree;
 import Image.NodeImage;
-import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
+import searchfilters.SearchFilter;
 
 import org.junit.jupiter.api.Test;
 import javax.swing.JFrame;
