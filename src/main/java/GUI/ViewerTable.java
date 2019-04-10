@@ -26,10 +26,10 @@ public class ViewerTable extends JPanel {
     
     AbstractTableModel model = new AbstractTableModel() {
             
-
-            public int getColumnCount() {
-                return columnNames.length;
-            }
+             @Override
+	    public int getColumnCount() {
+		return columnNames.length;
+	    }
 
             public String getColumnName(int column) {
                 return columnNames[column];
