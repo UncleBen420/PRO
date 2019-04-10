@@ -6,6 +6,7 @@ import Shapes.*;
 
 public class Tag {
 	private ArrayList<String> tags = new ArrayList<String>();
+        private Parser parser = new Parser();
 	
 	public void setTag(ArrayList<String> tag, Shapes shape) {
 		if(shape == null) {
@@ -44,7 +45,13 @@ public class Tag {
 		return str;
 	}
 	
-	public void saveTags() {
-		
+	public void saveTags(ArrayList<ArrayList<String>> tags, String imagesPath) {
+		for(ArrayList<String> tag : tags){
+                    setTag(tag, null);
+                }
+                
+                parser.setTags(this.tags, imagesPath);
+                
+                parser.showTags(imagesPath);
 	}
 }

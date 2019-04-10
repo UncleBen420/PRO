@@ -1,6 +1,8 @@
 package GUI;
 
 import Image.Image;
+import Tag.Tag;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,12 +17,13 @@ import Image.Image;
 public class crapau extends javax.swing.JFrame {
 
     private Image image = null;
+    private Tag tagManager = new Tag();
    /**
     * Creates new form crapau
     */
    public crapau() {
       initComponents();
-      sliderDemo1.startAnimation();
+      //sliderDemo1.startAnimation();
    }
 
    /**
@@ -49,16 +52,22 @@ public class crapau extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree();
         Galerie = new javax.swing.JPanel();
         sliderDemo1 = new GUI.SliderDemo();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         Edit = new javax.swing.JPanel();
         edit_label = new javax.swing.JLabel();
         tag_label = new javax.swing.JLabel();
         image_mode = new javax.swing.JTabbedPane();
         single_mode = new javax.swing.JPanel();
+        viewerTable = new GUI.ViewerTable();
         sequence_mode = new javax.swing.JPanel();
         exit_button = new javax.swing.JButton();
         save_button = new javax.swing.JButton();
         reload_button = new javax.swing.JButton();
         undo_button = new javax.swing.JButton();
+        add_row = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CrapauducViewer");
@@ -88,7 +97,7 @@ public class crapau extends javax.swing.JFrame {
                 .addComponent(Title1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Title2)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         TitreLayout.setVerticalGroup(
             TitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +227,7 @@ public class crapau extends javax.swing.JFrame {
                 .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Navigate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(Filters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,6 +235,29 @@ public class crapau extends javax.swing.JFrame {
         );
 
         Galerie.setBackground(new java.awt.Color(122, 72, 221));
+
+        jButton1.setText("start");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("prev");
+
+        jButton3.setText("pause");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("next");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout GalerieLayout = new javax.swing.GroupLayout(Galerie);
         Galerie.setLayout(GalerieLayout);
@@ -235,12 +267,28 @@ public class crapau extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(GalerieLayout.createSequentialGroup()
+                .addGap(319, 319, 319)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         GalerieLayout.setVerticalGroup(
             GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GalerieLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -252,11 +300,11 @@ public class crapau extends javax.swing.JFrame {
         single_mode.setLayout(single_modeLayout);
         single_modeLayout.setHorizontalGroup(
             single_modeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
         );
         single_modeLayout.setVerticalGroup(
             single_modeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
 
         image_mode.addTab("Single photo", single_mode);
@@ -269,7 +317,7 @@ public class crapau extends javax.swing.JFrame {
         );
         sequence_modeLayout.setVerticalGroup(
             sequence_modeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
 
         image_mode.addTab("Sequence", sequence_mode);
@@ -286,19 +334,31 @@ public class crapau extends javax.swing.JFrame {
             }
         });
 
-        save_button.setText("save");
+        save_button.setText("Save");
+        save_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_buttonActionPerformed(evt);
+            }
+        });
 
-        reload_button.setText("reload");
+        reload_button.setText("Clear");
         reload_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reload_buttonActionPerformed(evt);
             }
         });
 
-        undo_button.setText("undo");
+        undo_button.setText("Delete row");
         undo_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 undo_buttonActionPerformed(evt);
+            }
+        });
+
+        add_row.setText("Add row");
+        add_row.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_rowActionPerformed(evt);
             }
         });
 
@@ -307,43 +367,50 @@ public class crapau extends javax.swing.JFrame {
         EditLayout.setHorizontalGroup(
             EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EditLayout.createSequentialGroup()
-                .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(exit_button)
+                .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EditLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
                         .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(undo_button)
-                            .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tag_label)
-                                    .addComponent(edit_label))
-                                .addGroup(EditLayout.createSequentialGroup()
-                                    .addComponent(save_button)
-                                    .addGap(3, 3, 3)
-                                    .addComponent(reload_button))))
+                            .addComponent(tag_label)
+                            .addComponent(edit_label))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(save_button)
+                        .addGap(18, 18, 18)))
+                .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(EditLayout.createSequentialGroup()
+                        .addComponent(add_row)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(image_mode, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(undo_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(reload_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exit_button))
+                    .addComponent(image_mode, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         EditLayout.setVerticalGroup(
             EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+            .addGroup(EditLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EditLayout.createSequentialGroup()
-                        .addComponent(image_mode)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exit_button))
-                    .addGroup(EditLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditLayout.createSequentialGroup()
+                        .addComponent(image_mode, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditLayout.createSequentialGroup()
                         .addComponent(edit_label)
                         .addGap(34, 34, 34)
                         .addComponent(tag_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(save_button)
-                            .addComponent(reload_button))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(save_button)
+                        .addGap(217, 217, 217)))
+                .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exit_button)
+                    .addGroup(EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(add_row)
                         .addComponent(undo_button)
-                        .addContainerGap())))
+                        .addComponent(reload_button))))
         );
 
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
@@ -386,22 +453,49 @@ public class crapau extends javax.swing.JFrame {
       navigate_jtree.setVisible(false);
    }//GEN-LAST:event_navigate_labelMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        sliderDemo1.startAnimation();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void undo_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undo_buttonActionPerformed
+        // TODO add your handling code here:
+        viewerTable.delRow();
+    }//GEN-LAST:event_undo_buttonActionPerformed
+
+    private void reload_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reload_buttonActionPerformed
+        // TODO add your handling code here:
+        viewerTable.clear();
+    }//GEN-LAST:event_reload_buttonActionPerformed
+
+    private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exit_buttonActionPerformed
+
     private void exit_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit_buttonMouseClicked
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exit_buttonMouseClicked
 
-    private void reload_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reload_buttonActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_reload_buttonActionPerformed
+        sliderDemo1.stopAnimation();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void undo_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undo_buttonActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_undo_buttonActionPerformed
+        sliderDemo1.updatePicture(1);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed
+    private void add_rowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_rowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exit_buttonActionPerformed
+        viewerTable.addRow();
+    }//GEN-LAST:event_add_rowActionPerformed
+
+    private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
+        // TODO add your handling code here:
+        tagManager.saveTags(viewerTable.getData(), "Sunflower_from_Silesia.JPG");
+    }//GEN-LAST:event_save_buttonActionPerformed
 
    /**
     * @param args the command line arguments
@@ -450,10 +544,15 @@ public class crapau extends javax.swing.JFrame {
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title2;
     private javax.swing.JPanel Titre;
+    private javax.swing.JButton add_row;
     private javax.swing.JLabel edit_label;
     private javax.swing.JButton exit_button;
     private javax.swing.JLabel filters_label;
     private javax.swing.JTabbedPane image_mode;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JTree jTree1;
     private javax.swing.JScrollPane navigate_jscroll;
     private javax.swing.JPanel navigate_jtree;
@@ -466,5 +565,6 @@ public class crapau extends javax.swing.JFrame {
     private GUI.SliderDemo sliderDemo1;
     private javax.swing.JLabel tag_label;
     private javax.swing.JButton undo_button;
+    private GUI.ViewerTable viewerTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,10 +53,6 @@ public class SliderDemo extends JPanel
     int delay;
     Timer timer;
     boolean frozen = false;
-    JButton next = new JButton("next");
-    JButton prev = new JButton("prev");
-    JButton pause = new JButton("pause");
-    JButton play = new JButton("play");
 
     //This label uses ImageIcon to show the doggy pictures.
     JLabel picture;
@@ -67,38 +63,6 @@ public class SliderDemo extends JPanel
         delay = 1000 / FPS_INIT;
         
         JPanel p=new JPanel(new FlowLayout());
-        
-        
-        p.add(prev);
-        p.add(pause);
-        p.add(play);
-        p.add(next);
-        
-        prev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updatePicture(frameNumber); //display the next picture
-            }
-        });
-        pause.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stopAnimation();
-            }
-        });
-        play.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                 startAnimation();
-            }
-        });
-
 
         //Create the label that displays the animation.
         picture = new JLabel();
@@ -151,22 +115,7 @@ public class SliderDemo extends JPanel
     //Called when the Timer fires.
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(next==e.getSource())
-        {
-            updatePicture(frameNumber); //display the next picture
-        }
-        if(e.getSource()==pause)
-        {
-            stopAnimation();
-        }
-        if(e.getSource()==prev)
-        {
-        
-        }
-        if(play==e.getSource())
-        {
-            startAnimation();
-        }
+       
     }
 
     /** Update the label to display the image for the current frame. */
@@ -177,7 +126,7 @@ public class SliderDemo extends JPanel
                                                   + frameNumber
                                                   + ".gif");
         }
-
+        frameNumber = (frameNumber + 1) % images.length;
         //Set the image.
         if (images[frameNumber] != null) {
             picture.setIcon(images[frameNumber]);
