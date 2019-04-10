@@ -23,17 +23,6 @@
       <version>5.4.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-  <groupId>com.github.dragon66</groupId>
-  <artifactId>icafe</artifactId>
-  <version>1.1-SNAPSHOT</version>
-</dependency>
-    <dependency>
-    	<groupId>org.apache.maven.plugins</groupId>
-    	<artifactId>maven-compiler-plugin</artifactId>
-    	<version>3.8.0</version>
-    	<type>maven-plugin</type>
-    </dependency>
     </dependencies>
   
   <repositories>
@@ -47,8 +36,8 @@
   <snapshots>
     <enabled>true</enabled>
   </snapshots>
-</repository> 
-</repositories>
+</repository>
+  </repositories>
 
   <build>
     <plugins>
@@ -57,9 +46,10 @@
         <version>2.22.1</version>
       </plugin>
     </plugins>
+
   </build>
-  
-  
-  
-  
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 </project>

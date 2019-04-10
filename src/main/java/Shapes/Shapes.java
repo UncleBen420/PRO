@@ -1,8 +1,9 @@
+package Shapes;
 
-public abstract class Forme {
+public abstract class Shapes {
 	private double x, y;
 	
-	Forme(double x, double y){
+	Shapes(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
