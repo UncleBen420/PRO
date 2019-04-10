@@ -23,7 +23,6 @@ public class crapau extends javax.swing.JFrame {
     */
    public crapau() {
       initComponents();
-      //sliderDemo1.startAnimation();
    }
 
    /**
@@ -51,11 +50,11 @@ public class crapau extends javax.swing.JFrame {
         navigate_jscroll = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         Galerie = new javax.swing.JPanel();
-        sliderDemo1 = new GUI.SliderDemo();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        sliderDemo1 = new GUI.SliderDemo();
         Edit = new javax.swing.JPanel();
         edit_label = new javax.swing.JLabel();
         tag_label = new javax.swing.JLabel();
@@ -112,6 +111,7 @@ public class crapau extends javax.swing.JFrame {
         Filters.setBackground(new java.awt.Color(85, 65, 118));
 
         filters_label.setForeground(new java.awt.Color(255, 255, 255));
+        filters_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_filter_25px.png")));
         filters_label.setText("Filters");
 
         javax.swing.GroupLayout FiltersLayout = new javax.swing.GroupLayout(Filters);
@@ -131,6 +131,7 @@ public class crapau extends javax.swing.JFrame {
         Settings.setBackground(new java.awt.Color(85, 65, 118));
 
         settings_label.setForeground(new java.awt.Color(255, 255, 255));
+        settings_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_settings_25px.png")));
         settings_label.setText("Settings");
 
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
@@ -150,6 +151,7 @@ public class crapau extends javax.swing.JFrame {
         Navigate_Titre.setBackground(new java.awt.Color(85, 65, 118));
 
         navigate_label.setForeground(new java.awt.Color(255, 255, 255));
+        navigate_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_opened_folder_25px_2.png")));
         navigate_label.setText("Navigate");
         navigate_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,10 +266,6 @@ public class crapau extends javax.swing.JFrame {
         GalerieLayout.setHorizontalGroup(
             GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GalerieLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(GalerieLayout.createSequentialGroup()
                 .addGap(319, 319, 319)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,13 +275,17 @@ public class crapau extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        GalerieLayout.setVerticalGroup(
-            GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GalerieLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap())
+        );
+        GalerieLayout.setVerticalGroup(
+            GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GalerieLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -300,11 +302,11 @@ public class crapau extends javax.swing.JFrame {
         single_mode.setLayout(single_modeLayout);
         single_modeLayout.setHorizontalGroup(
             single_modeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
         );
         single_modeLayout.setVerticalGroup(
             single_modeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addComponent(viewerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
 
         image_mode.addTab("Single photo", single_mode);
@@ -427,34 +429,26 @@ public class crapau extends javax.swing.JFrame {
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(Side, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-               .addComponent(Galerie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(Edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-      );
-      BackGroundLayout.setVerticalGroup(
-         BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-         .addComponent(Side, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-         .addGroup(BackGroundLayout.createSequentialGroup()
-            .addComponent(Galerie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(Edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())
-      );
+            .addGroup(BackGroundLayout.createSequentialGroup()
+                .addComponent(Galerie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-      );
-      layout.setVerticalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-      pack();
-   }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
    private void navigate_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_navigate_labelMouseClicked
       // TODO add your handling code here:
