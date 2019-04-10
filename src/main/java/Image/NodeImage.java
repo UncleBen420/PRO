@@ -2,9 +2,9 @@ package Image;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
+import searchfilters.SearchFilter;
 
 public class NodeImage extends DefaultMutableTreeNode implements Filtrable {
 	

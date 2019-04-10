@@ -1,4 +1,4 @@
-package SearchFilters;
+package searchfilters;
 
 import interfaces.Visitor;
 import interfaces.Filtrable;

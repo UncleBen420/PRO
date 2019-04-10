@@ -26,7 +26,7 @@ public class ViewerTable extends JPanel {
     
     AbstractTableModel model = new AbstractTableModel() {
             
-             @Override
+
 	    public int getColumnCount() {
 		return columnNames.length;
 	    }

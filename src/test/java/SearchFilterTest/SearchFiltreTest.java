@@ -1,8 +1,8 @@
 package SearchFilterTest;
 
-import SearchFilters.SearchFilter;
 import interfaces.Filtrable;
 import interfaces.Visitor;
+import searchfilters.SearchFilter;
 import DirectoryTree.DirectoryTree;
 import Image.NodeImage;
 

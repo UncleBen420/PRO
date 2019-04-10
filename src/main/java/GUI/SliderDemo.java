@@ -113,7 +113,6 @@ public class SliderDemo extends JPanel
     }
 
     //Called when the Timer fires.
-    @Override
     public void actionPerformed(ActionEvent e) {
        
     }
