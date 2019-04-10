@@ -1,6 +1,6 @@
 package Image;
 import interfaces.Filtrable;
-import SearchFilters.SearchFilter;
+import searchfilters.SearchFilter;
 
 public class Image implements Filtrable {
 

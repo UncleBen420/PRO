@@ -1,6 +1,6 @@
 package interfaces;
 
-import SearchFilters.SearchFilter;
+import searchfilters.SearchFilter;
 
 public interface Filtrable {
 	
