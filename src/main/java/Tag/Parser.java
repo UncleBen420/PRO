@@ -65,20 +65,20 @@ public class Parser {
             File inputFile = new File(imagesPath);
             if (inputFile.isFile()) {
                 ImageInputStream input = ImageIO.createImageInputStream(inputFile);
-             ImageOutputStream output = ImageIO.createImageOutputStream(inputFile);
+                ImageOutputStream output = ImageIO.createImageOutputStream(inputFile);
 
-            Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
-            ImageReader reader = readers.next(); // TODO: Validate that there are readers
+               Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
+               ImageReader reader = readers.next(); // TODO: Validate that there are readers
 
-            reader.setInput(input);
-            IIOImage image = reader.readAll(0, null);
+               reader.setInput(input);
+               IIOImage image = reader.readAll(0, null);
 
-            addTextEntry(image.getMetadata(), "foo", tags);
+               addTextEntry(image.getMetadata(), "heig", tags);
 
-            ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
-            writer.setOutput(output);
-            writer.write(image);
-            } else {
+               ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
+               writer.setOutput(output);
+               writer.write(image);
+            } else if(inputFile.isDirectory()) {
                 File[] contents = inputFile.listFiles();
                 for (File file : contents) {
                     if (file.isFile()) {
@@ -91,7 +91,7 @@ public class Parser {
                        reader.setInput(input);
                        IIOImage image = reader.readAll(0, null);
 
-                       addTextEntry(image.getMetadata(), "foo", tags);
+                       addTextEntry(image.getMetadata(), "heig", tags);
 
                        ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
                        writer.setOutput(output);
@@ -243,7 +243,7 @@ public class Parser {
 
         IIOMetadataNode root = new IIOMetadataNode(IIOMetadataFormatImpl.standardMetadataFormatName);
         root.appendChild(text);
-
+        
         metadata.mergeTree(IIOMetadataFormatImpl.standardMetadataFormatName, root);
     }
 

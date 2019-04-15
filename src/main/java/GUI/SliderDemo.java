@@ -33,6 +33,9 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -48,11 +51,13 @@ public class SliderDemo extends JPanel
     static final int FPS_MAX = 30;
     static final int FPS_INIT = 15;    //initial frames per second
     int frameNumber = 0;
-    int NUM_FRAMES = 14;
-    ImageIcon[] images = new ImageIcon[NUM_FRAMES];
+    int NUM_FRAMES = 0;
+    ImageIcon[] images;
     int delay;
     Timer timer;
     boolean frozen = false;
+    String directory;
+    ArrayList<String> imagesPath = new ArrayList<String>();
 
     //This label uses ImageIcon to show the doggy pictures.
     JLabel picture;
@@ -61,19 +66,15 @@ public class SliderDemo extends JPanel
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         delay = 1000 / FPS_INIT;
-        
-        JPanel p=new JPanel(new FlowLayout());
 
         //Create the label that displays the animation.
         picture = new JLabel();
-        picture.setSize(364,925);
         picture.setHorizontalAlignment(JLabel.LEFT);
         picture.setAlignmentX(Component.LEFT_ALIGNMENT);
-        updatePicture(0); //display first frame
+        //updatePicture(0); //display first frame
 
         //Put everything together.
         add(picture);
-        add(p,BorderLayout.SOUTH);
 
         //Set up a timer that calls this object's action handler.
         timer = new Timer(delay, this);
@@ -114,35 +115,99 @@ public class SliderDemo extends JPanel
 
     //Called when the Timer fires.
     public void actionPerformed(ActionEvent e) {
-       
+       nextPicture();
     }
 
     /** Update the label to display the image for the current frame. */
-    protected void updatePicture(int frameNum) {
-        //Get the image if we haven't already.
-        if (images[frameNumber] == null) {
-            images[frameNumber] = createImageIcon("../doggy/T"
-                                                  + frameNumber
-                                                  + ".gif");
-        }
-        frameNumber = (frameNumber + 1) % images.length;
+    public void nextPicture() {
+        
+        frameNumber = (frameNumber + 1) % (images.length-1);
         //Set the image.
         if (images[frameNumber] != null) {
             picture.setIcon(images[frameNumber]);
         } else { //image not found
-            picture.setText("image #" + frameNumber + " not found");
+            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+            picture.setIcon(images[frameNumber]);
+        }
+    }
+    
+    /** Update the label to display the image for the current frame. */
+    public void prevPicture() {
+        
+        frameNumber--;
+        if(frameNumber < 0){
+            frameNumber = (images.length-1);
+        }
+        //Set the image.
+        if (images[frameNumber] != null) {
+            picture.setIcon(images[frameNumber]);
+        } else { //image not found
+            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+            picture.setIcon(images[frameNumber]);
         }
     }
 
     /** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = SliderDemo.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
+        if (path != null) {
+            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(910, 450, java.awt.Image.SCALE_FAST));
         } else {
             System.err.println("Couldn't find file: " + path);
             return null;
         }
+    }
+    
+    private String getFileExtension(File file) {
+        String fileName = file.getName();
+        int lastDot = fileName.lastIndexOf('.');
+        return fileName.substring(lastDot + 1);
+    }
+    
+    public void addImage(String path){
+        int i = 0;
+        if (path != null) {
+            if(!imagesPath.contains(path)){
+                imagesPath.clear();
+                File file = new File(path);
+                file = file.getParentFile();
+                directory = file.getAbsolutePath();
+                File[] files = file.listFiles();
+                Arrays.sort(files);
+                for(File image : files){
+                    if(getFileExtension(image).equals("jpg")){
+                        if(image.getAbsolutePath().equals(path)){
+                            frameNumber = i;
+                        }
+                        imagesPath.add(image.getAbsolutePath());
+                        i++;
+                    }
+                }
+
+                images = new ImageIcon[i+1];
+                images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+                picture.setIcon(images[frameNumber]); 
+            } else {
+                frameNumber = imagesPath.indexOf(path);
+                //Set the image.
+                if (images[frameNumber] != null) {
+                    picture.setIcon(images[frameNumber]);
+                } else { //image not found
+                    images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+                    picture.setIcon(images[frameNumber]);
+                }
+            }
+            
+        } else {
+            System.err.println("Couldn't find file: " + path);
+        }
+    }
+    
+    public String getImage(){
+        return imagesPath.get(frameNumber);
+    }
+    
+    public String getDirectory(){
+        return directory;
     }
     
     

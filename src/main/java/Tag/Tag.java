@@ -46,6 +46,7 @@ public class Tag {
 	}
 	
 	public void saveTags(ArrayList<ArrayList<String>> tags, String imagesPath) {
+                this.tags.clear();
 		for(ArrayList<String> tag : tags){
                     setTag(tag, null);
                 }
