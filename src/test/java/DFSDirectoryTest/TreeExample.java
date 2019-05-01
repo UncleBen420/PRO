@@ -1,6 +1,5 @@
 package DFSDirectoryTest;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,21 +7,13 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
 import javax.swing.SwingUtilities;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 
-import DirectoryTree.DirectoryTree;
 import JTreeManager.JTreeManager;
-import interfaces.Filtrable;
-import searchfilters.SearchFilter;
+import searchfilters.treeFilter;
 public class TreeExample extends JFrame
 {
-    private JTree tree;
-    private String value = "";
     public TreeExample()
     {
     	
@@ -45,29 +36,24 @@ public class TreeExample extends JFrame
 				e.printStackTrace();
 			}
 		}   	
-    	DirectoryTree test = new DirectoryTree();
+    	JTreeManager manager = new JTreeManager();
     	
-    	JTreeManager manager = new JTreeManager(new File(properties.getProperty("imageBankPath")));
     	
-    	this.add(new JScrollPane(manager));
-    	
-    	manager.updateJtree();
-        
-        SearchFilter filtre = new SearchFilter(test){
+    	manager.addFiltre(new treeFilter() {
 
-			public void visit(Filtrable f) {
-				
-				if(f.toString().equals("src")) {
-					f.Filtre(this);
+			@Override
+			public boolean analyseNode(DefaultMutableTreeNode node) {
+				if(node.toString().equals("Desktop") || node.toString().equals("Documents")) {
+					System.out.println("trouver");
+					return true;
+					
 				}
 				
-			}	
-		};
-        
-		manager.addFiltre(filtre);
-		manager.removeFiltre(filtre);
-		
-		
+				return false;
+			}});
+    	
+    	
+    	this.add(new JScrollPane(manager));
 		
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("JTree Example");       
