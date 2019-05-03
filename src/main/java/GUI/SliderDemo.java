@@ -166,6 +166,7 @@ public class SliderDemo extends JPanel
     public void addImage(String path){
         int i = 0;
         if (path != null) {
+        	
             if(!imagesPath.contains(path)){
                 imagesPath.clear();
                 File file = new File(path);
@@ -196,7 +197,7 @@ public class SliderDemo extends JPanel
                     picture.setIcon(images[frameNumber]);
                 }
             }
-            
+        	
         } else {
             System.err.println("Couldn't find file: " + path);
         }
