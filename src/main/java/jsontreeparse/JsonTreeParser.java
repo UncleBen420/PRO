@@ -7,22 +7,71 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.Arrays;
+import java.util.Properties;
 
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.apache.commons.io.FilenameUtils;
 import com.google.gson.*;
 
+import JTreeManager.TaggedTreeNode;
+
 public class JsonTreeParser {
+	
+	private String[] hierarchyTag;
+	
+	
+	public void parseHierarchyTag(){
+		
+			Properties properties = new Properties();
+			FileReader fr = null;
+			try {
+				fr = new FileReader("conf.properties");
+				properties.load(fr);
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					fr.close();
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+			}
+			hierarchyTag = ((String)properties.get("hierarchyTag")).split("/");
+			for(String s : hierarchyTag)
+			System.out.println(s);
+		
+		
+	}
 
 	public void createXML(File rootDirectory) {
 		try {
+			
+			int i = 0;
+			parseHierarchyTag();
 
 			FileWriter file = new FileWriter("src/jsonFile.json");
-			JsonArray tree = setXML(rootDirectory);
+			JsonArray tree;
 			JsonObject temp = new JsonObject();
-
-			temp.add("root", tree);
+			try {
+				
+				tree = setXML(rootDirectory,i);
+				
+				temp.add("root", tree);
+				
+			} catch (ArrayIndexOutOfBoundsException e) {
+				FileWriter error = new FileWriter("Error.txt");
+				error.write(e.toString());
+				error.flush();	
+				error.close();
+			}
+			
 
 			file.write(temp.toString());
 			file.flush();
@@ -33,7 +82,7 @@ public class JsonTreeParser {
 
 	}
 
-	public JsonArray setXML(File rootDirectory) {
+	public JsonArray setXML(File rootDirectory, int i) throws ArrayIndexOutOfBoundsException {
 
 		if (rootDirectory.isDirectory()) {
 
@@ -49,7 +98,9 @@ public class JsonTreeParser {
 
 						JsonObject temp = new JsonObject();
 						temp.addProperty("name", child.getName());
-						temp.add("nextDir", setXML(child));
+						
+						temp.addProperty("tag", hierarchyTag[i]);
+						temp.add("nextDir", setXML(child,i+1));
 						dirArray.add(temp);
 
 					} else {
@@ -88,36 +139,42 @@ public class JsonTreeParser {
 
 			JsonObject personne = (JsonObject) obj;
 			JsonArray dirArray = (JsonArray) personne.get("root");
-			DefaultMutableTreeNode temp = new DefaultMutableTreeNode();
+			TaggedTreeNode temp = new TaggedTreeNode("Dossier racine");
 			createTree(dirArray, temp);
 
 			return temp;
 
 		} catch (JsonParseException e) {
-			e.printStackTrace();
+
+			JOptionPane.showMessageDialog(null,"The hierarchy json file cannot be open correctly");
+			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+			JOptionPane.showMessageDialog(null,"The hierarchy json file cannot be open found.\nCheck the conf.properties");
+		} catch (NullPointerException e) {
+
+			JOptionPane.showMessageDialog(null,"The arborescence of the file cannot be create.\nCheck the hierarchy json file integrity or check the conf.properties");
+			
 		}
+		
 
 		return null;
 
 	}
 
-	public void createTree(JsonArray a, DefaultMutableTreeNode d) {
+	public void createTree(JsonArray a, TaggedTreeNode d) {
 
 		if (a.size() > 0)
 			for (JsonElement child : a) {
 
 				if (!child.isJsonNull() && ((JsonObject) child).has("image")) {
 
-					DefaultMutableTreeNode temp = new DefaultMutableTreeNode(((JsonObject) child).get("image").getAsString());
+					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("image").getAsString());
 					d.add(temp);
 
 				} else if (!child.isJsonNull()) {
 
-					DefaultMutableTreeNode temp = new DefaultMutableTreeNode(((JsonObject) child).get("name").getAsString());
+					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("name").getAsString(),((JsonObject) child).get("tag").getAsString());
 					d.add(temp);
 					createTree((JsonArray) ((JsonObject) child).get("nextDir"), temp);
 				}

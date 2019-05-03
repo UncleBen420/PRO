@@ -1,7 +1,4 @@
 package searchfilters;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import javax.swing.JTree;
@@ -9,7 +6,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import JTreeManager.OldNodePair;
-import JTreeManager.TreeNodeTag;
 
 public abstract class treeFilter {
 	
