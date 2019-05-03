@@ -4,7 +4,6 @@ package GUI;
 import Tag.Tag;
 import java.util.ArrayList;
 
-import Image.Image;
 import java.awt.Dimension;
 
 /*
@@ -19,7 +18,6 @@ import java.awt.Dimension;
  */
 public class crapau extends javax.swing.JFrame {
 
-    private Image image = null;
     private Tag tagManager = new Tag();
    /**
     * Creates new form crapau
