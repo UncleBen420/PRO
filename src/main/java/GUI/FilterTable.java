@@ -21,8 +21,11 @@ public class FilterTable extends JPanel {
 
     private JTable table;
     String[] columnNames = {"Filters"};
-    ArrayList<ArrayList<Object>> rowData = new ArrayList<ArrayList<Object>>();
-    ArrayList<Object> row = new ArrayList<Object>();
+    ArrayList<Object> rowData = new ArrayList<Object>();
+    FilterWeather filterWeather = new FilterWeather(this, rowData.size());
+    FilterChange filterChange = new FilterChange(this, rowData.size());
+    FilterDate filterDate = new FilterDate(this, rowData.size());
+    FilterTag filterTag = new FilterTag(this, rowData.size());
     
     AbstractTableModel model = new AbstractTableModel() {
             
@@ -40,7 +43,7 @@ public class FilterTable extends JPanel {
             }
 
             public Object getValueAt(int row, int column) {
-                return rowData.get(row).get(column);
+                return rowData.get(row);
             }
 
             public Class getColumnClass(int column) {
@@ -48,7 +51,10 @@ public class FilterTable extends JPanel {
             }
 
             public void setValueAt(Object value, int row, int column) {
-                rowData.get(row).set(column, value);
+                if(row >= rowData.size()){
+                    return;
+                }
+                rowData.set(row, value);
             }
 
             /*
@@ -65,10 +71,6 @@ public class FilterTable extends JPanel {
 
     public FilterTable() {
         super(new GridLayout(1, 1));
-        
-        row.add("");
-        
-        rowData.add(new ArrayList<Object>(row));
 
         JTable table = new JTable(model){
             // override these 2 jtable methods so we can provide different values in a single column
@@ -90,15 +92,15 @@ public class FilterTable extends JPanel {
                 return renderer;
             }
         };
-        table.setDefaultRenderer(FilterWeather.class, new FilterWeather());
-        table.setDefaultRenderer(FilterChange.class, new FilterChange());
-        table.setDefaultRenderer(FilterDate.class, new FilterDate());
-        table.setDefaultRenderer(FilterTag.class, new FilterTag());
+        table.setDefaultRenderer(FilterWeather.class, new FilterWeather(this, rowData.size()));
+        table.setDefaultRenderer(FilterChange.class, new FilterChange(this, rowData.size()));
+        table.setDefaultRenderer(FilterDate.class, new FilterDate(this, rowData.size()));
+        table.setDefaultRenderer(FilterTag.class, new FilterTag(this, rowData.size()));
         
-        table.setDefaultEditor(FilterWeather.class, new FilterWeather());
-        table.setDefaultEditor(FilterChange.class, new FilterChange());
-        table.setDefaultEditor(FilterDate.class, new FilterDate());
-        table.setDefaultEditor(FilterTag.class, new FilterTag());
+        table.setDefaultEditor(FilterWeather.class, new FilterWeather(this, rowData.size()));
+        table.setDefaultEditor(FilterChange.class, new FilterChange(this, rowData.size()));
+        table.setDefaultEditor(FilterDate.class, new FilterDate(this, rowData.size()));
+        table.setDefaultEditor(FilterTag.class, new FilterTag(this, rowData.size()));
         
         table.setRowHeight(40);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -112,23 +114,18 @@ public class FilterTable extends JPanel {
     }
     
     public void addRow(String value){
-        row.clear();
         switch(value){
             case "Weather":
-                row.add(new FilterWeather());
-                rowData.add(new ArrayList<Object>(row));
+                rowData.add(new FilterWeather(this, rowData.size()));
                 break;
             case "Date / Hour":
-                row.add(new FilterDate());
-                rowData.add(new ArrayList<Object>(row));
+                rowData.add(new FilterDate(this, rowData.size()));
                 break;
             case "Change":
-                row.add(new FilterChange());
-                rowData.add(new ArrayList<Object>(row));
+                rowData.add(new FilterChange(this, rowData.size()));
                 break;
             case "Tag":
-                row.add(new FilterTag());
-                rowData.add(new ArrayList<Object>(row));
+                rowData.add(new FilterTag(this, rowData.size()));
                 break;
               
             default:
@@ -136,14 +133,20 @@ public class FilterTable extends JPanel {
         model.fireTableDataChanged();
     }
     
-    public void delRow(){
-        rowData.remove(rowData.size()-1);
+    public void delRow(Class test){
+        
+        for(int i = 0; i < rowData.size(); i++){
+            if(test.isInstance(rowData.get(i))){
+                rowData.remove(i);
+                return;
+            }
+        }
         model.fireTableDataChanged();
     }
     
     public void clear(){
         rowData.clear();
-        rowData.add(new ArrayList<Object>(row));
+        rowData.add("");
         model.fireTableDataChanged();
     }
 

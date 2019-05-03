@@ -28,9 +28,13 @@ import javax.swing.table.TableCellRenderer;
  * @author gaetan
  */
 public class FilterTag extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
-    JPanel panel;
+    private JPanel panel;
+    private FilterTable table;
+    private int index;
     
-    public FilterTag(){
+    public FilterTag(FilterTable tab, int index){
+        this.table = tab;
+        this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         JButton filter = new JButton("Filter");
@@ -45,7 +49,7 @@ public class FilterTag extends AbstractCellEditor implements TableCellEditor, Ta
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Delete");
+                table.delRow(this.getClass());
             }
         });
         
@@ -58,7 +62,7 @@ public class FilterTag extends AbstractCellEditor implements TableCellEditor, Ta
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        
+        index = ((FilterTag)value).getIndex();
         if (isSelected) {
             panel.setBackground(table.getSelectionBackground());
         }else{
@@ -70,11 +74,20 @@ public class FilterTag extends AbstractCellEditor implements TableCellEditor, Ta
 
     @Override
     public Object getCellEditorValue() {
-        return null;
+        return this;
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        index = ((FilterTag)value).getIndex();
         return panel;
+    }
+    
+    public void setIndex(int index){
+        this.index = index;
+    }
+    
+    public int getIndex(){
+        return index;
     }
 }

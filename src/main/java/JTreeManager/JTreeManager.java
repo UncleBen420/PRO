@@ -97,7 +97,7 @@ public class JTreeManager extends JPanel {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("conf.properties");
+			fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 

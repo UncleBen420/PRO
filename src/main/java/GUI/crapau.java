@@ -51,7 +51,6 @@ public class crapau extends javax.swing.JFrame {
         Navigate_Titre = new javax.swing.JPanel();
         navigate_label = new javax.swing.JLabel();
         navigate_jtree = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jTreeManager1 = new JTreeManager.JTreeManager();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -186,22 +185,20 @@ public class crapau extends javax.swing.JFrame {
             .addComponent(navigate_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jTreeManager1);
-
         javax.swing.GroupLayout navigate_jtreeLayout = new javax.swing.GroupLayout(navigate_jtree);
         navigate_jtree.setLayout(navigate_jtreeLayout);
         navigate_jtreeLayout.setHorizontalGroup(
             navigate_jtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navigate_jtreeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jTreeManager1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         navigate_jtreeLayout.setVerticalGroup(
             navigate_jtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navigate_jtreeLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addComponent(jTreeManager1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout NavigateLayout = new javax.swing.GroupLayout(Navigate);
@@ -304,7 +301,11 @@ public class crapau extends javax.swing.JFrame {
         GalerieLayout.setHorizontalGroup(
             GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GalerieLayout.createSequentialGroup()
-                .addGap(346, 346, 346)
+                .addContainerGap()
+                .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GalerieLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(prev_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(play_button)
@@ -312,24 +313,20 @@ public class crapau extends javax.swing.JFrame {
                 .addComponent(pause_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(next_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(GalerieLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sliderDemo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(488, 488, 488))
         );
         GalerieLayout.setVerticalGroup(
             GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GalerieLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sliderDemo1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GalerieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(play_button)
                     .addComponent(prev_button)
                     .addComponent(next_button)
                     .addComponent(pause_button))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         edit_label.setText("Edit mode");
@@ -584,7 +581,6 @@ public class crapau extends javax.swing.JFrame {
     private javax.swing.JLabel filters_label;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JScrollPane jScrollPane1;
     private JTreeManager.JTreeManager jTreeManager1;
     private javax.swing.JPanel navigate_jtree;
     private javax.swing.JLabel navigate_label;

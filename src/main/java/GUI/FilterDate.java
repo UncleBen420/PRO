@@ -28,11 +28,15 @@ import javax.swing.table.TableCellRenderer;
  * @author gaetan
  */
 public class FilterDate extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
-    JPanel panel;
+    private JPanel panel;
+    private FilterTable table;
+    private int index;
     private String begin;
     private String end;
     
-    public FilterDate(){
+    public FilterDate(FilterTable tab, int index){
+        this.table = tab;
+        this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         JFormattedTextField beginText = new JFormattedTextField(DateFormat.getDateInstance(DateFormat.SHORT));
@@ -55,7 +59,7 @@ public class FilterDate extends AbstractCellEditor implements TableCellEditor, T
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Delete");
+                table.delRow(this.getClass());
             }
         });
         
@@ -70,7 +74,7 @@ public class FilterDate extends AbstractCellEditor implements TableCellEditor, T
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        
+        index = ((FilterDate)value).getIndex();
         if (isSelected) {
             panel.setBackground(table.getSelectionBackground());
         }else{
@@ -82,11 +86,20 @@ public class FilterDate extends AbstractCellEditor implements TableCellEditor, T
 
     @Override
     public Object getCellEditorValue() {
-        return null;
+        return this;
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        index = ((FilterDate)value).getIndex();
         return panel;
+    }
+    
+    public void setIndex(int index){
+        this.index = index;
+    }
+    
+    public int getIndex(){
+        return index;
     }
 }

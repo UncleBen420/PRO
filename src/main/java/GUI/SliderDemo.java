@@ -150,7 +150,7 @@ public class SliderDemo extends JPanel
     /** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {
         if (path != null) {
-            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(910, 450, java.awt.Image.SCALE_FAST));
+            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(1250, 550, java.awt.Image.SCALE_FAST));
         } else {
             System.err.println("Couldn't find file: " + path);
             return null;

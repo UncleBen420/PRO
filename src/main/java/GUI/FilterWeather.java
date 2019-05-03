@@ -28,10 +28,14 @@ import javax.swing.table.TableCellRenderer;
  * @author gaetan
  */
 public class FilterWeather extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
-    JPanel panel;
-    String weatherText;
+    private final JPanel panel;
+    private FilterTable table;
+    private int index;
+    private String weatherText;
     
-    public FilterWeather(){
+    public FilterWeather(FilterTable tab, int index){
+        this.table = tab;
+        this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JComboBox weather = new JComboBox();
         weather.addItem("Sun");
@@ -51,7 +55,7 @@ public class FilterWeather extends AbstractCellEditor implements TableCellEditor
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Delete");
+                table.delRow(this.getClass());
             }
         });
         
@@ -65,7 +69,7 @@ public class FilterWeather extends AbstractCellEditor implements TableCellEditor
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        
+        index = ((FilterWeather)value).getIndex();
         if (isSelected) {
             panel.setBackground(table.getSelectionBackground());
         }else{
@@ -77,11 +81,20 @@ public class FilterWeather extends AbstractCellEditor implements TableCellEditor
 
     @Override
     public Object getCellEditorValue() {
-        return null;
+        return this;
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        index = ((FilterWeather)value).getIndex();
         return panel;
+    }
+    
+    public void setIndex(int index){
+        this.index = index;
+    }
+    
+    public int getIndex(){
+        return index;
     }
 }
