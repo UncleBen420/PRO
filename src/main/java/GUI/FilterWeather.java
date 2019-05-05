@@ -37,7 +37,7 @@ public class FilterWeather extends AbstractCellEditor implements TableCellEditor
         this.table = tab;
         this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JComboBox weather = new JComboBox();
+        final JComboBox weather = new JComboBox();
         weather.addItem("Sun");
         weather.addItem("Cloud");
         weather.addItem("Rain");

@@ -8,13 +8,20 @@ public class TaggedTreeNode extends DefaultMutableTreeNode {
 	
 	public TaggedTreeNode(String path, String tag) {
 		super(path);
-		System.out.println(tag);
-		tag = "";
+		this.tag = tag;
 	}
 
 	public TaggedTreeNode(String path) {
 		super(path);
 		tag = "";
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 }

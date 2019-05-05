@@ -13,6 +13,8 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import JTreeManager.JTreeManager;
+
 /**
  *
  * @author gaetan
@@ -24,8 +26,9 @@ public class FilterTable extends JPanel {
     ArrayList<Object> rowData = new ArrayList<Object>();
     FilterWeather filterWeather = new FilterWeather(this, rowData.size());
     FilterChange filterChange = new FilterChange(this, rowData.size());
-    FilterDate filterDate = new FilterDate(this, rowData.size());
+    FilterDate filterDate = new FilterDate(this, rowData.size(),null);
     FilterTag filterTag = new FilterTag(this, rowData.size());
+    private JTreeManager manager;
     
     AbstractTableModel model = new AbstractTableModel() {
             
@@ -69,8 +72,11 @@ public class FilterTable extends JPanel {
             }
         };
 
-    public FilterTable() {
+    public FilterTable(JTreeManager manager) {
+    	
         super(new GridLayout(1, 1));
+        
+        this.manager = manager;
 
         JTable table = new JTable(model){
             // override these 2 jtable methods so we can provide different values in a single column
@@ -94,12 +100,12 @@ public class FilterTable extends JPanel {
         };
         table.setDefaultRenderer(FilterWeather.class, new FilterWeather(this, rowData.size()));
         table.setDefaultRenderer(FilterChange.class, new FilterChange(this, rowData.size()));
-        table.setDefaultRenderer(FilterDate.class, new FilterDate(this, rowData.size()));
+        table.setDefaultRenderer(FilterDate.class, new FilterDate(this, rowData.size(),manager));
         table.setDefaultRenderer(FilterTag.class, new FilterTag(this, rowData.size()));
         
         table.setDefaultEditor(FilterWeather.class, new FilterWeather(this, rowData.size()));
         table.setDefaultEditor(FilterChange.class, new FilterChange(this, rowData.size()));
-        table.setDefaultEditor(FilterDate.class, new FilterDate(this, rowData.size()));
+        table.setDefaultEditor(FilterDate.class, new FilterDate(this, rowData.size(),manager));
         table.setDefaultEditor(FilterTag.class, new FilterTag(this, rowData.size()));
         
         table.setRowHeight(40);
@@ -119,7 +125,7 @@ public class FilterTable extends JPanel {
                 rowData.add(new FilterWeather(this, rowData.size()));
                 break;
             case "Date / Hour":
-                rowData.add(new FilterDate(this, rowData.size()));
+                rowData.add(new FilterDate(this, rowData.size(),manager));
                 break;
             case "Change":
                 rowData.add(new FilterChange(this, rowData.size()));
