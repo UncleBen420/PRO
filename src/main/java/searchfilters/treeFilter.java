@@ -34,7 +34,7 @@ public abstract class treeFilter {
 		
 		DefaultMutableTreeNode parent = (DefaultMutableTreeNode)node.getParent();
 		
-		filtredElements.push(new OldNodePair(parent, node, parent.getIndex(node) ));
+		filtredElements.push(new OldNodePair(parent, node, parent.getIndex(node)));
 		
 		model.removeNodeFromParent(node);
 		model.reload(node);
