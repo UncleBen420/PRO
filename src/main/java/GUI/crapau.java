@@ -28,6 +28,7 @@ public class crapau extends javax.swing.JFrame {
       initComponents();
       jTreeManager1.setSlider(sliderDemo1);
       jTreeManager1.setTable(viewerTable);
+      filtersPanel1.setManager(jTreeManager1);
    }
 
    /**
@@ -53,9 +54,7 @@ public class crapau extends javax.swing.JFrame {
         navigate_label = new javax.swing.JLabel();
         navigate_jtree = new javax.swing.JPanel();
         jTreeManager1 = new JTreeManager.JTreeManager();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        filterTable1 = new GUI.FilterTable(jTreeManager1);
+        filtersPanel1 = new GUI.FiltersPanel();
         Galerie = new javax.swing.JPanel();
         play_button = new javax.swing.JButton();
         prev_button = new javax.swing.JButton();
@@ -106,7 +105,7 @@ public class crapau extends javax.swing.JFrame {
                 .addComponent(Title1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Title2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         TitreLayout.setVerticalGroup(
             TitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +144,12 @@ public class crapau extends javax.swing.JFrame {
 
         settings_label.setForeground(new java.awt.Color(255, 255, 255));
         settings_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_settings_25px.png")));
-        settings_label.setText("Settings");
+        settings_label.setText("Statistics");
+        settings_label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                settings_labelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
@@ -186,21 +190,7 @@ public class crapau extends javax.swing.JFrame {
             .addComponent(navigate_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout navigate_jtreeLayout = new javax.swing.GroupLayout(navigate_jtree);
-        navigate_jtree.setLayout(navigate_jtreeLayout);
-        navigate_jtreeLayout.setHorizontalGroup(
-            navigate_jtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navigate_jtreeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTreeManager1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        navigate_jtreeLayout.setVerticalGroup(
-            navigate_jtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navigate_jtreeLayout.createSequentialGroup()
-                .addComponent(jTreeManager1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        navigate_jtree.add(jTreeManager1);
 
         javax.swing.GroupLayout NavigateLayout = new javax.swing.GroupLayout(Navigate);
         Navigate.setLayout(NavigateLayout);
@@ -214,17 +204,8 @@ public class crapau extends javax.swing.JFrame {
             .addGroup(NavigateLayout.createSequentialGroup()
                 .addComponent(Navigate_Titre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(navigate_jtree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(navigate_jtree, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date / Hour", "Weather", "Change", "Tag" }));
-
-        jButton1.setText("Add");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout SideLayout = new javax.swing.GroupLayout(Side);
         Side.setLayout(SideLayout);
@@ -237,14 +218,7 @@ public class crapau extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(SideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Titre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(SideLayout.createSequentialGroup()
-                        .addGroup(SideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SideLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton1))
-                            .addComponent(filterTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(filtersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SideLayout.setVerticalGroup(
@@ -257,12 +231,8 @@ public class crapau extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Filters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(filtersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filterTable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -423,7 +393,7 @@ public class crapau extends javax.swing.JFrame {
                             .addComponent(undo_button)
                             .addComponent(reload_button)))
                     .addComponent(viewerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(exit_button))
         );
 
@@ -523,10 +493,9 @@ public class crapau extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void settings_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settings_labelMouseClicked
         // TODO add your handling code here:
-        filterTable1.addRow(jComboBox1.getSelectedItem().toString());
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_settings_labelMouseClicked
 
    /**
     * @param args the command line arguments
@@ -578,10 +547,8 @@ public class crapau extends javax.swing.JFrame {
     private javax.swing.JButton add_row;
     private javax.swing.JLabel edit_label;
     private javax.swing.JButton exit_button;
-    private GUI.FilterTable filterTable1;
+    private GUI.FiltersPanel filtersPanel1;
     private javax.swing.JLabel filters_label;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private JTreeManager.JTreeManager jTreeManager1;
     private javax.swing.JPanel navigate_jtree;
     private javax.swing.JLabel navigate_label;

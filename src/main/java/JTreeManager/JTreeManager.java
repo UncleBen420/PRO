@@ -59,7 +59,7 @@ public class JTreeManager extends JPanel {
 		} else {
 			System.out.println("le chemin du nouveau");
 			parser.createXML(rootDirectory);
-			root = parser.setDirectoryTree("src/jsonFile.json");
+			root = parser.setDirectoryTree("/mnt/Data/HEIG-VD/PRO/Code/PRO/src/jsonFile.json");
 		}
 
 		tree = null;
@@ -82,26 +82,25 @@ public class JTreeManager extends JPanel {
 	                	TreeNode[] elements = ((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).getPath();
 	                	System.out.println(((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).toString());
 	                	
-						for (int i = 1, n = elements.length; i < n; i++) {
-							value += "/" + elements[i];
+                                for (int i = 1, n = elements.length; i < n; i++) {
+                                        value += "/" + elements[i];
 
-						}
-						
-						System.out.println(value);
-						
-						slider.addImage(value);
+                                }
 
-					}
+                                System.out.println(value);
 
-					slider.addImage(value);
-                                    try {
+                                slider.addImage(value);
+                                
+                                try {
                                         table.setTags(CsvParser.getTag(parserTag.getTag(value)));
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(JTreeManager.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                                } catch (IOException ex) {
+                                    Logger.getLogger(JTreeManager.class.getName()).log(Level.SEVERE, null, ex);
+                                }
 
-				}
-			}
+                            }
+                        }
+                    }
+
 		});
 
 		this.add(tree);
@@ -125,7 +124,7 @@ public class JTreeManager extends JPanel {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("conf.properties");
+			fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 

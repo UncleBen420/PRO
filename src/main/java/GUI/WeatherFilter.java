@@ -1,4 +1,4 @@
-package guitest;
+package GUI;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 import JTreeManager.JTreeManager;
 
-public class TagFilterGUI extends TreeFilterGUI{
+public class WeatherFilter extends TreeFilterGUI {
 	
-public TagFilterGUI(final JTreeManager manager){
+public WeatherFilter(final JTreeManager manager){
     	
     	super(manager);     
        
@@ -31,10 +31,9 @@ protected void specialisation() {
         }
     });
     
-    JLabel label = new JLabel("Tag");
+    JLabel label = new JLabel("Weather");
     
     panel.add(label);
 	
 }
-
 }

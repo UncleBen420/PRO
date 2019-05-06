@@ -1,4 +1,4 @@
-package guitest;
+package GUI;
 
 
 import java.awt.event.ActionEvent;

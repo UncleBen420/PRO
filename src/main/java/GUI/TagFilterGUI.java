@@ -1,19 +1,19 @@
-package guitest;
+package GUI;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import JTreeManager.JTreeManager;
-public class ChangeFilter extends TreeFilterGUI {
-	
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = -213970803241070452L;
+import javax.swing.JPanel;
 
-public ChangeFilter(final JTreeManager manager){
+import JTreeManager.JTreeManager;
+
+public class TagFilterGUI extends TreeFilterGUI{
+	
+public TagFilterGUI(final JTreeManager manager){
     	
     	super(manager);     
        
@@ -21,7 +21,9 @@ public ChangeFilter(final JTreeManager manager){
 
 protected void specialisation() {
 	
-	JButton filter = new JButton("Filter");
+	panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    
+    JButton filter = new JButton("Filter");
     filter.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -29,7 +31,7 @@ protected void specialisation() {
         }
     });
     
-    JLabel label = new JLabel("Change");
+    JLabel label = new JLabel("Tag");
     
     panel.add(label);
 	

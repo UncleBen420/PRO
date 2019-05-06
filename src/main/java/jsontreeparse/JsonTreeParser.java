@@ -27,7 +27,7 @@ public class JsonTreeParser {
 			Properties properties = new Properties();
 			FileReader fr = null;
 			try {
-				fr = new FileReader("conf.properties");
+				fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
 				properties.load(fr);
 			} catch (FileNotFoundException e) {
 
@@ -56,7 +56,7 @@ public class JsonTreeParser {
 			int i = 0;
 			parseHierarchyTag();
 
-			FileWriter file = new FileWriter("src/jsonFile.json");
+			FileWriter file = new FileWriter("/mnt/Data/HEIG-VD/PRO/Code/PRO/src/jsonFile.json");
 			JsonArray tree;
 			JsonObject temp = new JsonObject();
 			try {
