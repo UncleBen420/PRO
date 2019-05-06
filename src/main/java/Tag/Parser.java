@@ -247,17 +247,103 @@ public class Parser {
         metadata.mergeTree(IIOMetadataFormatImpl.standardMetadataFormatName, root);
     }
 
-    private String getTextEntry(final IIOMetadata metadata, final String key) {
+    public ArrayList<String> getTextEntry(final IIOMetadata metadata, final String key) {
+        ArrayList<String> tags = new ArrayList<String>();
         IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree(IIOMetadataFormatImpl.standardMetadataFormatName);
         NodeList entries = root.getElementsByTagName("TextEntry");
 
         for (int i = 0; i < entries.getLength(); i++) {
             IIOMetadataNode node = (IIOMetadataNode) entries.item(i);
-            if (node.getAttribute("keyword").equals(key)) {
-                return node.getAttribute("value");
+            if (node.getAttribute("value").equals(key)) {
+                tags.add(node.getAttribute("value"));
             }
         }
 
-        return null;
+        return tags;
+    }
+    
+    private boolean findTag(final IIOMetadata metadata, final String key) {
+        IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree(IIOMetadataFormatImpl.standardMetadataFormatName);
+        NodeList entries = root.getElementsByTagName("TextEntry");
+        if(entries == null){
+            entries = root.getElementsByTagName("com");
+        }
+
+        for (int i = 0; i < entries.getLength(); i++) {
+            IIOMetadataNode node = (IIOMetadataNode) entries.item(i);
+            if (node.getAttribute("value").startsWith(key)) {
+                return true;
+            }
+            
+            if (node.getAttribute("comment").startsWith(key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public boolean isTagged(File file) throws IOException {
+
+        String extension = getFileExtension(file);
+
+        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(extension);
+
+        while (readers.hasNext()) {
+            ImageReader reader = readers.next();
+
+            ImageInputStream stream = null;
+
+            try {
+                stream = ImageIO.createImageInputStream(file);
+
+                reader.setInput(stream, true);
+
+                IIOMetadata metadata = reader.getImageMetadata(0);
+
+                return findTag(metadata,"heigViewer");
+
+            } finally {
+                if (stream != null) {
+                    stream.close();
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    public ArrayList<String> getTag(String path) throws IOException {
+
+        ArrayList<String> tags = new ArrayList<String>();
+        
+        File file = new File(path);
+        
+        String extension = getFileExtension(file);
+
+        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(extension);
+
+        if (readers.hasNext()) {
+            ImageReader reader = readers.next();
+
+            ImageInputStream stream = null;
+
+            try {
+                stream = ImageIO.createImageInputStream(file);
+
+                reader.setInput(stream, true);
+
+                IIOMetadata metadata = reader.getImageMetadata(0);
+
+                tags = getTextEntry(metadata, "heigViewer");
+
+            } finally {
+                if (stream != null) {
+                    stream.close();
+                }
+            }
+        }
+        
+        return tags;
     }
 }

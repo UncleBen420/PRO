@@ -13,10 +13,15 @@ import javax.swing.tree.TreePath;
 import org.apache.commons.io.FilenameUtils;
 
 import GUI.SliderDemo;
+import GUI.ViewerTable;
+import Tag.CsvParser;
+import Tag.Parser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import searchfilters.treeFilter;
 import jsontreeparse.JsonTreeParser;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -30,6 +35,8 @@ public class JTreeManager extends JPanel {
 	private JTree tree;
 	private File rootDirectory, JsonTree;
 	private SliderDemo slider;
+        private ViewerTable table;
+        private Parser parserTag = new Parser();
 
 	private String value = "";
 
@@ -71,6 +78,11 @@ public class JTreeManager extends JPanel {
 					}
 
 					slider.addImage(value);
+                                    try {
+                                        table.setTags(CsvParser.getTag(parserTag.getTag(value)));
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(JTreeManager.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
 
 				}
 			}
@@ -122,5 +134,9 @@ public class JTreeManager extends JPanel {
 
 	public void setSlider(SliderDemo s) {
 		slider = s;
+	}
+        
+        public void setTable(ViewerTable t) {
+		table = t;
 	}
 }

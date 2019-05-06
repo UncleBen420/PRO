@@ -69,8 +69,6 @@ public class ViewerTable extends JPanel {
         row.add(new Double(0));
         row.add(Boolean.FALSE);
         row.add(Boolean.FALSE);
-        
-        rowData.add(new ArrayList<Object>(row));
 
         JTable table = new JTable(model);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -125,6 +123,28 @@ public class ViewerTable extends JPanel {
         comboBox.addItem("Crapaud");
         comboBox.addItem("Tritton");
         animalColumn.setCellEditor(new DefaultCellEditor(comboBox));
+    }
+    
+    public void setTags(ArrayList<ArrayList<String>> tags){
+        for(ArrayList<String> tag : tags){
+            ArrayList<Object> rowTag = new ArrayList<Object>();
+            for(int i = 1; i < 5; i++){
+                switch(i){
+                    case 1:
+                        rowTag.add(tag.get(i));
+                        break;
+                    case 2:
+                        rowTag.add(Double.valueOf(tag.get(i)));
+                        break;
+                    case 3:
+                        rowTag.add(tag.get(i).equals("true"));
+                        break;
+                    case 4:
+                        rowTag.add(tag.get(i).equals("true"));
+                        break;
+                }
+            }
+        }
     }
 
 }

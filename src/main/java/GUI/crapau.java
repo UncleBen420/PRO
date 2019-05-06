@@ -27,6 +27,7 @@ public class crapau extends javax.swing.JFrame {
    public crapau() {
       initComponents();
       jTreeManager1.setSlider(sliderDemo1);
+      jTreeManager1.setTable(viewerTable);
    }
 
    /**
