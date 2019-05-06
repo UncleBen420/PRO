@@ -3,18 +3,26 @@ package DFSDirectoryTest;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.tree.DefaultMutableTreeNode;
+
 
 import JTreeManager.JTreeManager;
-import searchfilters.treeFilter;
+import searchfilters.TreeFilterDate;
 public class TreeExample extends JFrame
 {
-    public TreeExample()
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TreeExample()
     {
     	
     	Properties properties = new Properties();
@@ -38,20 +46,19 @@ public class TreeExample extends JFrame
 		}   	
     	JTreeManager manager = new JTreeManager();
     	
+    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+   	
+    	TreeFilterDate filtreDate = null;
+		try {
+			filtreDate = new TreeFilterDate(df.parse("2017-02-23"),df.parse("2017-04-23"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
-    	manager.addFiltre(new treeFilter() {
-
-			@Override
-			public boolean analyseNode(DefaultMutableTreeNode node) {
-				if(node.toString().equals("Desktop") || node.toString().equals("Documents")) {
-					System.out.println("trouver");
-					return true;
-					
-				}
-				
-				return false;
-			}});
+    	manager.addFiltre(filtreDate);
     	
+    	manager.removeFiltre(filtreDate);
     	
     	this.add(new JScrollPane(manager));
 		

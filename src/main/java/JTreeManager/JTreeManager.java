@@ -1,5 +1,7 @@
 package JTreeManager;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Properties;
 import searchfilters.treeFilter;
 import jsontreeparse.JsonTreeParser;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 
 
@@ -56,25 +59,36 @@ public class JTreeManager extends JPanel {
 
 		tree = new JTree(root);
 
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent e) {
-				TreePath treepath = e.getPath();
 
-				value = rootDirectory.getAbsolutePath();
-				
-				if (FilenameUtils.getExtension(treepath.getLastPathComponent().toString()).equals("jpg")) {
-					Object elements[] = treepath.getPath();
+		
+		tree.addMouseListener(new MouseAdapter() {
+	        public void mouseClicked(MouseEvent e) {
+	            if (e.getClickCount() == 2) {
+	            	
+	            	          
+	                
+	                
+	                if (FilenameUtils.getExtension(((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).toString()).equals("jpg")) {
+	                	
+	                	value = rootDirectory.getAbsolutePath();   
+	                	
+	                	TreeNode[] elements = ((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).getPath();
+	                	System.out.println(((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).toString());
+	                	
+						for (int i = 1, n = elements.length; i < n; i++) {
+							value += "/" + elements[i];
 
-					for (int i = 1, n = elements.length; i < n; i++) {
-						value += "/" + elements[i];
+						}
+						
+						System.out.println(value);
+						
+						slider.addImage(value);
 
 					}
-
-					slider.addImage(value);
-
-				}
-			}
-		});
+	            }
+	        }
+	    });
+		
 
 		this.add(tree);
 
@@ -97,7 +111,7 @@ public class JTreeManager extends JPanel {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
+			fr = new FileReader("conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 

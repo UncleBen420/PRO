@@ -54,7 +54,7 @@ public class crapau extends javax.swing.JFrame {
         jTreeManager1 = new JTreeManager.JTreeManager();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        filterTable1 = new GUI.FilterTable();
+        filterTable1 = new GUI.FilterTable(jTreeManager1);
         Galerie = new javax.swing.JPanel();
         play_button = new javax.swing.JButton();
         prev_button = new javax.swing.JButton();
