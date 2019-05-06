@@ -58,11 +58,25 @@ public class meteoAPITest {
     public void recuperationDeToutesLesDateOuIlFaisaitBeau () {
         MeteoAPI meteo = new MeteoAPI();
 
-        List<MeteoPerDay> listMeteo = meteo.getList("Clear");
+        List<MeteoPerDay> listMeteo = meteo.getListFiltreSummary(TYPEMETEO.DEGAGE);
 
         for (MeteoPerDay met : listMeteo) {
             System.out.println(met.getDate());
             for (String s : met.getMeteo()) {
+                System.out.println(s);
+            }
+        }
+    }
+
+    @Test
+    public void recuperationDeToutesLesTemperatures() {
+        MeteoAPI meteo = new MeteoAPI();
+
+        List<MeteoPerDay> listMeteo = meteo.getList();
+
+        for (MeteoPerDay met : listMeteo) {
+            System.out.println(met.getDate());
+            for (Double s : met.getTemperature()) {
                 System.out.println(s);
             }
         }

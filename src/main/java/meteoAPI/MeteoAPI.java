@@ -35,27 +35,99 @@ public class MeteoAPI {
         list.add(met);
     }
 
-    public List<MeteoPerDay> getList(String filtre) {
+    public List<MeteoPerDay> getListFiltreSummary(TYPEMETEO filtre) {
         boolean test;
         int i = 0;
+        int j;
         List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
         List<MeteoPerDay> meteoProjet = getList();
-        MeteoPerDay met = null;
+        MeteoPerDay met;
+
 
         for (MeteoPerDay day : meteoProjet) {
-
+            j = 0;
             test = true;
             for (String s : day.getMeteo()) {
+
+                if (test) {
+                    met = new MeteoPerDay(day.getDate());
+                    meteoPerFiltre.add(met);
+                    test = false;
+                }
+                if (s.equals(filtre.toString())) {
+                    meteoPerFiltre.get(i).addMeteo(s);
+                } else {
+                    meteoPerFiltre.get(i).addMeteo("-1");
+                }
+                meteoPerFiltre.get(i).addTemperature(day.getTemperature().get(j));
+                meteoPerFiltre.get(i).addRain(day.getRainInfo().get(j));
+                ++j;
+            }
+            ++i;
+        }
+
+        return meteoPerFiltre;
+    }
+
+    public List<MeteoPerDay> getListFiltrePluie(TYPEMETEO filtre) {
+        boolean test;
+        int i = 0;
+        int j;
+        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
+        List<MeteoPerDay> meteoProjet = getList();
+        MeteoPerDay met;
+
+        for (MeteoPerDay day : meteoProjet) {
+            j = 0;
+            test = true;
+            for (String s : day.getRainInfo()) {
+
+                if (test) {
+                    met = new MeteoPerDay(day.getDate());
+                    meteoPerFiltre.add(met);
+                    test = false;
+                }
+                if (s.equals(filtre.toString())) {
+                    meteoPerFiltre.get(i).addRain(s);
+                } else {
+                    meteoPerFiltre.get(i).addRain("no rain");
+                }
+                meteoPerFiltre.get(i).addTemperature(day.getTemperature().get(j));
+                meteoPerFiltre.get(i).addMeteo(day.getMeteo().get(j));
+                ++j;
+            }
+            ++i;
+        }
+
+        return meteoPerFiltre;
+    }
+
+    public List<MeteoPerDay> getListFiltreTemperature(Double filtre) {
+        boolean test;
+        int i = 0;
+        int j;
+        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
+        List<MeteoPerDay> meteoProjet = getList();
+        MeteoPerDay met;
+
+        for (MeteoPerDay day : meteoProjet) {
+            j = 0;
+            test = true;
+            for (Double s : day.getTemperature()) {
+
                 if (test) {
                     met = new MeteoPerDay(day.getDate());
                     meteoPerFiltre.add(met);
                     test = false;
                 }
                 if (s.equals(filtre)) {
-                    meteoPerFiltre.get(i).addMeteo(s);
+                    meteoPerFiltre.get(i).addTemperature(s);
                 } else {
-                    meteoPerFiltre.get(i).addMeteo("-1");
+                    meteoPerFiltre.get(i).addTemperature(99);
                 }
+                meteoPerFiltre.get(i).addMeteo(day.getMeteo().get(j));
+                meteoPerFiltre.get(i).addRain(day.getRainInfo().get(j));
+                ++j;
             }
             ++i;
         }
@@ -65,5 +137,11 @@ public class MeteoAPI {
 
     private void parseHourObject(MeteoPerDay met, JsonObject hour) {
         met.addMeteo(hour.get("summary").getAsString());
+        met.addTemperature(hour.get("temperature").getAsDouble());
+        if (hour.has("precipType")) {
+            met.addRain(hour.get("precipType").getAsString());
+        } else {
+            met.addRain("no rain");
+        }
     }
 }
