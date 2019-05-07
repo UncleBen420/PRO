@@ -24,22 +24,47 @@ import java.util.logging.Logger;
 public class TagHistory {
     static public void saveTag(ArrayList<ArrayList<String>> tags, String imagesPath){
         File history = new File("history.json");
+        File file = new File(imagesPath);
         try {
-            FileReader reader = new FileReader(history);
-            if(history.exists()){
-                
-                JsonParser parser = new JsonParser();
-                JsonElement json = parser.parse(reader);
-                JsonObject root = new JsonObject();
-                if(json.isJsonNull()){
-                    createHistory(history, tags, imagesPath);
+            if(file.isFile()){
+                FileReader reader = new FileReader(history);
+                if(history.exists()){
+
+                    JsonParser parser = new JsonParser();
+                    JsonElement json = parser.parse(reader);
+                    JsonObject root = new JsonObject();
+                    if(json.isJsonNull()){
+                        createHistory(history, tags, imagesPath);
+                    } else {
+                        updateTags(history, tags, imagesPath, reader, json);
+                    }
+                    reader.close();
                 } else {
-                    updateTags(history, tags, imagesPath, reader, json);
+                    createHistory(history, tags, imagesPath);
                 }
-                reader.close();
-            } else {
-                createHistory(history, tags, imagesPath);
+            } else if(file.isDirectory()){
+                File[] list = file.listFiles();
+                for(File f : list){
+                    if(getFileExtension(f).equals("jpg")){
+                        FileReader reader = new FileReader(history);
+                        if(history.exists()){
+
+                            JsonParser parser = new JsonParser();
+                            JsonElement json = parser.parse(reader);
+                            JsonObject root = new JsonObject();
+                            if(json.isJsonNull()){
+                                createHistory(history, tags, f.getAbsolutePath());
+                            } else {
+                                updateTags(history, tags, f.getAbsolutePath(), reader, json);
+                            }
+                            reader.close();
+                        } else {
+                            createHistory(history, tags, f.getAbsolutePath());
+                        }
+                    }
+                }
             }
+            
         } catch (IOException ex) {
             Logger.getLogger(TagHistory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,5 +156,11 @@ public class TagHistory {
             Logger.getLogger(TagHistory.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+    
+    static private String getFileExtension(File file) {
+        String fileName = file.getName();
+        int lastDot = fileName.lastIndexOf('.');
+        return fileName.substring(lastDot + 1);
     }
 }
