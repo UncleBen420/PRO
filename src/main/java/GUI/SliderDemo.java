@@ -31,11 +31,16 @@
 
 package GUI;
 
+import Tag.CsvParser;
+import Tag.Parser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -58,6 +63,8 @@ public class SliderDemo extends JPanel
     boolean frozen = false;
     String directory;
     ArrayList<String> imagesPath = new ArrayList<String>();
+    private Parser parserTag = new Parser();
+    private ViewerTable table;
 
     //This label uses ImageIcon to show the doggy pictures.
     JLabel picture;
@@ -129,6 +136,12 @@ public class SliderDemo extends JPanel
             images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
             picture.setIcon(images[frameNumber]);
         }
+        
+        try {
+            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
+        } catch (IOException ex) {
+            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /** Update the label to display the image for the current frame. */
@@ -144,6 +157,12 @@ public class SliderDemo extends JPanel
         } else { //image not found
             images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
             picture.setIcon(images[frameNumber]);
+        }
+        
+        try {
+            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
+        } catch (IOException ex) {
+            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -211,26 +230,8 @@ public class SliderDemo extends JPanel
         return directory;
     }
     
-    
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("SliderDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SliderDemo animator = new SliderDemo();
-                
-        //Add content to the window.
-        frame.add(animator, BorderLayout.CENTER);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-        animator.startAnimation(); 
+    public void setTable(ViewerTable table){
+        this.table = table;
     }
 }
 

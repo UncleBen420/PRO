@@ -122,10 +122,12 @@ public class ViewerTable extends JPanel {
         JComboBox comboBox = new JComboBox();
         comboBox.addItem("Crapaud");
         comboBox.addItem("Tritton");
+        comboBox.addItem("Grenouille");
         animalColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }
     
     public void setTags(ArrayList<ArrayList<String>> tags){
+        rowData.clear();
         for(ArrayList<String> tag : tags){
             ArrayList<Object> rowTag = new ArrayList<Object>();
             for(int i = 1; i < 5; i++){
@@ -144,7 +146,9 @@ public class ViewerTable extends JPanel {
                         break;
                 }
             }
+            rowData.add(new ArrayList<Object>(rowTag));
         }
+        model.fireTableDataChanged();
     }
 
 }

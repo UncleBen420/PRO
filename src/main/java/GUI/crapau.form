@@ -263,7 +263,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="Navigate_Titre" max="32767" attributes="0"/>
-                      <Component id="navigate_jtree" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -271,7 +271,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="Navigate_Titre" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="navigate_jtree" min="-2" pref="397" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="393" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -290,7 +290,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                               <Component id="navigate_label" min="-2" pref="113" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="234" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -317,9 +317,9 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="navigate_jtree">
+                <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="JTreeManager.JTreeManager" name="jTreeManager1">
                     </Component>
@@ -428,20 +428,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tag_label" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edit_label" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="save_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="save_button1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="tag_label" min="-2" max="-2" attributes="0"/>
+                          <Component id="edit_label" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="add_row" min="-2" max="-2" attributes="0"/>
@@ -474,7 +470,10 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="tag_label" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="save_button" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="save_button" min="-2" max="-2" attributes="0"/>
+                                  <Component id="save_button1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="add_row" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -551,6 +550,15 @@
               </Events>
             </Component>
             <Component class="GUI.ViewerTable" name="viewerTable">
+            </Component>
+            <Component class="javax.swing.JButton" name="save_button1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seq"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="save_button1MouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="save_button1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
