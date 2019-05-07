@@ -3,10 +3,6 @@ package Tag;
 import java.util.ArrayList;
 
 import Shapes.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Tag {
 	private ArrayList<String> tags = new ArrayList<String>();

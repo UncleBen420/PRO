@@ -49,16 +49,21 @@ public class TreeExample extends JFrame
     	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
    	
     	TreeFilterDate filtreDate = null;
+    	TreeFilterDate filtreDate2 = null;
 		try {
-			filtreDate = new TreeFilterDate(df.parse("2017-02-23"),df.parse("2017-04-23"));
+			filtreDate = new TreeFilterDate(df.parse("2017-03-23"),df.parse("2017-04-23"));
+			filtreDate2 = new TreeFilterDate(df.parse("2017-04-23"),df.parse("2017-04-23"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
+
     	manager.addFiltre(filtreDate);
+    	manager.addFiltre(filtreDate2);
     	
     	manager.removeFiltre(filtreDate);
+    	manager.removeFiltre(filtreDate2);
     	
     	this.add(new JScrollPane(manager));
 		
