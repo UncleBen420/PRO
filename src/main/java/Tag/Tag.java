@@ -3,10 +3,6 @@ package Tag;
 import java.util.ArrayList;
 
 import Shapes.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Tag {
 	private ArrayList<String> tags = new ArrayList<String>();
@@ -22,7 +18,7 @@ public class Tag {
 	}
 	
 	private String formatTag(ArrayList<String> tag) {
-		String str = "heigViewer";
+		String str = "heigViewer;";
 		
 		for(String s : tag) {
 			str += s + ";";
@@ -59,6 +55,6 @@ public class Tag {
                 
                 parser.setTags(this.tags, imagesPath);
                 
-                parser.showTags(imagesPath);
+                //parser.showTags(imagesPath);
 	}
 }

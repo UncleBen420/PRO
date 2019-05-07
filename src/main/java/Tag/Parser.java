@@ -3,8 +3,11 @@ package Tag;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -16,6 +19,7 @@ import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.imageio.metadata.IIOMetadataNode;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
+import org.w3c.dom.Element;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -73,35 +77,41 @@ public class Parser {
                reader.setInput(input);
                IIOImage image = reader.readAll(0, null);
 
-               addTextEntry(image.getMetadata(), "heig", tags);
+               addTextEntry(image.getMetadata(), "heigViewer", tags);
 
                ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
                writer.setOutput(output);
                writer.write(image);
+               input.close();
+               output.close();
             } else if(inputFile.isDirectory()) {
                 File[] contents = inputFile.listFiles();
                 for (File file : contents) {
                     if (file.isFile()) {
-                        ImageInputStream input = ImageIO.createImageInputStream(file);
-                        ImageOutputStream output = ImageIO.createImageOutputStream(file);
+                        if(getFileExtension(file).equals("jpg")){
+                            ImageInputStream input = ImageIO.createImageInputStream(file);
+                            ImageOutputStream output = ImageIO.createImageOutputStream(file);
 
-                       Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
-                       ImageReader reader = readers.next(); // TODO: Validate that there are readers
+                           Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
+                           ImageReader reader = readers.next(); // TODO: Validate that there are readers
 
-                       reader.setInput(input);
-                       IIOImage image = reader.readAll(0, null);
+                           reader.setInput(input);
+                           IIOImage image = reader.readAll(0, null);
 
-                       addTextEntry(image.getMetadata(), "heig", tags);
+                           addTextEntry(image.getMetadata(), "heigViewer", tags);
 
-                       ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
-                       writer.setOutput(output);
-                       writer.write(image);
+                           ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
+                           writer.setOutput(output);
+                           writer.write(image);
+                           input.close();
+                           output.close();
+                        }
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } 
     }
 
     private void indent(int level) {
@@ -231,20 +241,31 @@ public class Parser {
         }
     }
 
-    private void addTextEntry(final IIOMetadata metadata, final String key, final ArrayList<String> value) throws IIOInvalidTreeException {
-        IIOMetadataNode text = new IIOMetadataNode("Text");
+    private void addTextEntry(final IIOMetadata metadata, final String key, final ArrayList<String> value) throws IIOInvalidTreeException, UnsupportedEncodingException{
         
-        for(String tag : value){
-            IIOMetadataNode textEntry = new IIOMetadataNode("TextEntry");
-            textEntry.setAttribute("keyword", key);
-            textEntry.setAttribute("value", tag);
-            text.appendChild(textEntry);
-        }
+        IIOMetadataNode tree = (IIOMetadataNode) metadata.getAsTree("javax_imageio_jpeg_image_1.0");
+        
+        IIOMetadataNode textNode = (IIOMetadataNode)tree.getElementsByTagName("markerSequence").item(0);
+        NodeList entries = textNode.getElementsByTagName("com");
 
-        IIOMetadataNode root = new IIOMetadataNode(IIOMetadataFormatImpl.standardMetadataFormatName);
-        root.appendChild(text);
+        for (int i = 0; i < entries.getLength(); i++) {
+            IIOMetadataNode node = (IIOMetadataNode) entries.item(i);
+            if (node.getAttribute("comment").startsWith(key)) {
+                textNode.removeChild(node);
+            }
+        }
         
-        metadata.mergeTree(IIOMetadataFormatImpl.standardMetadataFormatName, root);
+        for(int i = 0; i < value.size(); i++){
+            IIOMetadataNode textEntry = new IIOMetadataNode("com");
+            try {
+                    textEntry.setUserObject((value.get(i)).getBytes("ISO-8859-1"));
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            textNode.appendChild(textEntry);
+        }
+        
+        metadata.setFromTree("javax_imageio_jpeg_image_1.0", tree);
     }
 
     public ArrayList<String> getTextEntry(final IIOMetadata metadata, final String key) {
@@ -254,7 +275,7 @@ public class Parser {
 
         for (int i = 0; i < entries.getLength(); i++) {
             IIOMetadataNode node = (IIOMetadataNode) entries.item(i);
-            if (node.getAttribute("value").equals(key)) {
+            if (node.getAttribute("value").startsWith(key)) {
                 tags.add(node.getAttribute("value"));
             }
         }
