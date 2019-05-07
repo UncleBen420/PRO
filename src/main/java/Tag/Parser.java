@@ -65,6 +65,7 @@ public class Parser {
     }
     
     public void setTags(ArrayList<String> tags, String imagesPath) {
+        String test = "";
         try {
             File inputFile = new File(imagesPath);
             if (inputFile.isFile()) {
@@ -89,6 +90,7 @@ public class Parser {
                 for (File file : contents) {
                     if (file.isFile()) {
                         if(getFileExtension(file).equals("jpg")){
+                            test = file.getName();
                             ImageInputStream input = ImageIO.createImageInputStream(file);
                             ImageOutputStream output = ImageIO.createImageOutputStream(file);
 
@@ -110,6 +112,7 @@ public class Parser {
                 }
             }
         } catch (IOException e) {
+            System.out.println(test);
             e.printStackTrace();
         } 
     }
@@ -352,11 +355,13 @@ public class Parser {
             try {
                 stream = ImageIO.createImageInputStream(file);
 
-                reader.setInput(stream, true);
+                if(stream != null){
+                    reader.setInput(stream, true);
 
-                IIOMetadata metadata = reader.getImageMetadata(0);
+                    IIOMetadata metadata = reader.getImageMetadata(0);
 
-                tags = getTextEntry(metadata, "heigViewer");
+                    tags = getTextEntry(metadata, "heigViewer");
+                }
 
             } finally {
                 if (stream != null) {
