@@ -34,13 +34,13 @@ public class TagHistory {
                     JsonElement json = parser.parse(reader);
                     JsonObject root = new JsonObject();
                     if(json.isJsonNull()){
-                        createHistory(history, tags, imagesPath);
+                        createHistory(history, tags, getRelativePath(imagesPath));
                     } else {
-                        updateTags(history, tags, imagesPath, reader, json);
+                        updateTags(history, tags, getRelativePath(imagesPath), reader, json);
                     }
                     reader.close();
                 } else {
-                    createHistory(history, tags, imagesPath);
+                    createHistory(history, tags, getRelativePath(imagesPath));
                 }
             } else if(file.isDirectory()){
                 File[] list = file.listFiles();
@@ -53,13 +53,13 @@ public class TagHistory {
                             JsonElement json = parser.parse(reader);
                             JsonObject root = new JsonObject();
                             if(json.isJsonNull()){
-                                createHistory(history, tags, f.getAbsolutePath());
+                                createHistory(history, tags, getRelativePath(f.getAbsolutePath()));
                             } else {
-                                updateTags(history, tags, f.getAbsolutePath(), reader, json);
+                                updateTags(history, tags, getRelativePath(f.getAbsolutePath()), reader, json);
                             }
                             reader.close();
                         } else {
-                            createHistory(history, tags, f.getAbsolutePath());
+                            createHistory(history, tags, getRelativePath(f.getAbsolutePath()));
                         }
                     }
                 }
@@ -164,5 +164,11 @@ public class TagHistory {
         String fileName = file.getName();
         int lastDot = fileName.lastIndexOf('.');
         return fileName.substring(lastDot + 1);
+    }
+    
+    static private String getRelativePath(String path){
+        String relative = "";
+        int index = path.indexOf("Camera", 0);
+        return path.substring(index);
     }
 }
