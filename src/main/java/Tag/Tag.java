@@ -17,7 +17,7 @@ public class Tag {
 		
 	}
 	
-	private String formatTag(ArrayList<String> tag) {
+	public String formatTag(ArrayList<String> tag) {
 		String str = "heigViewer;";
 		
 		for(String s : tag) {
@@ -27,7 +27,7 @@ public class Tag {
 		return str;
 	}
 	
-	private String formatShape(Shapes shape) {
+	public String formatShape(Shapes shape) {
 		String str = "";
 		
 		if(shape instanceof Cercle) {
@@ -54,7 +54,5 @@ public class Tag {
                 TagHistory.saveTag(tags, imagesPath);
                 
                 parser.setTags(this.tags, imagesPath);
-                
-                //parser.showTags(imagesPath);
 	}
 }

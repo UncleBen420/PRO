@@ -27,9 +27,9 @@ public class TagHistory {
         File file = new File(imagesPath);
         try {
             if(file.isFile()){
-                FileReader reader = new FileReader(history);
+                
                 if(history.exists()){
-
+                    FileReader reader = new FileReader(history);
                     JsonParser parser = new JsonParser();
                     JsonElement json = parser.parse(reader);
                     JsonObject root = new JsonObject();
@@ -46,9 +46,9 @@ public class TagHistory {
                 File[] list = file.listFiles();
                 for(File f : list){
                     if(getFileExtension(f).equals("jpg")){
-                        FileReader reader = new FileReader(history);
+                        
                         if(history.exists()){
-
+                            FileReader reader = new FileReader(history);
                             JsonParser parser = new JsonParser();
                             JsonElement json = parser.parse(reader);
                             JsonObject root = new JsonObject();
@@ -76,14 +76,15 @@ public class TagHistory {
                 root.addProperty("type", "IntermediateRegister");
                 root.addProperty("imageCounter", 1);
                 JsonArray content = new JsonArray();
-                JsonArray tag = new JsonArray();
+                
                 JsonArray tagArray = new JsonArray();
                 
                 for(ArrayList<String> elem : tags){
+                    JsonArray tag = new JsonArray();
                     for(String str : elem){
                         tag.add(str);
                     }
-                    tagArray.addAll(tag);
+                    tagArray.add(tag);
                 }
                 
                 JsonObject temp = new JsonObject();
@@ -111,8 +112,8 @@ public class TagHistory {
 
         JsonArray content = root.getAsJsonArray("content");
         JsonObject tmp = new JsonObject();
-        JsonArray tag = new JsonArray();
-        JsonArray tagArray = new JsonArray();;
+        
+        JsonArray tagArray = new JsonArray();
 
         for(int i = 0; i < content.size(); i++){
             tmp = content.get(i).getAsJsonObject();
@@ -127,10 +128,11 @@ public class TagHistory {
         }
 
         for(ArrayList<String> elem : tags){
+            JsonArray tag = new JsonArray();
             for(String str : elem){
                 tag.add(str);
             }
-            tagArray.addAll(tag);
+            tagArray.add(tag);
         }
 
         if(test){

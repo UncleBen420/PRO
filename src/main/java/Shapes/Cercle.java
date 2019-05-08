@@ -3,7 +3,7 @@ package Shapes;
 public class Cercle extends Shapes{
 	private double radius;
 	
-	Cercle(double x, double y, double r) {
+	public Cercle(double x, double y, double r) {
 		super(x, y);
 		radius = r;
 	}

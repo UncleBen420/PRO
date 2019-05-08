@@ -2,7 +2,7 @@ package Shapes;
 
 public class Point extends Shapes{
 	
-	Point(double x, double y){
+	public Point(double x, double y){
 		super(x,y);
 	}
 }
