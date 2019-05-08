@@ -1,3 +1,9 @@
+/**
+ * PRO
+ * Authors: Bacso
+ * File: WeatherFilter.java
+ * IDE: NetBeans IDE 11
+ */
 package GUI;
 
 import java.awt.FlowLayout;
@@ -24,62 +30,63 @@ import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
 import searchfilters.TreeFilterDate;
 
-public class WeatherFilter extends TreeFilterGUI {
-	
-	private boolean rainChecked = false;
-	
-public WeatherFilter(final JTreeManager manager){
-    	
-    	super(manager);     
-       
+/**
+ * Classe implémentant l'interface pour le fitre meteo
+ *
+ * @author gaetan
+ */
+public class WeatherFilter extends TreeFilter {
+
+    private boolean rainChecked = false;
+
+    public WeatherFilter(final JTreeManager manager) {
+
+        super(manager);
+
     }
 
-protected void specialisation() {
-	
-	List<String> weathersString = new ArrayList<>();
-	
-	
-	
-	for(TYPEMETEO weather : TYPEMETEO.values()) {
-		weathersString.add(weather.toString());		
-	}
-	
-	JComboBox weatherCombobox = new JComboBox(weathersString.toArray());
-	JCheckBox rainCheckBox = new JCheckBox("rain");
-	
-	rainCheckBox.addItemListener(new ItemListener() {
-	    @Override
-	    public void itemStateChanged(ItemEvent e) {
-	        if(e.getStateChange() == ItemEvent.SELECTED) {
-	            rainChecked = true;
-	        } else {
+    protected void specialisation() {
 
-	        	rainChecked = false;
-	        };
-	    }
-	});
-	
-    filter.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-            if(currentFilter != null) {
-            	manager.removeFiltre(currentFilter);
-            }
-            
-            currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())), rainChecked);
-            manager.addFiltre(currentFilter); 
+        List<String> weathersString = new ArrayList<>();
 
-            
-
+        for (TYPEMETEO weather : TYPEMETEO.values()) {
+            weathersString.add(weather.toString());
         }
-    });
-    
-    JLabel label = new JLabel("Weather");
-    
-    panel.add(label);
-    panel.add(weatherCombobox);
-    panel.add(rainCheckBox);
-	
-}
+
+        JComboBox weatherCombobox = new JComboBox(weathersString.toArray());
+        JCheckBox rainCheckBox = new JCheckBox("rain");
+
+        rainCheckBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    rainChecked = true;
+                } else {
+
+                    rainChecked = false;
+                };
+            }
+        });
+
+        filter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (currentFilter != null) {
+                    manager.removeFiltre(currentFilter);
+                }
+
+                currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())), rainChecked);
+                manager.addFiltre(currentFilter);
+
+            }
+        });
+
+        JLabel label = new JLabel("Weather");
+
+        panel.add(label);
+        panel.add(weatherCombobox);
+        panel.add(rainCheckBox);
+
+    }
 }

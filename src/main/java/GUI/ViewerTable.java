@@ -9,12 +9,12 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- *
+ * Classe implémentant l'interface du tableau pour les tags
+ * 
  * @author gaetan
  */
 public class ViewerTable extends JPanel {
@@ -27,26 +27,32 @@ public class ViewerTable extends JPanel {
     AbstractTableModel model = new AbstractTableModel() {
             
 
+            @Override
 	    public int getColumnCount() {
 		return columnNames.length;
 	    }
 
+            @Override
             public String getColumnName(int column) {
                 return columnNames[column];
             }
 
+            @Override
             public int getRowCount() {
                 return rowData.size();
             }
 
+            @Override
             public Object getValueAt(int row, int column) {
                 return rowData.get(row).get(column);
             }
 
+            @Override
             public Class getColumnClass(int column) {
                 return (getValueAt(0, column).getClass());
             }
 
+            @Override
             public void setValueAt(Object value, int row, int column) {
                 rowData.get(row).set(column, value);
             }
@@ -70,15 +76,13 @@ public class ViewerTable extends JPanel {
         row.add(Boolean.FALSE);
         row.add(Boolean.FALSE);
 
-        JTable table = new JTable(model);
+        table = new JTable(model);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
 
         //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
 
-        //Set up column sizes.
-        //initColumnSizes(table);
         //Fiddle with the Sport column's cell editors/renderers.
         setUpAnimalColumn(table, table.getColumnModel().getColumn(0));
 

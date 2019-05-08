@@ -27,8 +27,7 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
-
+ */
 package GUI;
 
 import Tag.CsvParser;
@@ -42,15 +41,16 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.event.*;
 
-/*
- * SliderDemo.java requires all the files in the images/doggy
- * directory.
+/**
+ * Classe implémentant le slider d'images
+ *
+ * @author gaetan
  */
 public class SliderDemo extends JPanel
-                        implements ActionListener,
-                                   WindowListener {
+        implements ActionListener,
+        WindowListener {
+
     //Set up animation parameters.
     static final int FPS_MIN = 0;
     static final int FPS_MAX = 30;
@@ -86,27 +86,47 @@ public class SliderDemo extends JPanel
         //Set up a timer that calls this object's action handler.
         timer = new Timer(delay, this);
         timer.setInitialDelay(delay * 7); //We pause animation twice per cycle
-                                          //by restarting the timer
+        //by restarting the timer
         timer.setCoalesce(true);
     }
 
-    /** Add a listener for window events. */
+    /**
+     * Add a listener for window events.
+     */
     void addWindowListener(Window w) {
         w.addWindowListener(this);
     }
 
     //React to window events.
+    @Override
     public void windowIconified(WindowEvent e) {
         stopAnimation();
     }
+
+    @Override
     public void windowDeiconified(WindowEvent e) {
         startAnimation();
     }
-    public void windowOpened(WindowEvent e) {}
-    public void windowClosing(WindowEvent e) {}
-    public void windowClosed(WindowEvent e) {}
-    public void windowActivated(WindowEvent e) {}
-    public void windowDeactivated(WindowEvent e) {}
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+    }
 
     public void startAnimation() {
         //Start (or restart) animating!
@@ -121,14 +141,17 @@ public class SliderDemo extends JPanel
     }
 
     //Called when the Timer fires.
+    @Override
     public void actionPerformed(ActionEvent e) {
-       nextPicture();
+        nextPicture();
     }
 
-    /** Update the label to display the image for the current frame. */
+    /**
+     * Update the label to display the image for the current frame.
+     */
     public void nextPicture() {
-        
-        frameNumber = (frameNumber + 1) % (images.length-1);
+
+        frameNumber = (frameNumber + 1) % (images.length - 1);
         //Set the image.
         if (images[frameNumber] != null) {
             picture.setIcon(images[frameNumber]);
@@ -136,29 +159,7 @@ public class SliderDemo extends JPanel
             images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
             picture.setIcon(images[frameNumber]);
         }
-        
-        try {
-            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
-        } catch (IOException ex) {
-            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    /** Update the label to display the image for the current frame. */
-    public void prevPicture() {
-        
-        frameNumber--;
-        if(frameNumber < 0){
-            frameNumber = (images.length-1);
-        }
-        //Set the image.
-        if (images[frameNumber] != null) {
-            picture.setIcon(images[frameNumber]);
-        } else { //image not found
-            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
-            picture.setIcon(images[frameNumber]);
-        }
-        
+
         try {
             table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
         } catch (IOException ex) {
@@ -166,7 +167,36 @@ public class SliderDemo extends JPanel
         }
     }
 
-    /** Returns an ImageIcon, or null if the path was invalid. */
+    /**
+     * Update the label to display the image for the current frame.
+     */
+    public void prevPicture() {
+
+        frameNumber--;
+        if (frameNumber < 0) {
+            frameNumber = (images.length - 1);
+        }
+        //Set the image.
+        if (images[frameNumber] != null) {
+            picture.setIcon(images[frameNumber]);
+        } else { //image not found
+            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+            picture.setIcon(images[frameNumber]);
+        }
+
+        try {
+            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
+        } catch (IOException ex) {
+            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     *
+     * @param path Chemin de l'image
+     * @return Icone de l'image
+     */
     protected static ImageIcon createImageIcon(String path) {
         if (path != null) {
             return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(1250, 550, java.awt.Image.SCALE_FAST));
@@ -175,27 +205,27 @@ public class SliderDemo extends JPanel
             return null;
         }
     }
-    
+
     private String getFileExtension(File file) {
         String fileName = file.getName();
         int lastDot = fileName.lastIndexOf('.');
         return fileName.substring(lastDot + 1);
     }
-    
-    public void addImage(String path){
+
+    public void addImage(String path) {
         int i = 0;
         if (path != null) {
-        	
-            if(!imagesPath.contains(path)){
+
+            if (!imagesPath.contains(path)) {
                 imagesPath.clear();
                 File file = new File(path);
                 file = file.getParentFile();
                 directory = file.getAbsolutePath();
                 File[] files = file.listFiles();
                 Arrays.sort(files);
-                for(File image : files){
-                    if(getFileExtension(image).equals("jpg")){
-                        if(image.getAbsolutePath().equals(path)){
+                for (File image : files) {
+                    if (getFileExtension(image).equals("jpg")) {
+                        if (image.getAbsolutePath().equals(path)) {
                             frameNumber = i;
                         }
                         imagesPath.add(image.getAbsolutePath());
@@ -203,9 +233,9 @@ public class SliderDemo extends JPanel
                     }
                 }
 
-                images = new ImageIcon[i+1];
+                images = new ImageIcon[i + 1];
                 images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
-                picture.setIcon(images[frameNumber]); 
+                picture.setIcon(images[frameNumber]);
             } else {
                 frameNumber = imagesPath.indexOf(path);
                 //Set the image.
@@ -216,22 +246,21 @@ public class SliderDemo extends JPanel
                     picture.setIcon(images[frameNumber]);
                 }
             }
-        	
+
         } else {
             System.err.println("Couldn't find file: " + path);
         }
     }
-    
-    public String getImage(){
+
+    public String getImage() {
         return imagesPath.get(frameNumber);
     }
-    
-    public String getDirectory(){
+
+    public String getDirectory() {
         return directory;
     }
-    
-    public void setTable(ViewerTable table){
+
+    public void setTable(ViewerTable table) {
         this.table = table;
     }
 }
-

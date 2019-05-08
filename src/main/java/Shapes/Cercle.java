@@ -1,5 +1,16 @@
+/**
+ * PRO
+ * Authors: Bacso
+ * File: Cercle.java
+ * IDE: NetBeans IDE 11
+ */
 package Shapes;
 
+/**
+ * Classe implémentant les Cercle
+ * 
+ * @author gaetan
+ */
 public class Cercle extends Shapes{
 	private double radius;
 	
