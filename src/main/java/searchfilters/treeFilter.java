@@ -35,7 +35,7 @@ public abstract class treeFilter {
 		this.tree = tree;
 	}
 
-	public void removeFromTree(DefaultMutableTreeNode node) {
+	protected void removeFromTree(DefaultMutableTreeNode node) {
 
 		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
@@ -73,7 +73,7 @@ public abstract class treeFilter {
 
 	}
 
-	private void filtreNode(DefaultMutableTreeNode node) {
+	protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {
 
