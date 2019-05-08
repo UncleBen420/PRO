@@ -121,7 +121,7 @@ public class ViewerTable extends JPanel {
         //Set up the editor for the sport cells.
         JComboBox comboBox = new JComboBox();
         comboBox.addItem("Crapaud");
-        comboBox.addItem("Tritton");
+        comboBox.addItem("Triton");
         comboBox.addItem("Grenouille");
         animalColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }
