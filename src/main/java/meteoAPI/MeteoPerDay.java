@@ -9,11 +9,11 @@ public class MeteoPerDay {
     private Date date;
     private List<String> Meteo = new ArrayList<>();
     private List<Double> Temperature = new ArrayList<>();
-    private List<String> rain = new ArrayList<>();
+    private List<Boolean> rain = new ArrayList<>();
 
     public MeteoPerDay(String date) {
 
-        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             this.date = df.parse(date);
         } catch (ParseException e) {
@@ -45,12 +45,12 @@ public class MeteoPerDay {
         Temperature.add((Double) temperature);
     }
 
-    public List<String> getRainInfo() {
+    public List<Boolean> getRainInfo() {
         return rain;
     }
-
-    public void addRain(Object rainInfo) {
-        rain.add((String) rainInfo);
+    
+    public void addRain(Boolean rainInfo) {
+        rain.add(rainInfo);
     }
 
 }

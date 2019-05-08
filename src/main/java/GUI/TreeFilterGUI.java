@@ -7,15 +7,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import JTreeManager.JTreeManager;
-import searchfilters.TreeFilterDate;
+import searchfilters.treeFilter;
 
 abstract public class TreeFilterGUI extends JPanel{
 	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7409356452760309804L;
 		protected JPanel panel;
 		private JButton delete;
 		protected JButton filter;
 		protected JTreeManager manager;
-		protected TreeFilterDate currentFilter;
+		protected treeFilter currentFilter;
 	    
 	protected TreeFilterGUI() {
 		
@@ -54,6 +58,7 @@ abstract public class TreeFilterGUI extends JPanel{
             	
             	if(currentFilter != null) {
                 	manager.removeFiltre(currentFilter);
+                	currentFilter = null;
                 }
 
             }

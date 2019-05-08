@@ -1,9 +1,7 @@
 package meteoAPI;
 
 public enum TYPEMETEO {
-    RAIN("rain"),
-    NORAIN("no rain"),
-    DEGAGE("Clear"),
+	DEGAGE("Clear"),
     PEUNUAGUEX("Partly Cloudly"),
     TRESNUAGEUX("Mostly Cloudly"),
     OVERCAST("Overcast");
@@ -15,5 +13,15 @@ public enum TYPEMETEO {
     }
     public String toString(){
         return meteo;
+    }
+    
+    static public TYPEMETEO getTypeByString(String s) {
+    	for(TYPEMETEO weather : TYPEMETEO.values()) {
+    		if(weather.toString().equals(s)) {
+    			return weather;
+    		}
+    	}
+    	
+    	return null;
     }
 }
