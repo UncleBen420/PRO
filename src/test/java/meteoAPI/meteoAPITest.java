@@ -81,4 +81,19 @@ public class meteoAPITest {
             }
         }
     }
+
+    @Test
+    public void recuperationDesJoursPluvieux() {
+        MeteoAPI meteo = new MeteoAPI();
+
+        List<MeteoPerDay> listMeteo = meteo.getListFiltrePluie(TYPEMETEO.RAIN);
+
+        for (MeteoPerDay met : listMeteo) {
+            System.out.println(met.getDate());
+            for (String s : met.getRainInfo()) {
+                System.out.println(s);
+            }
+        }
+
+    }
 }
