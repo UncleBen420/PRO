@@ -1,6 +1,11 @@
+/**
+ * PRO
+ * Authors: Bacso
+ * File: Parser.java
+ * IDE: NetBeans IDE 11
+ */
 package Tag;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -19,231 +24,88 @@ import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.imageio.metadata.IIOMetadataNode;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
-import org.w3c.dom.Element;
 
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Classe de gestion des metadatas d'images avec
+ * l'ajout et la lecture des tags.
+ * 
+ * @author Bacso
+ */
 public class Parser {
-
-    private BufferedImage readImage(File file) throws IOException {
-        ImageInputStream stream = null;
-        BufferedImage image = null;
-        try {
-            stream = ImageIO.createImageInputStream(file);
-            Iterator<ImageReader> readers = ImageIO.getImageReaders(stream);
-            if (readers.hasNext()) {
-                ImageReader reader = readers.next();
-                reader.setInput(stream);
-                image = reader.read(0);
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
-
-        return image;
-    }
-
-    public void showTags(String imagesPath) {
-
-        try {
-            File fileOrDirectory = new File(imagesPath);
-
-            if (fileOrDirectory.isFile()) {
-                processFile(fileOrDirectory);
-            } else {
-                processDirectory(fileOrDirectory);
-            }
-
-            System.out.println("\nDone");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
+    /**
+     * Ajoute les tags sur une image ou sur 
+     * toutes les images d'un répertoire
+     * 
+     * @param tags Liste de tags
+     * @param imagesPath Chemin d'une image ou d'un répertoire
+     */
     public void setTags(ArrayList<String> tags, String imagesPath) {
-        String test = "";
-        try {
-            File inputFile = new File(imagesPath);
-            if (inputFile.isFile()) {
-                ImageInputStream input = ImageIO.createImageInputStream(inputFile);
-                ImageOutputStream output = ImageIO.createImageOutputStream(inputFile);
-
-               Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
-               ImageReader reader = readers.next(); // TODO: Validate that there are readers
-
-               reader.setInput(input);
-               IIOImage image = reader.readAll(0, null);
-
-               addTextEntry(image.getMetadata(), "heigViewer", tags);
-
-               ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
-               writer.setOutput(output);
-               writer.write(image);
-               input.close();
-               output.close();
-            } else if(inputFile.isDirectory()) {
-                File[] contents = inputFile.listFiles();
-                for (File file : contents) {
-                    if (file.isFile()) {
-                        if(getFileExtension(file).equals("jpg")){
-                            test = file.getName();
-                            ImageInputStream input = ImageIO.createImageInputStream(file);
-                            ImageOutputStream output = ImageIO.createImageOutputStream(file);
-
-                           Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
-                           ImageReader reader = readers.next(); // TODO: Validate that there are readers
-
-                           reader.setInput(input);
-                           IIOImage image = reader.readAll(0, null);
-
-                           addTextEntry(image.getMetadata(), "heigViewer", tags);
-
-                           ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
-                           writer.setOutput(output);
-                           writer.write(image);
-                           input.close();
-                           output.close();
-                        }
+        File inputFile = new File(imagesPath);
+        if (inputFile.isFile()) {
+            writeTag(inputFile, tags);
+        } else if(inputFile.isDirectory()) {
+            File[] contents = inputFile.listFiles();
+            for (File file : contents) {
+                if (file.isFile()) {
+                    if(getFileExtension(file).equals("jpg")){
+                        writeTag(file, tags);
                     }
                 }
             }
-        } catch (IOException e) {
-            System.out.println(test);
-            e.printStackTrace();
-        } 
-    }
-
-    private void indent(int level) {
-        for (int i = 0; i < level; i++) {
-            System.out.print("    ");
-        }
-    }
-
-    private void displayAttributes(NamedNodeMap attributes) {
-        if (attributes != null) {
-            int count = attributes.getLength();
-            for (int i = 0; i < count; i++) {
-                Node attribute = attributes.item(i);
-
-                System.out.print(" ");
-                System.out.print(attribute.getNodeName());
-                System.out.print("='");
-                System.out.print(attribute.getNodeValue());
-                System.out.print("'");
-            }
-        }
-    }
-
-    private void displayMetadataNode(Node node, int level) {
-        indent(level);
-        System.out.print("<");
-        System.out.print(node.getNodeName());
-
-        NamedNodeMap attributes = node.getAttributes();
-        displayAttributes(attributes);
-
-        Node child = node.getFirstChild();
-        if (child == null) {
-            String value = node.getNodeValue();
-            if (value == null || value.length() == 0) {
-                System.out.println("/>");
-            } else {
-                System.out.print(">");
-                System.out.print(value);
-                System.out.print("<");
-                System.out.print(node.getNodeName());
-                System.out.println(">");
-            }
-            return;
-        }
-
-        System.out.println(">");
-        while (child != null) {
-            displayMetadataNode(child, level + 1);
-            child = child.getNextSibling();
-        }
-
-        indent(level);
-        System.out.print("</");
-        System.out.print(node.getNodeName());
-        System.out.println(">");
-    }
-
-    private void dumpMetadata(IIOMetadata metadata) {
-        String[] names = metadata.getMetadataFormatNames();
-        int length = names.length;
-        for (int i = 0; i < length; i++) {
-            indent(2);
-            System.out.println("Format name: " + names[i]);
-            displayMetadataNode(metadata.getAsTree(names[i]), 3);
-        }
-    }
-
-    private void processFileWithReader(File file, ImageReader reader) throws IOException {
-        ImageInputStream stream = null;
-
-        try {
-            stream = ImageIO.createImageInputStream(file);
-
-            reader.setInput(stream, true);
-
-            IIOMetadata metadata = reader.getImageMetadata(0);
-
-            indent(1);
-            System.out.println("Image metadata");
-            dumpMetadata(metadata);
-
-            metadata = reader.getStreamMetadata();
-            if (metadata != null) {
-                indent(1);
-                System.out.println("Stream metadata");
-                dumpMetadata(metadata);
-            }
-
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
         }
     }
     
+    /**
+     * Ecrit les tags sur une image
+     * 
+     * @param file Image à modifier
+     * @param tags Liste de tags
+     */
+    private void writeTag(File file, ArrayList<String> tags){
+        ImageOutputStream output;
+        try (ImageInputStream input = ImageIO.createImageInputStream(file)) {
+            output = ImageIO.createImageOutputStream(file);
+            Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
+            ImageReader reader = readers.next();
+            reader.setInput(input);
+            IIOImage image = reader.readAll(0, null);
+            addTextEntry(image.getMetadata(), "heigViewer", tags);
+            ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
+            writer.setOutput(output);
+            writer.write(image);
+            output.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    
+    /**
+     * Récupère l'extension d'un fichier
+     * 
+     * @param file Fichier
+     * @return Retourne l'extension
+     */
     private String getFileExtension(File file) {
         String fileName = file.getName();
         int lastDot = fileName.lastIndexOf('.');
         return fileName.substring(lastDot + 1);
     }
 
-    private void processFile(File file) throws IOException {
-        System.out.println("\nProcessing " + file.getName() + ":\n");
-
-        String extension = getFileExtension(file);
-
-        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(extension);
-
-        while (readers.hasNext()) {
-            ImageReader reader = readers.next();
-
-            System.out.println("Reader: " + reader.getClass().getName());
-
-            processFileWithReader(file, reader);
-        }
-    }
-
-    private void processDirectory(File directory) throws IOException {
-        System.out.println("Processing all files in " + directory.getAbsolutePath());
-
-        File[] contents = directory.listFiles();
-        for (File file : contents) {
-            if (file.isFile()) {
-                processFile(file);
-            }
-        }
-    }
-
+    /**
+     * Modifie les metadatas en ajoutant les tags.
+     * Si il y a déjà des tags présents sur l'image
+     * on les supprimes et on ajoute les nouveaux.
+     * 
+     * @param metadata Metadata de l'image
+     * @param key Valeur unique définissant un tag
+     * @param value Liste de tags
+     * @throws IIOInvalidTreeException
+     * @throws UnsupportedEncodingException 
+     */
     private void addTextEntry(final IIOMetadata metadata, final String key, final ArrayList<String> value) throws IIOInvalidTreeException, UnsupportedEncodingException{
         
         IIOMetadataNode tree = (IIOMetadataNode) metadata.getAsTree("javax_imageio_jpeg_image_1.0");
@@ -271,6 +133,13 @@ public class Parser {
         metadata.setFromTree("javax_imageio_jpeg_image_1.0", tree);
     }
 
+    /**
+     * Récupère les tags présent sur l'image
+     * 
+     * @param metadata Metadata de l'image
+     * @param key Valeur unique définissant un tag
+     * @return Liste des tags présents
+     */
     public ArrayList<String> getTextEntry(final IIOMetadata metadata, final String key) {
         ArrayList<String> tags = new ArrayList<String>();
         IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree(IIOMetadataFormatImpl.standardMetadataFormatName);
@@ -286,6 +155,13 @@ public class Parser {
         return tags;
     }
     
+    /**
+     * Trouve la présence de tags sur l'image
+     * 
+     * @param metadata Metadata de l'image
+     * @param key Valeur unique définissant un tag
+     * @return True si il y des tags sinon false
+     */
     private boolean findTag(final IIOMetadata metadata, final String key) {
         IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree(IIOMetadataFormatImpl.standardMetadataFormatName);
         NodeList entries = root.getElementsByTagName("TextEntry");
@@ -307,6 +183,13 @@ public class Parser {
         return false;
     }
     
+    /**
+     * Trouve la présence de tags sur l'image
+     * 
+     * @param file Image à tester
+     * @return True si il y des tags sinon false
+     * @throws IOException 
+     */
     public boolean isTagged(File file) throws IOException {
 
         String extension = getFileExtension(file);
@@ -316,10 +199,7 @@ public class Parser {
         while (readers.hasNext()) {
             ImageReader reader = readers.next();
 
-            ImageInputStream stream = null;
-
-            try {
-                stream = ImageIO.createImageInputStream(file);
+            try (ImageInputStream stream = ImageIO.createImageInputStream(file)) {
 
                 reader.setInput(stream, true);
 
@@ -327,16 +207,19 @@ public class Parser {
 
                 return findTag(metadata,"heigViewer");
 
-            } finally {
-                if (stream != null) {
-                    stream.close();
-                }
             }
         }
         
         return false;
     }
     
+    /**
+     * Récupère les tags d'une image
+     * 
+     * @param path Chemin de l'image
+     * @return Liste des tags présents sur l'image
+     * @throws IOException 
+     */
     public ArrayList<String> getTag(String path) throws IOException {
 
         ArrayList<String> tags = new ArrayList<String>();
@@ -350,10 +233,7 @@ public class Parser {
         if (readers.hasNext()) {
             ImageReader reader = readers.next();
 
-            ImageInputStream stream = null;
-
-            try {
-                stream = ImageIO.createImageInputStream(file);
+            try (ImageInputStream stream = ImageIO.createImageInputStream(file)) {
 
                 if(stream != null){
                     reader.setInput(stream, true);
@@ -363,10 +243,6 @@ public class Parser {
                     tags = getTextEntry(metadata, "heigViewer");
                 }
 
-            } finally {
-                if (stream != null) {
-                    stream.close();
-                }
             }
         }
         

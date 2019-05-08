@@ -1,27 +1,30 @@
 /**
  * PRO
  * Authors: Bacso
- * File: ChangeFilter.java
+ * File: TagFilter.java
  * IDE: NetBeans IDE 11
  */
 package GUI;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import JTreeManager.JTreeManager;
 
 /**
- * Implémentation de l'interface pour le filtre par changement d'image
+ * Classe implémentant l'interface pour le filtre par tag
  *
  * @author gaetan
  */
-public class ChangeFilter extends TreeFilter {
+public class TagFilter extends TreeFilter {
 
-    private static final long serialVersionUID = -213970803241070452L;
-
-    public ChangeFilter(final JTreeManager manager) {
+    public TagFilter(final JTreeManager manager) {
 
         super(manager);
 
@@ -30,12 +33,14 @@ public class ChangeFilter extends TreeFilter {
     @Override
     protected void specialisation() {
 
+        panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
         JButton filterButton = new JButton("Filter");
         filterButton.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(null, "Filter");
         });
 
-        JLabel label = new JLabel("Change");
+        JLabel label = new JLabel("Tag");
 
         panel.add(label);
 

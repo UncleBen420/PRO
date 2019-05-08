@@ -1,3 +1,9 @@
+/**
+ * PRO
+ * Authors: Bacso
+ * File: FiltersPanel.java
+ * IDE: NetBeans IDE 11
+ */
 package GUI;
 
 import javax.swing.BoxLayout;
@@ -6,10 +12,15 @@ import javax.swing.JScrollPane;
 
 import JTreeManager.JTreeManager;
 
+/**
+ * Classe implémentant l'interface pour les filtres
+ * 
+ * @author gaetan
+ */
 public class FiltersPanel extends JPanel {
 	
 	private JTreeManager manager;
-        private JPanel panel;
+        private final JPanel panel;
 	
 	public FiltersPanel() {
 		manager = null;
@@ -26,9 +37,9 @@ public class FiltersPanel extends JPanel {
         
         public void setManager(JTreeManager manager){
             this.manager = manager;
-            panel.add(new DateFiltreTest(manager));
+            panel.add(new DateFiltrer(manager));
             panel.add(new ChangeFilter(manager));
-            panel.add(new TagFilterGUI(manager));
+            panel.add(new TagFilter(manager));
             panel.add(new WeatherFilter(manager));
         }
 

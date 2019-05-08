@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * PRO
+ * Authors: Bacso
+ * File: CsvParser.java
+ * IDE: NetBeans IDE 11
  */
 package Tag;
 
@@ -9,10 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
- * @author gaetan
+ * Classe découpant les tags en liste de String
+ * 
+ * @author Bacso
  */
 public class CsvParser {
+    /**
+     * Découpe les tags en liste de String
+     * 
+     * @param tags Tags de l'image
+     * @return Liste des tags découpés
+     */
     static public ArrayList<ArrayList<String>> getTag(ArrayList<String> tags){
         ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
         

@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * PRO
+ * Authors: Bacso
+ * File: TagHistory.java
+ * IDE: NetBeans IDE 11
  */
 package Tag;
 
@@ -18,10 +19,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Implémente les fonctions pour créer un fichier
+ * JSON contenant les tags ajoutés aux images pour 
+ * pouvoir effectuer les statistiques sans 
+ * parcourir toutes les images à chaque fois
+ * 
  * @author gaetan
  */
 public class TagHistory {
+    /**
+     * Enregistre ou met à jour les tags pour une ou plusieurs images dans 
+     * un fichier history.json
+     * 
+     * @param tags Liste des tags
+     * @param imagesPath Chemin de l'image ou du dossier
+     */
     static public void saveTag(ArrayList<ArrayList<String>> tags, String imagesPath){
         File history = new File("history.json");
         File file = new File(imagesPath);
@@ -29,16 +41,15 @@ public class TagHistory {
             if(file.isFile()){
                 
                 if(history.exists()){
-                    FileReader reader = new FileReader(history);
-                    JsonParser parser = new JsonParser();
-                    JsonElement json = parser.parse(reader);
-                    JsonObject root = new JsonObject();
-                    if(json.isJsonNull()){
-                        createHistory(history, tags, getRelativePath(imagesPath));
-                    } else {
-                        updateTags(history, tags, getRelativePath(imagesPath), reader, json);
+                    try (FileReader reader = new FileReader(history)) {
+                        JsonParser parser = new JsonParser();
+                        JsonElement json = parser.parse(reader);
+                        if(json.isJsonNull()){
+                            createHistory(history, tags, getRelativePath(imagesPath));
+                        } else {
+                            updateTags(history, tags, getRelativePath(imagesPath), json);
+                        }
                     }
-                    reader.close();
                 } else {
                     createHistory(history, tags, getRelativePath(imagesPath));
                 }
@@ -48,16 +59,15 @@ public class TagHistory {
                     if(getFileExtension(f).equals("jpg")){
                         
                         if(history.exists()){
-                            FileReader reader = new FileReader(history);
-                            JsonParser parser = new JsonParser();
-                            JsonElement json = parser.parse(reader);
-                            JsonObject root = new JsonObject();
-                            if(json.isJsonNull()){
-                                createHistory(history, tags, getRelativePath(f.getAbsolutePath()));
-                            } else {
-                                updateTags(history, tags, getRelativePath(f.getAbsolutePath()), reader, json);
+                            try (FileReader reader = new FileReader(history)) {
+                                JsonParser parser = new JsonParser();
+                                JsonElement json = parser.parse(reader);
+                                if(json.isJsonNull()){
+                                    createHistory(history, tags, getRelativePath(f.getAbsolutePath()));
+                                } else {
+                                    updateTags(history, tags, getRelativePath(f.getAbsolutePath()), json);
+                                }
                             }
-                            reader.close();
                         } else {
                             createHistory(history, tags, getRelativePath(f.getAbsolutePath()));
                         }
@@ -71,6 +81,13 @@ public class TagHistory {
         
     }
     
+    /**
+     * Crée la base du fichier json avec les premier tags
+     * 
+     * @param history Fichier d'historique
+     * @param tags Liste des tags
+     * @param imagesPath Chemin de l'image
+     */
     static private void createHistory(File history, ArrayList<ArrayList<String>> tags, String imagesPath){
             JsonObject root = new JsonObject();
                 root.addProperty("type", "IntermediateRegister");
@@ -105,7 +122,15 @@ public class TagHistory {
                
     }
     
-    static private void updateTags(File history, ArrayList<ArrayList<String>> tags, String imagesPath, FileReader reader, JsonElement json){
+    /**
+     * Met à jour les tags pour une image déjà enregistrée
+     * 
+     * @param history fichier d'historique
+     * @param tags liste des tags
+     * @param imagesPath chemin de l'image
+     * @param json element racine ou ajouter les tags
+     */
+    static private void updateTags(File history, ArrayList<ArrayList<String>> tags, String imagesPath, JsonElement json){
         JsonObject root = json.getAsJsonObject();
         int counter = root.get("imageCounter").getAsInt();
         boolean test = false;
@@ -160,15 +185,25 @@ public class TagHistory {
        
     }
     
+    /**
+     * Récupère l'extension d'un fichier
+     * 
+     * @param file Fichier
+     * @return Retourne l'extension
+     */
     static private String getFileExtension(File file) {
         String fileName = file.getName();
         int lastDot = fileName.lastIndexOf('.');
         return fileName.substring(lastDot + 1);
     }
     
+    /**
+     * Retourne le chemin relatif d'une image
+     * 
+     * @param path chemin absolu de l'image
+     * @return chemin relatif
+     */
     static private String getRelativePath(String path){
-        String relative = "";
-        int index = path.indexOf("Camera", 0);
-        return path.substring(index);
+        return path.substring(path.indexOf("Camera", 0));
     }
 }

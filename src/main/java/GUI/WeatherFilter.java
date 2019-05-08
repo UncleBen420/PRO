@@ -1,3 +1,9 @@
+/**
+ * PRO
+ * Authors: Bacso
+ * File: WeatherFilter.java
+ * IDE: NetBeans IDE 11
+ */
 package GUI;
 
 import java.awt.FlowLayout;
@@ -11,29 +17,32 @@ import javax.swing.JPanel;
 
 import JTreeManager.JTreeManager;
 
-public class WeatherFilter extends TreeFilterGUI {
-	
-public WeatherFilter(final JTreeManager manager){
-    	
-    	super(manager);     
-       
+/**
+ * Classe implémentant l'interface pour le fitre meteo
+ *
+ * @author gaetan
+ */
+public class WeatherFilter extends TreeFilter {
+
+    public WeatherFilter(final JTreeManager manager) {
+
+        super(manager);
+
     }
 
-protected void specialisation() {
-	
-	panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    
-    JButton filter = new JButton("Filter");
-    filter.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    @Override
+    protected void specialisation() {
+
+        panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JButton filterButton = new JButton("Filter");
+        filterButton.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(null, "Filter");
-        }
-    });
-    
-    JLabel label = new JLabel("Weather");
-    
-    panel.add(label);
-	
-}
+        });
+
+        JLabel label = new JLabel("Weather");
+
+        panel.add(label);
+
+    }
 }
