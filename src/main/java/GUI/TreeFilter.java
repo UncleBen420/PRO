@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import JTreeManager.JTreeManager;
-import searchfilters.TreeFilterDate;
+import searchfilters.treeFilter;
 
 abstract public class TreeFilter extends JPanel {
 
@@ -14,7 +14,7 @@ abstract public class TreeFilter extends JPanel {
     private JButton delete;
     protected JButton filter;
     protected JTreeManager manager;
-    protected TreeFilterDate currentFilter;
+    protected treeFilter currentFilter;
 
     protected TreeFilter() {
 

@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 import com.google.gson.*;
 
 import JTreeManager.TaggedTreeNode;
+import properties.PropertiesHandler;
 
 public class JsonTreeParser {
 	
@@ -24,30 +25,8 @@ public class JsonTreeParser {
 	
 	public void parseHierarchyTag(){
 		
-			Properties properties = new Properties();
-			FileReader fr = null;
-			try {
-				fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
-				properties.load(fr);
-			} catch (FileNotFoundException e) {
-
-				e.printStackTrace();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					fr.close();
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-			}
-			hierarchyTag = ((String)properties.get("hierarchyTag")).split("/");
-			for(String s : hierarchyTag)
-			System.out.println(s);
-		
-		
+			Properties properties = PropertiesHandler.parseProperties();
+			hierarchyTag = ((String)properties.get("hierarchyTag")).split("/");		
 	}
 
 	public void createXML(File rootDirectory) {
@@ -55,8 +34,10 @@ public class JsonTreeParser {
 			
 			int i = 0;
 			parseHierarchyTag();
+			Properties properties = PropertiesHandler.parseProperties();
+			
 
-			FileWriter file = new FileWriter("/mnt/Data/HEIG-VD/PRO/Code/PRO/src/jsonFile.json");
+			FileWriter file = new FileWriter((new File(properties.getProperty("JsonBankPath")).getAbsolutePath()));
 			JsonArray tree;
 			JsonObject temp = new JsonObject();
 			try {
@@ -75,6 +56,7 @@ public class JsonTreeParser {
 
 			file.write(temp.toString());
 			file.flush();
+			file.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
