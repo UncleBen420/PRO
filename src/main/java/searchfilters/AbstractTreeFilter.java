@@ -12,7 +12,7 @@ import JTreeManager.OldNodePair;
  *
  * @author gaetan
  */
-public abstract class treeFilter {
+public abstract class AbstractTreeFilter {
 	
 	static int counter = 0;
 	{
@@ -27,14 +27,14 @@ public abstract class treeFilter {
      *
      * @param tree
      */
-    public treeFilter(JTree tree) {
+    public AbstractTreeFilter(JTree tree) {
 		this.tree = tree;
 	}
 
     /**
      *
      */
-    public treeFilter() {
+    public AbstractTreeFilter() {
 		this.tree = null;
 	}
 

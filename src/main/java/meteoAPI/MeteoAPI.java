@@ -87,7 +87,7 @@ public class MeteoAPI {
      * @param filtre
      * @return
      */
-    public List<MeteoPerDay> getListFiltreTemperature(Double filtre) {
+    public List<MeteoPerDay> getListFiltreTemperature(double min, double max) {
         boolean test;
         int i = 0;
         int j;
@@ -105,10 +105,10 @@ public class MeteoAPI {
                     meteoPerFiltre.add(met);
                     test = false;
                 }
-                if (s.equals(filtre)) {
+                if (min <= s && s <= max) {
                     meteoPerFiltre.get(i).addTemperature(s);
                 } else {
-                    meteoPerFiltre.get(i).addTemperature(99);
+                    meteoPerFiltre.get(i).addTemperature(99.);
                 }
                 meteoPerFiltre.get(i).addMeteo(day.getMeteo().get(j));
                 meteoPerFiltre.get(i).addRain(day.getRainInfo().get(j));

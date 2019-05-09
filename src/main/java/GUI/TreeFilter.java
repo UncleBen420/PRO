@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import JTreeManager.JTreeManager;
-import searchfilters.treeFilter;
+import searchfilters.AbstractTreeFilter;
 
 /**
  * 
@@ -33,7 +33,7 @@ abstract public class TreeFilter extends JPanel {
     /**
      *
      */
-    protected treeFilter currentFilter;
+    protected AbstractTreeFilter currentFilter;
 
     /**
      *
@@ -77,7 +77,8 @@ abstract public class TreeFilter extends JPanel {
         delete.addActionListener((ActionEvent e) -> {
             if (currentFilter != null) {
                 manager.removeFiltre(currentFilter);
-            }
+                currentFilter = null;
+            }            
         });
 
     }

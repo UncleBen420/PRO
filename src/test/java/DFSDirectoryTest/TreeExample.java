@@ -12,7 +12,9 @@ import javax.swing.SwingUtilities;
 import JTreeManager.JTreeManager;
 import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
-import searchfilters.TreeFilterDate;
+import searchfilters.TagTreeFilter;
+import searchfilters.TemperatureTreeFilter;
+import searchfilters.DateTreeFilter;
 
 /**
  *
@@ -36,11 +38,11 @@ public class TreeExample extends JFrame
     	
     	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
    	
-    	TreeFilterDate filtreDate = null;
-    	TreeFilterDate filtreDate2 = null;
+    	DateTreeFilter filtreDate = null;
+    	DateTreeFilter filtreDate2 = null;
 		try {
-			filtreDate = new TreeFilterDate(df.parse("2017-03-23"),df.parse("2017-04-23"));
-			filtreDate2 = new TreeFilterDate(df.parse("2017-04-23"),df.parse("2017-04-23"));
+			filtreDate = new DateTreeFilter(df.parse("2017-03-23"),df.parse("2017-04-23"));
+			filtreDate2 = new DateTreeFilter(df.parse("2017-04-23"),df.parse("2017-04-23"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +57,11 @@ public class TreeExample extends JFrame
     	
     	MeteoTreeFilter meteo = new MeteoTreeFilter(TYPEMETEO.DEGAGE, false);
     	
-    	manager.addFiltre(meteo);
+    	TemperatureTreeFilter tf = new TemperatureTreeFilter(1. , 2.);
+    	
+    	TagTreeFilter ttf = new TagTreeFilter(true);
+    	
+    	manager.addFiltre(ttf);
     	
     	this.add(new JScrollPane(manager));
 		

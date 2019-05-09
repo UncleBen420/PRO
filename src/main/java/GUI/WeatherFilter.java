@@ -28,7 +28,11 @@ import searchfilters.MeteoTreeFilter;
  */
 public class WeatherFilter extends TreeFilter {
 
-    private boolean rainChecked = false;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4481484164630682831L;
+	private boolean rainChecked = false;
 
     /**
      *
