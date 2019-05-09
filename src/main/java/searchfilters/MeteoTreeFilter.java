@@ -13,6 +13,10 @@ import meteoAPI.MeteoAPI;
 import meteoAPI.MeteoPerDay;
 import meteoAPI.TYPEMETEO;
 
+/**
+ *
+ * @author gaetan
+ */
 public class MeteoTreeFilter extends treeFilter {
 
 	private TYPEMETEO meteo;
@@ -20,12 +24,22 @@ public class MeteoTreeFilter extends treeFilter {
 	private List<MeteoPerDay> dates;
 	private Boolean rain;
 
-	public MeteoTreeFilter(TYPEMETEO meteo, Boolean rain) {
+    /**
+     *
+     * @param meteo
+     * @param rain
+     */
+    public MeteoTreeFilter(TYPEMETEO meteo, Boolean rain) {
 		this.meteo = meteo;
 		this.rain = rain;
 	}
 
-	@Override
+    /**
+     *
+     * @param node
+     * @return
+     */
+    @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 
 		dates = new MeteoAPI().getListFiltreSummary(meteo);
@@ -85,7 +99,11 @@ public class MeteoTreeFilter extends treeFilter {
 		return false;
 	}
 
-	protected void filtreNode(DefaultMutableTreeNode node) {
+    /**
+     *
+     * @param node
+     */
+    protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {
 

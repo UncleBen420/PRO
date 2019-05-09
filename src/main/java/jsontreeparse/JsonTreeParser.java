@@ -18,18 +18,28 @@ import com.google.gson.*;
 import JTreeManager.TaggedTreeNode;
 import properties.PropertiesHandler;
 
+/**
+ *
+ * @author gaetan
+ */
 public class JsonTreeParser {
 	
 	private String[] hierarchyTag;
 	
-	
-	public void parseHierarchyTag(){
+    /**
+     *
+     */
+    public void parseHierarchyTag(){
 		
 			Properties properties = PropertiesHandler.parseProperties();
 			hierarchyTag = ((String)properties.get("hierarchyTag")).split("/");		
 	}
 
-	public void createXML(File rootDirectory) {
+    /**
+     *
+     * @param rootDirectory
+     */
+    public void createXML(File rootDirectory) {
 		try {
 			
 			int i = 0;
@@ -64,7 +74,14 @@ public class JsonTreeParser {
 
 	}
 
-	public JsonArray setXML(File rootDirectory, int i) throws ArrayIndexOutOfBoundsException {
+    /**
+     *
+     * @param rootDirectory
+     * @param i
+     * @return
+     * @throws ArrayIndexOutOfBoundsException
+     */
+    public JsonArray setXML(File rootDirectory, int i) throws ArrayIndexOutOfBoundsException {
 
 		if (rootDirectory.isDirectory()) {
 
@@ -106,7 +123,12 @@ public class JsonTreeParser {
 
 	}
 
-	public DefaultMutableTreeNode setDirectoryTree(String path) {
+    /**
+     *
+     * @param path
+     * @return
+     */
+    public DefaultMutableTreeNode setDirectoryTree(String path) {
 
 		JsonParser jsonParser = new JsonParser();
 
@@ -144,7 +166,12 @@ public class JsonTreeParser {
 
 	}
 
-	public void createTree(JsonArray a, TaggedTreeNode d) {
+    /**
+     *
+     * @param a
+     * @param d
+     */
+    public void createTree(JsonArray a, TaggedTreeNode d) {
 
 		if (a.size() > 0)
 			for (JsonElement child : a) {

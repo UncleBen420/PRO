@@ -14,9 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ * @author gaetan
+ */
 public class meteoAPITest {
 
-
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     @BeforeEach
     public void recuperationFichier() throws FileNotFoundException {
         JsonParser jsonParser = new JsonParser();
@@ -31,6 +38,10 @@ public class meteoAPITest {
         }
     }
 
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     @Test
     public void lectureFichier() throws FileNotFoundException {
         MeteoAPI meteo = new MeteoAPI();
@@ -38,6 +49,9 @@ public class meteoAPITest {
         meteo.getList();
     }
 
+    /**
+     *
+     */
     @Test
     public void creationdelameteodu23fevrier () {
         MeteoAPI meteo = new MeteoAPI();
@@ -54,6 +68,9 @@ public class meteoAPITest {
         assertEquals(date, listMeteo.get(0).getDate());
     }
 
+    /**
+     *
+     */
     @Test
     public void recuperationDeToutesLesDateOuIlFaisaitBeau () {
         MeteoAPI meteo = new MeteoAPI();
@@ -68,6 +85,9 @@ public class meteoAPITest {
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void recuperationDeToutesLesTemperatures() {
         MeteoAPI meteo = new MeteoAPI();

@@ -8,6 +8,10 @@ import javax.swing.tree.DefaultTreeModel;
 
 import JTreeManager.OldNodePair;
 
+/**
+ *
+ * @author gaetan
+ */
 public abstract class treeFilter {
 	
 	static int counter = 0;
@@ -19,23 +23,42 @@ public abstract class treeFilter {
 	private Stack<OldNodePair> filtredElements = new Stack<OldNodePair>();
 	private JTree tree;
 
-	public treeFilter(JTree tree) {
+    /**
+     *
+     * @param tree
+     */
+    public treeFilter(JTree tree) {
 		this.tree = tree;
 	}
 
-	public treeFilter() {
+    /**
+     *
+     */
+    public treeFilter() {
 		this.tree = null;
 	}
 
-	public JTree getTree() {
+    /**
+     *
+     * @return
+     */
+    public JTree getTree() {
 		return tree;
 	}
 
-	public void setTree(JTree tree) {
+    /**
+     *
+     * @param tree
+     */
+    public void setTree(JTree tree) {
 		this.tree = tree;
 	}
 
-	protected void removeFromTree(DefaultMutableTreeNode node) {
+    /**
+     *
+     * @param node
+     */
+    protected void removeFromTree(DefaultMutableTreeNode node) {
 
 		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
@@ -48,7 +71,10 @@ public abstract class treeFilter {
 
 	}
 
-	public void PopToTree() {
+    /**
+     *
+     */
+    public void PopToTree() {
 
 		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
@@ -59,7 +85,10 @@ public abstract class treeFilter {
 
 	}
 
-	public void filtreTree() {
+    /**
+     *
+     */
+    public void filtreTree() {
 		
 		System.out.println("filtre :" + this);
 
@@ -73,7 +102,11 @@ public abstract class treeFilter {
 
 	}
 
-	protected void filtreNode(DefaultMutableTreeNode node) {
+    /**
+     *
+     * @param node
+     */
+    protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {
 
@@ -88,7 +121,10 @@ public abstract class treeFilter {
 		}
 	}
 
-	public void unfiltreTree() {
+    /**
+     *
+     */
+    public void unfiltreTree() {
 		
 		System.out.println("unfiltre :" + this);
 		
@@ -97,7 +133,12 @@ public abstract class treeFilter {
 		}
 	}
 
-	abstract public boolean analyseNode(DefaultMutableTreeNode node);
+    /**
+     *
+     * @param node
+     * @return
+     */
+    abstract public boolean analyseNode(DefaultMutableTreeNode node);
 
 	public String toString() {
 		String temp = num + "filter:\n";

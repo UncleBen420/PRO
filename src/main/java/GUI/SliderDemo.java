@@ -69,6 +69,9 @@ public class SliderDemo extends JPanel
     //This label uses ImageIcon to show the doggy pictures.
     JLabel picture;
 
+    /**
+     *
+     */
     public SliderDemo() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -128,12 +131,18 @@ public class SliderDemo extends JPanel
     public void windowDeactivated(WindowEvent e) {
     }
 
+    /**
+     *
+     */
     public void startAnimation() {
         //Start (or restart) animating!
         timer.start();
         frozen = false;
     }
 
+    /**
+     *
+     */
     public void stopAnimation() {
         //Stop the animating thread.
         timer.stop();
@@ -212,6 +221,10 @@ public class SliderDemo extends JPanel
         return fileName.substring(lastDot + 1);
     }
 
+    /**
+     *
+     * @param path
+     */
     public void addImage(String path) {
         int i = 0;
         if (path != null) {
@@ -252,14 +265,26 @@ public class SliderDemo extends JPanel
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getImage() {
         return imagesPath.get(frameNumber);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDirectory() {
         return directory;
     }
 
+    /**
+     *
+     * @param table
+     */
     public void setTable(ViewerTable table) {
         this.table = table;
     }

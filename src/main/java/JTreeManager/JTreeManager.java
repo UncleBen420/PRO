@@ -24,6 +24,10 @@ import properties.PropertiesHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+/**
+ *
+ * @author gaetan
+ */
 public class JTreeManager extends JPanel {
 
 	private List<treeFilter> Filtre = new ArrayList<treeFilter>();
@@ -37,7 +41,10 @@ public class JTreeManager extends JPanel {
 
 	private String value = "";
 
-	public JTreeManager() {
+    /**
+     *
+     */
+    public JTreeManager() {
 
 		Properties properties = PropertiesHandler.parseProperties();
 
@@ -101,7 +108,11 @@ public class JTreeManager extends JPanel {
 
 	}
 
-	public void addFiltre(final treeFilter f) {
+    /**
+     *
+     * @param f
+     */
+    public void addFiltre(final treeFilter f) {
 
 		Thread thread = new Thread() {
 			public void run() {
@@ -126,7 +137,11 @@ public class JTreeManager extends JPanel {
 
 	}
 
-	public void removeFiltre(final treeFilter f) {
+    /**
+     *
+     * @param f
+     */
+    public void removeFiltre(final treeFilter f) {
 
 		Thread thread = new Thread() {
 			public void run() {
@@ -165,15 +180,27 @@ public class JTreeManager extends JPanel {
 
 	}
 
-	public String getValue() {
+    /**
+     *
+     * @return
+     */
+    public String getValue() {
 		return value;
 	}
 
-	public void setSlider(SliderDemo s) {
+    /**
+     *
+     * @param s
+     */
+    public void setSlider(SliderDemo s) {
 		slider = s;
 	}
 
-	public void setTable(ViewerTable t) {
+    /**
+     *
+     * @param t
+     */
+    public void setTable(ViewerTable t) {
 		table = t;
 	}
 }
