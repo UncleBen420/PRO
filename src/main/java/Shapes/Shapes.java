@@ -14,11 +14,25 @@ package Shapes;
 public abstract class Shapes {
 	private double x, y;
 	
-	public Shapes(double x, double y){
+    /**
+     *
+     * @param x
+     * @param y
+     */
+    public Shapes(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
 	
-	public double getX() { return x; }
-	public double getY() { return y; }
+    /**
+     *
+     * @return
+     */
+    public double getX() { return x; }
+
+    /**
+     *
+     * @return
+     */
+    public double getY() { return y; }
 }

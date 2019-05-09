@@ -8,7 +8,6 @@ package GUI;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,12 +23,19 @@ import JTreeManager.JTreeManager;
  */
 public class TagFilter extends TreeFilter {
 
+    /**
+     *
+     * @param manager
+     */
     public TagFilter(final JTreeManager manager) {
 
         super(manager);
 
     }
 
+    /**
+     *
+     */
     @Override
     protected void specialisation() {
 

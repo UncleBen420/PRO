@@ -5,13 +5,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ *
+ * @author gaetan
+ */
 public class PropertiesHandler {
 	
-	static public Properties parseProperties() {
+    /**
+     *
+     * @return
+     */
+    static public Properties parseProperties() {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("conf.properties");
+			fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 

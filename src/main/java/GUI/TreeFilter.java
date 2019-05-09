@@ -8,18 +8,44 @@ import javax.swing.JPanel;
 import JTreeManager.JTreeManager;
 import searchfilters.treeFilter;
 
+/**
+ * 
+ * @author gaetan
+ */
 abstract public class TreeFilter extends JPanel {
 
+    /**
+     *
+     */
     protected JPanel panel;
     private JButton delete;
+
+    /**
+     *
+     */
     protected JButton filter;
+
+    /**
+     *
+     */
     protected JTreeManager manager;
+
+    /**
+     *
+     */
     protected treeFilter currentFilter;
 
+    /**
+     *
+     */
     protected TreeFilter() {
 
     }
 
+    /**
+     *
+     * @param manager
+     */
     public TreeFilter(final JTreeManager manager) {
 
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -37,6 +63,9 @@ abstract public class TreeFilter extends JPanel {
 
     }
 
+    /**
+     *
+     */
     protected abstract void specialisation();
 
     private void common() {

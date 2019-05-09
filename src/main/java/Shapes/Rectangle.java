@@ -15,13 +15,29 @@ public class Rectangle extends Shapes{
 	private double width;
 	private double height;
 
-	public Rectangle(double x, double y, double h, double l) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @param h
+     * @param l
+     */
+    public Rectangle(double x, double y, double h, double l) {
 		super(x, y);
 		width = h;
 		height = l;
 	}
 	
-	public double getWidth() { return width; }
-	public double getHeight() { return height; }
+    /**
+     *
+     * @return
+     */
+    public double getWidth() { return width; }
+
+    /**
+     *
+     * @return
+     */
+    public double getHeight() { return height; }
 	
 }

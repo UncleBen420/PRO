@@ -22,7 +22,10 @@ public class FiltersPanel extends JPanel {
 	private JTreeManager manager;
         private final JPanel panel;
 	
-	public FiltersPanel() {
+    /**
+     *
+     */
+    public FiltersPanel() {
 		manager = null;
 		
 		panel = new JPanel();
@@ -35,7 +38,11 @@ public class FiltersPanel extends JPanel {
 		
 	}
         
-        public void setManager(JTreeManager manager){
+    /**
+     *
+     * @param manager
+     */
+    public void setManager(JTreeManager manager){
             this.manager = manager;
             panel.add(new DateFiltrer(manager));
             panel.add(new ChangeFilter(manager));

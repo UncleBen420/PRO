@@ -8,10 +8,18 @@ import java.util.List;
 
 import com.google.gson.*;
 
+/**
+ *
+ * @author gaetan
+ */
 public class MeteoAPI {
 
     private List<MeteoPerDay> list = new ArrayList<>();
 
+    /**
+     *
+     * @return
+     */
     public List<MeteoPerDay> getList() {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader("src/meteo.json")) {
@@ -35,6 +43,11 @@ public class MeteoAPI {
         list.add(met);
     }
 
+    /**
+     *
+     * @param filtre
+     * @return
+     */
     public List<MeteoPerDay> getListFiltreSummary(TYPEMETEO filtre) {
         boolean test;
         int i = 0;
@@ -69,6 +82,11 @@ public class MeteoAPI {
         return meteoPerFiltre;
     }
 
+    /**
+     *
+     * @param filtre
+     * @return
+     */
     public List<MeteoPerDay> getListFiltreTemperature(Double filtre) {
         boolean test;
         int i = 0;

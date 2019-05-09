@@ -69,6 +69,9 @@ public class ViewerTable extends JPanel {
             }
         };
 
+    /**
+     *
+     */
     public ViewerTable() {
         super(new GridLayout(1, 1));
         row.add("");
@@ -90,22 +93,35 @@ public class ViewerTable extends JPanel {
         add(scrollPane);
     }
     
+    /**
+     *
+     */
     public void addRow(){
         rowData.add(new ArrayList<Object>(row));
         model.fireTableDataChanged();
     }
     
+    /**
+     *
+     */
     public void delRow(){
         rowData.remove(rowData.size()-1);
         model.fireTableDataChanged();
     }
     
+    /**
+     *
+     */
     public void clear(){
         rowData.clear();
         rowData.add(new ArrayList<Object>(row));
         model.fireTableDataChanged();
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<ArrayList<String>> getData() {
         ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
         ArrayList<String> line = new ArrayList<String>();
@@ -120,6 +136,11 @@ public class ViewerTable extends JPanel {
         return result;
     }
 
+    /**
+     *
+     * @param table
+     * @param animalColumn
+     */
     public void setUpAnimalColumn(JTable table,
             TableColumn animalColumn) {
         //Set up the editor for the sport cells.
@@ -130,6 +151,10 @@ public class ViewerTable extends JPanel {
         animalColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }
     
+    /**
+     *
+     * @param tags
+     */
     public void setTags(ArrayList<ArrayList<String>> tags){
         rowData.clear();
         for(ArrayList<String> tag : tags){

@@ -21,12 +21,19 @@ public class ChangeFilter extends TreeFilter {
 
     private static final long serialVersionUID = -213970803241070452L;
 
+    /**
+     *
+     * @param manager
+     */
     public ChangeFilter(final JTreeManager manager) {
 
         super(manager);
 
     }
 
+    /**
+     *
+     */
     @Override
     protected void specialisation() {
 

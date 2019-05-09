@@ -8,16 +8,30 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import JTreeManager.TaggedTreeNode;
 
+/**
+ *
+ * @author gaetan
+ */
 public class TreeFilterDate extends treeFilter {
 	
 	private Date startDate, endDate;
 	
-	public TreeFilterDate(Date startdate, Date endDate) {
+    /**
+     *
+     * @param startdate
+     * @param endDate
+     */
+    public TreeFilterDate(Date startdate, Date endDate) {
 		this.startDate = startdate;
 		this.endDate = endDate;
 	}
 
-	@Override
+    /**
+     *
+     * @param node
+     * @return
+     */
+    @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 		
 		if(!(node instanceof TaggedTreeNode)) {

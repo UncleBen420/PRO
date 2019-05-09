@@ -26,12 +26,19 @@ public class DateFiltrer extends TreeFilter {
 
     private static final long serialVersionUID = -8309810800818768681L;
 
+    /**
+     *
+     * @param manager
+     */
     public DateFiltrer(final JTreeManager manager) {
 
         super(manager);
 
     }
 
+    /**
+     *
+     */
     protected void specialisation() {
 
         JLabel label = new JLabel("Date");

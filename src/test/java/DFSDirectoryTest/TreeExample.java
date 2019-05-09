@@ -13,6 +13,11 @@ import JTreeManager.JTreeManager;
 import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
 import searchfilters.TreeFilterDate;
+
+/**
+ *
+ * @author gaetan
+ */
 public class TreeExample extends JFrame
 {
     /**
@@ -20,7 +25,10 @@ public class TreeExample extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TreeExample()
+    /**
+     *
+     */
+    public TreeExample()
     {
     	
 	
@@ -59,6 +67,10 @@ public class TreeExample extends JFrame
         
     }
      
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(new Runnable() {
