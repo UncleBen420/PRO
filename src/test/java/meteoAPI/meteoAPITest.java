@@ -56,7 +56,7 @@ public class meteoAPITest {
         MeteoAPI meteo = new MeteoAPI();
         List<MeteoPerDay> listMeteo = meteo.getList();
         Date date = null;
-        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             date = df.parse("2017-02-23");
         } catch (ParseException e) {
