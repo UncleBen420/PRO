@@ -2,7 +2,9 @@ package meteoAPI;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import com.google.gson.*;
 
 import java.io.FileNotFoundException;
@@ -11,17 +13,16 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author gaetan
  */
 public class meteoAPITest {
 
     /**
-     *
      * @throws FileNotFoundException
      */
     @BeforeEach
@@ -39,13 +40,11 @@ public class meteoAPITest {
     }
 
     /**
-     *
      * @throws FileNotFoundException
      */
     @Test
     public void lectureFichier() throws FileNotFoundException {
         MeteoAPI meteo = new MeteoAPI();
-
         meteo.getList();
     }
 
@@ -53,11 +52,9 @@ public class meteoAPITest {
      *
      */
     @Test
-    public void creationdelameteodu23fevrier () {
+    public void creationdelameteodu23fevrier() {
         MeteoAPI meteo = new MeteoAPI();
-
         List<MeteoPerDay> listMeteo = meteo.getList();
-
         Date date = null;
         DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         try {
@@ -72,7 +69,7 @@ public class meteoAPITest {
      *
      */
     @Test
-    public void recuperationDeToutesLesDateOuIlFaisaitBeau () {
+    public void recuperationDeToutesLesDateOuIlFaisaitBeau() {
         MeteoAPI meteo = new MeteoAPI();
 
         List<MeteoPerDay> listMeteo = meteo.getListFiltreSummary(TYPEMETEO.DEGAGE);
