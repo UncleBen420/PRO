@@ -30,6 +30,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import Statistics.handler.StatisticsHandler;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.*;
 
 /**
  *
@@ -39,6 +42,8 @@ public class statisticsPage extends JFrame {
     
     private statParser parser;
     private StatisticsHandler statHandler = new StatisticsHandler();
+    private String dayConfig = "default";
+    private String monthConfig = "default";
  
     public statisticsPage() {
         // Recuperation des donnees du parser
@@ -51,14 +56,19 @@ public class statisticsPage extends JFrame {
     }
 
     public void initAndShowGUI() {
-            //JPanel background = new javax.swing.JPanel();
+        
             JFrame mainFrame = new JFrame("Crapauduc Viewer Statistics");
-            final JFXPanel fxPanel = new JFXPanel();
+            
+            JFXPanel fxPanel = new JFXPanel();
+            JScrollPane jScrollPane = new JScrollPane(fxPanel);
+            
             mainFrame.setAlwaysOnTop(true);
             mainFrame.add(fxPanel);
-            mainFrame.setSize(1500, 1000);
+            mainFrame.add(jScrollPane);
+            mainFrame.setSize(2000, 1500);
             mainFrame.setVisible(true);
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            mainFrame.getToolkit().setDynamicLayout(true);
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -88,18 +98,75 @@ public class statisticsPage extends JFrame {
         root.getChildren().add(sideInfosGroup);
         
         /*
-         * Creation de la Line Chart mois/animaux 
+         * Creation de la Line Chart par année
          */
         Group lineChartGroup = createLineChart();
         root.getChildren().add(lineChartGroup);
         
         /*
-         * Creation de la Bar Chart mois/animaux 
+         * Creation de la Bar Chart par année
          */
         Group barChartGroup = createBarChart();
         root.getChildren().add(barChartGroup);
+        
+        /*
+        * Creation de la zone de génération dynamique
+        */
+        Group dynamGroup = createDynamGroup();
+        root.getChildren().add(dynamGroup);
 
         return (scene);
+    }
+    
+    /*
+     * Cree un groupe avec la zone de generation dynamique
+     */
+    public Group createDynamGroup() {
+        Group dynamGroup = new Group();
+        
+        // Creation du bouton de choix du mois
+        ChoiceBox monthBox = new ChoiceBox(FXCollections.observableArrayList(
+        "Jan", "Feb", "Mar"));
+        monthBox.setLayoutY(800);
+        
+        final String[] monthChoice = new String[] {"Jan", "Feb", "Mar"};
+        
+        // Evenements suite aux choix
+        monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
+            ChangeListener<Number>() {
+            public void changed(ObservableValue ov, Number value, 
+                    Number new_value) {
+                // Enregistrement du choix
+                monthConfig = monthChoice[new_value.intValue()];
+                
+                // Repaint de la fenetre
+                statistics();
+            }
+        });
+        
+        dynamGroup.getChildren().add(monthBox);
+        
+        // Definition des axes
+        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        
+        final LineChart<Number, Number> monthLineChart = new LineChart<>(xAxis, yAxis);
+                
+        monthLineChart.setTitle("Number of animals for " + monthConfig);
+        // Positionnement a gauche de la fenetre
+        monthLineChart.setLayoutX(0);
+        monthLineChart.setLayoutY(900);
+        monthLineChart.setLegendVisible(false);
+        
+        XYChart.Series monthSeries = new XYChart.Series();
+        
+        monthSeries.getData().add(new XYChart.Data(1, 2));
+        monthSeries.getData().add(new XYChart.Data(2, 3));
+        
+        monthLineChart.getData().add(monthSeries);
+        dynamGroup.getChildren().add(monthLineChart);
+        
+        return dynamGroup;
     }
     
     /*
@@ -185,7 +252,6 @@ public class statisticsPage extends JFrame {
         final NumberAxis yAxis = new NumberAxis();
         
         StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
-        sbc.setTitle("Number of animals per month");
         
         List<String> xAxeNames = new ArrayList<String>();
         
