@@ -73,7 +73,7 @@ public class statisticsPage extends JFrame {
         Group root = new Group();
         Color backgroundColor = Color.rgb(110, 25, 222);
         Scene scene = new Scene(root, backgroundColor);
-        scene.getStylesheets().add("/GUI/chartsStyle.css");
+        scene.getStylesheets().add("chartsStyle.css");
 
         /*
         * Creation de la Pie Chart principale

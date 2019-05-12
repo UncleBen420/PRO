@@ -509,7 +509,7 @@ public class crapau extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void settings_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settings_labelMouseClicked
-        statisticsPage stat = new statisticsPage();
+        new statisticsPage();
     }//GEN-LAST:event_settings_labelMouseClicked
 
     private void save_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_button1ActionPerformed

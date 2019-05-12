@@ -49,7 +49,9 @@ public class StatisticsHandler {
     public StatisticsHandler() {
         initiasize();
         images.clear();
-        System.out.println("all clear and initialized");
+        System.err.println(getClass().getClassLoader().getResource("main\\java\\Statistics\\components\\chartsStyle.css"));
+
+       // System.out.println("all clear and initialized");
     }
 
     private void initiasize() {   
