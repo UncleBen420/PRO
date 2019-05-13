@@ -32,7 +32,7 @@ class treeFilterTest {
 		
 		String old = printTree(root);
 		
-		treeFilter filter = new treeFilter(tree) {
+		AbstractTreeFilter filter = new AbstractTreeFilter(tree) {
 
 			@Override
 			public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -88,7 +88,7 @@ class treeFilterTest {
 		System.out.println("before filtrage:");
 		String old = printTree(root);
 		
-		treeFilter filter = new treeFilter(tree) {
+		AbstractTreeFilter filter = new AbstractTreeFilter(tree) {
 
 			@Override
 			public boolean analyseNode(DefaultMutableTreeNode node) {

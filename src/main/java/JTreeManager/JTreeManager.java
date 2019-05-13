@@ -17,7 +17,7 @@ import java.util.Properties;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import searchfilters.treeFilter;
+import searchfilters.AbstractTreeFilter;
 import jsontreeparse.JsonTreeParser;
 import properties.PropertiesHandler;
 
@@ -78,22 +78,16 @@ public class JTreeManager extends JPanel {
 
 				if (e.getClickCount() == 2) {
 
-					if (FilenameUtils
-							.getExtension(((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).toString())
-							.equals("jpg")) {
+					if (FilenameUtils.getExtension(((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).toString()).equals("jpg")) {
 
 						value = rootDirectory.getAbsolutePath();
 
 						TreeNode[] elements = ((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).getPath();
-						System.out.println(((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).toString());
-
 						for (int i = 1, n = elements.length; i < n; i++) {
 							value += "/" + elements[i];
 
 						}
-
-						System.out.println(value);
-
+						
 						slider.addImage(value);
 
 						try {
@@ -116,7 +110,7 @@ public class JTreeManager extends JPanel {
      *
      * @param f
      */
-    public void addFiltre(final treeFilter f) {
+    public void addFiltre(final AbstractTreeFilter f) {
 
 		Thread thread = new Thread() {
 			public void run() {
@@ -145,7 +139,7 @@ public class JTreeManager extends JPanel {
      *
      * @param f
      */
-    public void removeFiltre(final treeFilter f) {
+    public void removeFiltre(final AbstractTreeFilter f) {
 
 		Thread thread = new Thread() {
 			public void run() {
@@ -156,8 +150,6 @@ public class JTreeManager extends JPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				
 
 				int i = Filtre.size();
 

@@ -147,6 +147,7 @@ public class crapau extends javax.swing.JFrame {
         settings_label.setForeground(new java.awt.Color(255, 255, 255));
         settings_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_settings_25px.png")));
         settings_label.setText("Statistics");
+        settings_label.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         settings_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 settings_labelMouseClicked(evt);
@@ -508,7 +509,7 @@ public class crapau extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void settings_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settings_labelMouseClicked
-        // TODO add your handling code here:
+        new statisticsPage();
     }//GEN-LAST:event_settings_labelMouseClicked
 
     private void save_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_button1ActionPerformed

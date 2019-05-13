@@ -12,7 +12,7 @@ import JTreeManager.TaggedTreeNode;
  *
  * @author gaetan
  */
-public class TreeFilterDate extends treeFilter {
+public class DateTreeFilter extends AbstractTreeFilter {
 	
 	private Date startDate, endDate;
 	
@@ -21,7 +21,7 @@ public class TreeFilterDate extends treeFilter {
      * @param startdate
      * @param endDate
      */
-    public TreeFilterDate(Date startdate, Date endDate) {
+    public DateTreeFilter(Date startdate, Date endDate) {
 		this.startDate = startdate;
 		this.endDate = endDate;
 	}
@@ -59,6 +59,24 @@ public class TreeFilterDate extends treeFilter {
 		}
 		
 		return false;
+	}
+    
+    @Override
+    protected void filtreNode(DefaultMutableTreeNode node) {
+
+		for (int i = 0; i < node.getChildCount(); i++) {
+
+			DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getChildAt(i);
+
+			if (analyseNode(child)) {
+				removeFromTree(child);
+				i--;
+			} else {
+				if(!((TaggedTreeNode)child).getTag().equals("AfterDate")) {
+					filtreNode((DefaultMutableTreeNode) node.getChildAt(i));
+				}
+			}
+		}
 	}
 
 }

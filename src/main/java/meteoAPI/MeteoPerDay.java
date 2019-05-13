@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author gaetan
  */
 public class MeteoPerDay {
@@ -16,7 +15,6 @@ public class MeteoPerDay {
     private List<Boolean> rain = new ArrayList<>();
 
     /**
-     *
      * @param date
      */
     public MeteoPerDay(String date) {
@@ -30,7 +28,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @param date
      */
     public MeteoPerDay(Date date) {
@@ -38,7 +35,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @return
      */
     public Date getDate() {
@@ -46,7 +42,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @return
      */
     public List<String> getMeteo() {
@@ -54,7 +49,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @param summary
      */
     public void addMeteo(Object summary) {
@@ -62,7 +56,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @return
      */
     public List<Double> getTemperature() {
@@ -70,7 +63,6 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @param temperature
      */
     public void addTemperature(Object temperature) {
@@ -78,19 +70,16 @@ public class MeteoPerDay {
     }
 
     /**
-     *
      * @return
      */
     public List<Boolean> getRainInfo() {
         return rain;
     }
-    
+
     /**
-     *
      * @param rainInfo
      */
     public void addRain(Boolean rainInfo) {
         rain.add(rainInfo);
     }
-
 }

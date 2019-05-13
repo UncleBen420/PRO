@@ -15,7 +15,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import JTreeManager.JTreeManager;
-import searchfilters.TreeFilterDate;
+import searchfilters.DateTreeFilter;
 
 /**
  * Classe implémentant l'interface pour le filtre par date
@@ -75,5 +75,6 @@ public class DateFiltrer extends TreeFilter {
         panel.add(endText);
 
     }
+   
 
 }

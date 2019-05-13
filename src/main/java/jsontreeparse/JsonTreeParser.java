@@ -97,7 +97,6 @@ public class JsonTreeParser {
 
 						JsonObject temp = new JsonObject();
 						temp.addProperty("name", child.getName());
-						
 						temp.addProperty("tag", hierarchyTag[i]);
 						temp.add("nextDir", setXML(child,i+1));
 						dirArray.add(temp);
@@ -107,7 +106,8 @@ public class JsonTreeParser {
 						if (FilenameUtils.getExtension(child.getName()).equals("jpg")) {
 
 							JsonObject temp = new JsonObject();
-							temp.addProperty("image", child.getName());
+							temp.addProperty("nameImage", child.getName());
+							temp.addProperty("tag", "Image");
 							dirArray.add(temp);
 
 						}
@@ -176,9 +176,9 @@ public class JsonTreeParser {
 		if (a.size() > 0)
 			for (JsonElement child : a) {
 
-				if (!child.isJsonNull() && ((JsonObject) child).has("image")) {
+				if (!child.isJsonNull() && ((JsonObject) child).has("nameImage")) {
 
-					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("image").getAsString());
+					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("nameImage").getAsString(),((JsonObject) child).get("tag").getAsString());
 					d.add(temp);
 
 				} else if (!child.isJsonNull()) {

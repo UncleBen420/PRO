@@ -48,5 +48,4 @@ public class FiltersPanel extends JPanel {
         panel.add(new TagFilter(manager));
         panel.add(new WeatherFilter(manager));
     }
-
 }

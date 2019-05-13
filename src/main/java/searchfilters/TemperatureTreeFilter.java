@@ -11,18 +11,15 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import JTreeManager.TaggedTreeNode;
 import meteoAPI.MeteoAPI;
 import meteoAPI.MeteoPerDay;
-import meteoAPI.TYPEMETEO;
-
 /**
  *
  * @author gaetan
  */
-public class MeteoTreeFilter extends AbstractTreeFilter {
+public class TemperatureTreeFilter extends AbstractTreeFilter {
 
-	private TYPEMETEO meteo;
+	private double tempMin, tempMax;
 	private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	private List<MeteoPerDay> dates;
-	private Boolean rain;
 	private MeteoAPI ma = new MeteoAPI();
 
     /**
@@ -30,9 +27,9 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
      * @param meteo
      * @param rain
      */
-    public MeteoTreeFilter(TYPEMETEO meteo, Boolean rain) {
-		this.meteo = meteo;
-		this.rain = rain;
+    public TemperatureTreeFilter(double tempMin, double tempMax) {
+		this.tempMin = tempMin;
+		this.tempMax = tempMax;	
 	}
 
     /**
@@ -43,7 +40,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 
-		dates = ma.getListFiltreSummary(meteo);
+		dates = ma.getListFiltreTemperature(tempMin, tempMax);
 
 		if (!(node instanceof TaggedTreeNode)) {
 			return false;
@@ -69,10 +66,9 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 
 					for (int i = 0; i < hours.getChildCount(); i++) {
 						
-
 						if (((TaggedTreeNode) hours.getChildAt(i)).getTag().equals("Hour")
-								&& !(date.getMeteo().get(Integer.parseInt(hours.getChildAt(i).toString()))
-										.equals(meteo.toString()) && rain == date.getRainInfo().get(i))) {
+								&& (date.getTemperature().get(Integer.parseInt(hours.getChildAt(i).toString()))
+										.equals(99.))) {
 
 							removeFromTree((TaggedTreeNode) hours.getChildAt(i));
 							i--;
@@ -92,9 +88,6 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 			}else {
 				return false;
 			}
-
-			
-
 		}
 
 		return false;
