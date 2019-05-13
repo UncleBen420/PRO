@@ -28,15 +28,13 @@ import searchfilters.MeteoTreeFilter;
  */
 public class WeatherFilter extends TreeFilter {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4481484164630682831L;
-	private boolean rainChecked = false;
+    private static final long serialVersionUID = -4481484164630682831L;
+    private boolean rainChecked = false;
 
     /**
-     *
-     * @param manager
+     * Constructeur
+     * 
+     * @param manager jtree de la banque d'image
      */
     public WeatherFilter(final JTreeManager manager) {
 
@@ -44,9 +42,7 @@ public class WeatherFilter extends TreeFilter {
 
     }
 
-    /**
-     *
-     */
+    @Override
     protected void specialisation() {
 
         List<String> weathersString = new ArrayList<>();
@@ -55,33 +51,21 @@ public class WeatherFilter extends TreeFilter {
             weathersString.add(weather.toString());
         }
 
-        JComboBox weatherCombobox = new JComboBox(weathersString.toArray());
+        JComboBox<?> weatherCombobox;
+        weatherCombobox = new JComboBox<>(weathersString.toArray());
         JCheckBox rainCheckBox = new JCheckBox("rain");
 
-        rainCheckBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    rainChecked = true;
-                } else {
-
-                    rainChecked = false;
-                };
-            }
+        rainCheckBox.addItemListener((ItemEvent e) -> {
+            rainChecked = ItemEvent.SELECTED == e.getStateChange();
         });
 
-        filter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (currentFilter != null) {
-                    manager.removeFiltre(currentFilter);
-                }
-
-                currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())), rainChecked);
-                manager.addFiltre(currentFilter);
-
+        filter.addActionListener((ActionEvent e) -> {
+            if (currentFilter != null) {
+                manager.removeFiltre(currentFilter);
             }
+            
+            currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())), rainChecked);
+            manager.addFiltre(currentFilter);
         });
 
         JLabel label = new JLabel("Weather");

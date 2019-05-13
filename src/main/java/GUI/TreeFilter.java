@@ -9,42 +9,29 @@ import JTreeManager.JTreeManager;
 import searchfilters.AbstractTreeFilter;
 
 /**
- * 
+ *
  * @author gaetan
  */
 abstract public class TreeFilter extends JPanel {
 
-    /**
-     *
-     */
+    private static final long serialVersionUID = 8378656726744781478L;
     protected JPanel panel;
     private JButton delete;
-
-    /**
-     *
-     */
     protected JButton filter;
-
-    /**
-     *
-     */
     protected JTreeManager manager;
-
-    /**
-     *
-     */
     protected AbstractTreeFilter currentFilter;
 
     /**
-     *
+     * Constructeur
      */
     protected TreeFilter() {
 
     }
 
     /**
-     *
-     * @param manager
+     * Constructeur avec manager
+     * 
+     * @param manager jtree de la banque d'image
      */
     public TreeFilter(final JTreeManager manager) {
 
@@ -63,9 +50,6 @@ abstract public class TreeFilter extends JPanel {
 
     }
 
-    /**
-     *
-     */
     protected abstract void specialisation();
 
     private void common() {
