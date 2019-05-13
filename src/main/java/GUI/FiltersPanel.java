@@ -35,17 +35,20 @@ public class FiltersPanel extends JPanel {
         JScrollPane scroll = new JScrollPane(panel);
         this.add(scroll);
 
-    }
 
-    /**
-     * Setteur du manager
-     *
-     * @param manager jtree de la banque d'image
-     */
-    public void setManager(JTreeManager manager) {
-        panel.add(new DateFiltrer(manager));
-        panel.add(new ChangeFilter(manager));
-        panel.add(new TagFilter(manager));
-        panel.add(new WeatherFilter(manager));
+	}
+
+	/**
+	 *
+	 * @param manager
+	 */
+	public void setManager(JTreeManager manager) {
+		
+		panel.add(new DateFiltrer(manager));
+		panel.add(new ChangeFilter(manager));
+		panel.add(new TagFilter(manager));
+		panel.add(new WeatherFilter(manager));
+		panel.add(new TemperatureFilter(manager));
+	}
+
     }
-}

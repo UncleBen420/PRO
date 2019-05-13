@@ -68,11 +68,10 @@ public class WeatherFilter extends TreeFilter {
             manager.addFiltre(currentFilter);
         });
 
-        JLabel label = new JLabel("Weather");
+        label = new JLabel("Weather");
 
-        panel.add(label);
-        panel.add(weatherCombobox);
-        panel.add(rainCheckBox);
+        specialistationPanel.add(weatherCombobox);
+        specialistationPanel.add(rainCheckBox);
 
     }
 }

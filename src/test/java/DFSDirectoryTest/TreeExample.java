@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import JTreeManager.JTreeManager;
 import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
+import searchfilters.RatioTreeFilter;
 import searchfilters.TagTreeFilter;
 import searchfilters.TemperatureTreeFilter;
 import searchfilters.DateTreeFilter;
@@ -61,7 +62,9 @@ public class TreeExample extends JFrame
     	
     	TagTreeFilter ttf = new TagTreeFilter(true);
     	
-    	manager.addFiltre(ttf);
+    	RatioTreeFilter rf = new RatioTreeFilter(40,100,90,100);
+    	
+    	manager.addFiltre(rf);
     	
     	this.add(new JScrollPane(manager));
 		

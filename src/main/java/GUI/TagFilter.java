@@ -56,10 +56,9 @@ public class TagFilter extends TreeFilter {
             manager.addFiltre(currentFilter);
         });
 
-        JLabel label = new JLabel("Weather");
+        label = new JLabel("Tag");
 
-        panel.add(label);
-        panel.add(taggedCheckBox);
+        specialistationPanel.add(taggedCheckBox);
 
     }
 
