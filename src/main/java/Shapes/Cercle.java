@@ -15,10 +15,11 @@ public class Cercle extends Shapes{
 	private double radius;
 	
     /**
-     *
-     * @param x
-     * @param y
-     * @param r
+     * Constructeur
+     * 
+     * @param x position x
+     * @param y position y
+     * @param r rayon du cercle
      */
     public Cercle(double x, double y, double r) {
 		super(x, y);
@@ -26,8 +27,9 @@ public class Cercle extends Shapes{
 	}
 	
     /**
-     *
-     * @return
+     * Accesseur du rayon
+     * 
+     * @return le rayon du cercle
      */
     public double getRadius() { return radius; }
 

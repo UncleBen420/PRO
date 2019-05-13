@@ -14,9 +14,10 @@ package Shapes;
 public class Point extends Shapes{
 	
     /**
-     *
-     * @param x
-     * @param y
+     * Constructeur
+     * 
+     * @param x position x
+     * @param y position y
      */
     public Point(double x, double y){
 		super(x,y);

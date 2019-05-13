@@ -16,27 +16,30 @@ public class Rectangle extends Shapes{
 	private double height;
 
     /**
-     *
-     * @param x
-     * @param y
-     * @param h
-     * @param l
+     * Constructeur 
+     * 
+     * @param x position x
+     * @param y position y
+     * @param h hauteur
+     * @param l largeur
      */
     public Rectangle(double x, double y, double h, double l) {
 		super(x, y);
-		width = h;
-		height = l;
+		width = l;
+		height = h;
 	}
 	
     /**
-     *
-     * @return
+     * Accesseur de la largeur
+     * 
+     * @return la largeur du rectangle
      */
     public double getWidth() { return width; }
 
     /**
-     *
-     * @return
+     * Accesseur de la hauteur
+     * 
+     * @return la hauteur du rectangle
      */
     public double getHeight() { return height; }
 	

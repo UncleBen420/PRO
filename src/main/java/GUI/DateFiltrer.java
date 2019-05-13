@@ -27,8 +27,9 @@ public class DateFiltrer extends TreeFilter {
     private static final long serialVersionUID = -8309810800818768681L;
 
     /**
+     * Constructeur
      *
-     * @param manager
+     * @param manager Jtree de la banque d'image
      */
     public DateFiltrer(final JTreeManager manager) {
 
@@ -36,9 +37,7 @@ public class DateFiltrer extends TreeFilter {
 
     }
 
-    /**
-     *
-     */
+    @Override
     protected void specialisation() {
 
         JLabel label = new JLabel("Date");
@@ -47,35 +46,28 @@ public class DateFiltrer extends TreeFilter {
 
         final JTextField endText = new JTextField("2017-03-23");
 
-        filter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        filter.addActionListener((ActionEvent e) -> {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date beginDate = null;
+            Date endDate = null;
 
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                Date beginDate = null;
-                Date endDate = null;
-
-                try {
-                    beginDate = df.parse(beginText.getText());
-                } catch (ParseException e2) {
-                    // TODO Auto-generated catch block
-                    e2.printStackTrace();
-                }
-                try {
-                    endDate = df.parse(endText.getText());
-                } catch (ParseException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-                if (currentFilter != null) {
-                    manager.removeFiltre(currentFilter);
-                }
-
-                currentFilter = new TreeFilterDate(beginDate, endDate);
-                manager.addFiltre(currentFilter);
+            try {
+                beginDate = df.parse(beginText.getText());
+            } catch (ParseException e2) {
 
             }
+            try {
+                endDate = df.parse(endText.getText());
+            } catch (ParseException e1) {
+
+            }
+
+            if (currentFilter != null) {
+                manager.removeFiltre(currentFilter);
+            }
+
+            currentFilter = new TreeFilterDate(beginDate, endDate);
+            manager.addFiltre(currentFilter);
         });
 
         panel.add(label);

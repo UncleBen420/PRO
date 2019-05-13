@@ -14,40 +14,39 @@ import JTreeManager.JTreeManager;
 
 /**
  * Classe implémentant l'interface pour les filtres
- * 
+ *
  * @author gaetan
  */
 public class FiltersPanel extends JPanel {
-	
-	private JTreeManager manager;
-        private final JPanel panel;
-	
+
+    private static final long serialVersionUID = 1565598350882697012L;
+    private final JPanel panel;
+
     /**
-     *
+     * Constructeur
      */
     public FiltersPanel() {
-		manager = null;
-		
-		panel = new JPanel();
-		
-		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		
-		JScrollPane scroll = new JScrollPane(panel);
-		this.add(scroll);
-		
-	}
-        
+
+        panel = new JPanel();
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JScrollPane scroll = new JScrollPane(panel);
+        this.add(scroll);
+
+    }
+
     /**
+     * Setteur du manager
      *
-     * @param manager
+     * @param manager jtree de la banque d'image
      */
-    public void setManager(JTreeManager manager){
-            this.manager = manager;
-            panel.add(new DateFiltrer(manager));
-            panel.add(new ChangeFilter(manager));
-            panel.add(new TagFilter(manager));
-            panel.add(new WeatherFilter(manager));
-        }
+    public void setManager(JTreeManager manager) {
+        panel.add(new DateFiltrer(manager));
+        panel.add(new ChangeFilter(manager));
+        panel.add(new TagFilter(manager));
+        panel.add(new WeatherFilter(manager));
+    }
 
 }

@@ -28,7 +28,7 @@ public class meteoAPITest {
     public void recuperationFichier() throws FileNotFoundException {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader("src/meteo.json")) {
-            Object obj = jsonParser.parse(reader);
+            jsonParser.parse(reader);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

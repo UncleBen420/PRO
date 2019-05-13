@@ -23,9 +23,12 @@ import JTreeManager.JTreeManager;
  */
 public class TagFilter extends TreeFilter {
 
+    private static final long serialVersionUID = -695555728838015946L;
+
     /**
+     * Constructeur
      *
-     * @param manager
+     * @param manager jtree de la banque d'image
      */
     public TagFilter(final JTreeManager manager) {
 
@@ -33,9 +36,6 @@ public class TagFilter extends TreeFilter {
 
     }
 
-    /**
-     *
-     */
     @Override
     protected void specialisation() {
 

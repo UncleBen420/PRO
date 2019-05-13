@@ -30,6 +30,10 @@ import javax.swing.tree.TreeNode;
  */
 public class JTreeManager extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 774488936584418358L;
 	private List<treeFilter> Filtre = new ArrayList<treeFilter>();
 	private DefaultMutableTreeNode root;
 	private JTree tree;
@@ -153,7 +157,7 @@ public class JTreeManager extends JPanel {
 					e.printStackTrace();
 				}
 
-				List<treeFilter> temp = new ArrayList<treeFilter>();
+				
 
 				int i = Filtre.size();
 

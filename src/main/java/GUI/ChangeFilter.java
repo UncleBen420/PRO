@@ -22,8 +22,9 @@ public class ChangeFilter extends TreeFilter {
     private static final long serialVersionUID = -213970803241070452L;
 
     /**
+     * Constrcuteur
      *
-     * @param manager
+     * @param manager Jtree de la banque d'image
      */
     public ChangeFilter(final JTreeManager manager) {
 
@@ -31,9 +32,6 @@ public class ChangeFilter extends TreeFilter {
 
     }
 
-    /**
-     *
-     */
     @Override
     protected void specialisation() {
 
