@@ -46,6 +46,9 @@ public class statisticsPage extends JFrame {
     private String dayConfig = "1";
     private Month monthConfig = Month.values()[0];
  
+    /**
+     * Constructeur
+     */
     public statisticsPage() {
         // Recuperation des donnees du parser
         parser = new statParser(statHandler);
@@ -58,19 +61,17 @@ public class statisticsPage extends JFrame {
         statistics();
     }
 
-
     public void initAndShowGUI() {
         
             JFrame mainFrame = new JFrame("Crapauduc Viewer Statistics");
-            
             JFXPanel fxPanel = new JFXPanel();
             
             mainFrame.setAlwaysOnTop(true);
             mainFrame.add(fxPanel);
-            mainFrame.setSize(1900, 1000);
+            mainFrame.setSize(1900, 1050);
             mainFrame.setVisible(true);
+            mainFrame.setResizable(false);
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            mainFrame.getToolkit().setDynamicLayout(true);
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -127,14 +128,22 @@ public class statisticsPage extends JFrame {
         Group dynamGroup = new Group();
         
         /* BOUTON DE CHOIX MOIS */
+        Text pleaseChooseMonth = new Text();
+        pleaseChooseMonth.setFont(new Font(10));
+        pleaseChooseMonth.setText("Choose a \n"
+                                    + "month :");
+        pleaseChooseMonth.setX(1750);
+        pleaseChooseMonth.setY(475);
+        pleaseChooseMonth.setFill(Color.WHITE);
+        dynamGroup.getChildren().add(pleaseChooseMonth);
+        
         List<String> monthSelector = new ArrayList<String>();         
         for (Month m : Month.values()){
           monthSelector.add(m.getName());
         }
         ChoiceBox monthBox = new ChoiceBox(FXCollections.observableArrayList(monthSelector));
-        
-        monthBox.setLayoutX(1700);
-        monthBox.setLayoutY(425);
+        monthBox.setLayoutX(1750);
+        monthBox.setLayoutY(500);
         
         // Evenements suite aux choix
         monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
@@ -157,12 +166,12 @@ public class statisticsPage extends JFrame {
         LineChart<Number, Number> monthLineChart = new LineChart<>(xAxisLineMonth, yAxisLineMonth);
         monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         monthLineChart.setPrefHeight(300);
+        monthLineChart.setPrefWidth(600);
         
         // Positionnement a gauche de la fenetre
         monthLineChart.setLayoutX(550);
         monthLineChart.setLayoutY(350);
-        monthLineChart.setLegendVisible(false);
-//   
+        monthLineChart.setLegendVisible(false);  
         XYChart.Series monthLineSeries = new XYChart.Series();   
         
         Map<Integer, Integer> mapThisMonth = statHandler.getAnimalNbByDayMap(monthConfig); 
@@ -179,7 +188,8 @@ public class statisticsPage extends JFrame {
         
         StackedBarChart<String, Number> sbcMonth = new StackedBarChart<>(xAxisBarMonth, yAxisBarMonth);
         sbcMonth.setPrefHeight(300);
-        sbcMonth.setLayoutX(1050);
+        sbcMonth.setPrefWidth(600);
+        sbcMonth.setLayoutX(1150);
         sbcMonth.setLayoutY(375);
         sbcMonth.setLegendVisible(false);        
         
@@ -205,13 +215,22 @@ public class statisticsPage extends JFrame {
         /********************************************/
         
         /* BOUTON DE CHOIX JOUR */
-        List<String> daySelector = new ArrayList<String>();         
+        Text pleaseChooseDay = new Text();
+        pleaseChooseDay.setFont(new Font(10));
+        pleaseChooseDay.setText("Choose a \n"
+                                    + "day :");
+        pleaseChooseDay.setX(1750);
+        pleaseChooseDay.setY(825);
+        pleaseChooseDay.setFill(Color.WHITE);
+        dynamGroup.getChildren().add(pleaseChooseDay);
+        
+        List<String> daySelector = new ArrayList<>();         
         for (int day = 1; day <= monthConfig.getNbDays(); day++){
           daySelector.add(Integer.toString(day));
         }
         ChoiceBox dayBox = new ChoiceBox(FXCollections.observableArrayList(daySelector));
-        dayBox.setLayoutX(1700);
-        dayBox.setLayoutY(700);               
+        dayBox.setLayoutX(1750);
+        dayBox.setLayoutY(850);               
         
         // Evenements suite aux choix
         dayBox.getSelectionModel().selectedIndexProperty().addListener(new 
@@ -233,6 +252,7 @@ public class statisticsPage extends JFrame {
         LineChart<Number, Number> dayLineChart = new LineChart<>(xAxisLineDay, yAxisLineDay);
         dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName() );
         dayLineChart.setPrefHeight(300);
+        dayLineChart.setPrefWidth(600);
         dayLineChart.setLayoutX(550);
         dayLineChart.setLayoutY(675);
         dayLineChart.setLegendVisible(false);
@@ -253,7 +273,8 @@ public class statisticsPage extends JFrame {
         
         StackedBarChart<String, Number> sbcDay = new StackedBarChart<>(xAxisBarDay, yAxisBarDay);
         sbcDay.setPrefHeight(300);
-        sbcDay.setLayoutX(1050);
+        sbcDay.setPrefWidth(600);
+        sbcDay.setLayoutX(1150);
         sbcDay.setLayoutY(700);
         sbcDay.setLegendVisible(false);
         
@@ -336,6 +357,7 @@ public class statisticsPage extends JFrame {
         lineChart.setLayoutY(25);
         lineChart.setLegendVisible(false);
         lineChart.setPrefHeight(300);
+        lineChart.setPrefWidth(600);
         
         XYChart.Series series = new XYChart.Series();
         
@@ -360,17 +382,18 @@ public class statisticsPage extends JFrame {
         final NumberAxis yAxis = new NumberAxis();
         
         StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
+        sbc.setLayoutX(1150);
+        sbc.setLayoutY(50);
         sbc.setPrefHeight(300);
+        sbc.setPrefWidth(650);
+        sbc.setLegendSide(Side.RIGHT);
         
-        List<String> xAxeNames = new ArrayList<String>();
+        List<String> xAxeNames = new ArrayList<>();
         
         for (Month m : Month.values()){
           xAxeNames.add(m.getAbbreviation());
         }
         xAxis.setCategories(FXCollections.<String>observableArrayList(xAxeNames));
-
-        sbc.setLayoutX(1050);
-        sbc.setLayoutY(50);
         
          for (AnimalType a : AnimalType.values()){               
             XYChart.Series<String, Number> serie = new XYChart.Series<>();
