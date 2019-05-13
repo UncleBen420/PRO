@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -63,7 +64,7 @@ public class statisticsPage extends JFrame {
             JScrollPane jScrollPane = new JScrollPane(fxPanel);
             
             mainFrame.setAlwaysOnTop(true);
-            mainFrame.add(fxPanel);
+            //mainFrame.add(fxPanel);
             mainFrame.add(jScrollPane);
             mainFrame.setSize(2000, 1500);
             mainFrame.setVisible(true);
@@ -98,19 +99,19 @@ public class statisticsPage extends JFrame {
         root.getChildren().add(sideInfosGroup);
         
         /*
-         * Creation de la Line Chart par année
+         * Creation de la Line Chart par annï¿½e
          */
         Group lineChartGroup = createLineChart();
         root.getChildren().add(lineChartGroup);
         
         /*
-         * Creation de la Bar Chart par année
+         * Creation de la Bar Chart par annï¿½e
          */
         Group barChartGroup = createBarChart();
         root.getChildren().add(barChartGroup);
         
         /*
-        * Creation de la zone de génération dynamique
+        * Creation de la zone de gï¿½nï¿½ration dynamique
         */
         Group dynamGroup = createDynamGroup();
         root.getChildren().add(dynamGroup);
