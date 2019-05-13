@@ -45,6 +45,7 @@ public class FiltersPanel extends JPanel {
 	 * @param manager
 	 */
 	public void setManager(JTreeManager manager) {
+		
 		panel.add(new DateFiltrer(manager));
 		panel.add(new ChangeFilter(manager));
 		panel.add(new TagFilter(manager));

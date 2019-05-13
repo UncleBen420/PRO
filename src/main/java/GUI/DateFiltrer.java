@@ -41,7 +41,7 @@ public class DateFiltrer extends TreeFilter {
      */
     protected void specialisation() {
 
-        JLabel label = new JLabel("Date");
+        label = new JLabel("Date");
 
         final JTextField beginText = new JTextField("2017-03-23");
 
@@ -78,9 +78,8 @@ public class DateFiltrer extends TreeFilter {
             }
         });
 
-        panel.add(label);
-        panel.add(beginText);
-        panel.add(endText);
+        specialistationPanel.add(beginText);
+        specialistationPanel.add(endText);
 
     }
    

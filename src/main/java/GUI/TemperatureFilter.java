@@ -42,7 +42,7 @@ public class TemperatureFilter extends TreeFilter {
      */
     protected void specialisation() {
     	
-    	JLabel label = new JLabel("Temperature");
+    	label = new JLabel("Temperature");
 
     	final JTextField beginText = new JTextField("00.0");
 
@@ -72,9 +72,8 @@ public class TemperatureFilter extends TreeFilter {
             }
         });
 
-        panel.add(label);
-        panel.add(beginText);
-        panel.add(endText);
+        specialistationPanel.add(beginText);
+        specialistationPanel.add(endText);
 
     }
 }
