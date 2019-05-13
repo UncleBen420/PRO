@@ -204,6 +204,8 @@ public class Parser {
 
                 return findTag(metadata, "heigViewer");
 
+            } catch (Exception e){
+                return false;
             }
         }
 

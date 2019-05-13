@@ -19,7 +19,7 @@ abstract public class TreeFilter extends JPanel {
     private JButton delete;
     protected JButton filter;
     protected JTreeManager manager;
-    protected treeFilter currentFilter;
+    protected AbstractTreeFilter currentFilter;
 
     /**
      * Constructeur

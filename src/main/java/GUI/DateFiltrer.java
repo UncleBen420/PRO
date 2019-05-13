@@ -7,7 +7,6 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,7 +65,7 @@ public class DateFiltrer extends TreeFilter {
                 manager.removeFiltre(currentFilter);
             }
 
-            currentFilter = new TreeFilterDate(beginDate, endDate);
+            currentFilter = new DateTreeFilter(beginDate, endDate);
             manager.addFiltre(currentFilter);
         });
 
