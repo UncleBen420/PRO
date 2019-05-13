@@ -30,10 +30,15 @@ import javax.swing.tree.TreeNode;
  */
 public class JTreeManager extends JPanel {
 
-	private List<AbstractTreeFilter> Filtre = new ArrayList<AbstractTreeFilter>();
-	private DefaultMutableTreeNode root;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 774488936584418358L;
+	private final List<AbstractTreeFilter> Filtre;
+	private final DefaultMutableTreeNode root;
 	private JTree tree;
-	private File rootDirectory, JsonTree;
+	private final File rootDirectory;
+	private final File JsonTree;
 	private SliderDemo slider;
 	private ViewerTable table;
 	private Parser parserTag = new Parser();
@@ -45,6 +50,7 @@ public class JTreeManager extends JPanel {
      *
      */
     public JTreeManager() {
+        this.Filtre = new ArrayList<>();
 
 		Properties properties = PropertiesHandler.parseProperties();
 
@@ -70,6 +76,7 @@ public class JTreeManager extends JPanel {
 
 		tree.addMouseListener(new MouseAdapter() {
 
+                        @Override
 			public void mouseClicked(MouseEvent e) {
 
 				if (e.getClickCount() == 2) {
@@ -108,24 +115,25 @@ public class JTreeManager extends JPanel {
      */
     public void addFiltre(final AbstractTreeFilter f) {
 
-		Thread thread = new Thread() {
-			public void run() {
-
-				try {
-					mutex.acquire();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				Filtre.add(f);
-				f.setTree(tree);
-				f.filtreTree();
-
-				mutex.release();
-
-			}
-		};
+		Thread thread;
+                thread = new Thread() {
+                @Override
+                public void run() {
+                    
+                    try {
+                        mutex.acquire();
+                    } catch (InterruptedException e) {
+                        
+                    }
+                    
+                    Filtre.add(f);
+                    f.setTree(tree);
+                    f.filtreTree();
+                    
+                    mutex.release();
+                    
+                }
+            };
 
 		thread.start();
 
@@ -138,16 +146,15 @@ public class JTreeManager extends JPanel {
     public void removeFiltre(final AbstractTreeFilter f) {
 
 		Thread thread = new Thread() {
+                        @Override
 			public void run() {
 
 				try {
 					mutex.acquire();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                                    // TODO Auto-generated catch block
 
-				List<AbstractTreeFilter> temp = new ArrayList<AbstractTreeFilter>();
+				}
 
 				int i = Filtre.size();
 

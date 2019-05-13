@@ -51,28 +51,27 @@ public class SliderDemo extends JPanel
         implements ActionListener,
         WindowListener {
 
+    private static final long serialVersionUID = -2296941579498067629L;
     //Set up animation parameters.
-    static final int FPS_MIN = 0;
-    static final int FPS_MAX = 30;
-    static final int FPS_INIT = 15;    //initial frames per second
-    int frameNumber = 0;
-    int NUM_FRAMES = 0;
-    ImageIcon[] images;
-    int delay;
-    Timer timer;
-    boolean frozen = false;
-    String directory;
-    ArrayList<String> imagesPath = new ArrayList<String>();
-    private Parser parserTag = new Parser();
+    private static final int FPS_INIT = 15;    //initial frames per second
+    private int frameNumber = 0;
+    private ImageIcon[] images;
+    private final int delay;
+    private final Timer timer;
+    private String directory;
+    private final ArrayList<String> imagesPath;
+    private final Parser parserTag;
     private ViewerTable table;
 
     //This label uses ImageIcon to show the doggy pictures.
     JLabel picture;
 
     /**
-     *
+     * Constructeur
      */
     public SliderDemo() {
+        this.parserTag = new Parser();
+        this.imagesPath = new ArrayList<String>();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         delay = 1000 / FPS_INIT;
@@ -132,21 +131,19 @@ public class SliderDemo extends JPanel
     }
 
     /**
-     *
+     * Démarre l'animation
      */
     public void startAnimation() {
         //Start (or restart) animating!
         timer.start();
-        frozen = false;
     }
 
     /**
-     *
+     * Stoppe l'animation
      */
     public void stopAnimation() {
         //Stop the animating thread.
         timer.stop();
-        frozen = true;
     }
 
     //Called when the Timer fires.
@@ -215,6 +212,12 @@ public class SliderDemo extends JPanel
         }
     }
 
+    /**
+     * Retourne l'extension d'un fichier
+     * 
+     * @param file fichier
+     * @return extension du fichier
+     */
     private String getFileExtension(File file) {
         String fileName = file.getName();
         int lastDot = fileName.lastIndexOf('.');
@@ -222,8 +225,9 @@ public class SliderDemo extends JPanel
     }
 
     /**
-     *
-     * @param path
+     * Ajoute les images au slider
+     * 
+     * @param path chemin de l'image
      */
     public void addImage(String path) {
         int i = 0;
@@ -266,24 +270,27 @@ public class SliderDemo extends JPanel
     }
 
     /**
-     *
-     * @return
+     * Retourne le chemin de l'image actuelle
+     * 
+     * @return chemin de l'image actuelle
      */
     public String getImage() {
         return imagesPath.get(frameNumber);
     }
 
     /**
-     *
-     * @return
+     * Retourne le chemin du dossier de l'image actuelle
+     * 
+     * @return chemin du dossier de l'image actuelle
      */
     public String getDirectory() {
         return directory;
     }
 
     /**
-     *
-     * @param table
+     * Setteur du tableau de tags
+     * 
+     * @param table tableau de tags
      */
     public void setTable(ViewerTable table) {
         this.table = table;

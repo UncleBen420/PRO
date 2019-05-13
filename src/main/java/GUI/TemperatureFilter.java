@@ -7,7 +7,6 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -40,6 +39,7 @@ public class TemperatureFilter extends TreeFilter {
     /**
      *
      */
+        @Override
     protected void specialisation() {
     	
     	label = new JLabel("Temperature");
@@ -48,29 +48,23 @@ public class TemperatureFilter extends TreeFilter {
 
         final JTextField endText = new JTextField("36.7");
 
-        filter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-                if (currentFilter != null) {
-                    manager.removeFiltre(currentFilter);
-                }
-                currentFilter = null;
-
-                
-                try {
+        filter.addActionListener((ActionEvent e) -> {
+            if (currentFilter != null) {
+                manager.removeFiltre(currentFilter);
+            }
+            currentFilter = null;
+            
+            
+            try {
                 currentFilter = new TemperatureTreeFilter(Double.parseDouble(beginText.getText()), Double.parseDouble(endText.getText()));
                 manager.addFiltre(currentFilter);
                 
-                }catch(Exception ex) {
-                	
-                	JOptionPane.showMessageDialog(null,"The temperature entered cannot be parse");
-                	
-                }
-
+            }catch(NumberFormatException ex) {
+                
+                JOptionPane.showMessageDialog(null,"The temperature entered cannot be parse");
+                
             }
-        });
+            });
 
         specialistationPanel.add(beginText);
         specialistationPanel.add(endText);

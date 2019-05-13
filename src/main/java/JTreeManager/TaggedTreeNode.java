@@ -8,6 +8,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class TaggedTreeNode extends DefaultMutableTreeNode {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8501672794313810915L;
 	private String tag;
 	
     /**

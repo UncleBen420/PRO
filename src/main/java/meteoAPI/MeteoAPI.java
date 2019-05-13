@@ -9,17 +9,12 @@ import java.util.List;
 import com.google.gson.*;
 
 /**
- *
  * @author gaetan
  */
 public class MeteoAPI {
 
     private List<MeteoPerDay> list = new ArrayList<>();
 
-    /**
-     *
-     * @return
-     */
     public List<MeteoPerDay> getList() {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader("src/meteo.json")) {
@@ -36,6 +31,64 @@ public class MeteoAPI {
         return list;
     }
 
+    public List<MeteoPerDay> getListFiltreSummary(TYPEMETEO filtre) {
+        boolean firstMeasureOfMeteo;
+        int counterOfDays = 0;
+        int counterOfHours;
+        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
+        List<MeteoPerDay> meteoProjet = getList();
+
+        for (MeteoPerDay day : meteoProjet) {
+            counterOfHours = 0;
+            firstMeasureOfMeteo = true;
+            for (String s : day.getMeteo()) {
+                if (firstMeasureOfMeteo) {
+                    meteoPerFiltre.add(new MeteoPerDay(day.getDate()));
+                    firstMeasureOfMeteo = false;
+                }
+                if (s.equals(filtre.toString())) {
+                    meteoPerFiltre.get(counterOfDays).addMeteo(s);
+                } else {
+                    meteoPerFiltre.get(counterOfDays).addMeteo("-1");
+                }
+                meteoPerFiltre.get(counterOfDays).addTemperature(day.getTemperature().get(counterOfHours));
+                meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+                ++counterOfHours;
+            }
+            ++counterOfDays;
+        }
+        return meteoPerFiltre;
+    }
+
+    public List<MeteoPerDay> getListFiltreTemperature(double min, double max) {
+        boolean firstMeasureOfTemperature;
+        int counterOfDays = 0;
+        int counterOfHours;
+        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
+        List<MeteoPerDay> meteoProjet = getList();
+
+        for (MeteoPerDay day : meteoProjet) {
+            counterOfHours = 0;
+            firstMeasureOfTemperature = true;
+            for (Double s : day.getTemperature()) {
+                if (firstMeasureOfTemperature) {
+                    meteoPerFiltre.add(new MeteoPerDay(day.getDate()));
+                    firstMeasureOfTemperature = false;
+                }
+                if (min <= s && s <= max) {
+                    meteoPerFiltre.get(counterOfDays).addTemperature(s);
+                } else {
+                    meteoPerFiltre.get(counterOfDays).addTemperature(99.);
+                }
+                meteoPerFiltre.get(counterOfDays).addMeteo(day.getMeteo().get(counterOfHours));
+                meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+                ++counterOfHours;
+            }
+            ++counterOfDays;
+        }
+        return meteoPerFiltre;
+    }
+
     private void parseDateObject(JsonObject date) {
         MeteoPerDay met = new MeteoPerDay(date.get("date").getAsString());
         JsonArray hourArray = (JsonArray) ((JsonObject) ((JsonObject) date.get("properties")).get("hourly")).get("data");
@@ -43,90 +96,9 @@ public class MeteoAPI {
         list.add(met);
     }
 
-    /**
-     *
-     * @param filtre
-     * @return
-     */
-    public List<MeteoPerDay> getListFiltreSummary(TYPEMETEO filtre) {
-        boolean test;
-        int i = 0;
-        int j;
-        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
-        List<MeteoPerDay> meteoProjet = getList();
-        MeteoPerDay met;
-
-
-        for (MeteoPerDay day : meteoProjet) {
-            j = 0;
-            test = true;
-            for (String s : day.getMeteo()) {
-
-                if (test) {
-                    met = new MeteoPerDay(day.getDate());
-                    meteoPerFiltre.add(met);
-                    test = false;
-                }
-                if (s.equals(filtre.toString())) {
-                    meteoPerFiltre.get(i).addMeteo(s);
-                } else {
-                    meteoPerFiltre.get(i).addMeteo("-1");
-                }
-                meteoPerFiltre.get(i).addTemperature(day.getTemperature().get(j));
-                meteoPerFiltre.get(i).addRain(day.getRainInfo().get(j));
-                ++j;
-            }
-            ++i;
-        }
-
-        return meteoPerFiltre;
-    }
-
-    /**
-     *
-     * @param filtre
-     * @return
-     */
-    public List<MeteoPerDay> getListFiltreTemperature(double min, double max) {
-        boolean test;
-        int i = 0;
-        int j;
-        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
-        List<MeteoPerDay> meteoProjet = getList();
-        MeteoPerDay met;
-
-        for (MeteoPerDay day : meteoProjet) {
-            j = 0;
-            test = true;
-            for (Double s : day.getTemperature()) {
-
-                if (test) {
-                    met = new MeteoPerDay(day.getDate());
-                    meteoPerFiltre.add(met);
-                    test = false;
-                }
-                if (min <= s && s <= max) {
-                    meteoPerFiltre.get(i).addTemperature(s);
-                } else {
-                    meteoPerFiltre.get(i).addTemperature(99.);
-                }
-                meteoPerFiltre.get(i).addMeteo(day.getMeteo().get(j));
-                meteoPerFiltre.get(i).addRain(day.getRainInfo().get(j));
-                ++j;
-            }
-            ++i;
-        }
-
-        return meteoPerFiltre;
-    }
-
     private void parseHourObject(MeteoPerDay met, JsonObject hour) {
         met.addMeteo(hour.get("summary").getAsString());
         met.addTemperature(hour.get("temperature").getAsDouble());
-        if (hour.has("precipType")) {
-            met.addRain(true);
-        } else {
-            met.addRain(false);
-        }
+        met.addRain(hour.has("precipType"));
     }
 }
