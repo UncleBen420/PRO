@@ -30,6 +30,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import Statistics.handler.StatisticsHandler;
+import java.util.Map;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
@@ -43,17 +44,20 @@ public class statisticsPage extends JFrame {
     private statParser parser;
     private StatisticsHandler statHandler = new StatisticsHandler();
     private String dayConfig = "1";
-    private String monthConfig = "Januar";
+    private Month monthConfig = Month.values()[0];
  
     public statisticsPage() {
         // Recuperation des donnees du parser
         parser = new statParser(statHandler);
         parser.parseFile();
         statHandler.analyzeData();
-        System.out.println(statHandler.test());
-
+        //System.out.println(statHandler.test());
+        //Map <Integer, List<Integer>> test = statHandler.getAnimalTypeByHourMap(Month.FEB, 23);
+        
+        //System.out.println(test);
         statistics();
     }
+
 
     public void initAndShowGUI() {
         
@@ -123,11 +127,14 @@ public class statisticsPage extends JFrame {
         Group dynamGroup = new Group();
         
         /* BOUTON DE CHOIX MOIS */
-        ChoiceBox monthBox = new ChoiceBox(FXCollections.observableArrayList(
-        "Jan", "Feb", "Mar"));
+        List<String> monthSelector = new ArrayList<String>();         
+        for (Month m : Month.values()){
+          monthSelector.add(m.getName());
+        }
+        ChoiceBox monthBox = new ChoiceBox(FXCollections.observableArrayList(monthSelector));
+        
         monthBox.setLayoutX(1700);
         monthBox.setLayoutY(425);
-        final String[] monthChoice = new String[] {"Jan", "Feb", "Mar"};
         
         // Evenements suite aux choix
         monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
@@ -136,8 +143,7 @@ public class statisticsPage extends JFrame {
             public void changed(ObservableValue ov, Number value, 
                     Number new_value) {
                 // Enregistrement du choix
-                monthConfig = monthChoice[new_value.intValue()];
-                
+                monthConfig = Month.values()[new_value.intValue()];
                 // Repaint de la fenetre
                 statistics();
             }
@@ -146,61 +152,66 @@ public class statisticsPage extends JFrame {
         
         /* LINE CHART MOIS*/
         // Definition des axes
-        NumberAxis xAxisLineMonth = new NumberAxis();
+        NumberAxis xAxisLineMonth = new NumberAxis(1, monthConfig.getNbDays(), 1);
         NumberAxis yAxisLineMonth = new NumberAxis();
         LineChart<Number, Number> monthLineChart = new LineChart<>(xAxisLineMonth, yAxisLineMonth);
-        monthLineChart.setTitle("Number of animals for " + monthConfig);
+        monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         monthLineChart.setPrefHeight(300);
+        
         // Positionnement a gauche de la fenetre
         monthLineChart.setLayoutX(550);
         monthLineChart.setLayoutY(350);
         monthLineChart.setLegendVisible(false);
-        XYChart.Series monthLineSeries = new XYChart.Series();
-        monthLineSeries.getData().add(new XYChart.Data(1, 2));
-        monthLineSeries.getData().add(new XYChart.Data(2, 3));
-        monthLineSeries.getData().add(new XYChart.Data(3, 3));
-        monthLineSeries.getData().add(new XYChart.Data(4, 3));
-        monthLineSeries.getData().add(new XYChart.Data(5, 3));
-        monthLineSeries.getData().add(new XYChart.Data(6, 3));
-        monthLineSeries.getData().add(new XYChart.Data(7, 3));
-        monthLineSeries.getData().add(new XYChart.Data(8, 3));
-        monthLineSeries.getData().add(new XYChart.Data(9, 3));
-        monthLineSeries.getData().add(new XYChart.Data(10, 3));
+//   
+        XYChart.Series monthLineSeries = new XYChart.Series();   
+        
+        Map<Integer, Integer> mapThisMonth = statHandler.getAnimalNbByDayMap(monthConfig); 
+        for (Map.Entry<Integer, Integer> entry : mapThisMonth.entrySet()) {
+           monthLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+        }
         monthLineChart.getData().add(monthLineSeries);
         dynamGroup.getChildren().add(monthLineChart);
+
         
         /* BAR CHART MOIS */
-        // Definition des axes
-        CategoryAxis xAxisBarMonth = new CategoryAxis();
-        NumberAxis yAxisBarMonth = new NumberAxis();
+        final CategoryAxis xAxisBarMonth = new CategoryAxis();
+        final NumberAxis yAxisBarMonth = new NumberAxis();
+        
         StackedBarChart<String, Number> sbcMonth = new StackedBarChart<>(xAxisBarMonth, yAxisBarMonth);
         sbcMonth.setPrefHeight(300);
         sbcMonth.setLayoutX(1050);
         sbcMonth.setLayoutY(375);
-        sbcMonth.setLegendVisible(false);
-        XYChart.Series<String, Number> seriesTritonMonth = new XYChart.Series<>();
-        XYChart.Series<String, Number> seriesToadMonth = new XYChart.Series<>();
-        XYChart.Series<String, Number> seriesFrogMonth = new XYChart.Series<>();
-        seriesTritonMonth.setName("Tritons");
-        seriesToadMonth.setName("Toads");
-        seriesFrogMonth.setName("Frogs");
-        seriesTritonMonth.getData().add(new XYChart.Data<>("1", 2));
-        seriesToadMonth.getData().add(new XYChart.Data<>("2", 4));
-        seriesFrogMonth.getData().add(new XYChart.Data<>("1", 6));
-        sbcMonth.getData().addAll(seriesTritonMonth, seriesToadMonth, seriesFrogMonth);
-        dynamGroup.getChildren().add(sbcMonth);  
+        sbcMonth.setLegendVisible(false);        
         
-        
+         for (AnimalType a : AnimalType.values()){               
+            XYChart.Series<String, Number> serie = new XYChart.Series<>();
+            serie.setName(a.getName());          
+            sbcMonth.getData().add(serie);
+        }
+          
+         
+        Map<Integer, List<Integer>> mapThisMonthByType = statHandler.getAnimalTypeByDayMap(monthConfig); 
+         for (Map.Entry<Integer, List<Integer>> entry : mapThisMonthByType.entrySet()) {
+            List<Integer> list = entry.getValue();
+            for (AnimalType animal : AnimalType.values()) {
+                XYChart.Series<String, Number> serie = sbcMonth.getData().get(animal.ordinal());
+                serie.getData().add(new XYChart.Data<>(entry.getKey().toString(), list.get(animal.ordinal())));
+            }
+        }
+               
+        dynamGroup.getChildren().add(sbcMonth);    
         
         
         /********************************************/
         
         /* BOUTON DE CHOIX JOUR */
-        ChoiceBox dayBox = new ChoiceBox(FXCollections.observableArrayList(
-        "1", "2", "3"));
+        List<String> daySelector = new ArrayList<String>();         
+        for (int day = 1; day <= monthConfig.getNbDays(); day++){
+          daySelector.add(Integer.toString(day));
+        }
+        ChoiceBox dayBox = new ChoiceBox(FXCollections.observableArrayList(daySelector));
         dayBox.setLayoutX(1700);
-        dayBox.setLayoutY(700);
-        final String[] dayChoice = new String[] {"1", "2", "3"};
+        dayBox.setLayoutY(700);               
         
         // Evenements suite aux choix
         dayBox.getSelectionModel().selectedIndexProperty().addListener(new 
@@ -209,58 +220,57 @@ public class statisticsPage extends JFrame {
             public void changed(ObservableValue ov, Number value, 
                     Number new_value) {
                 // Enregistrement du choix
-                dayConfig = dayChoice[new_value.intValue()];
-                
+                dayConfig = daySelector.get(new_value.intValue());  
                 // Repaint de la fenetre
                 statistics();
             }
         });
         dynamGroup.getChildren().add(dayBox);
         
-        /* LINE CHART JOUR */
-        // Definition des axes
-        NumberAxis xAxisLineDay = new NumberAxis();
+        /* LINE CHART JOUR */   
+        NumberAxis xAxisLineDay = new NumberAxis(0, 23, 1);
         NumberAxis yAxisLineDay = new NumberAxis();
         LineChart<Number, Number> dayLineChart = new LineChart<>(xAxisLineDay, yAxisLineDay);
-        dayLineChart.setTitle("Number of animals for " + dayConfig);
+        dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName() );
         dayLineChart.setPrefHeight(300);
         dayLineChart.setLayoutX(550);
         dayLineChart.setLayoutY(675);
         dayLineChart.setLegendVisible(false);
-        XYChart.Series dayLineSeries = new XYChart.Series();
-        dayLineSeries.getData().add(new XYChart.Data(1, 2));
-        dayLineSeries.getData().add(new XYChart.Data(2, 3));
-        dayLineSeries.getData().add(new XYChart.Data(3, 3));
-        dayLineSeries.getData().add(new XYChart.Data(4, 3));
-        dayLineSeries.getData().add(new XYChart.Data(5, 3));
-        dayLineSeries.getData().add(new XYChart.Data(6, 3));
-        dayLineSeries.getData().add(new XYChart.Data(7, 3));
-        dayLineSeries.getData().add(new XYChart.Data(8, 3));
-        dayLineSeries.getData().add(new XYChart.Data(9, 3));
-        dayLineSeries.getData().add(new XYChart.Data(10, 3));
-        dayLineChart.getData().add(dayLineSeries);
+   
+        XYChart.Series dayLineSeries = new XYChart.Series();   
         
+        Map<Integer, Integer> mapThisDay = statHandler.getAnimalNbByHourMap(monthConfig, Integer.parseInt(dayConfig)); 
+        for (Map.Entry<Integer, Integer> entry : mapThisDay.entrySet()) {
+           dayLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+        }
+        dayLineChart.getData().add(dayLineSeries);
         dynamGroup.getChildren().add(dayLineChart);
         
-        /* BAR CHART JOUR */
-        // Definition des axes
-        CategoryAxis xAxisBarDay = new CategoryAxis();
-        NumberAxis yAxisBarDay = new NumberAxis();
+          
+        /* BAR CHART JOUR */        
+        final CategoryAxis xAxisBarDay = new CategoryAxis();
+        final NumberAxis yAxisBarDay = new NumberAxis();
+        
         StackedBarChart<String, Number> sbcDay = new StackedBarChart<>(xAxisBarDay, yAxisBarDay);
         sbcDay.setPrefHeight(300);
         sbcDay.setLayoutX(1050);
         sbcDay.setLayoutY(700);
         sbcDay.setLegendVisible(false);
-        XYChart.Series<String, Number> seriesTritonDay = new XYChart.Series<>();
-        XYChart.Series<String, Number> seriesToadDay = new XYChart.Series<>();
-        XYChart.Series<String, Number> seriesFrogDay = new XYChart.Series<>();
-        seriesTritonDay.setName("Tritons");
-        seriesToadDay.setName("Toads");
-        seriesFrogDay.setName("Frogs");
-        seriesTritonDay.getData().add(new XYChart.Data<>("1", 2));
-        seriesToadDay.getData().add(new XYChart.Data<>("2", 4));
-        seriesFrogDay.getData().add(new XYChart.Data<>("1", 6));
-        sbcDay.getData().addAll(seriesTritonDay, seriesToadDay, seriesFrogDay);
+        
+         for (AnimalType a : AnimalType.values()){               
+            XYChart.Series<String, Number> serie = new XYChart.Series<>();
+            serie.setName(a.getName());          
+            sbcDay.getData().add(serie);
+        }
+           
+        Map<Integer, List<Integer>> mapThisDayByType = statHandler.getAnimalTypeByHourMap(monthConfig,Integer.parseInt(dayConfig)); 
+         for (Map.Entry<Integer, List<Integer>> entry : mapThisDayByType.entrySet()) {
+            List<Integer> list = entry.getValue();
+            for (AnimalType animal : AnimalType.values()) {
+                XYChart.Series<String, Number> serie = sbcDay.getData().get(animal.ordinal());
+                serie.getData().add(new XYChart.Data<>(entry.getKey().toString(), list.get(animal.ordinal())));
+            }
+        }
         dynamGroup.getChildren().add(sbcDay);        
         
         return dynamGroup;
