@@ -3,6 +3,10 @@ package GUI;
 
 import Tag.Tag;
 import javax.swing.JFrame;
+import mdlaf.*;
+import mdlaf.animation.*;
+import javax.swing.*;
+import java.awt.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -78,7 +82,6 @@ public class crapau extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setIconImages(null);
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1900, 1200));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -347,7 +350,7 @@ public class crapau extends javax.swing.JFrame {
             }
         });
 
-        save_button1.setText("Seq");
+        save_button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-sequence.png")));
         save_button1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 save_button1MouseClicked(evt);
@@ -531,18 +534,7 @@ public class crapau extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
        */
       try {
-         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-               javax.swing.UIManager.setLookAndFeel(info.getClassName());
-               break;
-            }
-         }
-      } catch (ClassNotFoundException ex) {
-         java.util.logging.Logger.getLogger(crapau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      } catch (InstantiationException ex) {
-         java.util.logging.Logger.getLogger(crapau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-      } catch (IllegalAccessException ex) {
-         java.util.logging.Logger.getLogger(crapau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	UIManager.setLookAndFeel (new MaterialLookAndFeel ());
       } catch (javax.swing.UnsupportedLookAndFeelException ex) {
          java.util.logging.Logger.getLogger(crapau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
       }

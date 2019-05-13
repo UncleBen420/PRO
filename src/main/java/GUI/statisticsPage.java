@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -67,7 +68,7 @@ public class statisticsPage extends JFrame {
             JFXPanel fxPanel = new JFXPanel();
             
             mainFrame.setAlwaysOnTop(true);
-            mainFrame.add(fxPanel);
+            mainFrame.add(jScrollPane);
             mainFrame.setSize(1900, 1050);
             mainFrame.setVisible(true);
             mainFrame.setResizable(false);
@@ -101,19 +102,19 @@ public class statisticsPage extends JFrame {
         root.getChildren().add(sideInfosGroup);
         
         /*
-         * Creation de la Line Chart par année
+         * Creation de la Line Chart par annï¿½e
          */
         Group lineChartGroup = createLineChart();
         root.getChildren().add(lineChartGroup);
         
         /*
-         * Creation de la Bar Chart par année
+         * Creation de la Bar Chart par annï¿½e
          */
         Group barChartGroup = createBarChart();
         root.getChildren().add(barChartGroup);
         
         /*
-        * Creation de la zone de génération dynamique
+        * Creation de la zone de gï¿½nï¿½ration dynamique
         */
         Group dynamGroup = createDynamGroup();
         root.getChildren().add(dynamGroup);
@@ -340,7 +341,7 @@ public class statisticsPage extends JFrame {
     }
     
     /*
-     * Cree un groupe avec la line chart par année
+     * Cree un groupe avec la line chart par annÃ©e
      */
     public Group createLineChart() {
         Group lineChartGroup = new Group();
@@ -372,7 +373,7 @@ public class statisticsPage extends JFrame {
     }
     
     /*
-     * Cree un groupe avec la bar chart par année
+     * Cree un groupe avec la bar chart par annÃ©e
      */
     public Group createBarChart() {
         Group barChartGroup = new Group();
