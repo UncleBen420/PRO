@@ -130,7 +130,7 @@ public class statisticsPage extends JFrame {
         
         /* LINE CHART MOIS*/
         NumberAxis xAxisLineMonth = new NumberAxis(1, monthConfig.getNbDays(), 1);
-        NumberAxis yAxisLineMonth = new NumberAxis();
+        NumberAxis yAxisLineMonth = new NumberAxis(0,statHandler.getTaggedAnimals(),10);
         LineChart<Number, Number> monthLineChart = new LineChart<>(xAxisLineMonth, yAxisLineMonth);
         monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         monthLineChart.setPrefHeight(300);
@@ -141,7 +141,7 @@ public class statisticsPage extends JFrame {
         
         /* BAR CHART MOIS */
         final CategoryAxis xAxisBarMonth = new CategoryAxis();
-        final NumberAxis yAxisBarMonth = new NumberAxis();
+        final NumberAxis yAxisBarMonth = new NumberAxis(0,statHandler.getTaggedAnimals(),10);
         StackedBarChart<String, Number> sbcMonth = new StackedBarChart<>(xAxisBarMonth, yAxisBarMonth);
         sbcMonth.setPrefHeight(300);
         sbcMonth.setPrefWidth(600);
@@ -176,6 +176,7 @@ public class statisticsPage extends JFrame {
                 // Enregistrement du choix
                 monthConfig = Month.values()[new_value.intValue()];
                 monthLineChart.getData().clear();
+                sbcMonth.getData().clear();
                 /* Peuplage des graphiques */
                 populateMonthLineChart(monthLineChart);
                 populateMonthBarChart(sbcMonth);
@@ -237,6 +238,7 @@ public class statisticsPage extends JFrame {
                 // Enregistrement du choix
                 dayConfig = daySelector.get(new_value.intValue());
                 dayLineChart.getData().clear();
+                sbcDay.getData().clear();
                 /* Peuplage des graphiques */
                 populateDayLineChart(dayLineChart);
                 populateDayBarChart(sbcDay);
