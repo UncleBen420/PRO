@@ -78,5 +78,10 @@ public class DateTreeFilter extends AbstractTreeFilter {
 			}
 		}
 	}
+    
+    public String toString() {
+		return "Date Filter";
+
+	}
 
 }

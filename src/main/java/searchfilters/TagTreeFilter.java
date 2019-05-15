@@ -76,5 +76,10 @@ public class TagTreeFilter extends AbstractTreeFilter {
 		
 		return false;
 	}
+    
+    public String toString() {
+		return "Tag Filter";
+
+	}
 
 }

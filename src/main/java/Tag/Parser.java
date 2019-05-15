@@ -89,6 +89,7 @@ public class Parser {
      */
     private String getFileExtension(File file) {
         String fileName = file.getName();
+        
         int lastDot = fileName.lastIndexOf('.');
         return fileName.substring(lastDot + 1);
     }
@@ -191,6 +192,7 @@ public class Parser {
 
         String extension = getFileExtension(file);
 
+        
         Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(extension);
 
         while (readers.hasNext()) {

@@ -1,3 +1,4 @@
+
 package searchfilters;
 
 import java.io.File;
@@ -58,14 +59,8 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 
 					try {
 						int test = ip.compareImageRatioOpti(path1, path2, 100, 0, tolerance, precision);
-						System.out.println(path1);
-						System.out.println(path2);
-						System.out.println(test);
 						mean += test;
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						
 						return true;
 					}
 
@@ -76,8 +71,6 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 			if(taggedTreeNode.getChildCount() - 1 != 0)
 			mean /= taggedTreeNode.getChildCount() - 1;
 
-			System.out.println("mean" + mean);
-			
 			if (min > mean || mean > max) {
 				
 				return true;
@@ -107,6 +100,11 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 				}
 			}
 		}
+
+	}
+	
+	public String toString() {
+		return "Image's differances Filter";
 
 	}
 }

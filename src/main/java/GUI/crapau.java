@@ -2,6 +2,9 @@ package GUI;
 
 
 import Tag.Tag;
+
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import mdlaf.*;
 import mdlaf.animation.*;
