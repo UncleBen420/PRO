@@ -90,8 +90,6 @@ public abstract class AbstractTreeFilter {
      */
     public void filtreTree() {
 		
-		System.out.println("filtre :" + this);
-
 		final DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
 
 		if (analyseNode(root)) {
@@ -126,8 +124,6 @@ public abstract class AbstractTreeFilter {
      */
     public void unfiltreTree() {
 		
-		System.out.println("unfiltre :" + this);
-		
 		while (!filtredElements.isEmpty()) {
 			PopToTree();
 		}
@@ -140,7 +136,7 @@ public abstract class AbstractTreeFilter {
      */
     abstract public boolean analyseNode(DefaultMutableTreeNode node);
 
-	public String toString() {
+	public String testToString() {
 		String temp = num + "filter:\n";
 
 		for (OldNodePair o : filtredElements) {
@@ -148,6 +144,11 @@ public abstract class AbstractTreeFilter {
 		}
 
 		return temp;
+
+	}
+	
+	public String toString() {
+		return "Abstract filter";
 
 	}
 

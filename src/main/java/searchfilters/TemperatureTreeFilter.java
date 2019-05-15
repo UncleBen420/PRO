@@ -112,5 +112,10 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 			}
 		}
 	}
+    
+    public String toString() {
+		return "Temperature Filter";
+
+	}
 
 }

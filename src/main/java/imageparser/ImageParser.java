@@ -16,11 +16,7 @@ public class ImageParser {
 	  int  red   = (clr & 0x00ff0000) >> 16;
 	  int  green = (clr & 0x0000ff00) >> 8;
 	  int  blue  =  clr & 0x000000ff;
-	  
-	  System.out.println("Red Color value = "+ red);
-	  System.out.println("Green Color value = "+ green);
-	  System.out.println("Blue Color value = "+ blue);
-	  
+
 	  return clr;
 	  
 	}
@@ -33,41 +29,7 @@ public class ImageParser {
 		
 	}
 	
-	/*static int compareImageRatio(String path1, String path2) throws Exception {
-		
-		byte[] bufImage1 = ImageParser.getPixelBuffer(path1);
-		byte[] bufImage2 = ImageParser.getPixelBuffer(path2);
-		
-		if(bufImage1.length != bufImage2.length) {
-			throw new Exception("The images are not the same size");
-		}
-		
-		double ratio = 100;
-		int valUnsigned1, valUnsigned2, min, max;
-		
-
-		for(int i = 0; i < bufImage1.length; i++) {
-			
-			
-			
-			valUnsigned1 = Byte.toUnsignedInt(bufImage1[i]);
-			valUnsigned2 = Byte.toUnsignedInt(bufImage2[i]);
-			
-			//System.out.println("val1: " + valUnsigned1 + " val2: "+ valUnsigned2);
-			
-			min = Math.min(valUnsigned1, valUnsigned2);
-			max = Math.max(valUnsigned1, valUnsigned2);
-			
-			if(max != 0) {
-			
-				ratio = (((min / max) * 100) + ratio) / 2;
-			
-			}
-		}
-		
-		return (int)ratio;
-		
-	}*/
+	
 	
 	
 public int compareImageRatioOpti(String path1, String path2, int hCut, int wCut, int correctness, int precision) throws Exception {
@@ -82,8 +44,6 @@ public int compareImageRatioOpti(String path1, String path2, int hCut, int wCut,
 	}
 	
 	double ratio = 0;
-	
-	System.out.println(image1.getHeight() + " " + image1.getWidth());
 	
 	int incrementI = image1.getHeight() / precision;
 	int incrementJ = image1.getWidth() / precision;

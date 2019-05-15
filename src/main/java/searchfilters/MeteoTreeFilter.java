@@ -33,6 +33,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
     public MeteoTreeFilter(TYPEMETEO meteo, Boolean rain) {
 		this.meteo = meteo;
 		this.rain = rain;
+		dates = ma.getListFiltreSummary(meteo);
 	}
 
     /**
@@ -43,7 +44,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 
-		dates = ma.getListFiltreSummary(meteo);
+		
 
 		if (!(node instanceof TaggedTreeNode)) {
 			return false;
@@ -118,6 +119,11 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 				}
 			}
 		}
+	}
+    
+    public String toString() {
+		return "Filtre de Météo";
+
 	}
 
 }

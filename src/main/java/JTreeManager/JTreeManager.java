@@ -1,11 +1,18 @@
 package JTreeManager;
 
+
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import org.apache.commons.io.FilenameUtils;
 import GUI.SliderDemo;
@@ -43,6 +50,7 @@ public class JTreeManager extends JPanel {
 	private ViewerTable table;
 	private Parser parserTag = new Parser();
 	private final Semaphore mutex = new Semaphore(1);
+	private JTextField messageBox;
 
 	private String value = "";
 
@@ -51,7 +59,11 @@ public class JTreeManager extends JPanel {
      */
     public JTreeManager() {
         this.Filtre = new ArrayList<>();
-
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setSize(new Dimension(500,500));
+        this.setPreferredSize(new Dimension(100,100));
+        
+        
 		Properties properties = PropertiesHandler.parseProperties();
 
 		this.rootDirectory = new File(properties.getProperty("imageBankPath"));
@@ -60,11 +72,9 @@ public class JTreeManager extends JPanel {
 		JsonTreeParser parser = new JsonTreeParser();
 
 		if (this.JsonTree.exists()) {
-			System.out.println("le chemin du passer");
 			root = parser.setDirectoryTree(properties.getProperty("JsonBankPath"));
 
 		} else {
-			System.out.println("le chemin du nouveau");
 			parser.createXML(rootDirectory);
 
 			root = parser.setDirectoryTree((new File(properties.getProperty("JsonBankPath")).getAbsolutePath()));
@@ -73,6 +83,8 @@ public class JTreeManager extends JPanel {
 		tree = null;
 
 		tree = new JTree(root);
+		
+		tree.setMinimumSize(new Dimension(100,100));
 
 		tree.addMouseListener(new MouseAdapter() {
 
@@ -104,8 +116,15 @@ public class JTreeManager extends JPanel {
 			}
 
 		});
-
-		this.add(tree);
+		
+		JScrollPane sb = new JScrollPane();
+		sb.setViewportView(tree);
+		sb.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(sb);
+		
+		messageBox = new JTextField();
+		messageBox.setEditable(false);
+		this.add(messageBox);
 
 	}
 
@@ -114,6 +133,8 @@ public class JTreeManager extends JPanel {
      * @param f
      */
     public void addFiltre(final AbstractTreeFilter f) {
+    	
+    	JPanel manager = this;
 
 		Thread thread;
                 thread = new Thread() {
@@ -126,11 +147,26 @@ public class JTreeManager extends JPanel {
                         
                     }
                     
+                    
+                    messageBox.setEditable(true);
+                    messageBox.setText(f.toString() + " is running.");
+                    messageBox.setEditable(false);
+                    
+                    tree.setEnabled(false);
+                    JLabel label = new JLabel();
+                    manager.add(label);
                     Filtre.add(f);
                     f.setTree(tree);
                     f.filtreTree();
                     
+                    tree.setEnabled(true);
+                    
+                    messageBox.setEditable(true);
+                    messageBox.setText("");
+                    messageBox.setEditable(false);
+                    
                     mutex.release();
+                    
                     
                 }
             };
