@@ -56,7 +56,7 @@ public class TreeExample extends JFrame
     	manager.removeFiltre(filtreDate);
     	manager.removeFiltre(filtreDate2);
     	
-    	MeteoTreeFilter meteo = new MeteoTreeFilter(TYPEMETEO.DEGAGE, false);
+    	MeteoTreeFilter meteo = new MeteoTreeFilter(TYPEMETEO.DEGAGE);
     	
     	TemperatureTreeFilter tf = new TemperatureTreeFilter(1. , 2.);
     	

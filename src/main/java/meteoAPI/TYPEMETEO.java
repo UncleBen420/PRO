@@ -24,7 +24,21 @@ public enum TYPEMETEO {
     /**
      *
      */
-    OVERCAST("Overcast");
+    OVERCAST("Overcast"),
+	
+	Rain("Rain"),
+	
+	LightRain("Light Rain"),
+	
+	Snow("Snow"),
+	
+	LightSleet("Light Sleet"),
+	
+	Foggy("Foggy");
+	
+	
+	
+	
 
     private String meteo;
 

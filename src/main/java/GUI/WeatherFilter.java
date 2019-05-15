@@ -27,7 +27,7 @@ import searchfilters.MeteoTreeFilter;
 public class WeatherFilter extends TreeFilter {
 
     private static final long serialVersionUID = -4481484164630682831L;
-    private boolean rainChecked = false;
+    //private boolean rainChecked = false;
 
     /**
      * Constructeur
@@ -51,25 +51,25 @@ public class WeatherFilter extends TreeFilter {
 
         JComboBox<?> weatherCombobox;
         weatherCombobox = new JComboBox<>(weathersString.toArray());
-        JCheckBox rainCheckBox = new JCheckBox("rain");
+       // JCheckBox rainCheckBox = new JCheckBox("rain");
 
-        rainCheckBox.addItemListener((ItemEvent e) -> {
+        /*rainCheckBox.addItemListener((ItemEvent e) -> {
             rainChecked = ItemEvent.SELECTED == e.getStateChange();
-        });
+        });*/
 
         filter.addActionListener((ActionEvent e) -> {
             if (currentFilter != null) {
                 manager.removeFiltre(currentFilter);
             }
             
-            currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())), rainChecked);
+            currentFilter = new MeteoTreeFilter(TYPEMETEO.getTypeByString(String.valueOf(weatherCombobox.getSelectedItem())));
             manager.addFiltre(currentFilter);
         });
 
         label = new JLabel("Weather");
 
         specialistationPanel.add(weatherCombobox);
-        specialistationPanel.add(rainCheckBox);
+        //specialistationPanel.add(rainCheckBox);
 
     }
 }

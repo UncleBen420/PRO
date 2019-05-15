@@ -91,7 +91,7 @@ public class JTreeManager extends JPanel {
                         @Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (e.getClickCount() == 2) {
+				if (e.getClickCount() == 2 && tree.isEnabled()) {
 
 					if (FilenameUtils.getExtension(((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).toString()).equals("jpg")) {
 
@@ -102,7 +102,6 @@ public class JTreeManager extends JPanel {
 							value += "/" + elements[i];
 
 						}
-						
 						slider.addImage(value);
 
 						try {
@@ -189,6 +188,7 @@ public class JTreeManager extends JPanel {
 				}
 				
 				setText(f.toString() + " is deleted");
+				tree.setEnabled(false);
 
 				int i = Filtre.size();
 
@@ -206,6 +206,7 @@ public class JTreeManager extends JPanel {
 
 				}
 				
+				tree.setEnabled(true);
 				releaseText();
 				
 				mutex.release();
@@ -242,27 +243,19 @@ public class JTreeManager extends JPanel {
 	}
     
     private void setText(String text) {
-    	
-    	try {
+
     		messageBox.setEditable(true);
             messageBox.setText(text);
             messageBox.setEditable(false);
-    	}catch(NullPointerException e) {
-    		System.out.println("caca");
-    	}
-    	
+
     	
     }
     
     private void releaseText() {
     	
-    	try {
     	messageBox.setEditable(true);
         messageBox.setText("");
         messageBox.setEditable(false);
-    }catch(NullPointerException e) {
-		System.out.println("caca");
-	}
-    	
+
     }
 }

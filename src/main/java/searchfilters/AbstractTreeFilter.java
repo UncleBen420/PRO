@@ -22,6 +22,8 @@ public abstract class AbstractTreeFilter {
 	private int num = counter;
 	private Stack<OldNodePair> filtredElements = new Stack<OldNodePair>();
 	private JTree tree;
+	private DefaultTreeModel model;
+	private DefaultMutableTreeNode root;
 
     /**
      *
@@ -29,6 +31,7 @@ public abstract class AbstractTreeFilter {
      */
     public AbstractTreeFilter(JTree tree) {
 		this.tree = tree;
+		
 	}
 
     /**
@@ -52,6 +55,8 @@ public abstract class AbstractTreeFilter {
      */
     public void setTree(JTree tree) {
 		this.tree = tree;
+		this.model = (DefaultTreeModel) tree.getModel();
+		root = (DefaultMutableTreeNode) model.getRoot();
 	}
 
     /**
@@ -60,14 +65,13 @@ public abstract class AbstractTreeFilter {
      */
     protected void removeFromTree(DefaultMutableTreeNode node) {
 
-		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-
 		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
 
 		filtredElements.push(new OldNodePair(parent, node, parent.getIndex(node)));
 
 		model.removeNodeFromParent(node);
-		model.reload(node);
+		
+		
 
 	}
 
@@ -75,13 +79,11 @@ public abstract class AbstractTreeFilter {
      *
      */
     public void PopToTree() {
-
-		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-
+    	
 		OldNodePair lastFiltredNode = filtredElements.pop();
 
 		model.insertNodeInto(lastFiltredNode.getChild(), lastFiltredNode.getParent(), lastFiltredNode.getIndex());
-		model.reload(lastFiltredNode.getParent());
+		
 
 	}
 
@@ -89,14 +91,14 @@ public abstract class AbstractTreeFilter {
      *
      */
     public void filtreTree() {
-		
-		final DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
-
+    	
 		if (analyseNode(root)) {
 			removeFromTree(root);
 		} else {
 			filtreNode(root);
 		}
+		model.reload();
+		
 
 	}
 
@@ -127,6 +129,7 @@ public abstract class AbstractTreeFilter {
 		while (!filtredElements.isEmpty()) {
 			PopToTree();
 		}
+		model.reload();
 	}
 
     /**

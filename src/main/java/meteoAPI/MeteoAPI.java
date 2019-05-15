@@ -52,7 +52,7 @@ public class MeteoAPI {
                     meteoPerFiltre.get(counterOfDays).addMeteo("-1");
                 }
                 meteoPerFiltre.get(counterOfDays).addTemperature(day.getTemperature().get(counterOfHours));
-                meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+                //meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
                 ++counterOfHours;
             }
             ++counterOfDays;
@@ -81,7 +81,7 @@ public class MeteoAPI {
                     meteoPerFiltre.get(counterOfDays).addTemperature(99.);
                 }
                 meteoPerFiltre.get(counterOfDays).addMeteo(day.getMeteo().get(counterOfHours));
-                meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+               // meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
                 ++counterOfHours;
             }
             ++counterOfDays;
@@ -99,6 +99,6 @@ public class MeteoAPI {
     private void parseHourObject(MeteoPerDay met, JsonObject hour) {
         met.addMeteo(hour.get("summary").getAsString());
         met.addTemperature(hour.get("temperature").getAsDouble());
-        met.addRain(hour.has("precipType"));
+       // met.addRain(hour.has("precipType"));
     }
 }
