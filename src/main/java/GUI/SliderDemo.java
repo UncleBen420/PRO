@@ -71,7 +71,9 @@ public class SliderDemo extends JPanel
      */
     public SliderDemo() {
         this.parserTag = new Parser();
-        this.imagesPath = new ArrayList<String>();
+        this.imagesPath = new ArrayList<>();
+        this.images = new ImageIcon[0];
+        this.directory = "";
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         delay = 1000 / FPS_INIT;
@@ -80,7 +82,6 @@ public class SliderDemo extends JPanel
         picture = new JLabel();
         picture.setHorizontalAlignment(JLabel.LEFT);
         picture.setAlignmentX(Component.LEFT_ALIGNMENT);
-        //updatePicture(0); //display first frame
 
         //Put everything together.
         add(picture);
@@ -157,19 +158,21 @@ public class SliderDemo extends JPanel
      */
     public void nextPicture() {
 
-        frameNumber = (frameNumber + 1) % (images.length - 1);
-        //Set the image.
-        if (images[frameNumber] != null) {
-            picture.setIcon(images[frameNumber]);
-        } else { //image not found
-            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
-            picture.setIcon(images[frameNumber]);
-        }
+        if(images.length > 0){
+            frameNumber = (frameNumber + 1) % (images.length - 1);
+            //Set the image.
+            if (images[frameNumber] != null) {
+                picture.setIcon(images[frameNumber]);
+            } else { //image not found
+                images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+                picture.setIcon(images[frameNumber]);
+            }
 
-        try {
-            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
-        } catch (IOException ex) {
-            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
+            } catch (IOException ex) {
+                Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -178,22 +181,24 @@ public class SliderDemo extends JPanel
      */
     public void prevPicture() {
 
-        frameNumber--;
-        if (frameNumber < 0) {
-            frameNumber = (images.length - 1);
-        }
-        //Set the image.
-        if (images[frameNumber] != null) {
-            picture.setIcon(images[frameNumber]);
-        } else { //image not found
-            images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
-            picture.setIcon(images[frameNumber]);
-        }
+        if(images.length > 0){
+            frameNumber--;
+            if (frameNumber < 0) {
+                frameNumber = (images.length - 1);
+            }
+            //Set the image.
+            if (images[frameNumber] != null) {
+                picture.setIcon(images[frameNumber]);
+            } else { //image not found
+                images[frameNumber] = createImageIcon(imagesPath.get(frameNumber));
+                picture.setIcon(images[frameNumber]);
+            }
 
-        try {
-            table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
-        } catch (IOException ex) {
-            Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                table.setTags(CsvParser.getTag(parserTag.getTag(imagesPath.get(frameNumber))));
+            } catch (IOException ex) {
+                Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -275,7 +280,10 @@ public class SliderDemo extends JPanel
      * @return chemin de l'image actuelle
      */
     public String getImage() {
-        return imagesPath.get(frameNumber);
+        if(imagesPath.size() > 0){
+            return imagesPath.get(frameNumber);
+        }
+        return null;
     }
 
     /**
@@ -284,6 +292,9 @@ public class SliderDemo extends JPanel
      * @return chemin du dossier de l'image actuelle
      */
     public String getDirectory() {
+        if(directory.equals("")){
+            return null;
+        }
         return directory;
     }
 

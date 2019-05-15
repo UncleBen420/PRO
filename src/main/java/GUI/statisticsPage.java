@@ -42,8 +42,12 @@ import javafx.scene.control.*;
  */
 public class statisticsPage extends JFrame {
     
-    private statParser parser;
-    private StatisticsHandler statHandler = new StatisticsHandler();
+    /**
+	 * 
+	 */
+    private static final long serialVersionUID = -7065620008313888732L;
+    private final statParser parser;
+    private final StatisticsHandler statHandler;
     private String dayConfig = "1";
     private Month monthConfig = Month.values()[0];
  
@@ -51,6 +55,7 @@ public class statisticsPage extends JFrame {
      * Constructeur
      */
     public statisticsPage() {
+        this.statHandler = new StatisticsHandler();
         // Recuperation des donnees du parser
         parser = new statParser(statHandler);
         parser.parseFile();
@@ -68,7 +73,7 @@ public class statisticsPage extends JFrame {
             JFXPanel fxPanel = new JFXPanel();
             
             mainFrame.setAlwaysOnTop(true);
-            mainFrame.add(jScrollPane);
+            mainFrame.add(fxPanel);
             mainFrame.setSize(1900, 1050);
             mainFrame.setVisible(true);
             mainFrame.setResizable(false);
@@ -102,19 +107,19 @@ public class statisticsPage extends JFrame {
         root.getChildren().add(sideInfosGroup);
         
         /*
-         * Creation de la Line Chart par ann�e
+         * Creation de la Line Chart par année
          */
         Group lineChartGroup = createLineChart();
         root.getChildren().add(lineChartGroup);
         
         /*
-         * Creation de la Bar Chart par ann�e
+         * Creation de la Bar Chart par année
          */
         Group barChartGroup = createBarChart();
         root.getChildren().add(barChartGroup);
         
         /*
-        * Creation de la zone de g�n�ration dynamique
+        * Creation de la zone de génération dynamique
         */
         Group dynamGroup = createDynamGroup();
         root.getChildren().add(dynamGroup);
@@ -138,7 +143,8 @@ public class statisticsPage extends JFrame {
         pleaseChooseMonth.setFill(Color.WHITE);
         dynamGroup.getChildren().add(pleaseChooseMonth);
         
-        List<String> monthSelector = new ArrayList<String>();         
+        List<String> monthSelector;         
+        monthSelector = new ArrayList<>();
         for (Month m : Month.values()){
           monthSelector.add(m.getName());
         }
@@ -176,9 +182,9 @@ public class statisticsPage extends JFrame {
         XYChart.Series monthLineSeries = new XYChart.Series();   
         
         Map<Integer, Integer> mapThisMonth = statHandler.getAnimalNbByDayMap(monthConfig); 
-        for (Map.Entry<Integer, Integer> entry : mapThisMonth.entrySet()) {
-           monthLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
+        mapThisMonth.entrySet().forEach((entry) -> {
+            monthLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+        });
         monthLineChart.getData().add(monthLineSeries);
         dynamGroup.getChildren().add(monthLineChart);
 
@@ -202,13 +208,13 @@ public class statisticsPage extends JFrame {
           
          
         Map<Integer, List<Integer>> mapThisMonthByType = statHandler.getAnimalTypeByDayMap(monthConfig); 
-         for (Map.Entry<Integer, List<Integer>> entry : mapThisMonthByType.entrySet()) {
+        mapThisMonthByType.entrySet().forEach((entry) -> {
             List<Integer> list = entry.getValue();
             for (AnimalType animal : AnimalType.values()) {
                 XYChart.Series<String, Number> serie = sbcMonth.getData().get(animal.ordinal());
                 serie.getData().add(new XYChart.Data<>(entry.getKey().toString(), list.get(animal.ordinal())));
             }
-        }
+        });
                
         dynamGroup.getChildren().add(sbcMonth);    
         
@@ -261,9 +267,9 @@ public class statisticsPage extends JFrame {
         XYChart.Series dayLineSeries = new XYChart.Series();   
         
         Map<Integer, Integer> mapThisDay = statHandler.getAnimalNbByHourMap(monthConfig, Integer.parseInt(dayConfig)); 
-        for (Map.Entry<Integer, Integer> entry : mapThisDay.entrySet()) {
-           dayLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
+        mapThisDay.entrySet().forEach((entry) -> {
+            dayLineSeries.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+        });
         dayLineChart.getData().add(dayLineSeries);
         dynamGroup.getChildren().add(dayLineChart);
         
@@ -286,13 +292,13 @@ public class statisticsPage extends JFrame {
         }
            
         Map<Integer, List<Integer>> mapThisDayByType = statHandler.getAnimalTypeByHourMap(monthConfig,Integer.parseInt(dayConfig)); 
-         for (Map.Entry<Integer, List<Integer>> entry : mapThisDayByType.entrySet()) {
+        mapThisDayByType.entrySet().forEach((entry) -> {
             List<Integer> list = entry.getValue();
             for (AnimalType animal : AnimalType.values()) {
                 XYChart.Series<String, Number> serie = sbcDay.getData().get(animal.ordinal());
                 serie.getData().add(new XYChart.Data<>(entry.getKey().toString(), list.get(animal.ordinal())));
             }
-        }
+        });
         dynamGroup.getChildren().add(sbcDay);        
         
         return dynamGroup;
@@ -508,12 +514,9 @@ public class statisticsPage extends JFrame {
     /*
      * Main entry point
      */
-    public void statistics() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                initAndShowGUI();
-            }
+    private void statistics() {
+        SwingUtilities.invokeLater(() -> {
+            initAndShowGUI();
         });
     }
 }
