@@ -498,7 +498,9 @@ public class crapau extends javax.swing.JFrame {
 
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         // TODO add your handling code here:
-        tagManager.saveTags(viewerTable.getData(), sliderDemo1.getImage());
+        if(sliderDemo1.getImage() != null){
+            tagManager.saveTags(viewerTable.getData(), sliderDemo1.getImage());
+        }
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void prev_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prev_buttonActionPerformed
@@ -521,7 +523,9 @@ public class crapau extends javax.swing.JFrame {
 
     private void save_button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_button1MouseClicked
         // TODO add your handling code here:
-        tagManager.saveTags(viewerTable.getData(), sliderDemo1.getDirectory());
+        if(sliderDemo1.getDirectory() != null){
+            tagManager.saveTags(viewerTable.getData(), sliderDemo1.getDirectory());
+        }
     }//GEN-LAST:event_save_button1MouseClicked
 
    /**
