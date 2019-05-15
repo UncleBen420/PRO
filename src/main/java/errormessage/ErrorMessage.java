@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class ErrorMessage {
 
-	private JDialog dialog;
+	private JFrame dialog;
 	private JProgressBar progressBar;
 
     public void doJob(int max, String message) {
@@ -28,16 +28,17 @@ public class ErrorMessage {
         panel.add(progressBar, BorderLayout.CENTER);
         panel.setBorder(BorderFactory.createEmptyBorder(11, 11, 11, 11));
 
-        dialog = new JDialog();
+        dialog = new JFrame();
         dialog.getContentPane().add(panel);
         dialog.setResizable(false);
         dialog.pack();
         dialog.setSize(500, dialog.getHeight());
         dialog.setLocationRelativeTo(null);
-        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         dialog.setAlwaysOnTop(false);
         dialog.setVisible(true);
         msgLabel.setBackground(panel.getBackground());
+        System.out.println("ssse");
 
     }
     

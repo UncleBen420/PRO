@@ -51,7 +51,6 @@ public class DateTreeFilter extends AbstractTreeFilter {
 			}
 			
 			if(startDate.compareTo(nodeDate) <= 0 && endDate.compareTo(nodeDate) >= 0) {
-				System.out.println("trouver");
 				return false;
 			}else {
 				return true;

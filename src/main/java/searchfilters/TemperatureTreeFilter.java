@@ -30,6 +30,7 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
     public TemperatureTreeFilter(double tempMin, double tempMax) {
 		this.tempMin = tempMin;
 		this.tempMax = tempMax;	
+		dates = ma.getListFiltreTemperature(tempMin, tempMax);
 	}
 
     /**
@@ -40,7 +41,7 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 
-		dates = ma.getListFiltreTemperature(tempMin, tempMax);
+		
 
 		if (!(node instanceof TaggedTreeNode)) {
 			return false;
@@ -60,7 +61,10 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 			boolean noDateFound = true;
 
 			for (MeteoPerDay date : dates) {
+				
 				if (nodeDate.compareTo(date.getDate()) == 0) {
+					
+					date.setProper();
 
 					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0);
 
@@ -72,10 +76,14 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 
 							removeFromTree((TaggedTreeNode) hours.getChildAt(i));
 							i--;
+							
+							
 
 						}else {
 							noDateFound = false;
 						}
+						
+						
 					}
 
 				}

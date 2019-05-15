@@ -12,7 +12,7 @@ public class MeteoPerDay {
     private Date date;
     private List<String> Meteo = new ArrayList<>();
     private List<Double> Temperature = new ArrayList<>();
-    private List<Boolean> rain = new ArrayList<>();
+  //  private List<Boolean> rain = new ArrayList<>();
 
     /**
      * @param date
@@ -72,14 +72,24 @@ public class MeteoPerDay {
     /**
      * @return
      */
-    public List<Boolean> getRainInfo() {
+   /* public List<Boolean> getRainInfo() {
         return rain;
-    }
+    }*/
 
     /**
      * @param rainInfo
      */
-    public void addRain(Boolean rainInfo) {
+   /* public void addRain(Boolean rainInfo) {
         rain.add(rainInfo);
+    }*/
+    
+    public void setProper() {
+    	for(int i = Meteo.size(); i < 24; i++) {
+    		Meteo.add("-1");
+    	}
+    	
+    	for(int i = Temperature.size(); i < 24; i++) {
+    		Temperature.add(99.);
+    	}
     }
 }

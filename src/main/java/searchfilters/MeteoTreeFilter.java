@@ -22,7 +22,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	private TYPEMETEO meteo;
 	private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	private List<MeteoPerDay> dates;
-	private Boolean rain;
+	//private Boolean rain;
 	private MeteoAPI ma = new MeteoAPI();
 
     /**
@@ -30,9 +30,9 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
      * @param meteo
      * @param rain
      */
-    public MeteoTreeFilter(TYPEMETEO meteo, Boolean rain) {
+    public MeteoTreeFilter(TYPEMETEO meteo) {
 		this.meteo = meteo;
-		this.rain = rain;
+		//this.rain = rain;
 		dates = ma.getListFiltreSummary(meteo);
 	}
 
@@ -64,7 +64,10 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 			boolean noDateFound = true;
 
 			for (MeteoPerDay date : dates) {
+				
 				if (nodeDate.compareTo(date.getDate()) == 0) {
+					
+					date.setProper();
 
 					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0);
 
@@ -73,7 +76,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 
 						if (((TaggedTreeNode) hours.getChildAt(i)).getTag().equals("Hour")
 								&& !(date.getMeteo().get(Integer.parseInt(hours.getChildAt(i).toString()))
-										.equals(meteo.toString()) && rain == date.getRainInfo().get(i))) {
+										.equals(meteo.toString()))) {
 
 							removeFromTree((TaggedTreeNode) hours.getChildAt(i));
 							i--;
