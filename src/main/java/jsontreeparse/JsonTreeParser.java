@@ -36,7 +36,7 @@ import properties.PropertiesHandler;
 public class JsonTreeParser {
 	
 	private String[] hierarchyTag;
-	private Parser p = new Parser();;
+	private Parser p = new Parser();
 	
     /**
      *
@@ -90,7 +90,8 @@ public class JsonTreeParser {
 						    ExecutorService es = Executors.newSingleThreadExecutor();
 						    Future<JsonArray> result = es.submit(new Callable<JsonArray>() {
 						    	
-						        public JsonArray call() throws Exception {
+						        @Override
+								public JsonArray call() throws Exception {
 						        	JsonArray dirArray = new JsonArray();
 						        	JsonObject temp = new JsonObject();
 						        						       						 

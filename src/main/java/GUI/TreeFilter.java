@@ -62,7 +62,7 @@ abstract public class TreeFilter extends JPanel {
         panelButton.add(delete, BorderLayout.CENTER);
         
         panel.add(panelButton);
-        panel.setPreferredSize(new Dimension(100, 60));
+        panel.setPreferredSize(new Dimension(100, 80));
         this.setLayout(new BorderLayout());
         label.setFont(new Font(label.getText(), Font.BOLD, 12));
         this.add(label,BorderLayout.NORTH);

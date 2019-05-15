@@ -148,9 +148,7 @@ public class JTreeManager extends JPanel {
                     }
                     
                     
-                    messageBox.setEditable(true);
-                    messageBox.setText(f.toString() + " is running.");
-                    messageBox.setEditable(false);
+                    setText(f.toString() + " is running.");
                     
                     tree.setEnabled(false);
                     JLabel label = new JLabel();
@@ -161,9 +159,7 @@ public class JTreeManager extends JPanel {
                     
                     tree.setEnabled(true);
                     
-                    messageBox.setEditable(true);
-                    messageBox.setText("");
-                    messageBox.setEditable(false);
+                    releaseText();
                     
                     mutex.release();
                     
@@ -191,6 +187,8 @@ public class JTreeManager extends JPanel {
                                     // TODO Auto-generated catch block
 
 				}
+				
+				setText(f.toString() + " is deleted");
 
 				int i = Filtre.size();
 
@@ -207,6 +205,8 @@ public class JTreeManager extends JPanel {
 					Filtre.get(i).filtreTree();
 
 				}
+				
+				releaseText();
 				
 				mutex.release();
 
@@ -240,4 +240,29 @@ public class JTreeManager extends JPanel {
     public void setTable(ViewerTable t) {
 		table = t;
 	}
+    
+    private void setText(String text) {
+    	
+    	try {
+    		messageBox.setEditable(true);
+            messageBox.setText(text);
+            messageBox.setEditable(false);
+    	}catch(NullPointerException e) {
+    		System.out.println("caca");
+    	}
+    	
+    	
+    }
+    
+    private void releaseText() {
+    	
+    	try {
+    	messageBox.setEditable(true);
+        messageBox.setText("");
+        messageBox.setEditable(false);
+    }catch(NullPointerException e) {
+		System.out.println("caca");
+	}
+    	
+    }
 }

@@ -7,6 +7,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,9 @@ public class ChangeFilter extends TreeFilter {
     	
     	JPanel sliders = new JPanel();
         JSlider sliderPrecision = new JSlider(10,100);
+        sliderPrecision.setPreferredSize(new Dimension(200,20));
         JSlider sliderTolerance = new JSlider(0,100);
+        sliderTolerance.setPreferredSize(new Dimension(200,20));
         sliders.setLayout(new BorderLayout());
         sliders.add(sliderPrecision, BorderLayout.NORTH);
         sliders.add(sliderTolerance, BorderLayout.CENTER);
