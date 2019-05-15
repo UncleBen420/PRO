@@ -221,7 +221,8 @@ public class Parser {
      */
     public ArrayList<String> getTag(String path) throws IOException {
 
-        ArrayList<String> tags = new ArrayList<String>();
+        ArrayList<String> tags;
+        tags = new ArrayList<>();
 
         File file = new File(path);
 

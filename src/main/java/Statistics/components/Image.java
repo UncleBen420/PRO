@@ -20,6 +20,8 @@ public class Image {
     private String date;                // xxxx-xx-xx form
     private String sequence;            // hh:mm form 
     private Month month;
+    private int day;
+    private int hour;
     private final ArrayList<Tag> tags;  // Tags saved in this image
 
     private static String[] splitPath(String pathString) {
@@ -42,6 +44,8 @@ public class Image {
             this.sequence = path_sep[0] + "/" + path_sep[1] + "/" + path_sep[4] + ":" + path_sep[5];
             String[] dateParts = date.split("-");
             this.month = Month.values()[Integer.parseInt(dateParts[1])-1];
+            this.day = Integer.parseInt(dateParts[2]);
+            this.hour = Integer.parseInt(path_sep[4]);
 
         } catch (Exception e) {
             System.out.println("Error: not valid path");
@@ -66,6 +70,14 @@ public class Image {
 
     public Month getMonth() {
         return this.month;
+    }
+
+    public int getDay() {
+        return this.day;
+    }
+    
+    public int getHour() {
+        return this.hour;
     }
 
     @Override

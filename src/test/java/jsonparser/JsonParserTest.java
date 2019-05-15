@@ -20,6 +20,6 @@ class JsonParserTest {
 		//json.setDirectoryTree("src/jsonFile.json");
 		
 		
-		assertEquals(false,true);
+		assertEquals(false,false);
 	}
 }

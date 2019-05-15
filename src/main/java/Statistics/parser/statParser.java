@@ -13,6 +13,7 @@ import com.google.gson.*;
 import java.util.ArrayList;
 
 import Statistics.components.Image;
+import Statistics.components.Month;
 import Statistics.components.Tag;
 
 /**
@@ -63,10 +64,17 @@ public class statParser {
            statHandler.countDaysObservation(imageStructure.getDate(), tagsStructure.size());
            statHandler.countSequenceObservation(imageStructure.getSequence(), tagsStructure.size());
            statHandler.countMonthlyObservation(imageStructure.getMonth(), tagsStructure.size());
+           statHandler.countDailyObservation(imageStructure.getMonth(), imageStructure.getDay(), tagsStructure.size());
+           statHandler.countHourlyObservation(imageStructure.getMonth(), imageStructure.getDay(), imageStructure.getHour(), tagsStructure.size());
+
            statHandler.addNbAnimals(tagsStructure.size());
-           for (Tag tag : tagsStructure){      
+           
+           for (Tag tag : tagsStructure){   
+                     
                statHandler.countMonthlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth());
-               statHandler.countAnimalType(tag.getAnimalType());
+               statHandler.countDailyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(), imageStructure.getDay());
+               statHandler.countHourlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(),imageStructure.getDay(), imageStructure.getHour());
+               statHandler.countTotalObservationsByAnimalType(tag.getAnimalType());
            }
            statHandler.addImage(imageStructure);
         }
