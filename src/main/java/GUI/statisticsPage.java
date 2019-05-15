@@ -139,8 +139,8 @@ public class statisticsPage extends JFrame {
         monthLineChart.setLegendVisible(false);  
         
         /* BAR CHART MOIS */
-        final CategoryAxis xAxisBarMonth = new CategoryAxis();
-        final NumberAxis yAxisBarMonth = new NumberAxis(0,statHandler.getTaggedAnimals(),10);
+        CategoryAxis xAxisBarMonth = new CategoryAxis();
+        NumberAxis yAxisBarMonth = new NumberAxis(0,statHandler.getTaggedAnimals(),10);
         StackedBarChart<String, Number> sbcMonth = new StackedBarChart<>(xAxisBarMonth, yAxisBarMonth);
         sbcMonth.setPrefHeight(300);
         sbcMonth.setPrefWidth(600);
@@ -216,7 +216,6 @@ public class statisticsPage extends JFrame {
         populateDayLineChart(dayLineChart);
         populateDayBarChart(sbcDay);
         
-        
         // Evenements suite aux choix
         monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
             ChangeListener<Number>() {
@@ -227,6 +226,17 @@ public class statisticsPage extends JFrame {
                 monthConfig = Month.values()[new_value.intValue()];
                 monthLineChart.getData().clear();
                 sbcMonth.getData().clear();
+                // Mise a jour des axes du line chart mois
+                xAxisLineMonth.setLowerBound(1);
+                xAxisLineMonth.setUpperBound(monthConfig.getNbDays());
+                xAxisLineMonth.setTickUnit(1);
+                yAxisLineMonth.setLowerBound(0);
+                yAxisLineMonth.setUpperBound(statHandler.getTaggedAnimals());
+                yAxisLineMonth.setTickUnit(10);
+                // Mise a jour de l'axe de la bar chart mois
+                yAxisBarMonth.setLowerBound(0);
+                yAxisBarMonth.setUpperBound(statHandler.getTaggedAnimals());
+                yAxisBarMonth.setTickUnit(10);
                 /* Peuplage des graphiques mois */
                 monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
                 populateMonthLineChart(monthLineChart);
