@@ -159,8 +159,8 @@ public class statisticsPage extends JFrame {
         dayLineChart.setLegendVisible(false);
         
         /* BAR CHART JOUR */        
-        final CategoryAxis xAxisBarDay = new CategoryAxis();
-        final NumberAxis yAxisBarDay = new NumberAxis();
+        CategoryAxis xAxisBarDay = new CategoryAxis();
+        NumberAxis yAxisBarDay = new NumberAxis();
         StackedBarChart<String, Number> sbcDay = new StackedBarChart<>(xAxisBarDay, yAxisBarDay);
         sbcDay.setPrefHeight(300);
         sbcDay.setPrefWidth(600);
@@ -208,6 +208,7 @@ public class statisticsPage extends JFrame {
         
         /** PARAMETRES PAR DEFAUT **/
         /* Peuplage des graphiques mois */
+        //xAxisBarMonth.setCategories(FXCollections.observableArrayList(daySelector));
         monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         populateMonthLineChart(monthLineChart);
         populateMonthBarChart(sbcMonth);
@@ -224,6 +225,13 @@ public class statisticsPage extends JFrame {
                     Number new_value) {
                 // Enregistrement du choix
                 monthConfig = Month.values()[new_value.intValue()];
+                // Update des numeros disponibles pour le choix du jour
+                daySelector.clear();
+                for (int day = 1; day <= monthConfig.getNbDays(); day++){
+                  daySelector.add(Integer.toString(day));
+                }
+                dayBox.setItems(FXCollections.observableArrayList(daySelector));
+                dayBox.getSelectionModel().selectFirst();
                 monthLineChart.getData().clear();
                 sbcMonth.getData().clear();
                 // Mise a jour des axes du line chart mois
@@ -233,7 +241,7 @@ public class statisticsPage extends JFrame {
                 yAxisLineMonth.setLowerBound(0);
                 yAxisLineMonth.setUpperBound(statHandler.getTaggedAnimals());
                 yAxisLineMonth.setTickUnit(10);
-                // Mise a jour de l'axe de la bar chart mois
+                // Mise a jour des axes de la bar chart mois
                 yAxisBarMonth.setLowerBound(0);
                 yAxisBarMonth.setUpperBound(statHandler.getTaggedAnimals());
                 yAxisBarMonth.setTickUnit(10);
@@ -241,14 +249,6 @@ public class statisticsPage extends JFrame {
                 monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
                 populateMonthLineChart(monthLineChart);
                 populateMonthBarChart(sbcMonth);
-                
-                // Update des numeros disponibles pour le choix du jour
-                daySelector.clear();
-                for (int day = 1; day <= monthConfig.getNbDays(); day++){
-                  daySelector.add(Integer.toString(day));
-                }
-                dayBox.setItems(FXCollections.observableArrayList(daySelector));
-                dayBox.getSelectionModel().selectFirst();
                 
                 /* Peuplage des graphiques jour avec 1er jour du mois */
                 dayConfig = "1";
