@@ -1,25 +1,28 @@
 package jsontreeparse;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
-
 import org.apache.commons.io.FilenameUtils;
 import com.google.gson.*;
-
 import JTreeManager.TaggedTreeNode;
-import errormessage.ErrorMessage;
+import Tag.CsvParser;
+import Tag.Parser;
+import Tag.TagHistory;
+import exceptionHandler.LogFileWritingHandler;
 import properties.PropertiesHandler;
 
 /**
@@ -27,62 +30,47 @@ import properties.PropertiesHandler;
  * @author gaetan
  */
 public class JsonTreeParser {
-	
+
 	private String[] hierarchyTag;
-	
-    /**
-     *
-     */
-    public void parseHierarchyTag(){
-		
-			Properties properties = PropertiesHandler.parseProperties();
-			hierarchyTag = ((String)properties.get("hierarchyTag")).split("/");		
+	private Parser p = new Parser();
+
+	/**
+	 *
+	 */
+	public void parseHierarchyTag() {
+
+		Properties properties = PropertiesHandler.parseProperties();
+		hierarchyTag = ((String) properties.get("hierarchyTag")).split("/");
 	}
 
-    /**
-     *
-     * @param rootDirectory
-     */
-    public void createXML(File rootDirectory) {
+	/**
+	 *
+	 * @param rootDirectory
+	 */
+	public void createXML(File rootDirectory) {
 		try {
-			
+
 			int i = 0;
 			parseHierarchyTag();
 			Properties properties = PropertiesHandler.parseProperties();
-			
-			
-			
-			Thread thread;
-            thread = new Thread() {
-            @Override
-            public void run() {
-                
-            	JOptionPane.showMessageDialog(null,"ImageTree.json not found, the application is trying to build one.\nit will take some time!");
-            	
 
-            }
-        };
-
-	thread.start();
-
-	
-			System.out.println("startparsing");
-			FileWriter file = new FileWriter((new File(properties.getProperty("JsonBankPath")).getAbsolutePath()));
+			BufferedWriter file = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(new File(properties.getProperty("JsonBankPath")).getAbsolutePath()),
+					StandardCharsets.UTF_16));
 			JsonArray tree;
 			JsonObject temp = new JsonObject();
 			try {
-				
-				tree = setXML(rootDirectory,i);
-				
+
+				tree = setXML(rootDirectory, i);
+
 				temp.add("root", tree);
-				
+
 			} catch (ArrayIndexOutOfBoundsException e) {
 				FileWriter error = new FileWriter("Error.txt");
 				error.write(e.toString());
-				error.flush();	
+				error.flush();
 				error.close();
 			}
-			
 
 			file.write(temp.toString());
 			file.flush();
@@ -94,14 +82,14 @@ public class JsonTreeParser {
 
 	}
 
-    /**
-     *
-     * @param rootDirectory
-     * @param i
-     * @return
-     * @throws ArrayIndexOutOfBoundsException
-     */
-    public JsonArray setXML(File rootDirectory, int i) throws ArrayIndexOutOfBoundsException {
+	/**
+	 *
+	 * @param rootDirectory
+	 * @param i
+	 * @return
+	 * @throws ArrayIndexOutOfBoundsException
+	 */
+	public JsonArray setXML(File rootDirectory, int i) throws ArrayIndexOutOfBoundsException {
 
 		if (rootDirectory.isDirectory()) {
 
@@ -110,7 +98,7 @@ public class JsonTreeParser {
 			File[] childrenDir = rootDirectory.listFiles();
 			if (childrenDir != null) {
 				Arrays.sort(childrenDir);
-				
+
 				for (File child : childrenDir) {
 
 					if (child.isDirectory()) {
@@ -118,13 +106,22 @@ public class JsonTreeParser {
 						JsonObject temp = new JsonObject();
 						temp.addProperty("name", child.getName());
 						temp.addProperty("tag", hierarchyTag[i]);
-						temp.add("nextDir", setXML(child,i+1));
+						temp.add("nextDir", setXML(child, i + 1));
 						dirArray.add(temp);
 
 					} else {
 
 						if (FilenameUtils.getExtension(child.getName()).equals("jpg")) {
+/*
+							try {
+								ArrayList<ArrayList<String>> arraytemp = CsvParser.getTag(p.getTag(child.getAbsolutePath()));
+								TagHistory.saveTag(arraytemp, child.getAbsolutePath());
 
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+*/
 							JsonObject temp = new JsonObject();
 							temp.addProperty("nameImage", child.getName());
 							temp.addProperty("tag", "Image");
@@ -143,32 +140,24 @@ public class JsonTreeParser {
 
 	}
 
-    /**
-     *
-     * @param path
-     * @return
-     */
-    public DefaultMutableTreeNode setDirectoryTree(String path) {
+	/**
+	 *
+	 * @param path
+	 * @return
+	 */
+	public DefaultMutableTreeNode setDirectoryTree(String path) {
 
 		JsonParser jsonParser = new JsonParser();
 
 		try {
 
-			InputStreamReader reader = null;
-			try {
-				reader = new InputStreamReader(new FileInputStream(path),"utf-8" );
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_16));
 
-			// lecture du fichier
-			Object obj;
+			Object obj = jsonParser.parse(reader);
 
-			obj = jsonParser.parse(reader);
-
-			JsonObject personne = (JsonObject) obj;
-			JsonArray dirArray = (JsonArray) personne.get("root");
+			JsonObject jsonRoot = (JsonObject) obj;
+			JsonArray dirArray = (JsonArray) jsonRoot.get("root");
 			TaggedTreeNode temp = new TaggedTreeNode("Dossier racine");
 			createTree(dirArray, temp);
 
@@ -176,46 +165,54 @@ public class JsonTreeParser {
 
 		} catch (JsonParseException e) {
 
-			JOptionPane.showMessageDialog(null,"The hierarchy json file cannot be open correctly");
-			
+			JOptionPane.showMessageDialog(null, "The hierarchy json file cannot be open correctly");
+			LogFileWritingHandler.handleException(e.getMessage(), e.getStackTrace());
+
 		} catch (FileNotFoundException e) {
 
-			JOptionPane.showMessageDialog(null,"The hierarchy json file cannot be open found.\nCheck the conf.properties");
+			JOptionPane.showMessageDialog(null,	"The hierarchy json file cannot be open/found.\nCheck the conf.properties");
+			LogFileWritingHandler.handleException(e.getMessage(), e.getStackTrace());
 		} catch (NullPointerException e) {
 
-			JOptionPane.showMessageDialog(null,"The arborescence of the file cannot be create.\nCheck the hierarchy json file integrity or check the conf.properties");
-			
-		}
-		
+			JOptionPane.showMessageDialog(null,
+					"The arborescence of the file cannot be create.\nCheck the hierarchy json file integrity or check the conf.properties");
+			LogFileWritingHandler.handleException(e.getMessage(), e.getStackTrace());
+		} catch (ClassCastException e) {
+
+			JOptionPane.showMessageDialog(null, "The hierarchy json file cannot be open correctly");
+			LogFileWritingHandler.handleException(e.getMessage(), e.getStackTrace());
+		} 
 
 		return null;
 
 	}
 
-    /**
-     *
-     * @param a
-     * @param d
-     */
-    public void createTree(JsonArray a, TaggedTreeNode d) {
+	/**
+	 *
+	 * @param a
+	 * @param d
+	 */
+	public void createTree(JsonArray a, TaggedTreeNode d) {
 
 		if (a.size() > 0)
 			for (JsonElement child : a) {
 
 				if (!child.isJsonNull() && ((JsonObject) child).has("nameImage")) {
 
-					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("nameImage").getAsString(),((JsonObject) child).get("tag").getAsString());
+					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("nameImage").getAsString(),
+							((JsonObject) child).get("tag").getAsString());
 					d.add(temp);
 
 				} else if (!child.isJsonNull()) {
 
-					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("name").getAsString(),((JsonObject) child).get("tag").getAsString());
+					TaggedTreeNode temp = new TaggedTreeNode(((JsonObject) child).get("name").getAsString(),
+							((JsonObject) child).get("tag").getAsString());
 					d.add(temp);
 					createTree((JsonArray) ((JsonObject) child).get("nextDir"), temp);
 				}
 
-				}
-
-		}
+			}
 
 	}
+
+}
