@@ -204,6 +204,6 @@ public class TagHistory {
      * @return chemin relatif
      */
     static private String getRelativePath(String path) {
-        return path.substring(path.indexOf("Camera", 0));
+        return path.substring(path.indexOf("Caméra", 0));
     }
 }

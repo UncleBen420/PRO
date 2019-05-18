@@ -25,9 +25,16 @@ public class CsvParser {
     static public ArrayList<ArrayList<String>> getTag(ArrayList<String> tags) {
         ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
 
+        
+        
         for (String str : tags) {
-            String[] splits = str.split(";");
-            result.add(new ArrayList<String>(Arrays.asList(splits)));
+        	
+        	if(str.equals("")) {
+        		result.add(new ArrayList<String>());
+            }else {
+            	String[] splits = str.split(";");
+            	result.add(new ArrayList<String>(Arrays.asList(splits)));
+            }
         }
 
         return result;

@@ -32,13 +32,12 @@ import javax.swing.tree.TreeNode;
 
 /**
  *
- * @author gaetan
+ * @author Groupe PRO B-9
+ * Cette classe est une extention d'un jPanel
+ * Elle englobe un jtree qu'elle gère et met a jour quand des filtre sur ce jTree on été créer
  */
 public class JTreeManager extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 774488936584418358L;
 	private final List<AbstractTreeFilter> Filtre;
 	private DefaultMutableTreeNode root;
@@ -51,25 +50,27 @@ public class JTreeManager extends JPanel {
 	private final Semaphore mutex = new Semaphore(1);
 	private JTextField messageBox;
 	private Boolean flagFilter = false;
-	private String value = "";
 	JPanel waitingPanel = null;
 
 	/**
-	 *
+	 * Constructeur du JtreeManager
 	 */
 	public JTreeManager() {
+		
 		this.Filtre = new ArrayList<>();
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setSize(new Dimension(500, 500));
 		this.setPreferredSize(new Dimension(100, 100));
 
+		// charge les emplacement des dossiers des image et du fichier json des images
 		Properties properties = PropertiesHandler.parseProperties();
-
 		this.rootDirectory = new File(properties.getProperty("imageBankPath"));
 		this.JsonTree = new File(properties.getProperty("JsonBankPath"));
 
 		JsonTreeParser parser = new JsonTreeParser();
 
+		// si un fichier json de l'arborescence existe, il va le prendre sinon il va en créer un
 		if (this.JsonTree.exists()) {
 
 			root = parser.setDirectoryTree(properties.getProperty("JsonBankPath"));
@@ -78,14 +79,19 @@ public class JTreeManager extends JPanel {
 
 		} else {
 
-			JTreeManager manager = this;
+			// averti l'utilisateur que le fichier n'a pas pu etre trouvé, il demande aussi si il veut charger le fichier history
+			int reply = JOptionPane.showConfirmDialog(null, "The program cannot with the json Directory tree file,\nIt start parsing a new one.\nWould you like to parse a new history.json file ?", "CrapauducViewer can't find json file", JOptionPane.YES_NO_OPTION);
 
+			showWaiting();
+			
+			// cree une nouvelle thread qui se charge de parser les dossiers
+			JTreeManager manager = this;
 			Thread thread;
 			thread = new Thread() {
 				@Override
 				public void run() {
 
-					parser.createXML(rootDirectory);
+					parser.createJson(rootDirectory,reply);
 					root = parser
 							.setDirectoryTree((new File(properties.getProperty("JsonBankPath")).getAbsolutePath()));
 					manager.showTree();
@@ -96,21 +102,21 @@ public class JTreeManager extends JPanel {
 
 			thread.start();
 
-			showWaiting();
-
 		}
 	}
 
 	/**
 	 *
-	 * @param f
+	 * @param f filtre étant ajouter au manager
 	 */
 	public void addFiltre(final AbstractTreeFilter f) {
 
+		// si le jtree n'est pas encore setté, le filtre n'est pas ajouté
 		if (!flagFilter) {
 			return;
 		}
 
+		// on crée une thread qui se charge de filtrer le jtree
 		Thread thread;
 		thread = new Thread() {
 			@Override
@@ -145,7 +151,7 @@ public class JTreeManager extends JPanel {
 
 	/**
 	 *
-	 * @param f
+	 * @param f le filtre devant etre enlever
 	 */
 	public void removeFiltre(final AbstractTreeFilter f) {
 
@@ -166,9 +172,10 @@ public class JTreeManager extends JPanel {
 
 				setText(f.toString() + " is deleted");
 				tree.setEnabled(false);
+				
+				// pour eviter un phenomène de perte de noeud de l'arbre, on enlève tous les filtre après celui devant etre enlevé puis on les remets
 
 				int i = Filtre.size();
-
 				for (i--; i >= Filtre.indexOf(f); i--) {
 
 					Filtre.get(i).unfiltreTree();
@@ -194,18 +201,10 @@ public class JTreeManager extends JPanel {
 		thread.start();
 
 	}
-
+	
 	/**
 	 *
-	 * @return
-	 */
-	public String getValue() {
-		return value;
-	}
-
-	/**
-	 *
-	 * @param s
+	 * @param s slider qui va etre ajouter
 	 */
 	public void setSlider(SliderDemo s) {
 		slider = s;
@@ -213,12 +212,17 @@ public class JTreeManager extends JPanel {
 
 	/**
 	 *
-	 * @param t
+	 * @param t qui va etre ajouter
 	 */
 	public void setTable(ViewerTable t) {
 		table = t;
 	}
 
+	/**
+	 * le JTreeManager contient un text qui permet d'afficher des informations
+	 * cette methode permet d'ajouter le texte qui va etre montré 
+	 * @param text qui va etre montré
+	 */
 	private void setText(String text) {
 
 		messageBox.setEditable(true);
@@ -227,6 +231,10 @@ public class JTreeManager extends JPanel {
 
 	}
 
+	
+	/**
+	 * Permet de clear le label
+	 */
 	private void releaseText() {
 
 		messageBox.setEditable(true);
@@ -235,6 +243,9 @@ public class JTreeManager extends JPanel {
 
 	}
 
+	/**
+	 * affiche le tree
+	 */
 	private void showTree() {
 
 		if (waitingPanel != null) {
@@ -259,7 +270,7 @@ public class JTreeManager extends JPanel {
 							.getExtension(((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).toString())
 							.equals("jpg")) {
 
-						value = rootDirectory.getAbsolutePath();
+						String value = rootDirectory.getAbsolutePath();
 
 						TreeNode[] elements = ((DefaultMutableTreeNode) tree.getLastSelectedPathComponent()).getPath();
 						for (int i = 1, n = elements.length; i < n; i++) {
@@ -291,6 +302,9 @@ public class JTreeManager extends JPanel {
 		this.repaint();
 	}
 
+	/**
+	 * affiche une bar de progression d'attente
+	 */
 	private void showWaiting() {
 
 		waitingPanel = new JPanel();
@@ -298,13 +312,11 @@ public class JTreeManager extends JPanel {
 		waitingPanel.setLayout(new BoxLayout(waitingPanel, BoxLayout.Y_AXIS));
 
 		messageBox = new JTextField();
-		JOptionPane.showMessageDialog(null,
-				"The program cannot with the json Directory tree file,\nIt start parsing a new one please wait a few minutes");
 
 		messageBox.setEditable(false);
 		JProgressBar pb = new JProgressBar();
 		pb.setIndeterminate(true);
-
+		
 		waitingPanel.add(messageBox, BorderLayout.SOUTH);
 		waitingPanel.add(pb, BorderLayout.SOUTH);
 
