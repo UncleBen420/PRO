@@ -9,12 +9,18 @@ import java.util.List;
 import com.google.gson.*;
 
 /**
- * @author gaetan
+ * Class MeteoAPI parser de fichier Json, elle parcourt toutes les dates des images, récupère les informations
+ * nécessaire afin de créer des objets représentant les différentes données voulues (MeteoPerDay).
  */
 public class MeteoAPI {
 
-    private List<MeteoPerDay> list = new ArrayList<>();
+    private List<MeteoPerDay> listMeteoPerDay = new ArrayList<>();
 
+    /**
+     * Methode récupérant tout les informations météo fournies par l'API
+     *
+     * @return listMeteoPerDay
+     */
     public List<MeteoPerDay> getList() {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader("src/meteo.json")) {
@@ -28,77 +34,97 @@ public class MeteoAPI {
         } catch (JsonParseException e) {
             e.printStackTrace();
         }
-        return list;
+        return listMeteoPerDay;
     }
 
+    /**
+     * Methode récupérant tout les informations météo fournies par l'API en lui appliquant un filtre
+     * avec une condition météorologique
+     *
+     * @return listMeteoPerDay
+     */
     public List<MeteoPerDay> getListFiltreSummary(TYPEMETEO filtre) {
         boolean firstMeasureOfMeteo;
         int counterOfDays = 0;
         int counterOfHours;
-        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
-        List<MeteoPerDay> meteoProjet = getList();
+        List<MeteoPerDay> listDatesPerFiltre = new ArrayList<>();
+        List<MeteoPerDay> listAllDates = getList();
 
-        for (MeteoPerDay day : meteoProjet) {
+        for (MeteoPerDay day : listAllDates) {
             counterOfHours = 0;
             firstMeasureOfMeteo = true;
             for (String s : day.getMeteo()) {
                 if (firstMeasureOfMeteo) {
-                    meteoPerFiltre.add(new MeteoPerDay(day.getDate()));
+                    listDatesPerFiltre.add(new MeteoPerDay(day.getDate()));
                     firstMeasureOfMeteo = false;
                 }
                 if (s.equals(filtre.toString())) {
-                    meteoPerFiltre.get(counterOfDays).addMeteo(s);
+                    listDatesPerFiltre.get(counterOfDays).addMeteo(s);
                 } else {
-                    meteoPerFiltre.get(counterOfDays).addMeteo("-1");
+                    listDatesPerFiltre.get(counterOfDays).addMeteo("-1");
                 }
-                meteoPerFiltre.get(counterOfDays).addTemperature(day.getTemperature().get(counterOfHours));
-                //meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+                listDatesPerFiltre.get(counterOfDays).addTemperature(day.getTemperature().get(counterOfHours));
                 ++counterOfHours;
             }
             ++counterOfDays;
         }
-        return meteoPerFiltre;
+        return listDatesPerFiltre;
     }
 
+    /**
+     * Methode récupérant tout les informations météo fournies par l'API en lui appliquant un filtre
+     * avec des températures
+     *
+     * @return listMeteoPerDay
+     */
     public List<MeteoPerDay> getListFiltreTemperature(double min, double max) {
         boolean firstMeasureOfTemperature;
         int counterOfDays = 0;
         int counterOfHours;
-        List<MeteoPerDay> meteoPerFiltre = new ArrayList<>();
-        List<MeteoPerDay> meteoProjet = getList();
+        List<MeteoPerDay> listMeteoPerDay = new ArrayList<>();
+        List<MeteoPerDay> listAllDates = getList();
 
-        for (MeteoPerDay day : meteoProjet) {
+        for (MeteoPerDay day : listAllDates) {
             counterOfHours = 0;
             firstMeasureOfTemperature = true;
             for (Double s : day.getTemperature()) {
                 if (firstMeasureOfTemperature) {
-                    meteoPerFiltre.add(new MeteoPerDay(day.getDate()));
+                    listMeteoPerDay.add(new MeteoPerDay(day.getDate()));
                     firstMeasureOfTemperature = false;
                 }
                 if (min <= s && s <= max) {
-                    meteoPerFiltre.get(counterOfDays).addTemperature(s);
+                    listMeteoPerDay.get(counterOfDays).addTemperature(s);
                 } else {
-                    meteoPerFiltre.get(counterOfDays).addTemperature(99.);
+                    listMeteoPerDay.get(counterOfDays).addTemperature(99.);
                 }
-                meteoPerFiltre.get(counterOfDays).addMeteo(day.getMeteo().get(counterOfHours));
-               // meteoPerFiltre.get(counterOfDays).addRain(day.getRainInfo().get(counterOfHours));
+                listMeteoPerDay.get(counterOfDays).addMeteo(day.getMeteo().get(counterOfHours));
                 ++counterOfHours;
             }
             ++counterOfDays;
         }
-        return meteoPerFiltre;
+        return listMeteoPerDay;
     }
 
+    /**
+     * Methode récupérant toutes informations sur le Json pour une date
+     *
+     * @param date
+     */
     private void parseDateObject(JsonObject date) {
         MeteoPerDay met = new MeteoPerDay(date.get("date").getAsString());
         JsonArray hourArray = (JsonArray) ((JsonObject) ((JsonObject) date.get("properties")).get("hourly")).get("data");
         hourArray.forEach(hour -> parseHourObject(met, (JsonObject) hour));
-        list.add(met);
+        listMeteoPerDay.add(met);
     }
 
+    /**
+     * Methode recupérant pour une date donnée, toutes les informations pour chaque heure du jour
+     *
+     * @param met
+     * @param hour
+     */
     private void parseHourObject(MeteoPerDay met, JsonObject hour) {
         met.addMeteo(hour.get("summary").getAsString());
         met.addTemperature(hour.get("temperature").getAsDouble());
-       // met.addRain(hour.has("precipType"));
     }
 }

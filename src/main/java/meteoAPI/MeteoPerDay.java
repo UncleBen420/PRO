@@ -6,15 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author gaetan
+ *
  */
 public class MeteoPerDay {
     private Date date;
     private List<String> Meteo = new ArrayList<>();
     private List<Double> Temperature = new ArrayList<>();
-  //  private List<Boolean> rain = new ArrayList<>();
 
     /**
+     * Constructeur de la classe lorsque la date est donnée en string
+     *
      * @param date
      */
     public MeteoPerDay(String date) {
@@ -28,6 +29,8 @@ public class MeteoPerDay {
     }
 
     /**
+     * Constructeur de la classe lorsque la date est donnée en format Date
+     *
      * @param date
      */
     public MeteoPerDay(Date date) {
@@ -35,20 +38,26 @@ public class MeteoPerDay {
     }
 
     /**
-     * @return
+     * Methode retournant la date de l'objet
+     *
+     * @return date
      */
     public Date getDate() {
         return date;
     }
 
     /**
-     * @return
+     * Methode retournant la liste des condition météorologique pour chaque heure
+     *
+     * @return meteo
      */
     public List<String> getMeteo() {
         return Meteo;
     }
 
     /**
+     * Methode permettant d'ajouter une condition météorologique à l'objet
+     *
      * @param summary
      */
     public void addMeteo(Object summary) {
@@ -56,6 +65,8 @@ public class MeteoPerDay {
     }
 
     /**
+     * Methode retournant la liste des temperature pour chaque heure
+     *
      * @return
      */
     public List<Double> getTemperature() {
@@ -63,6 +74,8 @@ public class MeteoPerDay {
     }
 
     /**
+     * Methode permettant d'ajouter une température à l'objet
+     *
      * @param temperature
      */
     public void addTemperature(Object temperature) {
@@ -70,26 +83,15 @@ public class MeteoPerDay {
     }
 
     /**
-     * @return
+     * Initialise toutes les cases de la liste à la valeur par défaut
      */
-   /* public List<Boolean> getRainInfo() {
-        return rain;
-    }*/
-
-    /**
-     * @param rainInfo
-     */
-   /* public void addRain(Boolean rainInfo) {
-        rain.add(rainInfo);
-    }*/
-    
     public void setProper() {
-    	for(int i = Meteo.size(); i < 24; i++) {
-    		Meteo.add("-1");
-    	}
-    	
-    	for(int i = Temperature.size(); i < 24; i++) {
-    		Temperature.add(99.);
-    	}
+        for (int i = Meteo.size(); i < 24; i++) {
+            Meteo.add("-1");
+        }
+
+        for (int i = Temperature.size(); i < 24; i++) {
+            Temperature.add(99.);
+        }
     }
 }
