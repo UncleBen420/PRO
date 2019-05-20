@@ -112,7 +112,7 @@ public class JsonTreeParser {
 					} else {
 
 						if (FilenameUtils.getExtension(child.getName()).equals("jpg")) {
-/*
+
 							try {
 								ArrayList<ArrayList<String>> arraytemp = CsvParser.getTag(p.getTag(child.getAbsolutePath()));
 								TagHistory.saveTag(arraytemp, child.getAbsolutePath());
@@ -121,7 +121,7 @@ public class JsonTreeParser {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-*/
+
 							JsonObject temp = new JsonObject();
 							temp.addProperty("nameImage", child.getName());
 							temp.addProperty("tag", "Image");

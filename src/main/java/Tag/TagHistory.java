@@ -98,8 +98,10 @@ public class TagHistory {
 
         for (ArrayList<String> elem : tags) {
             JsonArray tag = new JsonArray();
-            for (String str : elem) {
-                tag.add(str);
+            if(elem != null){
+                for (String str : elem) {
+                    tag.add(str);
+                }
             }
             tagArray.add(tag);
         }
