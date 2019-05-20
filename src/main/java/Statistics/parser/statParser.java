@@ -17,7 +17,7 @@ import Statistics.components.Month;
 import Statistics.components.Tag;
 
 /**
- *
+ * Parse le fichier history qui contient les informations json de la banque d'images
  * @author Edd993Surface
  */
 public class statParser {
@@ -30,6 +30,10 @@ public class statParser {
     }
      
      
+    /**
+     * Parsage du fichier history
+     * @return un objet JsonParse avec les informations generees
+     */
     public JsonParser parseFile() {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader(HISTORIC)) {
@@ -49,6 +53,11 @@ public class statParser {
         return jsonParser;
     }
 
+    /**
+     * Parse le contenu d'un JsonArray et remplit l'objet statHandler qui contiendra
+     * les informations necessaires a la generation des graphes
+     * @param content le JsonArray a parser
+     */
     private void parseImageContent(JsonArray content) {
 
         for (Object image : content) {
@@ -81,6 +90,11 @@ public class statParser {
         
     }
 
+    /**
+     * Parse le JsonArray des tags
+     * @param tags le JsonArray des tags
+     * @return un ArrayList des tags recuperes
+     */
     private ArrayList<Tag> parseContentTags(JsonArray tags) {
         
         ArrayList<Tag> result = new ArrayList<>();

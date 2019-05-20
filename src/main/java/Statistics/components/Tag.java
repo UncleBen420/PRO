@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Statistics.components;
 
 /**
- *
+ * Represente un tag sur une image
  * @author Marion
  */
 public class Tag {
@@ -16,6 +11,9 @@ public class Tag {
     private double size;
     private boolean isEnteringTunnel;
 
+    /**
+     * Constructeur
+     */
     public Tag() {
     }
 
