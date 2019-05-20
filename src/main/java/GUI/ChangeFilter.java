@@ -50,17 +50,23 @@ public class ChangeFilter extends TreeFilter {
     @Override
     protected void specialisation() {
     	
-    	JPanel minMax = new JPanel();
-    	JTextField min = new JTextField("min");
-        JTextField max = new JTextField("max");
-    	minMax.setLayout(new BorderLayout());
+        JPanel minMax = new JPanel();
+        minMax.setOpaque(false);
+        JLabel min = new JLabel("min");
+        min.setForeground(GUIRender.getForeColor());
+        JLabel max = new JLabel("max");
+        max.setForeground(GUIRender.getForeColor());
+        minMax.setLayout(new BorderLayout());
     	minMax.add(min, BorderLayout.NORTH);
     	minMax.add(max, BorderLayout.CENTER);
     	
     	JPanel sliders = new JPanel();
+        sliders.setOpaque(false);
         JSlider sliderPrecision = new JSlider(10,100);
+        sliderPrecision.setOpaque(false);
         sliderPrecision.setPreferredSize(new Dimension(200,20));
         JSlider sliderTolerance = new JSlider(0,100);
+        sliderTolerance.setOpaque(false);
         sliderTolerance.setPreferredSize(new Dimension(200,20));
         sliders.setLayout(new BorderLayout());
         sliders.add(sliderPrecision, BorderLayout.NORTH);

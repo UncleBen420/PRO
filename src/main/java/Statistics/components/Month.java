@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Statistics.components;
 
 /**
- *
+ * Enum representant les mois de l'annee avec leur nombre de jours
  * @author Edd993Surface
  */
 public enum Month {
@@ -28,6 +23,12 @@ public enum Month {
     private final String abbreviation;
     private final int nbDays;
 
+    /**
+     * Constructeur
+     * @param name le nom du mois
+     * @param abbreviation son abreviation
+     * @param nbDays le nombre de jours qu'il a
+     */
     Month(String name, String abbreviation, int nbDays) {
         this.name = name;
         this.abbreviation = abbreviation;

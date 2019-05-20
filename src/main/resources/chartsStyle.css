@@ -63,3 +63,10 @@
 
 .default-color0.chart-series-line { -fx-stroke: #8EFA9C; }
 .default-color0.chart-line-symbol { -fx-background-color: #8EFA9C, white; }
+
+#pane{
+    -fx-background-image: url("statistics_background.JPG");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 1900 1050;
+    -fx-background-position: center center;
+}

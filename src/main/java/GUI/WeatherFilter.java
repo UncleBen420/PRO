@@ -16,6 +16,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 import JTreeManager.JTreeManager;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
 
@@ -51,6 +55,10 @@ public class WeatherFilter extends TreeFilter {
 
         JComboBox<?> weatherCombobox;
         weatherCombobox = new JComboBox<>(weathersString.toArray());
+        weatherCombobox.setRenderer(new ComboBoxRenderer());
+        weatherCombobox.setBackground(GUIRender.getButtonColor());
+        weatherCombobox.setForeground(GUIRender.getForeColor());
+        //((JTextField) weatherCombobox.getEditor().getEditorComponent()).setBackground(Color.YELLOW);
        // JCheckBox rainCheckBox = new JCheckBox("rain");
 
         /*rainCheckBox.addItemListener((ItemEvent e) -> {
@@ -72,4 +80,40 @@ public class WeatherFilter extends TreeFilter {
         //specialistationPanel.add(rainCheckBox);
 
     }
+    
+    
+    private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+
+        //private Color selectionBackgroundColor;
+        //private DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
+
+        // Constructor
+        public ComboBoxRenderer() {
+            setOpaque(true);
+            setHorizontalAlignment(CENTER);
+            setVerticalAlignment(CENTER);
+            //selectionBackgroundColor = this.dlcr.getBackground(); // Have to set a color, else a compiler error will occur
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            setBackground(list.getBackground());
+            setForeground(GUIRender.getForeColor());
+            setText((String) value);
+            setFont(GUIRender.GetElement());
+            // Check which item is selected
+            if (isSelected) {
+                // Set background color of the item your cursor is hovering over to the original background color
+                setBackground(GUIRender.getButtonSelectedColor());
+            } else {
+                setBackground(GUIRender.getButtonColor());
+
+            }
+            String selectedText = getText();
+            list.setSelectionBackground(GUIRender.getButtonColor());
+            list.setSelectionForeground(GUIRender.getForeColor());
+            return this;
+        }
+    }
+
 }

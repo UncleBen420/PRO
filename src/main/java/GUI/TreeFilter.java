@@ -12,6 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import JTreeManager.JTreeManager;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import searchfilters.AbstractTreeFilter;
 
 /**
@@ -27,6 +33,7 @@ abstract public class TreeFilter extends JPanel {
     protected JLabel label;
 
     private static final long serialVersionUID = 8378656726744781478L;
+    private final GUIRender GUIRender = new GUIRender();
 
     private JButton delete;
     protected JButton filter;
@@ -42,14 +49,19 @@ abstract public class TreeFilter extends JPanel {
 
     /**
      * Constructeur avec manager
-     * 
+     *
      * @param manager jtree de la banque d'image
      */
     public TreeFilter(final JTreeManager manager) {
 
+
+
         panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        specialistationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));    
-        
+
+
+        specialistationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        specialistationPanel.setBackground(GUIRender.getBackColor());
+
         this.manager = manager;
         currentFilter = null;
 
@@ -60,11 +72,16 @@ abstract public class TreeFilter extends JPanel {
         panelButton.setLayout(new BorderLayout());
         panelButton.add(filter, BorderLayout.NORTH);
         panelButton.add(delete, BorderLayout.CENTER);
-        
+
+        panel.setBackground(GUIRender.getBackColor());
         panel.add(panelButton);
         panel.setPreferredSize(new Dimension(100, 80));
+
+        label.setForeground(GUIRender.getForeColor());
+        label.setFont(GUIRender.getSectionTitle());
+
+        this.setBackground(GUIRender.getBackColor());
         this.setLayout(new BorderLayout());
-        label.setFont(new Font(label.getText(), Font.BOLD, 12));
         this.add(label,BorderLayout.NORTH);
         this.add(specialistationPanel, BorderLayout.WEST);
         this.add(panel, BorderLayout.EAST);
@@ -75,17 +92,64 @@ abstract public class TreeFilter extends JPanel {
 
     private void common() {
 
-        filter = new JButton("Filter");
+        filter = new SelButton("Filter", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        filter.setForeground(GUIRender.getForeColor());
 
-        delete = new JButton("Delete");
+        delete = new SelButton("Delete", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        delete.setForeground(GUIRender.getForeColor());
 
         delete.addActionListener((ActionEvent e) -> {
             if (currentFilter != null) {
                 manager.removeFiltre(currentFilter);
                 currentFilter = null;
-            }            
+            }
         });
 
     }
+
+    private class SelButton extends JButton implements MouseListener {
+
+        private Color defaultColor;
+        private Color mouseOverColor;
+
+        public SelButton(String text, Color defaultColor, Color mouseOverColor) {
+
+            super(text);
+            setBackground(defaultColor);
+            this.defaultColor = defaultColor;
+            this.mouseOverColor = mouseOverColor;
+            addMouseListener(this);
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if (e.getSource() == this) {
+                this.setBackground(this.mouseOverColor);
+            }
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if (e.getSource() == this) {
+                this.setBackground(this.defaultColor);
+            }
+
+        }
+
+}
 
 }

@@ -9,12 +9,12 @@ import javax.swing.tree.DefaultTreeModel;
 import JTreeManager.OldNodePair;
 
 /**
- *
- * @author gaetan
+ * Cette classe implemente les methodes de base pour filtrer sur un jtree
+ * @author Groupe PRO B-9
  */
 public abstract class AbstractTreeFilter {
-	
-	static int counter = 0;
+
+	static int counter = 0; // utiliser pour les test
 	{
 		counter++;
 	}
@@ -26,31 +26,33 @@ public abstract class AbstractTreeFilter {
 	private DefaultMutableTreeNode root;
 
     /**
-     *
-     * @param tree
+     * Constructeur du filtre
+     * @param tree l'arbre composer de DefaultMutableTreeNode
      */
     public AbstractTreeFilter(JTree tree) {
 		this.tree = tree;
+		this.model = (DefaultTreeModel) tree.getModel();
+		root = (DefaultMutableTreeNode) model.getRoot();
 		
 	}
 
     /**
-     *
+     * Constructeur du filtre
      */
     public AbstractTreeFilter() {
 		this.tree = null;
 	}
 
     /**
-     *
-     * @return
+     * get l'arbre sur lequelle ce filtre pointe
+     * @return l'arbre sur lequelle cette fonction filtre
      */
     public JTree getTree() {
 		return tree;
 	}
 
     /**
-     *
+     * permet de placer sur quel arbre va filtrer le filtre
      * @param tree
      */
     public void setTree(JTree tree) {
@@ -60,10 +62,11 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     *
-     * @param node
+     * enleve un noeud de l'arbre et ces enfant
+     * @param node le noeud a enlever
      */
     protected void removeFromTree(DefaultMutableTreeNode node) {
+
 
 		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
 
@@ -76,7 +79,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     *
+     * remet le dernier element enlevé dans l'arbre
      */
     public void PopToTree() {
     	
@@ -88,7 +91,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     *
+     * Filtre tous l'arbre en appliquant une condition de recherche
      */
     public void filtreTree() {
     	
@@ -103,8 +106,8 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     *
-     * @param node
+     * Filtre un noeud de'arbre en applicant une condition
+     * @param node le noeud sur lequel nous filtrons
      */
     protected void filtreNode(DefaultMutableTreeNode node) {
 
@@ -122,7 +125,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     *
+     * remet dans l'arbre tous les noeud enlevé
      */
     public void unfiltreTree() {
 		
@@ -134,8 +137,8 @@ public abstract class AbstractTreeFilter {
 
     /**
      *
-     * @param node
-     * @return
+     * @param node le noeud analyser
+     * @return si oui ou non le noeud doit etre enlever
      */
     abstract public boolean analyseNode(DefaultMutableTreeNode node);
 

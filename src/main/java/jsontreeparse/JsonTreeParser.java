@@ -6,12 +6,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
 import javax.swing.JOptionPane;
@@ -19,8 +17,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.apache.commons.io.FilenameUtils;
 import com.google.gson.*;
 import JTreeManager.TaggedTreeNode;
-import Tag.CsvParser;
-import Tag.Parser;
 import Tag.TagHistory;
 import exceptionHandler.LogFileWritingHandler;
 import properties.PropertiesHandler;
@@ -34,20 +30,21 @@ import properties.PropertiesHandler;
 public class JsonTreeParser {
 
 	private String[] hierarchyTag;
-	private Parser p = new Parser();
 	Properties properties = PropertiesHandler.parseProperties();
+	private JsonArray histArray;
+	private int counterhist;
 
 	/**
 	 * Cette methode parse les tag (le type de dossier de l'arborescence)
-	 * Exemple un dossier tagé pourrai etre un dossier de date ou d'heure.
-	 * Ceci nous permet de simplifier différentes opération sur le filtrage des images.
+	 * Exemple un dossier tagï¿½ pourrai etre un dossier de date ou d'heure.
+	 * Ceci nous permet de simplifier diffï¿½rentes opï¿½ration sur le filtrage des images.
 	 */
 	public void parseHierarchyTag() {
 		hierarchyTag = ((String) properties.get("hierarchyTag")).split("/");
 	}
 
 	/**
-	 * Cette methode permet de générer un fichier json en explorant l'arborescence des fichiers
+	 * Cette methode permet de gï¿½nï¿½rer un fichier json en explorant l'arborescence des fichiers
 	 * @param rootDirectory Le dossier racine ou l'exploration de l'arborescence s'executera
 	 */
 	public void createJson(File rootDirectory,int history) {
@@ -66,6 +63,16 @@ public class JsonTreeParser {
 			
 			JsonArray tree;
 			JsonObject temp = new JsonObject();
+			JsonObject root = new JsonObject();
+				
+			if(history == 0) {
+
+		        root.addProperty("type", "IntermediateRegister");
+		        histArray = new JsonArray();
+		        counterhist = 0;
+
+			}
+
 			try {
 
 				tree = setJson(rootDirectory, i,history); // appelle a setJson sur le dossier racine
@@ -76,6 +83,22 @@ public class JsonTreeParser {
 				JOptionPane.showMessageDialog(null, "the hierachy of the directory doesnt correspond to the taghierachy field in the conf.properties");
 				LogFileWritingHandler.handleException(e.getMessage(), e.getStackTrace());
 			}
+			
+			if(history == 0) {
+				
+				root.add("content", histArray);
+				root.addProperty("imageCounter", counterhist);
+				
+				BufferedWriter hist = new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream(new File("history.json").getAbsolutePath()),
+						StandardCharsets.UTF_8));
+				
+				hist.write(root.toString());
+				hist.flush();
+				hist.close();
+				
+			}
+			
 
 			file.write(temp.toString());
 			file.flush();
@@ -111,7 +134,7 @@ public class JsonTreeParser {
 					// si c'est un dossier
 					if (child.isDirectory()) {
 
-						// on applique la methode setJson récursivement
+						// on applique la methode setJson rï¿½cursivement
 						JsonObject temp = new JsonObject();
 						temp.addProperty("name", child.getName());
 						temp.addProperty("tag", hierarchyTag[i]);
@@ -126,15 +149,13 @@ public class JsonTreeParser {
 							if(history == 0) {
 							
 							// on enregistre les tag de l'image dans un fichier history.json
-							try {
-								ArrayList<ArrayList<String>> arraytemp = CsvParser.getTag(p.getTag(child.getAbsolutePath()));
-								TagHistory.saveTag(arraytemp, child.getAbsolutePath());
-
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
+								
+								String pathR = TagHistory.getRelativePath(child.getAbsolutePath());
+								JsonObject temp = new JsonObject();
+						        temp.addProperty("path", pathR);
+						        temp.add("tags", new JsonArray());
+								histArray.add(temp);
+								counterhist++;
 							}
 
 							//on ajoute l'image au fichier de l'arborescence
@@ -158,7 +179,7 @@ public class JsonTreeParser {
 	/**
 	 *
 	 * @param path chemin du fichier json contenant l'arborescence
-	 * @return un arbre composer de treenode représentant l'arborescance des fichiers
+	 * @return un arbre composer de treenode reprï¿½sentant l'arborescance des fichiers
 	 */
 	public DefaultMutableTreeNode setDirectoryTree(String path) {
 
