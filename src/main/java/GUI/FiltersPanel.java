@@ -28,13 +28,17 @@ public class FiltersPanel extends JPanel {
     public FiltersPanel() {
 
         panel = new JPanel();
+        panel.setOpaque(false);
+        this.setOpaque(false);
+        this.setBackground(GUIRender.getBackColor());
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
+        
         JScrollPane scroll = new JScrollPane(panel);
         this.add(scroll);
-
+        scroll.setOpaque(true);
+        scroll.setBackground(GUIRender.getBackColor());
 
 	}
 

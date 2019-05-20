@@ -42,7 +42,9 @@ public class TagFilter extends TreeFilter {
     protected void specialisation() {
 
         JCheckBox taggedCheckBox = new JCheckBox("tagged");
-
+        taggedCheckBox.setForeground(GUIRender.getForeColor());
+        taggedCheckBox.setBackground(GUIRender.getBackColor());
+        
         taggedCheckBox.addItemListener((ItemEvent e) -> {
             tagChecked = e.getStateChange() == ItemEvent.SELECTED;
         });

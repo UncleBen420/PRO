@@ -14,6 +14,8 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import JTreeManager.JTreeManager;
+import java.awt.Color;
+import java.awt.event.*;
 import searchfilters.DateTreeFilter;
 
 /**
@@ -42,8 +44,34 @@ public class DateFiltrer extends TreeFilter {
         label = new JLabel("Date");
 
         final JTextField beginText = new JTextField("2017-03-23");
+        beginText.setBackground(GUIRender.getButtonColor());
+        beginText.setForeground(GUIRender.getForeColor());
+        beginText.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                beginText.setForeground(Color.WHITE);
+            }
 
+            @Override
+            public void focusLost(FocusEvent fe) {
+                beginText.setForeground(Color.WHITE);
+            }
+        });
+        
         final JTextField endText = new JTextField("2017-03-23");
+        endText.setBackground(GUIRender.getButtonColor());
+        endText.setForeground(GUIRender.getForeColor());
+        endText.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                endText.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                endText.setForeground(Color.WHITE);
+            }
+        });
 
         filter.addActionListener((ActionEvent e) -> {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
