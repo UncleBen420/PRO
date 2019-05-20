@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Statistics.handler;
 
 import Statistics.components.Month;
@@ -20,7 +15,8 @@ import meteoAPI.MeteoAPI;
 import meteoAPI.MeteoPerDay;
 
 /**
- *
+ * Sert a enregistrer toutes les donnees necessaires a la generation des
+ * statistiques
  * @author Marion
  */
 public class StatisticsHandler {
@@ -55,6 +51,9 @@ public class StatisticsHandler {
     List<String> sequenceMaxKeys;
     List<String> sequenceMinKeys;
     
+    /**
+     * Constructeur
+     */
     public StatisticsHandler() {
         initiasize();
         images.clear();
@@ -63,6 +62,9 @@ public class StatisticsHandler {
         //System.out.println(meteo.toString());
     }
 
+    /**
+     * Initialisation des attributs 
+     */
     private void initiasize() {   
   
         for (AnimalType a : AnimalType.values()) {
@@ -136,6 +138,10 @@ public class StatisticsHandler {
         totalNbOfAnimals = 0;
     }
 
+    /**
+     * Enregistre combien d'animaux il y a pour chaque type dans une liste
+     * @return la liste generee
+     */
     private List<Integer> createListOfAnimals() {
 
         List<Integer> animalList = new ArrayList<>();
@@ -146,6 +152,12 @@ public class StatisticsHandler {
     }
     
     
+    /**
+     * Cherche la valeur minimale ou maximale de la map
+     * @param map la map a sonder
+     * @param type min ou max
+     * @return la valeur minimale ou maximale
+     */
     private Integer findLimitValueInMap(Map map, String type) {
         Integer result = 0;
         
@@ -157,6 +169,12 @@ public class StatisticsHandler {
         return result;
     }
 
+    /**
+     * Cherche la cle donnant la valeur minimale ou maximale de la map
+     * @param map la map a sonder
+     * @param value la valeur min ou max de la map
+     * @return la liste des cles trouvees
+     */
     private List<String> findLimitKeysInMap(Map map, int value) {
         List<String> keys = new ArrayList<>();
         
@@ -178,7 +196,13 @@ public class StatisticsHandler {
         return joiner.toString();
     }
 
-    private void countStringMap(Map map, Object key, int value) {
+    /**
+     * Insere une valeur et potentiellement sa cle dans une map
+     * @param map la map ou faire l'insertion
+     * @param key la cle
+     * @param value la valeur
+     */
+    private void countInMap(Map map, Object key, int value) {
         if (map.containsKey(key)) {
             map.put(key, (Integer) (map.get(key)) + value);
         } else {
@@ -186,33 +210,70 @@ public class StatisticsHandler {
         }
     }
     
+    /**
+     * Compte les observations pour une camera
+     * @param cameraName le nom de la camera
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle de la camera
+     */
     public void countCameraObservation(String cameraName, int numberOfTagsForAnImage) {
-        this.countStringMap(cameraObservations, cameraName, numberOfTagsForAnImage);
+        this.countInMap(cameraObservations, cameraName, numberOfTagsForAnImage);
     }
 
+    /**
+     * Compte les observations pour un jour
+     * @param dayName le nom du jour
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle du jour
+     */
     public void countDaysObservation(String dayName, int numberOfTagsForAnImage) {
-        this.countStringMap(dateObservations, dayName, numberOfTagsForAnImage);
+        this.countInMap(dateObservations, dayName, numberOfTagsForAnImage);
     }
 
+    /**
+     * Compte les observations pour une sequence
+     * @param sequenceName le nom de la sequence
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle de la sequence
+     */
     public void countSequenceObservation(String sequenceName, int numberOfTagsForAnImage) {
-        this.countStringMap(sequenceObservations, sequenceName, numberOfTagsForAnImage);
+        this.countInMap(sequenceObservations, sequenceName, numberOfTagsForAnImage);
     }
     
+    /**
+     * Compte les observations pour un mois
+     * @param month le nom du mois
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle du mois
+     */
     public void countMonthlyObservation(Month month, int numberOfTagsForAnImage) {
-        this.countStringMap(monthlyObservations, month, numberOfTagsForAnImage);
+        this.countInMap(monthlyObservations, month, numberOfTagsForAnImage);
     }
 
+    /**
+     * Compte les observations pour un jour
+     * @param month le nom du mois
+     * @param day le jour
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle du jour
+     */
     public void countDailyObservation(Month month, int day, int numberOfTagsForAnImage) {
         Map<Integer, Integer> mapForThisMonth = dailyObservations.get(month);
-        this.countStringMap(mapForThisMonth, day, numberOfTagsForAnImage);
+        this.countInMap(mapForThisMonth, day, numberOfTagsForAnImage);
     }
     
+    /**
+     * Compte les observations pour une heure
+     * @param month le nom du mois
+     * @param day le jour
+     * @param hour l'heure
+     * @param numberOfTagsForAnImage la valeur a mettre dans la cle de l'heure
+     */
     public void countHourlyObservation(Month month, int day, int hour, int numberOfTagsForAnImage) {
          Map<Integer, Map<Integer, Integer>> mapForThisMonth= hourlyObservations.get(month);
          Map<Integer, Integer> mapForThisDay = mapForThisMonth.get(day);
-        this.countStringMap(mapForThisDay, hour, numberOfTagsForAnImage);
+        this.countInMap(mapForThisDay, hour, numberOfTagsForAnImage);
     }
     
+    /**
+     * Compte le nombre d'observations totales d'un animal donne (peuple une map)
+     * @param animal l'animal a traiter
+     */
     public void countTotalObservationsByAnimalType(String animal) {
         for (AnimalType a : AnimalType.values()) {
             if (animal.equals(a.getName())) {
@@ -221,6 +282,12 @@ public class StatisticsHandler {
         }
     }
 
+    /**
+     * Compte le nombre d'observations d'un animal donne (peuple une map) pour
+     * un mois donne
+     * @param animal l'animal a traiter
+     * @param month le mois a traiter
+     */
     public void countMonthlyObservationsByAnimalType(String animal, Month month) {
         for (Month a : Month.values()) {
             if (month.equals(a)) {
@@ -234,7 +301,14 @@ public class StatisticsHandler {
         }
     }
     
-      public void countDailyObservationsByAnimalType(String animal, Month month, int day) {
+    /**
+     * Compte le nombre d'observations d'un animal donne (peuple une map) pour
+     * un jour donne
+     * @param animal l'animal a traiter
+     * @param month le mois a traiter
+     * @param day le jour a traiter
+     */
+    public void countDailyObservationsByAnimalType(String animal, Month month, int day) {
         for (Month a : Month.values()) {
             if (month.equals(a)) {
                 for (AnimalType b : AnimalType.values()) {                 
@@ -248,6 +322,14 @@ public class StatisticsHandler {
         }
     }
 
+    /**
+     * Compte le nombre d'observations d'un animal donne (peuple une map) pour
+     * une heure donnee
+     * @param animal l'animal a traiter
+     * @param month le mois a traiter
+     * @param day le jour a traiter
+     * @param hour l'heure a traiter
+     */
     public void countHourlyObservationsByAnimalType(String animal, Month month, int day, int hour) {
         for (Month a : Month.values()) {
             if (month.equals(a)) {
@@ -263,6 +345,9 @@ public class StatisticsHandler {
         }
     }
 
+    /**
+     * Genere les observations min et max pour les cameras, les sequences et les jours
+     */
     public void analyzeData() {
         cameraMinKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MIN));
         cameraMaxKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MAX));

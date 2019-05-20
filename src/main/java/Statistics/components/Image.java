@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Statistics.components;
 
 import java.nio.file.Path;
@@ -11,7 +6,7 @@ import java.util.ArrayList;
 import java.util.stream.StreamSupport;
 
 /**
- *
+ * Represente une image de la banque de donnee avec tous ses attributs
  * @author Marion
  */
 public class Image {
@@ -24,17 +19,32 @@ public class Image {
     private int hour;
     private final ArrayList<Tag> tags;  // Tags saved in this image
 
+    /**
+     * Renvoie une representation du path sous forme d'un tableau, chaque
+     * element du tableau est un sous-dossier
+     * @param pathString le chemin d'acces a separer
+     * @return le tableau genere
+     */
     private static String[] splitPath(String pathString) {
         Path path = Paths.get(pathString);
         return StreamSupport.stream(path.spliterator(), false).map(Path::toString)
                 .toArray(String[]::new);
     }
 
+    /**
+     * Constructeur
+     * @param path le chemin d'acces de l'image
+     * @param tags la liste des tags enregistres sur l'image
+     */
     public Image(String path, ArrayList<Tag> tags) {
         pathDecomposition(path);
         this.tags = tags;
     }
 
+    /**
+     * Enregistrement des attributs du path dans les attributs de la classe Image
+     * @param path le chemin d'acces a decortiquer
+     */
     private void pathDecomposition(String path) {
         try {
 

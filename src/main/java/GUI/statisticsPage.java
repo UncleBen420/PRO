@@ -1,10 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI;
 
 import Statistics.components.Month;
@@ -37,7 +30,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 
 /**
- *
+ * Cette classe construit une fenetre de statistiques sur la banque d'images
  * @author Marion
  */
 public class statisticsPage extends JFrame {
@@ -62,6 +55,9 @@ public class statisticsPage extends JFrame {
         statistics();
     }
 
+    /**
+     * Fonction de creation de l'interface graphique
+     */
     public void initAndShowGUI() {
         
             JFrame mainFrame = new JFrame("Crapauduc Viewer Statistics");
@@ -82,6 +78,9 @@ public class statisticsPage extends JFrame {
             });
     }
     
+    /**
+     * Fonction de creation de la Scene JaxaFX
+     */
     private Scene createScene() {
         
         Group root = new Group();
@@ -123,7 +122,7 @@ public class statisticsPage extends JFrame {
     }
     
     /*
-     * Cree un groupe avec la zone de generation dynamique
+     * Cree un Group JavaFX avec la zone de generation dynamique
      */
     public Group createDynamGroup() {
         Group dynamGroup = new Group();
@@ -208,7 +207,6 @@ public class statisticsPage extends JFrame {
         
         /** PARAMETRES PAR DEFAUT **/
         /* Peuplage des graphiques mois */
-        //xAxisBarMonth.setCategories(FXCollections.observableArrayList(daySelector));
         monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         populateMonthLineChart(monthLineChart);
         populateMonthBarChart(sbcMonth);
@@ -359,8 +357,8 @@ public class statisticsPage extends JFrame {
         }
     }
     
-    /*
-     * Cree un groupe avec la pie chart principale
+    /**
+     * Creation d'un groupe avec la pie chart
      */
     public Group createMainPieChart() {
         
@@ -402,7 +400,7 @@ public class statisticsPage extends JFrame {
     }
     
     /*
-     * Cree un groupe avec la line chart par année
+     * Cree un groupe avec la line chart par annee
      */
     public Group createLineChart() {
         Group lineChartGroup = new Group();
@@ -567,7 +565,7 @@ public class statisticsPage extends JFrame {
     }
     
     /*
-     * Main entry point
+     * Main de JavaFX
      */
     public void statistics() {
         SwingUtilities.invokeLater(new Runnable() {
