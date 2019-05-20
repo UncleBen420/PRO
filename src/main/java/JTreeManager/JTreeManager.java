@@ -19,6 +19,7 @@ import GUI.SliderDemo;
 import GUI.ViewerTable;
 import Tag.CsvParser;
 import Tag.Parser;
+import Tag.TagHistory;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
@@ -278,6 +279,16 @@ public class JTreeManager extends JPanel {
 
 						}
 						slider.addImage(value);
+						
+						Parser p = new Parser();
+						ArrayList<ArrayList<String>> arraytemp = null;
+						try {
+							arraytemp = CsvParser.getTag(p.getTag((new File(value)).getAbsolutePath()));
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						TagHistory.saveTag(arraytemp, (new File(value)).getAbsolutePath());
 
 						try {
 							table.setTags(CsvParser.getTag(parserTag.getTag(value)));

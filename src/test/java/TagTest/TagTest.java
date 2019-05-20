@@ -61,7 +61,7 @@ class TagTest {
             Parser parser = new Parser();
             ArrayList<String> array = new ArrayList<String>();
             String str = "heigViewer;grenouille;2.5;true;false;";
-            String path = "/mnt/Data/HEIG-VD/PRO/Code/PRO/testImages/Camera 01/2017-02-23/001/jpg/09/56/1553444168110s.jpg";
+            String path = "src/test/java/TagTest/1553444168110s.jpg";
             array.add(str);
             array.add(str);
             

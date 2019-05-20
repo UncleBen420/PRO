@@ -39,25 +39,25 @@ class treeFilterTest {
 				return false;
 			}};
 		
-		System.out.println(filter);
+		System.out.println(filter.testToString());
 		
 		filter.removeFromTree(childa);
 		
-		System.out.println(filter);
+		System.out.println(filter.testToString());
 		
 		filter.removeFromTree(child1);
 		
-		System.out.println(filter);
+		System.out.println(filter.testToString());
 		
 		printTree(root);
 		
 		filter.PopToTree();
 		
-		System.out.println(filter);
+		System.out.println(filter.testToString());
 		
 		filter.PopToTree();
 		
-		System.out.println(filter);
+		System.out.println(filter.testToString());
 		
 		String newOne = printTree(root);
 	

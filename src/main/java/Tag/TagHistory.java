@@ -203,7 +203,7 @@ public class TagHistory {
      * @param path chemin absolu de l'image
      * @return chemin relatif
      */
-    static private String getRelativePath(String path) {
+    static public String getRelativePath(String path) {
         return path.substring(path.indexOf("Caméra", 0));
     }
 }
