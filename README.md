@@ -1,6 +1,4 @@
 
-
-```
 # Outil pour navigation, l’étiquetage et l’annotation d’images
 
 Une application qui permet pour la navigation, l'étiquetage et l'annotation d'une banque d'image recueillie dans des crapauducs.
@@ -53,4 +51,3 @@ This software requires Java 8 or above and the following libraries:
 User manual: see file xxxxx.
 
 API documentation: see file yyyyy.
-```
