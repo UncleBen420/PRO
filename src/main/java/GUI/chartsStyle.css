@@ -49,14 +49,17 @@
     -fx-effect: null;
 }
 
+/* Vert : grenouille */
 .default-color0.chart-bar {
     -fx-bar-fill: #8EFA9C;
 }
 
+/* Violet foncé : triton */
 .default-color1.chart-bar {
     -fx-bar-fill: #180F50;
 }
 
+/* Violet clair : crapaud */
 .default-color2.chart-bar {
     -fx-bar-fill: #3F319B;
 }
