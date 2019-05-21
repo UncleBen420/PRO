@@ -66,6 +66,12 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 					
 					date.setProper();
 
+					if(!(taggedTreeNode.getChildCount() != 0 && taggedTreeNode.getChildAt(0).getChildCount() != 0)) {
+						removeFromTree(taggedTreeNode);
+						return true;
+						
+					}
+					
 					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0);
 
 					for (int i = 0; i < hours.getChildCount(); i++) {
@@ -74,8 +80,10 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 								&& (date.getTemperature().get(Integer.parseInt(hours.getChildAt(i).toString()))
 										.equals(99.))) {
 
+
 							removeFromTree((TaggedTreeNode) hours.getChildAt(i));
 							i--;
+							
 							
 							
 
@@ -100,6 +108,8 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
     protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {
+			
+			
 
 			DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getChildAt(i);
 

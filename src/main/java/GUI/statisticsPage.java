@@ -125,7 +125,7 @@ public class statisticsPage extends JFrame {
     /**
      * Cree un Group JavaFX avec la zone de generation dynamique, a savoir
      * les graphes par mois et par jour
-     * @return le groupe cr��
+     * @return le groupe cree
      */
     public Group createDynamGroup() {
         Group dynamGroup = new Group();
@@ -366,7 +366,7 @@ public class statisticsPage extends JFrame {
     
     /**
      * Creation d'un groupe avec la pie chart
-     * @return le group cr��
+     * @return le group cree
      */
     public Group createMainPieChart() {
         
@@ -396,10 +396,10 @@ public class statisticsPage extends JFrame {
         chart.setTitleSide(Side.BOTTOM);
 
         // Couleurs des tranches
-        pieChartData.get(0).getNode().setStyle("-fx-pie-color: #180F50;");
-        pieChartData.get(1).getNode().setStyle("-fx-pie-color: #8EFA9C;");
-        pieChartData.get(2).getNode().setStyle("-fx-pie-color: #3F319B;");
-        pieChartData.get(3).getNode().setStyle("-fx-pie-color: #807AA8;");
+        pieChartData.get(2).getNode().setStyle("-fx-pie-color: #180F50;"); // crapaud
+        pieChartData.get(1).getNode().setStyle("-fx-pie-color: #8EFA9C;"); // grenouille
+        pieChartData.get(0).getNode().setStyle("-fx-pie-color: #3F319B;"); // triton
+        pieChartData.get(3).getNode().setStyle("-fx-pie-color: #807AA8;"); // autre
 
         // Ajout de la chart au root group
         pieChartGroup.getChildren().add(chart);
@@ -407,8 +407,9 @@ public class statisticsPage extends JFrame {
         return pieChartGroup;
     }
     
-    /*
+    /**
      * Cree un groupe avec la line chart par annee
+     * @return le group cree
      */
     public Group createLineChart() {
         Group lineChartGroup = new Group();
@@ -490,7 +491,7 @@ public class statisticsPage extends JFrame {
         
         Group sideInfosGroup = new Group();
         
-        /* IMAGES */
+          /* IMAGES */
         Text imagesLabel = new Text();
         imagesLabel.setFont(new Font(20));
         imagesLabel.setText("IMAGES");
@@ -501,9 +502,9 @@ public class statisticsPage extends JFrame {
 
         Text imagesInfos = new Text();
         imagesInfos.setFont(new Font(10));
-        imagesInfos.setText("tagged : "+ statHandler.getTaggedImages() +"\n" +
+        imagesInfos.setText("tagged : "+ statHandler.getNbTaggedImages() +"\n" +
                             "untagged : XXX\n" +
-                            "total count : XXX");
+                            "total count : "+ statHandler.getNbImages() +"\n");
         imagesInfos.setX(250);
         imagesInfos.setY(530);
         imagesInfos.setFill(Color.WHITE);
@@ -520,15 +521,16 @@ public class statisticsPage extends JFrame {
 
         Text sequencesInfos = new Text();
         sequencesInfos.setFont(new Font(10));
-        sequencesInfos.setText("tagged : "+ statHandler.getTaggedSequenceNumber() +"\n" +
+        sequencesInfos.setText("tagged : "+ statHandler.getTaggedSequenceNumber() +" and also " + statHandler.getNbTaggedSequences() + "\n" +
                 "untagged : XXX\n" +
-                "total count : XXX\n" +
+                "total count : "+ statHandler.getNbSequences()  +"\n" +
                 "most captures : "+ statHandler.getMostTaggedSequence() +"\n" +
                 "least captures : "+ statHandler.getLeastTaggedSequence() +"\n");
         sequencesInfos.setX(250);
         sequencesInfos.setY(630);
         sequencesInfos.setFill(Color.WHITE);
         sideInfosGroup.getChildren().add(sequencesInfos);
+
 
         /* CAMERAS */
         Text camerasLabel = new Text();
@@ -544,7 +546,7 @@ public class statisticsPage extends JFrame {
         camerasInfos.setText("most used : "+ statHandler.getMostUsedCamera() +"\n" +
                              "least used : "+ statHandler.getLeastUsedCamera() +"\n");
         camerasInfos.setX(250);
-        camerasInfos.setY(730);
+        camerasInfos.setY(740);
         camerasInfos.setFill(Color.WHITE);
         sideInfosGroup.getChildren().add(camerasInfos);
 
@@ -562,7 +564,7 @@ public class statisticsPage extends JFrame {
         observationsInfos.setText("most : "+ statHandler.getMostFrequentDate() +"\n" +
                                  "least : "+ statHandler.getLeastFrequentDate() +"\n");
         observationsInfos.setX(250);
-        observationsInfos.setY(830);
+        observationsInfos.setY(840);
         observationsInfos.setFill(Color.WHITE);
         sideInfosGroup.getChildren().add(observationsInfos);
         

@@ -18,6 +18,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.SwingUtilities;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 import searchfilters.AbstractTreeFilter;
 
 /**
@@ -99,10 +103,10 @@ abstract public class TreeFilter extends JPanel {
      */
     private void common() {
 
-        filter = new SelButton("Filter", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        filter = new SelButton("Filter");
         filter.setForeground(GUIRender.getForeColor());
 
-        delete = new SelButton("Delete", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        delete = new SelButton("Delete");
         delete.setForeground(GUIRender.getForeColor());
 
         delete.addActionListener((ActionEvent e) -> {
@@ -114,49 +118,17 @@ abstract public class TreeFilter extends JPanel {
 
     }
 
-    private class SelButton extends JButton implements MouseListener {
+    private class SelButton extends JButton {
 
-        private Color defaultColor;
-        private Color mouseOverColor;
-
-        public SelButton(String text, Color defaultColor, Color mouseOverColor) {
-
+        public SelButton(String text) {
             super(text);
-            setBackground(defaultColor);
-            this.defaultColor = defaultColor;
-            this.mouseOverColor = mouseOverColor;
-            addMouseListener(this);
+            UIManager.put("Button.foreground", new ColorUIResource(GUIRender.getForeColor()));
+            UIManager.put("Button.mouseHoverColor", new ColorUIResource(GUIRender.getButtonSelectedColor()));
+            UIManager.put("Button.background", new ColorUIResource(GUIRender.getButtonColor()));
+            SwingUtilities.updateComponentTreeUI(this);
 
         }
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            if (e.getSource() == this) {
-                this.setBackground(this.mouseOverColor);
-            }
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            if (e.getSource() == this) {
-                this.setBackground(this.defaultColor);
-            }
-
-        }
-
-}
+    }
 
 }

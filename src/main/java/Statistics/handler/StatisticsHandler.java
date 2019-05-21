@@ -41,7 +41,10 @@ public class StatisticsHandler {
     private Map<Month, Map<Integer, Map<Integer, Integer>>> hourlyObservations = new HashMap<>();
     private Map<Month, Map<Integer, Map<Integer, List<Integer>>>> hourlyObservationsByAnimalType = new HashMap<>();
 
-
+    private int nbImages;
+    private int nbSequences;
+    private int nbTaggedImages;
+    private int nbTaggedSequences;
     private int totalNbOfAnimals;
     
     List<String> cameraMaxKeys;
@@ -136,6 +139,10 @@ public class StatisticsHandler {
         }
 
         totalNbOfAnimals = 0;
+        nbImages = 0;
+        nbSequences = 0;
+        nbTaggedImages = 0;
+        nbTaggedSequences = 0;
     }
 
     /**
@@ -347,23 +354,78 @@ public class StatisticsHandler {
 
     /**
      * Genere les observations min et max pour les cameras, les sequences et les jours
+     * Si aucune image possede un tag, un message alternatif est affiche
      */
     public void analyzeData() {
+        
+        if (nbTaggedImages != 0) {
         cameraMinKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MIN));
         cameraMaxKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MAX));
         dateMinKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MIN));
         dateMaxKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MAX));
         sequenceMinKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MIN));
         sequenceMaxKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MAX));
+        } else {
+             cameraMinKeys = new ArrayList<String>();
+             cameraMinKeys.add("no tagged images");
+             
+             cameraMaxKeys = new ArrayList<String>();
+             cameraMaxKeys.add("no tagged images");
+             
+             dateMinKeys = new ArrayList<String>();
+             dateMinKeys.add("no tagged images");
+             
+             dateMaxKeys = new ArrayList<String>();
+             dateMaxKeys.add("no tagged images");
+             
+             sequenceMinKeys = new ArrayList<String>();
+             sequenceMinKeys.add("no tagged images");
+                  
+             sequenceMaxKeys = new ArrayList<String>();
+             sequenceMaxKeys.add("no tagged images");
+        }
     }
 
-    public void addImage(Image image) {
+   public void addImage(Image image) {
         images.add(image);
     }
-    
+
     public void addNbAnimals(int n) {
-       this.totalNbOfAnimals += n;
+        this.totalNbOfAnimals += n;
     }
+
+    public void addNbImages(int n) {
+        this.nbImages += n;
+    }
+
+    public void addNbSequences(int n) {
+        this.nbSequences += n;
+    }
+
+    public void addNbTaggedSequences(int n) {
+        this.nbTaggedSequences += n;
+    }
+    
+     public int getNbImages() {
+        return nbImages;
+    }
+
+    public int getNbTaggedImages() {
+        return images.size();
+    }
+
+    public int getNbSequences() {
+        return nbSequences;
+    }
+
+    public int getNbTaggedSequences() {
+        return nbTaggedSequences;
+    }
+    
+    
+    
+    
+    
     
     public Map<AnimalType, Integer> getAnimalTypeCounter() {
         return this.animalTypeCounter;
