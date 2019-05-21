@@ -106,7 +106,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     * Filtre un noeud de'arbre en applicant une condition
+     * Filtre l'arbre en applicant une condition depuis la racine node.
      * @param node le noeud sur lequel nous filtrons
      */
     protected void filtreNode(DefaultMutableTreeNode node) {

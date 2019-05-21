@@ -17,7 +17,7 @@ import searchfilters.TagTreeFilter;
 /**
  * Classe implémentant l'interface pour le filtre par tag
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class TagFilter extends TreeFilter {
 

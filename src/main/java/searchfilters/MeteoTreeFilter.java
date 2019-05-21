@@ -14,32 +14,29 @@ import meteoAPI.MeteoPerDay;
 import meteoAPI.TYPEMETEO;
 
 /**
- *
- * @author gaetan
+ * Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la météo ce jour la. 
+ * @author Groupe PRO B-9
  */
 public class MeteoTreeFilter extends AbstractTreeFilter {
 
 	private TYPEMETEO meteo;
 	private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	private List<MeteoPerDay> dates;
-	//private Boolean rain;
 	private MeteoAPI ma = new MeteoAPI();
 
     /**
-     *
-     * @param meteo
-     * @param rain
+     * Constructeur de filtre météo
+     * @param meteo la météo voulue
      */
     public MeteoTreeFilter(TYPEMETEO meteo) {
 		this.meteo = meteo;
-		//this.rain = rain;
 		dates = ma.getListFiltreSummary(meteo);
 	}
 
     /**
-     *
-     * @param node
-     * @return
+     * analyse les noeuds, si c'est des noeuds de date, la méthode regarde si la date a la bonne météo (pluie, beau,...)  
+     * @param node le noeud étant analysé
+     * @return si oui ou non on doit l'enlevé de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -105,8 +102,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     *
-     * @param node
+     * modification de filtreNode pour qu'il ne parcours pas les noeud plus loin que date
      */
     protected void filtreNode(DefaultMutableTreeNode node) {
 

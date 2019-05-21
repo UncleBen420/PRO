@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *
- * @author gaetan
+ * Cette classe permet de parser le fichier conf.properties
+ * @author Groupe PRO B-9
  */
 public class PropertiesHandler {
 	
     /**
-     *
-     * @return
+     * parse les propriétés du fichier.
+     * @return les propriétés du fichier
      */
     static public Properties parseProperties() {
 		Properties properties = new Properties();
