@@ -396,9 +396,9 @@ public class statisticsPage extends JFrame {
         chart.setTitleSide(Side.BOTTOM);
 
         // Couleurs des tranches
-        pieChartData.get(0).getNode().setStyle("-fx-pie-color: #8EFA9C;");
-        pieChartData.get(1).getNode().setStyle("-fx-pie-color: #3F319B;");
-        pieChartData.get(2).getNode().setStyle("-fx-pie-color: #180F50;");
+        pieChartData.get(0).getNode().setStyle("-fx-pie-color: #180F50;");
+        pieChartData.get(1).getNode().setStyle("-fx-pie-color: #8EFA9C;");
+        pieChartData.get(2).getNode().setStyle("-fx-pie-color: #3F319B;");
         pieChartData.get(3).getNode().setStyle("-fx-pie-color: #807AA8;");
 
         // Ajout de la chart au root group
