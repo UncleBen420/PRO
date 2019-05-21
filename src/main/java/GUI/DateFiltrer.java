@@ -49,12 +49,12 @@ public class DateFiltrer extends TreeFilter {
         beginText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
         });
         
@@ -64,12 +64,12 @@ public class DateFiltrer extends TreeFilter {
         endText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
         });
 

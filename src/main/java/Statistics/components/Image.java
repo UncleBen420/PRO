@@ -89,6 +89,10 @@ public class Image {
     public int getHour() {
         return this.hour;
     }
+          
+    public boolean hasTags(){
+        return !tags.isEmpty();
+    }
 
     @Override
     public String toString() {

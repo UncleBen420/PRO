@@ -42,6 +42,9 @@ public class TagFilter extends TreeFilter {
     protected void specialisation() {
 
         JCheckBox taggedCheckBox = new JCheckBox("tagged");
+        taggedCheckBox.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chbox-checked-20.png")));
+        taggedCheckBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chbox-unchecked-20.png")));
+        
         taggedCheckBox.setForeground(GUIRender.getForeColor());
         taggedCheckBox.setBackground(GUIRender.getBackColor());
         

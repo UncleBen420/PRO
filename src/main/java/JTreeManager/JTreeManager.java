@@ -1,5 +1,6 @@
 package JTreeManager;
 
+import GUI.GUIRender;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -20,15 +21,20 @@ import GUI.ViewerTable;
 import Tag.CsvParser;
 import Tag.Parser;
 import Tag.TagHistory;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import searchfilters.AbstractTreeFilter;
 import jsontreeparse.JsonTreeParser;
 import properties.PropertiesHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 
 /**
@@ -40,6 +46,7 @@ import javax.swing.tree.TreeNode;
 public class JTreeManager extends JPanel {
 
 	private static final long serialVersionUID = 774488936584418358L;
+        private GUIRender GUIRender = new GUIRender();
 	private final List<AbstractTreeFilter> Filtre;
 	private DefaultMutableTreeNode root;
 	private JTree tree;
@@ -259,7 +266,7 @@ public class JTreeManager extends JPanel {
 		tree = new JTree(root);
 
 		tree.setMinimumSize(new Dimension(100, 100));
-
+                tree.setCellRenderer(new CellRenderer());
 		tree.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -304,10 +311,14 @@ public class JTreeManager extends JPanel {
 
 		JScrollPane sb = new JScrollPane();
 		sb.setViewportView(tree);
+                sb.getViewport().getView().setBackground(GUIRender.getBackColor());
+                sb.getVerticalScrollBar().setBackground(Color.DARK_GRAY);
 		sb.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sb);
 
 		messageBox = new JTextField();
+                messageBox.setBackground(GUIRender.getBackColor());
+                messageBox.setForeground(GUIRender.getForeColor());
 		messageBox.setEditable(false);
 		this.add(messageBox);
 		this.repaint();
@@ -334,4 +345,58 @@ public class JTreeManager extends JPanel {
 		this.add(waitingPanel, BorderLayout.SOUTH);
 
 	}
+        
+        
+        class CellRenderer extends DefaultTreeCellRenderer {
+
+        private Font elementFont;
+        private Font elementFontSelected;
+
+        CellRenderer() {
+            setElementFont();
+        }
+
+        @Override
+        public Component getTreeCellRendererComponent(
+                JTree tree, Object value, boolean isSelected, boolean expanded,
+                boolean leaf, int row, boolean hasFocus) {
+            JComponent c = (JComponent) super.getTreeCellRendererComponent(
+                    tree, value, isSelected, expanded, leaf, row, hasFocus);
+            c.setOpaque(false);
+            
+            setClosedIcon( new javax.swing.ImageIcon(getClass().getResource("/images/icons8-folder-26.png")));
+            setOpenIcon( new javax.swing.ImageIcon(getClass().getResource("/images/icons8-opened-folder-26.png")));
+            setLeafIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-google-images-26.png")));
+            
+            setFont(elementFont);
+            if (selected) {
+                setFont(elementFontSelected);
+            }
+
+            return c;
+        }
+        private final Color ALPHA_OF_ZERO = new Color(0, true);
+
+        @Override
+        public Color getBackgroundNonSelectionColor() {
+            return ALPHA_OF_ZERO;
+        }
+
+        @Override
+        public Color getBackgroundSelectionColor() {
+            return ALPHA_OF_ZERO;
+        }
+
+        @Override
+        public Color getForeground() {
+            return Color.WHITE;
+        }
+
+        private void setElementFont() {
+            elementFont = GUIRender.GetElement();
+            elementFontSelected = GUIRender.getElementSelected();
+
+        }
+
+    }
 }

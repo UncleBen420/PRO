@@ -24,11 +24,13 @@ public class statParser {
  
     private static final String HISTORIC = "history.json";
     private final StatisticsHandler statHandler;
+    private String currentSequence;
+
     
     public statParser(StatisticsHandler statHandler) {
         this.statHandler = statHandler;
+        this.currentSequence = "";
     }
-     
      
     /**
      * Parsage du fichier history
@@ -69,25 +71,39 @@ public class statParser {
            ArrayList<Tag> tagsStructure = parseContentTags(tags);         
            Image imageStructure = new Image(path, tagsStructure);
            
-           statHandler.countCameraObservation(imageStructure.getCamera(), tagsStructure.size());
-           statHandler.countDaysObservation(imageStructure.getDate(), tagsStructure.size());
-           statHandler.countSequenceObservation(imageStructure.getSequence(), tagsStructure.size());
-           statHandler.countMonthlyObservation(imageStructure.getMonth(), tagsStructure.size());
-           statHandler.countDailyObservation(imageStructure.getMonth(), imageStructure.getDay(), tagsStructure.size());
-           statHandler.countHourlyObservation(imageStructure.getMonth(), imageStructure.getDay(), imageStructure.getHour(), tagsStructure.size());
+            if (!currentSequence.equals(imageStructure.getSequence())) {
+                currentSequence = imageStructure.getSequence();
+                statHandler.addNbSequences(1);
+                if (imageStructure.hasTags()) {
+                    statHandler.addNbTaggedSequences(1);
+                }
+            }
 
-           statHandler.addNbAnimals(tagsStructure.size());
-           
-           for (Tag tag : tagsStructure){   
-                     
-               statHandler.countMonthlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth());
-               statHandler.countDailyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(), imageStructure.getDay());
-               statHandler.countHourlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(),imageStructure.getDay(), imageStructure.getHour());
-               statHandler.countTotalObservationsByAnimalType(tag.getAnimalType());
-           }
-           statHandler.addImage(imageStructure);
+            if (imageStructure.hasTags()) {
+                //statHandler.addNbTaggedImages(1);
+                System.out.println("finally some tags");
+                statHandler.countCameraObservation(imageStructure.getCamera(), tagsStructure.size());
+                statHandler.countDaysObservation(imageStructure.getDate(), tagsStructure.size());
+                statHandler.countSequenceObservation(imageStructure.getSequence(), tagsStructure.size());
+                statHandler.countMonthlyObservation(imageStructure.getMonth(), tagsStructure.size());
+                statHandler.countDailyObservation(imageStructure.getMonth(), imageStructure.getDay(), tagsStructure.size());
+                statHandler.countHourlyObservation(imageStructure.getMonth(), imageStructure.getDay(), imageStructure.getHour(), tagsStructure.size());
+
+                statHandler.addNbAnimals(tagsStructure.size());
+
+                for (Tag tag : tagsStructure) {
+                    statHandler.countMonthlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth());
+                    statHandler.countDailyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(), imageStructure.getDay());
+                    statHandler.countHourlyObservationsByAnimalType(tag.getAnimalType(), imageStructure.getMonth(), imageStructure.getDay(), imageStructure.getHour());
+                    statHandler.countTotalObservationsByAnimalType(tag.getAnimalType());
+                }
+
+                statHandler.addImage(imageStructure);
+                
+            } 
+            statHandler.addNbImages(1);
         }
-        
+
     }
 
     /**

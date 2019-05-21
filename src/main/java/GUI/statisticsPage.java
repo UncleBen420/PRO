@@ -491,7 +491,7 @@ public class statisticsPage extends JFrame {
         
         Group sideInfosGroup = new Group();
         
-        /* IMAGES */
+          /* IMAGES */
         Text imagesLabel = new Text();
         imagesLabel.setFont(new Font(20));
         imagesLabel.setText("IMAGES");
@@ -502,9 +502,9 @@ public class statisticsPage extends JFrame {
 
         Text imagesInfos = new Text();
         imagesInfos.setFont(new Font(10));
-        imagesInfos.setText("tagged : "+ statHandler.getTaggedImages() +"\n" +
+        imagesInfos.setText("tagged : "+ statHandler.getNbTaggedImages() +"\n" +
                             "untagged : XXX\n" +
-                            "total count : XXX");
+                            "total count : "+ statHandler.getNbImages() +"\n");
         imagesInfos.setX(250);
         imagesInfos.setY(530);
         imagesInfos.setFill(Color.WHITE);
@@ -521,15 +521,16 @@ public class statisticsPage extends JFrame {
 
         Text sequencesInfos = new Text();
         sequencesInfos.setFont(new Font(10));
-        sequencesInfos.setText("tagged : "+ statHandler.getTaggedSequenceNumber() +"\n" +
+        sequencesInfos.setText("tagged : "+ statHandler.getTaggedSequenceNumber() +" and also " + statHandler.getNbTaggedSequences() + "\n" +
                 "untagged : XXX\n" +
-                "total count : XXX\n" +
+                "total count : "+ statHandler.getNbSequences()  +"\n" +
                 "most captures : "+ statHandler.getMostTaggedSequence() +"\n" +
                 "least captures : "+ statHandler.getLeastTaggedSequence() +"\n");
         sequencesInfos.setX(250);
         sequencesInfos.setY(630);
         sequencesInfos.setFill(Color.WHITE);
         sideInfosGroup.getChildren().add(sequencesInfos);
+
 
         /* CAMERAS */
         Text camerasLabel = new Text();
