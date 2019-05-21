@@ -66,11 +66,18 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 					
 					date.setProper();
 
+					
+					if(!(taggedTreeNode.getChildCount() != 0 && taggedTreeNode.getChildAt(0).getChildCount() != 0)) {
+						removeFromTree(taggedTreeNode);
+						return true;
+						
+					}
+					
 					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0);
 
 					for (int i = 0; i < hours.getChildCount(); i++) {
 						
-
+						
 						if (((TaggedTreeNode) hours.getChildAt(i)).getTag().equals("Hour")
 								&& !(date.getMeteo().get(Integer.parseInt(hours.getChildAt(i).toString()))
 										.equals(meteo.toString()))) {
