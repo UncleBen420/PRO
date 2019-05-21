@@ -36,15 +36,15 @@ public class JsonTreeParser {
 
 	/**
 	 * Cette methode parse les tag (le type de dossier de l'arborescence)
-	 * Exemple un dossier tagé pourrai etre un dossier de date ou d'heure.
-	 * Ceci nous permet de simplifier différentes opération sur le filtrage des images.
+	 * Exemple un dossier tagï¿½ pourrai etre un dossier de date ou d'heure.
+	 * Ceci nous permet de simplifier diffï¿½rentes opï¿½ration sur le filtrage des images.
 	 */
 	public void parseHierarchyTag() {
 		hierarchyTag = ((String) properties.get("hierarchyTag")).split("/");
 	}
 
 	/**
-	 * Cette methode permet de générer un fichier json en explorant l'arborescence des fichiers
+	 * Cette methode permet de gï¿½nï¿½rer un fichier json en explorant l'arborescence des fichiers
 	 * @param rootDirectory Le dossier racine ou l'exploration de l'arborescence s'executera
 	 */
 	public void createJson(File rootDirectory,int history) {
@@ -134,7 +134,7 @@ public class JsonTreeParser {
 					// si c'est un dossier
 					if (child.isDirectory()) {
 
-						// on applique la methode setJson récursivement
+						// on applique la methode setJson rï¿½cursivement
 						JsonObject temp = new JsonObject();
 						temp.addProperty("name", child.getName());
 						temp.addProperty("tag", hierarchyTag[i]);
@@ -179,7 +179,7 @@ public class JsonTreeParser {
 	/**
 	 *
 	 * @param path chemin du fichier json contenant l'arborescence
-	 * @return un arbre composer de treenode représentant l'arborescance des fichiers
+	 * @return un arbre composer de treenode reprï¿½sentant l'arborescance des fichiers
 	 */
 	public DefaultMutableTreeNode setDirectoryTree(String path) {
 

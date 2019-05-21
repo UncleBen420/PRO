@@ -28,12 +28,11 @@ public class CsvParser {
         
         
         for (String str : tags) {
-        	
-        	if(str.equals("")) {
-        		result.add(new ArrayList<String>());
-            }else {
-            	String[] splits = str.split(";");
-            	result.add(new ArrayList<String>(Arrays.asList(splits)));
+            if(str.equals("")){
+                result.add(new ArrayList<String>());
+            } else {
+                String[] splits = str.split(";");
+                result.add(new ArrayList<String>(Arrays.asList(splits)));
             }
         }
 

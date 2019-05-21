@@ -2,20 +2,13 @@ package searchfilters;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 import JTreeManager.TaggedTreeNode;
 import Tag.Parser;
-import meteoAPI.MeteoAPI;
-import meteoAPI.MeteoPerDay;
+import Tag.TagHistory;
 import properties.PropertiesHandler;
 /**
  *
@@ -23,21 +16,21 @@ import properties.PropertiesHandler;
  */
 public class TagTreeFilter extends AbstractTreeFilter {
 
-	private Parser parser = new Parser();
-	private File rootDirectory;
-	private boolean tagged;
+	private final File rootDirectory;
+	private final boolean tagged;
 	
 	public TagTreeFilter(boolean tagged) {
 
 		this.tagged = tagged;
 		this.rootDirectory = new File(PropertiesHandler.parseProperties().getProperty("imageBankPath"));
+                TagHistory.getPaths();
 	}
 	
 
     /**
-     * Regarde si le noeud est une image et si cette image est taggée.
-     * @param node le noeud étant analysé
-     * @return si oui ou non on doit l'enlevé de l'arbre
+     * Regarde si le noeud est une image et si cette image est taggee.
+     * @param node le noeud etant analyse
+     * @return si oui ou non on doit l'enleve de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -59,19 +52,8 @@ public class TagTreeFilter extends AbstractTreeFilter {
 				value += "/" + elements[i];
 
 			}
-
-			try {
-				
-				if(parser.isTagged(new File(value)) == tagged) {
-					return false;
-				}else {
-					return true;
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				
-				e.printStackTrace();
-			}
+                        
+                        return TagHistory.findTag(value) != tagged;
 		}
 		
 		return false;

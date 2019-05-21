@@ -26,6 +26,8 @@ import java.util.logging.Logger;
  * @author gaetan
  */
 public class TagHistory {
+    
+    private static ArrayList<String> paths;
 
     /**
      * Enregistre ou met à jour les tags pour une ou plusieurs images dans un
@@ -98,8 +100,10 @@ public class TagHistory {
 
         for (ArrayList<String> elem : tags) {
             JsonArray tag = new JsonArray();
-            for (String str : elem) {
-                tag.add(str);
+            if(elem != null){
+                for (String str : elem) {
+                    tag.add(str);
+                }
             }
             tagArray.add(tag);
         }
@@ -204,6 +208,45 @@ public class TagHistory {
      * @return chemin relatif
      */
     static public String getRelativePath(String path) {
-        return path.substring(path.indexOf("Cam�ra", 0));
+        return path.substring(path.indexOf("Caméra", 0));
+    }
+    
+    static public boolean findTag(String path){
+        path = getRelativePath(path);
+        
+        return paths.contains(path);
+    }
+    
+    static public void getPaths(){
+        paths = new ArrayList<>();
+        
+        File history = new File("history.json");
+        try {
+
+            if (history.exists()) {
+                try (FileReader reader = new FileReader(history)) {
+                    JsonParser parser = new JsonParser();
+                    JsonElement json = parser.parse(reader);
+                    if (!json.isJsonNull()) {
+                        JsonObject root = json.getAsJsonObject();
+
+                        JsonArray content = root.getAsJsonArray("content");
+                        JsonObject tmp;
+
+                        for (int i = 0; i < content.size(); i++) {
+                            tmp = content.get(i).getAsJsonObject();
+                            String path = tmp.get("path").getAsString();
+                            JsonArray tags = tmp.getAsJsonArray("tags");
+                            if(tags != null && tags.size() > 0)
+                                paths.add(path);
+                        }
+
+                    }
+                }
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(TagHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
