@@ -30,7 +30,7 @@ import org.w3c.dom.NodeList;
 /**
  * Classe de gestion des metadatas d'images avec l'ajout et la lecture des tags.
  *
- * @author Bacso
+ * @author Groupe PRO B-9
  */
 public class Parser {
 

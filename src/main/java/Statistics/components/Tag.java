@@ -2,7 +2,7 @@ package Statistics.components;
 
 /**
  * Represente un tag sur une image
- * @author Marion
+ * @author Groupe PRO B-9
  */
 public class Tag {
 

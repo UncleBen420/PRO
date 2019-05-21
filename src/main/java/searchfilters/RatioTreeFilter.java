@@ -13,6 +13,10 @@ import imageparser.ImageParser;
 import meteoAPI.MeteoPerDay;
 import properties.PropertiesHandler;
 
+/**
+ * extension de abstractTreeFilter permettant de filtrer les noeud par rapport au ratio
+ * @author Groupe PRO B-9
+ */
 public class RatioTreeFilter extends AbstractTreeFilter {
 
 	private ImageParser ip = new ImageParser();
@@ -28,9 +32,9 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 	}
 
 	/**
-     * analyse les noeuds, sur les caractéristes entre les différences des images d'une séquance
-     * @param node le noeud étant analysé
-     * @return si oui ou non on doit l'enlevé de l'arbre
+     * analyse les noeuds, sur les caractï¿½ristes entre les diffï¿½rences des images d'une sï¿½quance
+     * @param node le noeud ï¿½tant analysï¿½
+     * @return si oui ou non on doit l'enlevï¿½ de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {

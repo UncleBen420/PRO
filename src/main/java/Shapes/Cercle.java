@@ -9,7 +9,7 @@ package Shapes;
 /**
  * Classe implémentant les Cercle
  * 
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class Cercle extends Shapes{
 	private double radius;

@@ -11,8 +11,8 @@ import Tag.Parser;
 import Tag.TagHistory;
 import properties.PropertiesHandler;
 /**
- *
- * @author gaetan
+ * extension de abstractTreeFilter permettant de filtrer les noeud par rapport aux tags
+ * @author Groupe PRO B-9
  */
 public class TagTreeFilter extends AbstractTreeFilter {
 

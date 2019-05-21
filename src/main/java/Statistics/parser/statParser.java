@@ -18,7 +18,7 @@ import Statistics.components.Tag;
 
 /**
  * Parse le fichier history qui contient les informations json de la banque d'images
- * @author Edd993Surface
+ * @author Groupe PRO B-9
  */
 public class statParser {
  

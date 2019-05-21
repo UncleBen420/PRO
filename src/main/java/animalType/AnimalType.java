@@ -6,8 +6,8 @@
 package animalType;
 
 /**
- *
- * @author Edd993Surface
+ * Enumeration des type d'animaux possible
+ * @author Groupe PRO B-9
  */
 public enum AnimalType {
     

@@ -7,7 +7,7 @@ import java.util.stream.StreamSupport;
 
 /**
  * Represente une image de la banque de donnee avec tous ses attributs
- * @author Marion
+ * @author Groupe PRO B-9
  */
 public class Image {
 

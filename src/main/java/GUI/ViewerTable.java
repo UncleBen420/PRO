@@ -16,7 +16,7 @@ import javax.swing.table.*;
 /**
  * Classe implémentant l'interface du tableau pour les tags
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class ViewerTable extends JPanel {
 

@@ -9,7 +9,7 @@ package Shapes;
 /**
  * Classe implémentant les formes
  * 
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public abstract class Shapes {
 	private double x, y;

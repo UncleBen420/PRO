@@ -13,8 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Edd993Surface
+ * Cette classe regroupe divers paramètres graphiques utilisable dans les autres classes
+ * @author Groupe PRO B-9
  */
 public class GUIRender {
     
