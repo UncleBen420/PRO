@@ -7,6 +7,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,11 +54,17 @@ public class ChangeFilter extends TreeFilter {
     	
         JPanel minMax = new JPanel();
         minMax.setOpaque(false);
-        JLabel min = new JLabel("min");
-        min.setForeground(GUIRender.getForeColor());
-        JLabel max = new JLabel("max");
-        max.setForeground(GUIRender.getForeColor());
-        minMax.setLayout(new BorderLayout());
+        JTextField min = new JTextField("min");
+       // min.setForeground(Color.WHITE);
+        JLabel ratio = new JLabel("ratio accepte");
+        ratio.setForeground(Color.WHITE);
+       // min.setForeground(GUIRender.getForeColor());
+        JTextField max = new JTextField("max");
+       // max.setForeground(Color.WHITE);
+
+        //max.setForeground(GUIRender.getForeColor());
+        minMax.setLayout(new BoxLayout(minMax, BoxLayout.Y_AXIS));
+        minMax.add(ratio);
     	minMax.add(min, BorderLayout.NORTH);
     	minMax.add(max, BorderLayout.CENTER);
     	
@@ -68,9 +76,15 @@ public class ChangeFilter extends TreeFilter {
         JSlider sliderTolerance = new JSlider(0,100);
         sliderTolerance.setOpaque(false);
         sliderTolerance.setPreferredSize(new Dimension(200,20));
-        sliders.setLayout(new BorderLayout());
-        sliders.add(sliderPrecision, BorderLayout.NORTH);
-        sliders.add(sliderTolerance, BorderLayout.CENTER);
+        sliders.setLayout(new BoxLayout(sliders, BoxLayout.Y_AXIS));
+        JLabel lprecision = new JLabel("precision");
+        lprecision.setForeground (Color.WHITE);
+        sliders.add(lprecision);
+        sliders.add(sliderPrecision);
+        JLabel ltolerance = new JLabel("tolerance");
+        ltolerance.setForeground(Color.WHITE);
+        sliders.add(ltolerance);
+        sliders.add(sliderTolerance);
         
         
         
