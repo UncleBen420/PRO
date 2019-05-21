@@ -9,8 +9,8 @@ import java.util.List;
 import com.google.gson.*;
 
 /**
- * Class MeteoAPI parser de fichier Json, elle parcourt toutes les dates des images, récupère les informations
- * nécessaire afin de créer des objets représentant les différentes données voulues (MeteoPerDay).
+ * Class MeteoAPI parser de fichier Json, elle parcourt toutes les dates des images, recupere les informations
+ * necessaire afin de creer des objets representant les differentes donnees voulues (MeteoPerDay).
  *
  * @author Groupe PRO B-9
  */
@@ -19,7 +19,7 @@ public class MeteoAPI {
     private List<MeteoPerDay> listMeteoPerDay = new ArrayList<>();
 
     /**
-     * Methode récupérant tout les informations météo fournies par l'API
+     * Methode recuperant tout les informations meteo fournies par l'API
      *
      * @return listMeteoPerDay
      */
@@ -40,8 +40,8 @@ public class MeteoAPI {
     }
 
     /**
-     * Methode récupérant tout les informations météo fournies par l'API en lui appliquant un filtre
-     * avec une condition météorologique
+     * Methode recuperant tout les informations meteo fournies par l'API en lui appliquant un filtre
+     * avec une condition meteorologique
      *
      * @return listMeteoPerDay
      */
@@ -74,8 +74,8 @@ public class MeteoAPI {
     }
 
     /**
-     * Methode récupérant tout les informations météo fournies par l'API en lui appliquant un filtre
-     * avec des températures
+     * Methode recuperant tout les informations meteo fournies par l'API en lui appliquant un filtre
+     * avec des temperatures
      *
      * @return listMeteoPerDay
      */
@@ -108,7 +108,7 @@ public class MeteoAPI {
     }
 
     /**
-     * Methode récupérant toutes informations sur le Json pour une date
+     * Methode recuperant toutes informations sur le Json pour une date
      *
      * @param date
      */
@@ -120,7 +120,7 @@ public class MeteoAPI {
     }
 
     /**
-     * Methode recupérant pour une date donnée, toutes les informations pour chaque heure du jour
+     * Methode recuperant pour une date donnee, toutes les informations pour chaque heure du jour
      *
      * @param met
      * @param hour

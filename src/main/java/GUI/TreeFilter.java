@@ -3,29 +3,19 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import JTreeManager.JTreeManager;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
-import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import searchfilters.AbstractTreeFilter;
 
 /**
- * Cette classe est une représentation graphique des filtres sur le JTree
+ * Cette classe est une representation graphique des filtres sur le JTree
  * @author Groupe PRO B-9
  */
 abstract public class TreeFilter extends JPanel {
@@ -93,13 +83,13 @@ abstract public class TreeFilter extends JPanel {
     }
 
     /**
-     * Cet methode doit etre implémentée dans les sous classe extendant celle-ci
-     * Elle permet d'ajouter des éléments graphiques différents entre les filtres
+     * Cet methode doit etre implementee dans les sous classe extendant celle-ci
+     * Elle permet d'ajouter des elements graphiques differents entre les filtres
      */
     protected abstract void specialisation();
 
     /**
-     * Methode qui crée les éléments graphiques de base commun à chaque filtre
+     * Methode qui cree les elements graphiques de base commun a chaque filtre
      */
     private void common() {
 

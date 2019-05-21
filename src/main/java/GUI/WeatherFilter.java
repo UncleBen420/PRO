@@ -1,22 +1,13 @@
-/**
- * PRO
- * Authors: Bacso
- * File: WeatherFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 import JTreeManager.JTreeManager;
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -24,7 +15,7 @@ import meteoAPI.TYPEMETEO;
 import searchfilters.MeteoTreeFilter;
 
 /**
- * Classe implémentant l'interface pour le fitre meteo
+ * Classe implementant l'interface pour le fitre meteo
  *
  * @author Groupe PRO B-9
  */

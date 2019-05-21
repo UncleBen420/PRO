@@ -1,9 +1,4 @@
-/**
- * PRO
- * Authors: Bacso
- * File: TagHistory.java
- * IDE: NetBeans IDE 11
- */
+
 package Tag;
 
 import com.google.gson.JsonArray;
@@ -19,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Implémente les fonctions pour créer un fichier JSON contenant les tags
- * ajoutés aux images pour pouvoir effectuer les statistiques sans parcourir
+ * Implemente les fonctions pour creer un fichier JSON contenant les tags
+ * ajoutes aux images pour pouvoir effectuer les statistiques sans parcourir
  * toutes les images à chaque fois
  *
  * @author Groupe PRO B-9
@@ -84,7 +79,7 @@ public class TagHistory {
     }
 
     /**
-     * Crée la base du fichier json avec les premier tags
+     * Cree la base du fichier json avec les premier tags
      *
      * @param history Fichier d'historique
      * @param tags Liste des tags
@@ -127,7 +122,7 @@ public class TagHistory {
     }
 
     /**
-     * Met à jour les tags pour une image déjà enregistrée
+     * Met a jour les tags pour une image deja enregistree
      *
      * @param history fichier d'historique
      * @param tags liste des tags
@@ -190,7 +185,7 @@ public class TagHistory {
     }
 
     /**
-     * Récupère l'extension d'un fichier
+     * Recupere l'extension d'un fichier
      *
      * @param file Fichier
      * @return Retourne l'extension

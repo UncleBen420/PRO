@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: FiltersPanel.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import javax.swing.BoxLayout;
@@ -13,7 +7,7 @@ import javax.swing.JScrollPane;
 import JTreeManager.JTreeManager;
 
 /**
- * Classe implémentant l'interface pour les filtres
+ * Classe implementant l'interface pour les filtres
  *
  * @author Groupe PRO B-9
  */

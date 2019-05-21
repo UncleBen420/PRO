@@ -41,7 +41,7 @@ import javax.swing.tree.TreeNode;
  *
  * @author Groupe PRO B-9
  * Cette classe est une extention d'un jPanel
- * Elle englobe un jtree qu'elle gère et met a jour quand des filtre sur ce jTree on été créer
+ * Elle englobe un jtree qu'elle gere et met a jour quand des filtre sur ce jTree on ete creer
  */
 public class JTreeManager extends JPanel {
 
@@ -78,7 +78,7 @@ public class JTreeManager extends JPanel {
 
 		JsonTreeParser parser = new JsonTreeParser();
 
-		// si un fichier json de l'arborescence existe, il va le prendre sinon il va en créer un
+		// si un fichier json de l'arborescence existe, il va le prendre sinon il va en creer un
 		if (this.JsonTree.exists()) {
 
 			root = parser.setDirectoryTree(properties.getProperty("JsonBankPath"));
@@ -87,7 +87,7 @@ public class JTreeManager extends JPanel {
 
 		} else {
 
-			// averti l'utilisateur que le fichier n'a pas pu etre trouvé, il demande aussi si il veut charger le fichier history
+			// averti l'utilisateur que le fichier n'a pas pu etre trouve, il demande aussi si il veut charger le fichier history
 			int reply = JOptionPane.showConfirmDialog(null, "The program cannot with the json Directory tree file,\nIt start parsing a new one.\nWould you like to parse a new history.json file ?", "CrapauducViewer can't find json file", JOptionPane.YES_NO_OPTION);
 
 			showWaiting();
@@ -115,16 +115,16 @@ public class JTreeManager extends JPanel {
 
 	/**
 	 *
-	 * @param f filtre étant ajouter au manager
+	 * @param f filtre etant ajouter au manager
 	 */
 	public void addFiltre(final AbstractTreeFilter f) {
 
-		// si le jtree n'est pas encore setté, le filtre n'est pas ajouté
+		// si le jtree n'est pas encore sette, le filtre n'est pas ajoute
 		if (!flagFilter) {
 			return;
 		}
 
-		// on crée une thread qui se charge de filtrer le jtree
+		// on cree une thread qui se charge de filtrer le jtree
 		Thread thread;
 		thread = new Thread() {
 			@Override
@@ -174,14 +174,13 @@ public class JTreeManager extends JPanel {
 				try {
 					mutex.acquire();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 
 				}
 
 				setText(f.toString() + " is deleted");
 				tree.setEnabled(false);
 				
-				// pour eviter un phenomène de perte de noeud de l'arbre, on enlève tous les filtre après celui devant etre enlevé puis on les remets
+				// pour eviter un phenomene de perte de noeud de l'arbre, on enleve tous les filtre apres celui devant etre enleve puis on les remets
 
 				int i = Filtre.size();
 				for (i--; i >= Filtre.indexOf(f); i--) {
@@ -228,8 +227,8 @@ public class JTreeManager extends JPanel {
 
 	/**
 	 * le JTreeManager contient un text qui permet d'afficher des informations
-	 * cette methode permet d'ajouter le texte qui va etre montré 
-	 * @param text qui va etre montré
+	 * cette methode permet d'ajouter le texte qui va etre montre
+	 * @param text qui va etre montre
 	 */
 	private void setText(String text) {
 

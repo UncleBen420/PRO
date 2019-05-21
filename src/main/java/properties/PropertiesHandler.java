@@ -12,8 +12,8 @@ import java.util.Properties;
 public class PropertiesHandler {
 	
     /**
-     * parse les propri�t�s du fichier.
-     * @return les propri�t�s du fichier
+     * parse les proprietes du fichier.
+     * @return les proprietes du fichier
      */
     static public Properties parseProperties() {
 		Properties properties = new Properties();

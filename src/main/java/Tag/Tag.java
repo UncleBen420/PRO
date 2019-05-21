@@ -1,9 +1,4 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Tag.java
- * IDE: NetBeans IDE 11
- */
+
 package Tag;
 
 import java.util.ArrayList;
@@ -11,7 +6,7 @@ import java.util.ArrayList;
 import Shapes.*;
 
 /**
- * Classe servant à formater les tags au format CSV (;) et à les envoyer au
+ * Classe servant a formater les tags au format CSV (;) et a les envoyer au
  * parser.
  *
  * @author Groupe PRO B-9
@@ -24,10 +19,10 @@ public class Tag {
     private Parser parser = new Parser();
 
     /**
-     * Ajout d'un tag à la liste des tags en le formatant
+     * Ajout d'un tag a la liste des tags en le formatant
      *
-     * @param tag Tag à formater
-     * @param shape Forme à formater
+     * @param tag Tag a formater
+     * @param shape Forme a formater
      */
     public void setTag(ArrayList<String> tag, Shapes shape) {
         if (shape == null) {
@@ -42,7 +37,7 @@ public class Tag {
      * Format un tag en ligne csv
      *
      * @param tag Tag à formater
-     * @return Tag formaté
+     * @return Tag formate
      */
     public String formatTag(ArrayList<String> tag) {
         String str = "heigViewer;";
@@ -58,7 +53,7 @@ public class Tag {
      * Formate une forme en ligne CSV
      *
      * @param shape Forme à formter
-     * @return Forme formatée
+     * @return Forme formatee
      */
     public String formatShape(Shapes shape) {
         String str = "";

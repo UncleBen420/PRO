@@ -71,18 +71,18 @@ public class StatisticsHandler {
     private void initiasize() {   
   
         for (AnimalType a : AnimalType.values()) {
-            // initialisation de la liste pour animalTypeCounter�a 0 pour toute categorie categorie d'animaux
+            // initialisation de la liste pour animalTypeCountera 0 pour toute categorie categorie d'animaux
             animalTypeCounter.put(a, 0);
         }
 
         for (Month a : Month.values()) {
-            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType a�0 pour toute categorie d'animaux
+            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType a 0 pour toute categorie d'animaux
             List<Integer> list_byType_ForDaily = createListOfAnimals();
             
-            // declaration du mappage entre les observations des animaux observ�s et les jours d'un mois
+            // declaration du mappage entre les observations des animaux observes et les jours d'un mois
             Map<Integer, Integer> mapDay_Observations = new HashMap();
             
-            // declaration du mappage entre les observations des animaux PAR TYPE observ�s et les jours d'un mois
+            // declaration du mappage entre les observations des animaux PAR TYPE observes et les jours d'un mois
             Map<Integer, List<Integer>> mapDay_Observations_byType = new HashMap();
             
             //declaration du mappage entre le jour d'un mois et les observations d'un animal par heure
@@ -94,26 +94,26 @@ public class StatisticsHandler {
             
             for (int jour = 1; jour <= a.getNbDays(); jour++) {
            
-                // initialisation � 0 du mappage journalier 
+                // initialisation a 0 du mappage journalier 
                 mapDay_Observations.put(jour, 0);
                 
                 
-                // delcaration et initialisation de la liste pour dailyObservationsByAnimalType a�0 pour toute categorie d'animaux
+                // delcaration et initialisation de la liste pour dailyObservationsByAnimalType a 0 pour toute categorie d'animaux
                 List<Integer> listAnimals_byType_forDaily = createListOfAnimals(); 
                 mapDay_Observations_byType.put(jour, listAnimals_byType_forDaily);
              
                
-                // initialisation de le mappage pour connecter les animaux observ�s avec les heures d'un jour
+                // initialisation de le mappage pour connecter les animaux observes avec les heures d'un jour
                 Map <Integer, Integer> mapHour_Observations = new HashMap<>();
                 
-                // initialisation de le mappage pour connecter les animaux observ�s PAR TYPE avec les heures d'un jour
+                // initialisation de le mappage pour connecter les animaux observes PAR TYPE avec les heures d'un jour
                 Map<Integer, List<Integer>> mapHour_Observations_byType = new HashMap();
 
                 for (int hour = 0; hour < HOURSINADAY; hour++){
-                    // initialisaiton � 0 du mappage horaire
+                    // initialisaiton a 0 du mappage horaire
                     mapHour_Observations.put(hour,0);
                     
-                    //initialisation du mappage PAR TYPE des animaux observ�s par heure
+                    //initialisation du mappage PAR TYPE des animaux observes par heure
                     List<Integer> listAnimals_byType_forHourly = createListOfAnimals(); 
                     mapHour_Observations_byType.put(hour, listAnimals_byType_forHourly);
                 }  

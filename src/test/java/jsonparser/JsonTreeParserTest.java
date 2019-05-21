@@ -27,7 +27,7 @@ public class JsonTreeParserTest {
 
 		String actual = printTree(temp);
 		System.out.println(actual);
-		String expected = "Caméra 012017-02-23001jpg09561553444168110s (8th copy).jpg";
+		String expected = "CamÃ©ra 012017-02-23001jpg09561553444168110s (8th copy).jpg";
 
 		assertEquals(expected, actual);
 
