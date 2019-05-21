@@ -31,7 +31,7 @@ import javafx.scene.control.*;
 
 /**
  * Cette classe construit une fenetre de statistiques sur la banque d'images
- * @author Marion
+ * @author Groupe PRO B-9
  */
 public class statisticsPage extends JFrame {
     
@@ -125,7 +125,7 @@ public class statisticsPage extends JFrame {
     /**
      * Cree un Group JavaFX avec la zone de generation dynamique, a savoir
      * les graphes par mois et par jour
-     * @return le groupe créé
+     * @return le groupe crï¿½ï¿½
      */
     public Group createDynamGroup() {
         Group dynamGroup = new Group();
@@ -366,7 +366,7 @@ public class statisticsPage extends JFrame {
     
     /**
      * Creation d'un groupe avec la pie chart
-     * @return le group créé
+     * @return le group crï¿½ï¿½
      */
     public Group createMainPieChart() {
         

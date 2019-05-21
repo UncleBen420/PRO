@@ -9,7 +9,7 @@ package Shapes;
 /**
  * Classe implémentant les rectangles
  * 
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class Rectangle extends Shapes{
 	private double width;

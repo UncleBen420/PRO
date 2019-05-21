@@ -14,7 +14,7 @@ import Shapes.*;
  * Classe servant à formater les tags au format CSV (;) et à les envoyer au
  * parser.
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class Tag {
     // Liste des tags formate

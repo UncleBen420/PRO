@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * ajoutés aux images pour pouvoir effectuer les statistiques sans parcourir
  * toutes les images à chaque fois
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class TagHistory {
     

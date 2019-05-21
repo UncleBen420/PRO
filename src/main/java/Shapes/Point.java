@@ -9,7 +9,7 @@ package Shapes;
 /**
  * Classe implémentant les points
  * 
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class Point extends Shapes{
 	

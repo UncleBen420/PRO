@@ -2,7 +2,7 @@ package Statistics.components;
 
 /**
  * Enum representant les mois de l'annee avec leur nombre de jours
- * @author Edd993Surface
+ * @author Groupe PRO B-9
  */
 public enum Month {
 

@@ -45,7 +45,7 @@ import javax.swing.*;
 /**
  * Classe implémentant le slider d'images
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class SliderDemo extends JPanel
         implements ActionListener,

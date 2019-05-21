@@ -2,6 +2,8 @@ package meteoAPI;
 
 /**
  * Enumeration représentant les différentes conditions météorologique possible
+ *
+ * @author Groupe PRO B-9
  */
 public enum TYPEMETEO {
     DEGAGE("Clear"),

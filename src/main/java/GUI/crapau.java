@@ -18,8 +18,9 @@ import java.awt.*;
  */
 
 /**
+ * Interface graphique du projet
  *
- * @author Sudo
+ * @author Groupe PRO B-9
  */
 public class crapau extends javax.swing.JFrame {
 

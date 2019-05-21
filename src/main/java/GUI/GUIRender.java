@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Edd993Surface
+ * @author Groupe PRO B-9
  */
 public class GUIRender {
     

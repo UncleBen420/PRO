@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Classe regroupant les informations météo par jour
  *
+ * @author Groupe PRO B-9
  */
 public class MeteoPerDay {
     private Date date;

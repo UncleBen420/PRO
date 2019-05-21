@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * Classe découpant les tags en liste de String
  *
- * @author Bacso
+ * @author Groupe PRO B-9
  */
 public class CsvParser {
 

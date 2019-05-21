@@ -12,7 +12,7 @@ import Tag.TagHistory;
 import properties.PropertiesHandler;
 /**
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class TagTreeFilter extends AbstractTreeFilter {
 

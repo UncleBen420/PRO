@@ -7,6 +7,10 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Classe qui gère les exceptions
+ * @author Groupe PRO B-9
+ */
 public class LogFileWritingHandler {
 
 	public static void handleException(String m, StackTraceElement[] s) {

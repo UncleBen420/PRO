@@ -11,6 +11,8 @@ import com.google.gson.*;
 /**
  * Class MeteoAPI parser de fichier Json, elle parcourt toutes les dates des images, récupère les informations
  * nécessaire afin de créer des objets représentant les différentes données voulues (MeteoPerDay).
+ *
+ * @author Groupe PRO B-9
  */
 public class MeteoAPI {
 
