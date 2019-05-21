@@ -1,13 +1,7 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Shapes.java
- * IDE: NetBeans IDE 11
- */
 package Shapes;
 
 /**
- * Classe implémentant les formes
+ * Classe implementant les formes
  * 
  * @author Groupe PRO B-9
  */

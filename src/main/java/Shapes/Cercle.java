@@ -1,13 +1,7 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Cercle.java
- * IDE: NetBeans IDE 11
- */
 package Shapes;
 
 /**
- * Classe implémentant les Cercle
+ * Classe implementant les Cercle
  * 
  * @author Groupe PRO B-9
  */

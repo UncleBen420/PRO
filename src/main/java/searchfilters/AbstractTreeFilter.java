@@ -79,7 +79,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     * remet le dernier element enlevé dans l'arbre
+     * remet le dernier element enleve dans l'arbre
      */
     public void PopToTree() {
     	
@@ -125,7 +125,7 @@ public abstract class AbstractTreeFilter {
 	}
 
     /**
-     * remet dans l'arbre tous les noeud enlevé
+     * remet dans l'arbre tous les noeud enleve
      */
     public void unfiltreTree() {
 		

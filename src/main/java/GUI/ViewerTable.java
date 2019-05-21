@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- * Classe implémentant l'interface du tableau pour les tags
+ * Classe implementant l'interface du tableau pour les tags
  *
  * @author Groupe PRO B-9
  */
@@ -166,7 +166,7 @@ public class ViewerTable extends JPanel {
     }
 
     /**
-     * Remplis le tableau avec les tags présents sur l'image
+     * Remplis le tableau avec les tags presents sur l'image
      *
      * @param tags Tags de l'image
      */

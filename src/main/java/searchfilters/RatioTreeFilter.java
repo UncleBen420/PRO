@@ -32,9 +32,9 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 	}
 
 	/**
-     * analyse les noeuds, sur les caract�ristes entre les diff�rences des images d'une s�quance
-     * @param node le noeud �tant analys�
-     * @return si oui ou non on doit l'enlev� de l'arbre
+     * analyse les noeuds, sur les caracteristes entre les differences des images d'une sequance
+     * @param node le noeud etant analyse
+     * @return si oui ou non on doit l'enleve de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {

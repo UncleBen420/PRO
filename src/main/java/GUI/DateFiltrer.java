@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: DateFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
@@ -19,7 +13,7 @@ import java.awt.event.*;
 import searchfilters.DateTreeFilter;
 
 /**
- * Classe implémentant l'interface pour le filtre par date
+ * Classe implementant l'interface pour le filtre par date
  *
  * @author Groupe PRO B-9
  */

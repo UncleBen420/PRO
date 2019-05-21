@@ -1,16 +1,11 @@
-/**
- * PRO
- * Authors: Bacso
- * File: CsvParser.java
- * IDE: NetBeans IDE 11
- */
+
 package Tag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Classe découpant les tags en liste de String
+ * Classe decoupant les tags en liste de String
  *
  * @author Groupe PRO B-9
  */
@@ -20,7 +15,7 @@ public class CsvParser {
      * Découpe les tags en liste de String
      *
      * @param tags Tags de l'image
-     * @return Liste des tags découpés
+     * @return Liste des tags decoupes
      */
     static public ArrayList<ArrayList<String>> getTag(ArrayList<String> tags) {
         ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
