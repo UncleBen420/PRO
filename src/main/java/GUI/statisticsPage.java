@@ -80,6 +80,7 @@ public class statisticsPage extends JFrame {
     
     /**
      * Fonction de creation de la Scene JaxaFX
+     * @return la scene cree
      */
     private Scene createScene() {
         
@@ -121,8 +122,10 @@ public class statisticsPage extends JFrame {
         return (scene);
     }
     
-    /*
-     * Cree un Group JavaFX avec la zone de generation dynamique
+    /**
+     * Cree un Group JavaFX avec la zone de generation dynamique, a savoir
+     * les graphes par mois et par jour
+     * @return le groupe créé
      */
     public Group createDynamGroup() {
         Group dynamGroup = new Group();
@@ -170,13 +173,13 @@ public class statisticsPage extends JFrame {
         /* BOUTON DE CHOIX MOIS */
         Text pleaseChooseMonth = new Text();
         pleaseChooseMonth.setFont(new Font(10));
-        pleaseChooseMonth.setText("Choose a \n"
-                                    + "month :");
+        pleaseChooseMonth.setText("Choose a \n" + "month :");
         pleaseChooseMonth.setX(1750);
         pleaseChooseMonth.setY(475);
         pleaseChooseMonth.setFill(Color.WHITE);
         dynamGroup.getChildren().add(pleaseChooseMonth);
         
+        /* Selecteur pour le bouton de choix mois */
         List<String> monthSelector = new ArrayList<>();         
         for (Month m : Month.values()){
           monthSelector.add(m.getName());
@@ -187,7 +190,7 @@ public class statisticsPage extends JFrame {
         monthBox.getSelectionModel().selectFirst();
         
         /* BOUTON DE CHOIX JOUR */
-        // Numeros disponibles pour le choix du jour
+        // Selecteur pour les numeros disponibles pour le choix du jour
         List<String> daySelector = new ArrayList<>();         
         for (int day = 1; day <= monthConfig.getNbDays(); day++){
           daySelector.add(Integer.toString(day));
@@ -205,7 +208,7 @@ public class statisticsPage extends JFrame {
         pleaseChooseDay.setFill(Color.WHITE);
         dynamGroup.getChildren().add(pleaseChooseDay);
         
-        /** PARAMETRES PAR DEFAUT **/
+        /** PARAMETRES PAR DEFAUT AU LANCEMENT DE LA FENETRE **/
         /* Peuplage des graphiques mois */
         monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
         populateMonthLineChart(monthLineChart);
@@ -215,7 +218,7 @@ public class statisticsPage extends JFrame {
         populateDayLineChart(dayLineChart);
         populateDayBarChart(sbcDay);
         
-        // Evenements suite aux choix
+        // Evenements suite aux choix du mois
         monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
             ChangeListener<Number>() {
             @Override
@@ -230,6 +233,7 @@ public class statisticsPage extends JFrame {
                 }
                 dayBox.setItems(FXCollections.observableArrayList(daySelector));
                 dayBox.getSelectionModel().selectFirst();
+                // Clear des 2 charts mois
                 monthLineChart.getData().clear();
                 sbcMonth.getData().clear();
                 // Mise a jour des axes du line chart mois
@@ -243,12 +247,15 @@ public class statisticsPage extends JFrame {
                 yAxisBarMonth.setLowerBound(0);
                 yAxisBarMonth.setUpperBound(statHandler.getTaggedAnimals());
                 yAxisBarMonth.setTickUnit(10);
+                xAxisBarMonth.getCategories().clear();
+                xAxisBarMonth.setCategories(FXCollections.observableArrayList(daySelector));
+                
                 /* Peuplage des graphiques mois */
                 monthLineChart.setTitle("Number of animals for " + monthConfig.getName());
                 populateMonthLineChart(monthLineChart);
                 populateMonthBarChart(sbcMonth);
                 
-                /* Peuplage des graphiques jour avec 1er jour du mois */
+                /* Peuplage des graphiques jour avec 1er jour du mois par defaut */
                 dayConfig = "1";
                 dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName());
                 populateDayLineChart(dayLineChart);
@@ -359,6 +366,7 @@ public class statisticsPage extends JFrame {
     
     /**
      * Creation d'un groupe avec la pie chart
+     * @return le group créé
      */
     public Group createMainPieChart() {
         
@@ -431,8 +439,9 @@ public class statisticsPage extends JFrame {
         return lineChartGroup;
     }
     
-    /*
+    /**
      * Cree un groupe avec la bar chart par annee
+     * @return le groupe cree
      */
     public Group createBarChart() {
         Group barChartGroup = new Group();
@@ -473,8 +482,9 @@ public class statisticsPage extends JFrame {
         return barChartGroup;
     }
     
-    /*
+    /**
      * Cree un groupe avec la zone d'infos droite
+     * @return le groupe cree
      */
     public Group createSideInfosZone() {
         
@@ -559,12 +569,16 @@ public class statisticsPage extends JFrame {
         return sideInfosGroup;
     }
     
+    /**
+     * Initialisation du FxPanel avec la Scene
+     * @param fxPanel le FxPanel a initialiser
+     */
     private void initFX(JFXPanel fxPanel) {
         Scene scene = createScene();
         fxPanel.setScene(scene);
     }
     
-    /*
+    /**
      * Main de JavaFX
      */
     public void statistics() {
