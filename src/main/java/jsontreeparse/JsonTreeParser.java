@@ -90,7 +90,7 @@ public class JsonTreeParser {
 				root.addProperty("imageCounter", counterhist);
 				
 				BufferedWriter hist = new BufferedWriter(new OutputStreamWriter(
-						new FileOutputStream(new File("history.json").getAbsolutePath()),
+						new FileOutputStream(new File("jsonFiles/history.json").getAbsolutePath()),
 						StandardCharsets.UTF_8));
 				
 				hist.write(root.toString());

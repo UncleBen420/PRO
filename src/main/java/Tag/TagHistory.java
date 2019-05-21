@@ -37,7 +37,7 @@ public class TagHistory {
      * @param imagesPath Chemin de l'image ou du dossier
      */
     static public void saveTag(ArrayList<ArrayList<String>> tags, String imagesPath) {
-        File history = new File("history.json");
+        File history = new File("jsonFiles/history.json");
         File file = new File(imagesPath);
         try {
             if (file.isFile()) {
@@ -220,7 +220,7 @@ public class TagHistory {
     static public void getPaths(){
         paths = new ArrayList<>();
         
-        File history = new File("history.json");
+        File history = new File("jsonFiles/history.json");
         try {
 
             if (history.exists()) {

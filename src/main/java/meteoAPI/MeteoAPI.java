@@ -25,7 +25,7 @@ public class MeteoAPI {
      */
     public List<MeteoPerDay> getList() {
         JsonParser jsonParser = new JsonParser();
-        try (FileReader reader = new FileReader("src/meteo.json")) {
+        try (FileReader reader = new FileReader("jsonFiles/meteo.json")) {
             Object obj = jsonParser.parse(reader);
             JsonArray dates = (JsonArray) ((JsonObject) ((JsonObject) obj).get("meteo")).get("dates");
             dates.forEach(date -> parseDateObject((JsonObject) date));

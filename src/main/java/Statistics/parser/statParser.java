@@ -22,7 +22,7 @@ import Statistics.components.Tag;
  */
 public class statParser {
  
-    private static final String HISTORIC = "history.json";
+    private static final String HISTORIC = "jsonFiles/history.json";
     private final StatisticsHandler statHandler;
     
     public statParser(StatisticsHandler statHandler) {

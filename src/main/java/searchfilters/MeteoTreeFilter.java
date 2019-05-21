@@ -14,7 +14,7 @@ import meteoAPI.MeteoPerDay;
 import meteoAPI.TYPEMETEO;
 
 /**
- * Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la météo ce jour la. 
+ * Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la mï¿½tï¿½o ce jour la. 
  * @author Groupe PRO B-9
  */
 public class MeteoTreeFilter extends AbstractTreeFilter {
@@ -25,8 +25,8 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	private MeteoAPI ma = new MeteoAPI();
 
     /**
-     * Constructeur de filtre météo
-     * @param meteo la météo voulue
+     * Constructeur de filtre mï¿½tï¿½o
+     * @param meteo la mï¿½tï¿½o voulue
      */
     public MeteoTreeFilter(TYPEMETEO meteo) {
 		this.meteo = meteo;
@@ -34,9 +34,9 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     * analyse les noeuds, si c'est des noeuds de date, la méthode regarde si la date a la bonne météo (pluie, beau,...)  
-     * @param node le noeud étant analysé
-     * @return si oui ou non on doit l'enlevé de l'arbre
+     * analyse les noeuds, si c'est des noeuds de date, la mï¿½thode regarde si la date a la bonne mï¿½tï¿½o (pluie, beau,...)  
+     * @param node le noeud ï¿½tant analysï¿½
+     * @return si oui ou non on doit l'enlevï¿½ de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -65,8 +65,12 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 				if (nodeDate.compareTo(date.getDate()) == 0) {
 					
 					date.setProper();
-
-					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0);
+                                        
+                                        if(!(taggedTreeNode.getChildCount() != 0 && taggedTreeNode.getChildAt(0).getChildCount() != 0)){
+                                            return true;
+                                        }
+                                        
+					TaggedTreeNode hours = (TaggedTreeNode) taggedTreeNode.getChildAt(0).getChildAt(0); 
 
 					for (int i = 0; i < hours.getChildCount(); i++) {
 						
@@ -121,7 +125,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	}
     
     public String toString() {
-		return "Filtre de Météo";
+		return "Filtre de Meteo";
 
 	}
 
