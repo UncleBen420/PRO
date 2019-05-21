@@ -21,8 +21,8 @@ import java.awt.event.MouseListener;
 import searchfilters.AbstractTreeFilter;
 
 /**
- *
- * @author gaetan
+ * Cette classe est une représentation graphique des filtres sur le JTree
+ * @author Groupe PRO B-9
  */
 abstract public class TreeFilter extends JPanel {
 
@@ -88,8 +88,15 @@ abstract public class TreeFilter extends JPanel {
 
     }
 
+    /**
+     * Cet methode doit etre implémentée dans les sous classe extendant celle-ci
+     * Elle permet d'ajouter des éléments graphiques différents entre les filtres
+     */
     protected abstract void specialisation();
 
+    /**
+     * Methode qui crée les éléments graphiques de base commun à chaque filtre
+     */
     private void common() {
 
         filter = new SelButton("Filter", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());

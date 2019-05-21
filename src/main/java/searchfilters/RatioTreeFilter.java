@@ -27,6 +27,12 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 		this.rootDirectory = new File(PropertiesHandler.parseProperties().getProperty("imageBankPath"));
 	}
 
+	/**
+     * analyse les noeuds, sur les caractéristes entre les différences des images d'une séquance
+     * @param node le noeud étant analysé
+     * @return si oui ou non on doit l'enlevé de l'arbre
+     */
+    @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
 
 		if (!(node instanceof TaggedTreeNode)) {
@@ -80,10 +86,6 @@ public class RatioTreeFilter extends AbstractTreeFilter {
 		return false;
 	}
 
-	/**
-	 *
-	 * @param node
-	 */
 	protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {

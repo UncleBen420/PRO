@@ -20,7 +20,7 @@ import searchfilters.TemperatureTreeFilter;
 /**
  * Classe implÃ©mentant l'interface pour le fitre meteo
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class TemperatureFilter extends TreeFilter {
 
@@ -30,8 +30,8 @@ public class TemperatureFilter extends TreeFilter {
 	private static final long serialVersionUID = -8934247004768877673L;
 
     /**
-     *
-     * @param manager
+     * Constructeur
+     * @param manager JTreeManager sur lequelle les filtres vont filtrer
      */
     public TemperatureFilter(final JTreeManager manager) {
 
@@ -40,7 +40,7 @@ public class TemperatureFilter extends TreeFilter {
     }
 
     /**
-     *
+     * specialisation des filtres pour la température
      */
         @Override
     protected void specialisation() {

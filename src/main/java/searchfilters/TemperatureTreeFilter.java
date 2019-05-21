@@ -34,9 +34,9 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     *
-     * @param node
-     * @return
+     * regarde si le noeud est un noeud de date, regarde si l'heure correspond a la température voulue.
+     * @param node le noeud étant analysé
+     * @return si oui ou non on doit l'enlevé de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -82,12 +82,8 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 						}else {
 							noDateFound = false;
 						}
-						
-						
 					}
-
 				}
-
 			}
 
 			if (noDateFound) {
@@ -101,10 +97,6 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 		return false;
 	}
 
-    /**
-     *
-     * @param node
-     */
     protected void filtreNode(DefaultMutableTreeNode node) {
 
 		for (int i = 0; i < node.getChildCount(); i++) {

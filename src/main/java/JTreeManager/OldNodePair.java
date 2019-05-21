@@ -3,8 +3,8 @@ package JTreeManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
- *
- * @author gaetan
+ * Cette classe permet d'associer des noeuds entre eux ainsi que de stocker un index.
+ * @author Groupe PRO B-9
  */
 public class OldNodePair {
 	
@@ -12,10 +12,10 @@ public class OldNodePair {
 	private int index;
 
     /**
-     *
-     * @param parent
-     * @param child
-     * @param index
+     * Constructeur
+     * @param parent le noeud parent du noeud enfant
+     * @param child le noeud enfant
+     * @param index l'index ou est placer le noeud enfant
      */
     public OldNodePair(DefaultMutableTreeNode parent, DefaultMutableTreeNode child, int index) {
 		super();
@@ -25,49 +25,36 @@ public class OldNodePair {
 	}
 
     /**
-     *
-     * @return
+     * @return retourne le parent
      */
     public DefaultMutableTreeNode getParent() {
 		return parent;
 	}
 
-    /**
-     *
-     * @param parent
-     */
     public void setParent(DefaultMutableTreeNode parent) {
 		this.parent = parent;
 	}
 
     /**
-     *
-     * @return
+     * @return retourne l'enfant
      */
     public DefaultMutableTreeNode getChild() {
 		return child;
 	}
 
-    /**
-     *
-     * @param child
-     */
     public void setChild(DefaultMutableTreeNode child) {
 		this.child = child;
 	}
 
     /**
      *
-     * @return
+     * @return retourne l'index
      */
     public int getIndex() {
 		return index;
 	}
 
-    /**
-     *
-     * @param index
-     */
+
     public void setIndex(int index) {
 		this.index = index;
 	}

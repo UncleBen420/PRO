@@ -15,7 +15,7 @@ import JTreeManager.JTreeManager;
 /**
  * Classe implémentant l'interface pour les filtres
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class FiltersPanel extends JPanel {
 
@@ -44,7 +44,7 @@ public class FiltersPanel extends JPanel {
 
 	/**
 	 *
-	 * @param manager
+	 * @param manager le JTreeManager sur lequelle les filtres doivent filtrer
 	 */
 	public void setManager(JTreeManager manager) {
 		

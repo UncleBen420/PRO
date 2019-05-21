@@ -26,7 +26,7 @@ import searchfilters.MeteoTreeFilter;
 /**
  * Classe implémentant l'interface pour le fitre meteo
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class WeatherFilter extends TreeFilter {
 

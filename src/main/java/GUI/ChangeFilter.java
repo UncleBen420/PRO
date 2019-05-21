@@ -30,14 +30,14 @@ import searchfilters.RatioTreeFilter;
 /**
  * Implémentation de l'interface pour le filtre par changement d'image
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class ChangeFilter extends TreeFilter {
 
     private static final long serialVersionUID = -213970803241070452L;
 
     /**
-     * Constrcuteur
+     * Constructeur
      *
      * @param manager Jtree de la banque d'image
      */

@@ -35,9 +35,9 @@ public class TagTreeFilter extends AbstractTreeFilter {
 	
 
     /**
-     *
-     * @param node
-     * @return
+     * Regarde si le noeud est une image et si cette image est taggée.
+     * @param node le noeud étant analysé
+     * @return si oui ou non on doit l'enlevé de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {

@@ -9,17 +9,17 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import JTreeManager.TaggedTreeNode;
 
 /**
- *
- * @author gaetan
+ * extention de abstractTreeFilter permettant de filtrer les noeud par rapport au date
+ * @author Groupe PRO B-9
  */
 public class DateTreeFilter extends AbstractTreeFilter {
 	
 	private Date startDate, endDate;
 	
     /**
-     *
-     * @param startdate
-     * @param endDate
+     * Constructeur du filtre
+     * @param startdate date de début du filtrage
+     * @param endDate date de fin du filtrage
      */
     public DateTreeFilter(Date startdate, Date endDate) {
 		this.startDate = startdate;
@@ -27,9 +27,9 @@ public class DateTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     *
-     * @param node
-     * @return
+     * regarde si un noeud est un noeud de date et s'y il est compris dans les date min et max
+     * @param node le noeud étant analysé
+     * @return si oui ou non on doit l'enlevé de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -60,6 +60,9 @@ public class DateTreeFilter extends AbstractTreeFilter {
 		return false;
 	}
     
+    /**
+     * modification de filtreNode pour qu'il ne parcours pas les noeud plus loin que date
+     */
     @Override
     protected void filtreNode(DefaultMutableTreeNode node) {
 

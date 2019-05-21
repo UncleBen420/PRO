@@ -3,8 +3,8 @@ package JTreeManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
- *
- * @author gaetan
+ * Extention de DefaultMutableTreeNode permettant d'ajouter un tag au noeud
+ * @author Groupe PRO B-9
  */
 public class TaggedTreeNode extends DefaultMutableTreeNode {
 	
@@ -15,9 +15,9 @@ public class TaggedTreeNode extends DefaultMutableTreeNode {
 	private String tag;
 	
     /**
-     *
-     * @param path
-     * @param tag
+     * constructeur du noeud
+     * @param path le chemin du noeud
+     * @param tag le tag du noeud
      */
     public TaggedTreeNode(String path, String tag) {
 		super(path);
@@ -25,8 +25,8 @@ public class TaggedTreeNode extends DefaultMutableTreeNode {
 	}
 
     /**
-     *
-     * @param path
+     * constructeur du noeud
+     * @param path le chemin du noeud
      */
     public TaggedTreeNode(String path) {
 		super(path);
@@ -35,16 +35,13 @@ public class TaggedTreeNode extends DefaultMutableTreeNode {
 
     /**
      *
-     * @return
+     * @return retourne le tag
      */
     public String getTag() {
 		return tag;
 	}
 
-    /**
-     *
-     * @param tag
-     */
+
     public void setTag(String tag) {
 		this.tag = tag;
 	}

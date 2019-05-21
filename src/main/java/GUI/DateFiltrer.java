@@ -21,7 +21,7 @@ import searchfilters.DateTreeFilter;
 /**
  * Classe implémentant l'interface pour le filtre par date
  *
- * @author gaetan
+ * @author Groupe PRO B-9
  */
 public class DateFiltrer extends TreeFilter {
 
