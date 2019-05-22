@@ -15,29 +15,26 @@ public class ImageParser {
     /**
      * Recupere un pixel
      *
-     * @param path
-     * @param x
-     * @param y
-     * @return
+     * @param path chemin de l'image
+     * @param x indice x du pixel
+     * @param y indice y du pixel
+     * @return le pixel au format entier
      * @throws IOException
      */
     public int getPixel(String path, int x, int y) throws IOException {
         File file = new File(path);
         BufferedImage image = ImageIO.read(file);
         // Getting pixel color by position x and y
-        int clr = image.getRGB(x, y);
-        int red = (clr & 0x00ff0000) >> 16;
-        int green = (clr & 0x0000ff00) >> 8;
-        int blue = clr & 0x000000ff;
-        return clr;
+
+        return image.getRGB(x, y);
 
     }
 
     /**
      * Recupere un buffer de pixel
      *
-     * @param path
-     * @return
+     * @param path chemin de l'image
+     * @return retourne un tableau de byte contenant les pixel
      * @throws IOException
      */
     public byte[] getPixelBuffer(String path) throws IOException {
@@ -50,13 +47,13 @@ public class ImageParser {
 
     /**
      * Compare deux images et retourne un ratio de correspondance
-     * @param path1
-     * @param path2
-     * @param hCut
-     * @param wCut
-     * @param correctness
-     * @param precision
-     * @return
+     * @param path1 chemin de l'image 1
+     * @param path2 chemin de l'image 2
+     * @param hCut coupure dans la hauteur
+     * @param wCut coupure dans la largeur
+     * @param correctness pourcentage de ressemblance autorise
+     * @param precision nombre de pixel analyse dans l'image
+     * @return retourne le pourcentage de ressemblance de l'image
      * @throws Exception
      */
     public int compareImageRatioOpti(String path1, String path2, int hCut, int wCut, int correctness, int precision) throws Exception {
@@ -92,10 +89,10 @@ public class ImageParser {
 
     /**
      * Compare deux pixels et renvoie leur différence
-     * @param pixel1
-     * @param pixel2
-     * @param correctness
-     * @return
+     * @param pixel1 premier pixel
+     * @param pixel2 deuxieme pixel
+     * @param correctness taux de ressemblance accepter
+     * @return pourcentage de ressemblance
      */
     public int comparePixelTolerance(int pixel1, int pixel2, int correctness) {
 
