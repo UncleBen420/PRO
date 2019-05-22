@@ -43,7 +43,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
- * Classe implémentant le slider d'images
+ * Classe implementant le slider d'images
  *
  * @author Groupe PRO B-9
  */
@@ -132,7 +132,7 @@ public class SliderDemo extends JPanel
     }
 
     /**
-     * Démarre l'animation
+     * Demarre l'animation
      */
     public void startAnimation() {
         //Start (or restart) animating!

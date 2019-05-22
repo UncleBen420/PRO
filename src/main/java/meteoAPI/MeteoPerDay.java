@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Classe regroupant les informations météo par jour
+ * Classe regroupant les informations meteo par jour
  *
  * @author Groupe PRO B-9
  */
@@ -16,7 +16,7 @@ public class MeteoPerDay {
     private List<Double> Temperature = new ArrayList<>();
 
     /**
-     * Constructeur de la classe lorsque la date est donnée en string
+     * Constructeur de la classe lorsque la date est donnee en string
      *
      * @param date
      */
@@ -31,7 +31,7 @@ public class MeteoPerDay {
     }
 
     /**
-     * Constructeur de la classe lorsque la date est donnée en format Date
+     * Constructeur de la classe lorsque la date est donnee en format Date
      *
      * @param date
      */
@@ -49,7 +49,7 @@ public class MeteoPerDay {
     }
 
     /**
-     * Methode retournant la liste des condition météorologique pour chaque heure
+     * Methode retournant la liste des condition meteorologique pour chaque heure
      *
      * @return meteo
      */
@@ -58,7 +58,7 @@ public class MeteoPerDay {
     }
 
     /**
-     * Methode permettant d'ajouter une condition météorologique à l'objet
+     * Methode permettant d'ajouter une condition meteorologique à l'objet
      *
      * @param summary
      */
@@ -76,7 +76,7 @@ public class MeteoPerDay {
     }
 
     /**
-     * Methode permettant d'ajouter une température à l'objet
+     * Methode permettant d'ajouter une temperature à l'objet
      *
      * @param temperature
      */
@@ -85,7 +85,7 @@ public class MeteoPerDay {
     }
 
     /**
-     * Initialise toutes les cases de la liste à la valeur par défaut
+     * Initialise toutes les cases de la liste a la valeur par défaut
      */
     public void setProper() {
         for (int i = Meteo.size(); i < 24; i++) {

@@ -7,49 +7,102 @@
 \f1\fs18
 \sbkpage
 {\par}
-{\f1\fs24 public abstract class {\b searchfilters.treeFilter}\par\par}{\par}
+{\f1\fs24 public class {\b searchfilters.RatioTreeFilter} extends {\f1\cb1\cf2 searchfilters.AbstractTreeFilter}\par\par}{extension de abstractTreeFilter permettant de filtrer les noeud par rapport au ratio \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public treeFilter(
-JTree tree)} \par 
+{\f1\cb1\cf2 \b public RatioTreeFilter(
+int min, 
+int max, 
+int tolerance, 
+int precision)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public boolean analyseNode(
+DefaultMutableTreeNode node)} \par 
+analyse les noeuds, sur les caracteristes entre les differences des images d'une sequance \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab node - le noeud etant analyse \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab si oui ou non on doit l'enleve de l'arbre \par
 \par 
-{\f1\cb1\cf2 \b public treeFilter()} \par 
+{\f1\cb1\cf2 \b protected void filtreNode(
+DefaultMutableTreeNode node)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private ip} \par 
+\par 
+{\f1\cb1\cf2 \b private min} \par 
+\par 
+{\f1\cb1\cf2 \b private max} \par 
+\par 
+{\f1\cb1\cf2 \b private tolerance} \par 
+\par 
+{\f1\cb1\cf2 \b private precision} \par 
+\par 
+{\f1\cb1\cf2 \b private rootDirectory} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public abstract class {\b searchfilters.AbstractTreeFilter}\par\par}{Cette classe implemente les methodes de base pour filtrer sur un jtree \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public AbstractTreeFilter(
+JTree tree)} \par 
+Constructeur du filtre \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab tree - l'arbre composer de DefaultMutableTreeNode \par
+\par 
+{\f1\cb1\cf2 \b public AbstractTreeFilter()} \par 
+Constructeur du filtre \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public javax.swing.JTree getTree()} \par 
+get l'arbre sur lequelle ce filtre pointe \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab l'arbre sur lequelle cette fonction filtre \par
 \par 
 {\f1\cb1\cf2 \b public void setTree(
 JTree tree)} \par 
+permet de placer sur quel arbre va filtrer le filtre \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
 \par 
 {\f1\cb1\cf2 \b protected void removeFromTree(
 DefaultMutableTreeNode node)} \par 
+enleve un noeud de l'arbre et ces enfant \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab node - le noeud a enlever \par
 \par 
 {\f1\cb1\cf2 \b public void PopToTree()} \par 
+remet le dernier element enleve dans l'arbre \par
 \par 
 {\f1\cb1\cf2 \b public void filtreTree()} \par 
+Filtre tous l'arbre en appliquant une condition de recherche \par
 \par 
 {\f1\cb1\cf2 \b protected void filtreNode(
 DefaultMutableTreeNode node)} \par 
+Filtre l'arbre en applicant une condition depuis la racine node. \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab node - le noeud sur lequel nous filtrons \par
 \par 
 {\f1\cb1\cf2 \b public void unfiltreTree()} \par 
+remet dans l'arbre tous les noeud enleve \par
 \par 
 {\f1\cb1\cf2 \b public abstract boolean analyseNode(
 DefaultMutableTreeNode node)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab node - le noeud analyser \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab si oui ou non le noeud doit etre enlever \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String testToString()} \par 
 \par 
 {\f1\cb1\cf2 \b public java.lang.String toString()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
@@ -62,15 +115,86 @@ DefaultMutableTreeNode node)} \par
 {\f1\cb1\cf2 \b private filtredElements} \par 
 \par 
 {\f1\cb1\cf2 \b private tree} \par 
+\par 
+{\f1\cb1\cf2 \b private model} \par 
+\par 
+{\f1\cb1\cf2 \b private root} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b searchfilters.TreeFilterDate} extends {\f1\cb1\cf2 searchfilters.treeFilter}\par\par}{\par}
+{\f1\fs24 public class {\b imageparser.ImageParser}\par\par}{Cette classe permet de faire des operations d'analyse sur une image \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public TreeFilterDate(
-Date startdate, 
-Date endDate)} \par 
+{\f1\cb1\cf2 \b public ImageParser()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public int getPixel(
+String path, 
+int x, 
+int y)} \par 
+Recupere un pixel \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\tab - \par
+\tab - \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab \par
+{\f1\cb1\cf3 \b Throws} \par 
+\tab - \par
+\par 
+{\f1\cb1\cf2 \b public byte[] getPixelBuffer(
+String path)} \par 
+Recupere un buffer de pixel \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab \par
+{\f1\cb1\cf3 \b Throws} \par 
+\tab - \par
+\par 
+{\f1\cb1\cf2 \b public int compareImageRatioOpti(
+String path1, 
+String path2, 
+int hCut, 
+int wCut, 
+int correctness, 
+int precision)} \par 
+Compare deux images et retourne un ratio de correspondance \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\tab - \par
+\tab - \par
+\tab - \par
+\tab - \par
+\tab - \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab \par
+{\f1\cb1\cf3 \b Throws} \par 
+\tab - \par
+\par 
+{\f1\cb1\cf2 \b public int comparePixelTolerance(
+int pixel1, 
+int pixel2, 
+int correctness)} \par 
+Compare deux pixels et renvoie leur différence \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\tab - \par
+\tab - \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b searchfilters.TemperatureTreeFilter} extends {\f1\cb1\cf2 searchfilters.AbstractTreeFilter}\par\par}{extension de abstractTreeFilter permettant de filtrer les noeud par rapport a la température \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public TemperatureTreeFilter(
+double tempMin, 
+double tempMax)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
 \tab - \par
@@ -79,10 +203,116 @@ Date endDate)} \par
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public boolean analyseNode(
 DefaultMutableTreeNode node)} \par 
+regarde si le noeud est un noeud de date, regarde si l'heure correspond a la temperature voulue. \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab node - le noeud etant analyse \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab si oui ou non on doit l'enleve de l'arbre \par
+\par 
+{\f1\cb1\cf2 \b protected void filtreNode(
+DefaultMutableTreeNode node)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private tempMin} \par 
+\par 
+{\f1\cb1\cf2 \b private tempMax} \par 
+\par 
+{\f1\cb1\cf2 \b private df} \par 
+\par 
+{\f1\cb1\cf2 \b private dates} \par 
+\par 
+{\f1\cb1\cf2 \b private ma} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b meteoAPI.MeteoPerDay}\par\par}{Classe regroupant les informations meteo par jour \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public MeteoPerDay(
+String date)} \par 
+Constructeur de la classe lorsque la date est donnee en string \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
+\par 
+{\f1\cb1\cf2 \b public MeteoPerDay(
+Date date)} \par 
+Constructeur de la classe lorsque la date est donnee en format Date \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public java.util.Date getDate()} \par 
+Methode retournant la date de l'objet \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab date \par
+\par 
+{\f1\cb1\cf2 \b public java.util.List getMeteo()} \par 
+Methode retournant la liste des condition meteorologique pour chaque heure \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab meteo \par
+\par 
+{\f1\cb1\cf2 \b public void addMeteo(
+Object summary)} \par 
+Methode permettant d'ajouter une condition meteorologique à l'objet \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\par 
+{\f1\cb1\cf2 \b public java.util.List getTemperature()} \par 
+Methode retournant la liste des temperature pour chaque heure \par
 {\f1\cb1\cf3 \b Returns} \par 
 \tab \par
+\par 
+{\f1\cb1\cf2 \b public void addTemperature(
+Object temperature)} \par 
+Methode permettant d'ajouter une temperature à l'objet \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
+\par 
+{\f1\cb1\cf2 \b public void setProper()} \par 
+Initialise toutes les cases de la liste a la valeur par défaut \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private date} \par 
+\par 
+{\f1\cb1\cf2 \b private Meteo} \par 
+\par 
+{\f1\cb1\cf2 \b private Temperature} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b searchfilters.DateTreeFilter} extends {\f1\cb1\cf2 searchfilters.AbstractTreeFilter}\par\par}{extention de abstractTreeFilter permettant de filtrer les noeud par rapport au date \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public DateTreeFilter(
+Date startdate, 
+Date endDate)} \par 
+Constructeur du filtre \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab startdate - date de debut du filtrage \par
+\tab endDate - date de fin du filtrage \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public boolean analyseNode(
+DefaultMutableTreeNode node)} \par 
+regarde si un noeud est un noeud de date et s'y il est compris dans les date min et max \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab node - le noeud etant analyse \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab si oui ou non on doit l'enleve de l'arbre \par
+\par 
+{\f1\cb1\cf2 \b protected void filtreNode(
+DefaultMutableTreeNode node)} \par 
+modification de filtreNode pour qu'il ne parcours pas les noeud plus loin que date \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
@@ -92,65 +322,8 @@ DefaultMutableTreeNode node)} \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b meteoAPI.MeteoPerDay}\par\par}{\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public MeteoPerDay(
-String date)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\par 
-{\f1\cb1\cf2 \b public MeteoPerDay(
-Date date)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public java.util.Date getDate()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public java.util.List getMeteo()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public void addMeteo(
-Object summary)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\par 
-{\f1\cb1\cf2 \b public java.util.List getTemperature()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public void addTemperature(
-Object temperature)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\par 
-{\f1\cb1\cf2 \b public java.util.List getRainInfo()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public void addRain(
-Boolean rainInfo)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private date} \par 
-\par 
-{\f1\cb1\cf2 \b private Meteo} \par 
-\par 
-{\f1\cb1\cf2 \b private Temperature} \par 
-\par 
-{\f1\cb1\cf2 \b private rain} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b meteoAPI.MeteoAPI}\par\par}{\par}
+{\f1\fs24 public class {\b meteoAPI.MeteoAPI}\par\par}{Class MeteoAPI parser de fichier Json, elle parcourt toutes les dates des images, recupere les informations necessaire afin de creer des objets representant les differentes donnees voulues (MeteoPerDay). \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public MeteoAPI()} \par 
@@ -158,59 +331,68 @@ Boolean rainInfo)} \par
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public java.util.List getList()} \par 
+Methode recuperant tout les informations meteo fournies par l'API \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b private void parseDateObject(
-JsonObject date)} \par 
+\tab listMeteoPerDay \par
 \par 
 {\f1\cb1\cf2 \b public java.util.List getListFiltreSummary(
 TYPEMETEO filtre)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+Methode recuperant tout les informations meteo fournies par l'API en lui appliquant un filtre avec une condition meteorologique \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab listMeteoPerDay \par
 \par 
 {\f1\cb1\cf2 \b public java.util.List getListFiltreTemperature(
-Double filtre)} \par 
+double min, 
+double max)} \par 
+Methode recuperant tout les informations meteo fournies par l'API en lui appliquant un filtre avec des temperatures \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab listMeteoPerDay \par
+\par 
+{\f1\cb1\cf2 \b private void parseDateObject(
+JsonObject date)} \par 
+Methode recuperant toutes informations sur le Json pour une date \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
 \par 
 {\f1\cb1\cf2 \b private void parseHourObject(
 MeteoPerDay met, 
 JsonObject hour)} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private list} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b searchfilters.MeteoTreeFilter} extends {\f1\cb1\cf2 searchfilters.treeFilter}\par\par}{\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public MeteoTreeFilter(
-TYPEMETEO meteo, 
-Boolean rain)} \par 
+Methode recuperant pour une date donnee, toutes les informations pour chaque heure du jour \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
 \tab - \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private listMeteoPerDay} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b searchfilters.MeteoTreeFilter} extends {\f1\cb1\cf2 searchfilters.AbstractTreeFilter}\par\par}{Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la meteo ce jour la. \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public MeteoTreeFilter(
+TYPEMETEO meteo)} \par 
+Constructeur de filtre meteo \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab meteo - la meteo voulue \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public boolean analyseNode(
 DefaultMutableTreeNode node)} \par 
+analyse les noeuds, si c'est des noeuds de date, la methode regarde si la date a la bonne meteo (pluie, beau,...) \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab node - le noeud etant analyse \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab si oui ou non on doit l'enleve de l'arbre \par
 \par 
 {\f1\cb1\cf2 \b protected void filtreNode(
 DefaultMutableTreeNode node)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+modification de filtreNode pour qu'il ne parcours pas les noeud plus loin que date \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
@@ -220,15 +402,46 @@ DefaultMutableTreeNode node)} \par
 \par 
 {\f1\cb1\cf2 \b private dates} \par 
 \par 
-{\f1\cb1\cf2 \b private rain} \par 
+{\f1\cb1\cf2 \b private ma} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public final class {\b meteoAPI.TYPEMETEO} extends {\f1\cb1\cf2 java.lang.Enum}\par\par}{\par}
+{\f1\fs24 public class {\b searchfilters.TagTreeFilter} extends {\f1\cb1\cf2 searchfilters.AbstractTreeFilter}\par\par}{extension de abstractTreeFilter permettant de filtrer les noeud par rapport aux tags \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public TagTreeFilter(
+boolean tagged)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public boolean analyseNode(
+DefaultMutableTreeNode node)} \par 
+Regarde si le noeud est une image et si cette image est taggee. \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab node - le noeud etant analyse \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab si oui ou non on doit l'enleve de l'arbre \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private final rootDirectory} \par 
+\par 
+{\f1\cb1\cf2 \b private final tagged} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public final class {\b meteoAPI.TYPEMETEO} extends {\f1\cb1\cf2 java.lang.Enum}\par\par}{Enumeration representant les differentes conditions meteorologique possible \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b private TYPEMETEO(
 String meteo)} \par 
+Constructeur de l'enum \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab - \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
@@ -238,13 +451,17 @@ String meteo)} \par
 String name)} \par 
 \par 
 {\f1\cb1\cf2 \b public java.lang.String toString()} \par 
+Retourne les conditions en string \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab meteo \par
 \par 
 {\f1\cb1\cf2 \b public static meteoAPI.TYPEMETEO getTypeByString(
-String s)} \par 
+String condition)} \par 
+Retourne les bytes de la condition fournie en parametre \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab - \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab weather \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
@@ -256,19 +473,125 @@ String s)} \par
 \par 
 {\f1\cb1\cf2 \b public static final OVERCAST} \par 
 \par 
+{\f1\cb1\cf2 \b public static final Rain} \par 
+\par 
+{\f1\cb1\cf2 \b public static final LightRain} \par 
+\par 
+{\f1\cb1\cf2 \b public static final Snow} \par 
+\par 
+{\f1\cb1\cf2 \b public static final LightSleet} \par 
+\par 
+{\f1\cb1\cf2 \b public static final Foggy} \par 
+\par 
 {\f1\cb1\cf2 \b private meteo} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\f1\fs28 \b Package GUI\par}
 {\par}
-{\f1\fs24 public class {\b GUI.DateFiltrer} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implémentant l'interface pour le filtre par date \par
+{\f1\fs24 public class {\b GUI.GUIRender}\par\par}{Cette classe regroupe divers parametres graphiques utilisable dans les autres classes \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public DateFiltrer(
-JTreeManager manager)} \par 
+{\f1\cb1\cf2 \b public GUIRender()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public static java.awt.Color getForeColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Color getBackColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Color getButtonColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Color getButtonSelectedColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Font getSectionTitle()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Font getMainTitle()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Font getElementSelected()} \par 
+\par 
+{\f1\cb1\cf2 \b public static java.awt.Font GetElement()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final CRAPA_VIOLET} \par 
+\par 
+{\f1\cb1\cf2 \b private static final BUTTON_VIOLET} \par 
+\par 
+{\f1\cb1\cf2 \b private static final BUTTON_VIOLET_SEL} \par 
+\par 
+{\f1\cb1\cf2 \b private static mainTitle} \par 
+\par 
+{\f1\cb1\cf2 \b private static sectionTitle} \par 
+\par 
+{\f1\cb1\cf2 \b private static element} \par 
+\par 
+{\f1\cb1\cf2 \b private static elementSelected} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.ViewerTable} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{Classe implementant l'interface du tableau pour les tags \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public ViewerTable()} \par 
+Constructeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public void addRow()} \par 
+Ajoute un ligne au tableau \par
+\par 
+{\f1\cb1\cf2 \b public void delRow()} \par 
+Supprime une ligne au tableau \par
+\par 
+{\f1\cb1\cf2 \b public void clear()} \par 
+Vide le tableau \par
+\par 
+{\f1\cb1\cf2 \b public java.util.ArrayList getData()} \par 
+Retourne la valeur des cases du tableau \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab Valeurs des cases du tableau \par
+\par 
+{\f1\cb1\cf2 \b public void setUpAnimalColumn(
+JTable table, 
+TableColumn animalColumn)} \par 
+Set la combobox \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab table - Tableau \par
+\tab animalColumn - Colonne contenant la combobox \par
+\par 
+{\f1\cb1\cf2 \b public void setTags(
+ArrayList tags)} \par 
+Remplis le tableau avec les tags presents sur l'image \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab tags - Tags de l'image \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\par 
+{\f1\cb1\cf2 \b private final table} \par 
+\par 
+{\f1\cb1\cf2 \b private columnNames} \par 
+\par 
+{\f1\cb1\cf2 \b private rowData} \par 
+\par 
+{\f1\cb1\cf2 \b private final row} \par 
+\par 
+{\f1\cb1\cf2 \b  model} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.WeatherFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implementant l'interface pour le fitre meteo \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public WeatherFilter(
+JTreeManager manager)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - jtree de la banque d'image \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
@@ -280,7 +603,293 @@ JTreeManager manager)} \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b GUI.crapau} extends {\f1\cb1\cf2 javax.swing.JFrame}\par\par}{\par}
+{\f1\fs24 private class {\b GUI.WeatherFilter.ComboBoxRenderer} extends {\f1\cb1\cf2 javax.swing.JLabel} implements {\f1\cb1\cf2 javax.swing.ListCellRenderer}\par\par}{\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public ComboBoxRenderer()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public java.awt.Component getListCellRendererComponent(
+JList list, 
+Object value, 
+int index, 
+boolean isSelected, 
+boolean cellHasFocus)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.SliderDemo} extends {\f1\cb1\cf2 javax.swing.JPanel} implements {\f1\cb1\cf2 java.awt.event.ActionListener}, {\f1\cb1\cf2 java.awt.event.WindowListener}\par\par}{Classe implementant le slider d'images \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public SliderDemo()} \par 
+Constructeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b  void addWindowListener(
+Window w)} \par 
+Add a listener for window events. \par
+\par 
+{\f1\cb1\cf2 \b public void windowIconified(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowDeiconified(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowOpened(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowClosing(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowClosed(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowActivated(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void windowDeactivated(
+WindowEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void startAnimation()} \par 
+Demarre l'animation \par
+\par 
+{\f1\cb1\cf2 \b public void stopAnimation()} \par 
+Stoppe l'animation \par
+\par 
+{\f1\cb1\cf2 \b public void actionPerformed(
+ActionEvent e)} \par 
+\par 
+{\f1\cb1\cf2 \b public void nextPicture()} \par 
+Update the label to display the image for the current frame. \par
+\par 
+{\f1\cb1\cf2 \b public void prevPicture()} \par 
+Update the label to display the image for the current frame. \par
+\par 
+{\f1\cb1\cf2 \b protected static javax.swing.ImageIcon createImageIcon(
+String path)} \par 
+Returns an ImageIcon, or null if the path was invalid. \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab path - Chemin de l'image \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab Icone de l'image \par
+\par 
+{\f1\cb1\cf2 \b private java.lang.String getFileExtension(
+File file)} \par 
+Retourne l'extension d'un fichier \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab file - fichier \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab extension du fichier \par
+\par 
+{\f1\cb1\cf2 \b public void addImage(
+String path)} \par 
+Ajoute les images au slider \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab path - chemin de l'image \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getImage()} \par 
+Retourne le chemin de l'image actuelle \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab chemin de l'image actuelle \par
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getDirectory()} \par 
+Retourne le chemin du dossier de l'image actuelle \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab chemin du dossier de l'image actuelle \par
+\par 
+{\f1\cb1\cf2 \b public void setTable(
+ViewerTable table)} \par 
+Setteur du tableau de tags \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab table - tableau de tags \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\par 
+{\f1\cb1\cf2 \b private static final FPS_INIT} \par 
+\par 
+{\f1\cb1\cf2 \b private frameNumber} \par 
+\par 
+{\f1\cb1\cf2 \b private images} \par 
+\par 
+{\f1\cb1\cf2 \b private final delay} \par 
+\par 
+{\f1\cb1\cf2 \b private final timer} \par 
+\par 
+{\f1\cb1\cf2 \b private directory} \par 
+\par 
+{\f1\cb1\cf2 \b private final imagesPath} \par 
+\par 
+{\f1\cb1\cf2 \b private final parserTag} \par 
+\par 
+{\f1\cb1\cf2 \b private table} \par 
+\par 
+{\f1\cb1\cf2 \b  picture} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.FiltersPanel} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{Classe implementant l'interface pour les filtres \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public FiltersPanel()} \par 
+Constructeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public void setManager(
+JTreeManager manager)} \par 
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - le JTreeManager sur lequelle les filtres doivent filtrer \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\par 
+{\f1\cb1\cf2 \b private final panel} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.ChangeFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Implementation de l'interface pour le filtre par changement d'image \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public ChangeFilter(
+JTreeManager manager)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - Jtree de la banque d'image \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b protected void specialisation()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.DateFiltrer} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implementant l'interface pour le filtre par date \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public DateFiltrer(
+JTreeManager manager)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - Jtree de la banque d'image \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b protected void specialisation()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.TagFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implementant l'interface pour le filtre par tag \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public TagFilter(
+JTreeManager manager)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - jtree de la banque d'image \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b protected void specialisation()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\par 
+{\f1\cb1\cf2 \b private tagChecked} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.TemperatureFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implementant l'interface pour le fitre meteo \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public TemperatureFilter(
+JTreeManager manager)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - JTreeManager sur lequelle les filtres vont filtrer \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b protected void specialisation()} \par 
+specialisation des filtres pour la temperature \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public abstract class {\b GUI.TreeFilter} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{Cette classe est une representation graphique des filtres sur le JTree \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b protected TreeFilter()} \par 
+Constructeur \par
+\par 
+{\f1\cb1\cf2 \b public TreeFilter(
+JTreeManager manager)} \par 
+Constructeur avec manager \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab manager - jtree de la banque d'image \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b protected abstract void specialisation()} \par 
+Cet methode doit etre implementee dans les sous classe extendant celle-ci Elle permet d'ajouter des elements graphiques differents entre les filtres \par
+\par 
+{\f1\cb1\cf2 \b private void common()} \par 
+Methode qui cree les elements graphiques de base commun a chaque filtre \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b protected panel} \par 
+\par 
+{\f1\cb1\cf2 \b protected specialistationPanel} \par 
+\par 
+{\f1\cb1\cf2 \b protected label} \par 
+\par 
+{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+\par 
+{\f1\cb1\cf2 \b private final GUIRender} \par 
+\par 
+{\f1\cb1\cf2 \b private delete} \par 
+\par 
+{\f1\cb1\cf2 \b protected filter} \par 
+\par 
+{\f1\cb1\cf2 \b protected manager} \par 
+\par 
+{\f1\cb1\cf2 \b protected currentFilter} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 private class {\b GUI.TreeFilter.SelButton} extends {\f1\cb1\cf2 javax.swing.JButton}\par\par}{\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public SelButton(
+String text)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b GUI.crapau} extends {\f1\cb1\cf2 javax.swing.JFrame}\par\par}{Interface graphique du projet \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public crapau()} \par 
@@ -345,7 +954,11 @@ String[] args)} \par
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
 {\f1\cb1\cf2 \b private static final serialVersionUID} \par 
 \par 
+{\f1\cb1\cf2 \b private final GUIRender} \par 
+\par 
 {\f1\cb1\cf2 \b private tagManager} \par 
+\par 
+{\f1\cb1\cf2 \b private stats} \par 
 \par 
 {\f1\cb1\cf2 \b private BackGround} \par 
 \par 
@@ -362,10 +975,6 @@ String[] args)} \par
 {\f1\cb1\cf2 \b private Settings} \par 
 \par 
 {\f1\cb1\cf2 \b private Side} \par 
-\par 
-{\f1\cb1\cf2 \b private Title1} \par 
-\par 
-{\f1\cb1\cf2 \b private Title2} \par 
 \par 
 {\f1\cb1\cf2 \b private Titre} \par 
 \par 
@@ -411,276 +1020,261 @@ String[] args)} \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b GUI.ViewerTable} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{Classe implémentant l'interface du tableau pour les tags \par
+{\f1\fs24 public class {\b GUI.statisticsPage} extends {\f1\cb1\cf2 javax.swing.JFrame}\par\par}{Cette classe construit une fenetre de statistiques sur la banque d'images \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public ViewerTable()} \par 
+{\f1\cb1\cf2 \b public statisticsPage()} \par 
+Constructeur \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public void addRow()} \par 
+{\f1\cb1\cf2 \b public void initAndShowGUI()} \par 
+Fonction de creation de l'interface graphique \par
 \par 
-{\f1\cb1\cf2 \b public void delRow()} \par 
-\par 
-{\f1\cb1\cf2 \b public void clear()} \par 
-\par 
-{\f1\cb1\cf2 \b public java.util.ArrayList getData()} \par 
+{\f1\cb1\cf2 \b private javafx.scene.Scene createScene()} \par 
+Fonction de creation de la Scene JaxaFX \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab la scene cree \par
 \par 
-{\f1\cb1\cf2 \b public void setUpAnimalColumn(
-JTable table, 
-TableColumn animalColumn)} \par 
+{\f1\cb1\cf2 \b public javafx.scene.Group createDynamGroup()} \par 
+Cree un Group JavaFX avec la zone de generation dynamique, a savoir les graphes par mois et par jour \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le groupe cree \par
+\par 
+{\f1\cb1\cf2 \b public void populateDayLineChart(
+LineChart dayLineChart)} \par 
+Population du graphique animaux totaux par jour \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
+\tab dayLineChart - la chart a peupler \par
 \par 
-{\f1\cb1\cf2 \b public void setTags(
+{\f1\cb1\cf2 \b public void populateMonthLineChart(
+LineChart monthLineChart)} \par 
+Population du graphique animaux totaux par mois \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab monthLineChart - la chart a peupler \par
+\par 
+{\f1\cb1\cf2 \b public void populateMonthBarChart(
+StackedBarChart sbcMonth)} \par 
+Population du graphique animaux par type et par mois \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab sbcMonth - la chart a peupler \par
+\par 
+{\f1\cb1\cf2 \b public void populateDayBarChart(
+StackedBarChart sbcDay)} \par 
+Population du graphique animaux par type et par jour \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab sbcDay - la chart a peupler \par
+\par 
+{\f1\cb1\cf2 \b public javafx.scene.Group createMainPieChart()} \par 
+Creation d'un groupe avec la pie chart \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le group cree \par
+\par 
+{\f1\cb1\cf2 \b public javafx.scene.Group createLineChart()} \par 
+Cree un groupe avec la line chart par annee \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le group cree \par
+\par 
+{\f1\cb1\cf2 \b public javafx.scene.Group createBarChart()} \par 
+Cree un groupe avec la bar chart par annee \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le groupe cree \par
+\par 
+{\f1\cb1\cf2 \b public javafx.scene.Group createSideInfosZone()} \par 
+Cree un groupe avec la zone d'infos droite \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le groupe cree \par
+\par 
+{\f1\cb1\cf2 \b private void initFX(
+JFXPanel fxPanel)} \par 
+Initialisation du FxPanel avec la Scene \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab fxPanel - le FxPanel a initialiser \par
+\par 
+{\f1\cb1\cf2 \b public void statistics()} \par 
+Main de JavaFX \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private parser} \par 
+\par 
+{\f1\cb1\cf2 \b private statHandler} \par 
+\par 
+{\f1\cb1\cf2 \b private dayConfig} \par 
+\par 
+{\f1\cb1\cf2 \b private monthConfig} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+\sect 
+{\f1\fs28 \b Package Statistics.components\par}
+{\par}
+{\f1\fs24 public class {\b Statistics.components.Tag}\par\par}{Represente un tag sur une image \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Tag()} \par 
+Constructeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public void setTypeAnimal(
+String animalType)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getAnimalType()} \par 
+\par 
+{\f1\cb1\cf2 \b public void setIsMale(
+boolean isMale)} \par 
+\par 
+{\f1\cb1\cf2 \b public void setSize(
+double size)} \par 
+\par 
+{\f1\cb1\cf2 \b public void setIsEnteringTunnel(
+boolean isEnteringTunnel)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private animalType} \par 
+\par 
+{\f1\cb1\cf2 \b private isMale} \par 
+\par 
+{\f1\cb1\cf2 \b private size} \par 
+\par 
+{\f1\cb1\cf2 \b private isEnteringTunnel} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public final class {\b Statistics.components.Month} extends {\f1\cb1\cf2 java.lang.Enum}\par\par}{Enum representant les mois de l'annee avec leur nombre de jours \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b private Month(
+String name, 
+String abbreviation, 
+int nbDays)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab name - le nom du mois \par
+\tab abbreviation - son abreviation \par
+\tab nbDays - le nombre de jours qu'il a \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public static Statistics.components.Month[] values()} \par 
+\par 
+{\f1\cb1\cf2 \b public static Statistics.components.Month valueOf(
+String name)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getName()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getAbbreviation()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getNbDays()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b public static final JAN} \par 
+\par 
+{\f1\cb1\cf2 \b public static final FEB} \par 
+\par 
+{\f1\cb1\cf2 \b public static final MAR} \par 
+\par 
+{\f1\cb1\cf2 \b public static final APR} \par 
+\par 
+{\f1\cb1\cf2 \b public static final MAY} \par 
+\par 
+{\f1\cb1\cf2 \b public static final JUN} \par 
+\par 
+{\f1\cb1\cf2 \b public static final JUL} \par 
+\par 
+{\f1\cb1\cf2 \b public static final AUG} \par 
+\par 
+{\f1\cb1\cf2 \b public static final SEP} \par 
+\par 
+{\f1\cb1\cf2 \b public static final OCT} \par 
+\par 
+{\f1\cb1\cf2 \b public static final NOV} \par 
+\par 
+{\f1\cb1\cf2 \b public static final DEC} \par 
+\par 
+{\f1\cb1\cf2 \b private final name} \par 
+\par 
+{\f1\cb1\cf2 \b private final abbreviation} \par 
+\par 
+{\f1\cb1\cf2 \b private final nbDays} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b Statistics.components.Image}\par\par}{Represente une image de la banque de donnee avec tous ses attributs \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Image(
+String path, 
 ArrayList tags)} \par 
+Constructeur \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
-\par 
-{\f1\cb1\cf2 \b private table} \par 
-\par 
-{\f1\cb1\cf2 \b  columnNames} \par 
-\par 
-{\f1\cb1\cf2 \b  rowData} \par 
-\par 
-{\f1\cb1\cf2 \b  row} \par 
-\par 
-{\f1\cb1\cf2 \b  model} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b GUI.WeatherFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implémentant l'interface pour le fitre meteo \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public WeatherFilter(
-JTreeManager manager)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab path - le chemin d'acces de l'image \par
+\tab tags - la liste des tags enregistres sur l'image \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b protected void specialisation()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
-\par 
-{\f1\cb1\cf2 \b private rainChecked} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public abstract class {\b GUI.TreeFilter} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b protected TreeFilter()} \par 
-\par 
-{\f1\cb1\cf2 \b public TreeFilter(
-JTreeManager manager)} \par 
+{\f1\cb1\cf2 \b private static java.lang.String[] splitPath(
+String pathString)} \par 
+Renvoie une representation du path sous forme d'un tableau, chaque element du tableau est un sous-dossier \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b protected abstract void specialisation()} \par 
+\tab pathString - le chemin d'acces a separer \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le tableau genere \par
 \par 
-{\f1\cb1\cf2 \b private void common()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
-\par 
-{\f1\cb1\cf2 \b protected panel} \par 
-\par 
-{\f1\cb1\cf2 \b private delete} \par 
-\par 
-{\f1\cb1\cf2 \b protected filter} \par 
-\par 
-{\f1\cb1\cf2 \b protected manager} \par 
-\par 
-{\f1\cb1\cf2 \b protected currentFilter} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b GUI.SliderDemo} extends {\f1\cb1\cf2 javax.swing.JPanel} implements {\f1\cb1\cf2 java.awt.event.ActionListener}, {\f1\cb1\cf2 java.awt.event.WindowListener}\par\par}{Classe implémentant le slider d'images \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public SliderDemo()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b  void addWindowListener(
-Window w)} \par 
-Add a listener for window events. \par
-\par 
-{\f1\cb1\cf2 \b public void windowIconified(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowDeiconified(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowOpened(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowClosing(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowClosed(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowActivated(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void windowDeactivated(
-WindowEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void startAnimation()} \par 
-\par 
-{\f1\cb1\cf2 \b public void stopAnimation()} \par 
-\par 
-{\f1\cb1\cf2 \b public void actionPerformed(
-ActionEvent e)} \par 
-\par 
-{\f1\cb1\cf2 \b public void nextPicture()} \par 
-Update the label to display the image for the current frame. \par
-\par 
-{\f1\cb1\cf2 \b public void prevPicture()} \par 
-Update the label to display the image for the current frame. \par
-\par 
-{\f1\cb1\cf2 \b protected static javax.swing.ImageIcon createImageIcon(
+{\f1\cb1\cf2 \b private void pathDecomposition(
 String path)} \par 
-Returns an ImageIcon, or null if the path was invalid. \par
+Enregistrement des attributs du path dans les attributs de la classe Image \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab path - Chemin de l'image \par
-{\f1\cb1\cf3 \b Returns} \par 
-\tab Icone de l'image \par
+\tab path - le chemin d'acces a decortiquer \par
 \par 
-{\f1\cb1\cf2 \b private java.lang.String getFileExtension(
-File file)} \par 
+{\f1\cb1\cf2 \b public java.util.ArrayList getTags()} \par 
 \par 
-{\f1\cb1\cf2 \b public void addImage(
-String path)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+{\f1\cb1\cf2 \b public java.lang.String getCamera()} \par 
 \par 
-{\f1\cb1\cf2 \b public java.lang.String getImage()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+{\f1\cb1\cf2 \b public java.lang.String getDate()} \par 
 \par 
-{\f1\cb1\cf2 \b public java.lang.String getDirectory()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+{\f1\cb1\cf2 \b public java.lang.String getSequence()} \par 
 \par 
-{\f1\cb1\cf2 \b public void setTable(
-ViewerTable table)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+{\f1\cb1\cf2 \b public Statistics.components.Month getMonth()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getDay()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getHour()} \par 
+\par 
+{\f1\cb1\cf2 \b public boolean hasTags()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String toString()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+{\f1\cb1\cf2 \b private camera} \par 
 \par 
-{\f1\cb1\cf2 \b static final FPS_MIN} \par 
+{\f1\cb1\cf2 \b private date} \par 
 \par 
-{\f1\cb1\cf2 \b static final FPS_MAX} \par 
+{\f1\cb1\cf2 \b private sequence} \par 
 \par 
-{\f1\cb1\cf2 \b static final FPS_INIT} \par 
+{\f1\cb1\cf2 \b private month} \par 
 \par 
-{\f1\cb1\cf2 \b  frameNumber} \par 
+{\f1\cb1\cf2 \b private day} \par 
 \par 
-{\f1\cb1\cf2 \b  NUM_FRAMES} \par 
+{\f1\cb1\cf2 \b private hour} \par 
 \par 
-{\f1\cb1\cf2 \b  images} \par 
-\par 
-{\f1\cb1\cf2 \b  delay} \par 
-\par 
-{\f1\cb1\cf2 \b  timer} \par 
-\par 
-{\f1\cb1\cf2 \b  frozen} \par 
-\par 
-{\f1\cb1\cf2 \b  directory} \par 
-\par 
-{\f1\cb1\cf2 \b  imagesPath} \par 
-\par 
-{\f1\cb1\cf2 \b private parserTag} \par 
-\par 
-{\f1\cb1\cf2 \b private table} \par 
-\par 
-{\f1\cb1\cf2 \b  picture} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b GUI.FiltersPanel} extends {\f1\cb1\cf2 javax.swing.JPanel}\par\par}{Classe implémentant l'interface pour les filtres \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public FiltersPanel()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public void setManager(
-JTreeManager manager)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
-\par 
-{\f1\cb1\cf2 \b private final panel} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b GUI.TagFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Classe implémentant l'interface pour le filtre par tag \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public TagFilter(
-JTreeManager manager)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b protected void specialisation()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b GUI.ChangeFilter} extends {\f1\cb1\cf2 GUI.TreeFilter}\par\par}{Implémentation de l'interface pour le filtre par changement d'image \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public ChangeFilter(
-JTreeManager manager)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b protected void specialisation()} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private static final serialVersionUID} \par 
+{\f1\cb1\cf2 \b private final tags} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 \sect 
 {\f1\fs28 \b Package properties\par}
 {\par}
-{\f1\fs24 public class {\b properties.PropertiesHandler}\par\par}{\par}
+{\f1\fs24 public class {\b properties.PropertiesHandler}\par\par}{Cette classe permet de parser le fichier conf.properties \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public PropertiesHandler()} \par 
@@ -688,38 +1282,40 @@ JTreeManager manager)} \par
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public static java.util.Properties parseProperties()} \par 
+parse les proprietes du fichier. \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab les proprietes du fichier \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 {\par\par}
 \sect 
 {\f1\fs28 \b Package JTreeManager\par}
 {\par}
-{\f1\fs24 public class {\b JTreeManager.TaggedTreeNode} extends {\f1\cb1\cf2 javax.swing.tree.DefaultMutableTreeNode}\par\par}{\par}
+{\f1\fs24 public class {\b JTreeManager.TaggedTreeNode} extends {\f1\cb1\cf2 javax.swing.tree.DefaultMutableTreeNode}\par\par}{Extention de DefaultMutableTreeNode permettant d'ajouter un tag au noeud \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public TaggedTreeNode(
 String path, 
 String tag)} \par 
+constructeur du noeud \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
+\tab path - le chemin du noeud \par
+\tab tag - le tag du noeud \par
 \par 
 {\f1\cb1\cf2 \b public TaggedTreeNode(
 String path)} \par 
+constructeur du noeud \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab path - le chemin du noeud \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public java.lang.String getTag()} \par 
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab retourne le tag \par
 \par 
 {\f1\cb1\cf2 \b public void setTag(
 String tag)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
@@ -729,46 +1325,42 @@ String tag)} \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b JTreeManager.OldNodePair}\par\par}{\par}
+{\f1\fs24 public class {\b JTreeManager.OldNodePair}\par\par}{Cette classe permet d'associer des noeuds entre eux ainsi que de stocker un index. \par
+\par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public OldNodePair(
 DefaultMutableTreeNode parent, 
 DefaultMutableTreeNode child, 
 int index)} \par 
+Constructeur \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
-\tab - \par
+\tab parent - le noeud parent du noeud enfant \par
+\tab child - le noeud enfant \par
+\tab index - l'index ou est placer le noeud enfant \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public javax.swing.tree.DefaultMutableTreeNode getParent()} \par 
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab retourne le parent \par
 \par 
 {\f1\cb1\cf2 \b public void setParent(
 DefaultMutableTreeNode parent)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
 \par 
 {\f1\cb1\cf2 \b public javax.swing.tree.DefaultMutableTreeNode getChild()} \par 
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab retourne l'enfant \par
 \par 
 {\f1\cb1\cf2 \b public void setChild(
 DefaultMutableTreeNode child)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
 \par 
 {\f1\cb1\cf2 \b public int getIndex()} \par 
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab retourne l'index \par
 \par 
 {\f1\cb1\cf2 \b public void setIndex(
 int index)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
@@ -784,46 +1376,60 @@ int index)} \par
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
 {\f1\cb1\cf2 \b public JTreeManager()} \par 
+Constructeur du JtreeManager \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public void addFiltre(
-treeFilter f)} \par 
+AbstractTreeFilter f)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab f - filtre etant ajouter au manager \par
 \par 
 {\f1\cb1\cf2 \b public void removeFiltre(
-treeFilter f)} \par 
+AbstractTreeFilter f)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\par 
-{\f1\cb1\cf2 \b public java.lang.String getValue()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab f - le filtre devant etre enlever \par
 \par 
 {\f1\cb1\cf2 \b public void setSlider(
 SliderDemo s)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab s - slider qui va etre ajouter \par
 \par 
 {\f1\cb1\cf2 \b public void setTable(
 ViewerTable t)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab t - qui va etre ajouter \par
+\par 
+{\f1\cb1\cf2 \b private void setText(
+String text)} \par 
+le JTreeManager contient un text qui permet d'afficher des informations cette methode permet d'ajouter le texte qui va etre montre \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab text - qui va etre montre \par
+\par 
+{\f1\cb1\cf2 \b private void releaseText()} \par 
+Permet de clear le label \par
+\par 
+{\f1\cb1\cf2 \b private void showTree()} \par 
+affiche le tree \par
+\par 
+{\f1\cb1\cf2 \b private void showWaiting()} \par 
+affiche une bar de progression d'attente \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
 {\f1\cb1\cf2 \b private static final serialVersionUID} \par 
 \par 
-{\f1\cb1\cf2 \b private Filtre} \par 
+{\f1\cb1\cf2 \b private GUIRender} \par 
+\par 
+{\f1\cb1\cf2 \b private final Filtre} \par 
 \par 
 {\f1\cb1\cf2 \b private root} \par 
 \par 
 {\f1\cb1\cf2 \b private tree} \par 
 \par 
-{\f1\cb1\cf2 \b private rootDirectory} \par 
+{\f1\cb1\cf2 \b private final rootDirectory} \par 
 \par 
-{\f1\cb1\cf2 \b private JsonTree} \par 
+{\f1\cb1\cf2 \b private final JsonTree} \par 
 \par 
 {\f1\cb1\cf2 \b private slider} \par 
 \par 
@@ -833,13 +1439,51 @@ ViewerTable t)} \par
 \par 
 {\f1\cb1\cf2 \b private final mutex} \par 
 \par 
-{\f1\cb1\cf2 \b private value} \par 
+{\f1\cb1\cf2 \b private messageBox} \par 
+\par 
+{\f1\cb1\cf2 \b private flagFilter} \par 
+\par 
+{\f1\cb1\cf2 \b  waitingPanel} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24  class {\b JTreeManager.JTreeManager.CellRenderer} extends {\f1\cb1\cf2 javax.swing.tree.DefaultTreeCellRenderer}\par\par}{\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b  CellRenderer()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public java.awt.Component getTreeCellRendererComponent(
+JTree tree, 
+Object value, 
+boolean isSelected, 
+boolean expanded, 
+boolean leaf, 
+int row, 
+boolean hasFocus)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.awt.Color getBackgroundNonSelectionColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.awt.Color getBackgroundSelectionColor()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.awt.Color getForeground()} \par 
+\par 
+{\f1\cb1\cf2 \b private void setElementFont()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private elementFont} \par 
+\par 
+{\f1\cb1\cf2 \b private elementFontSelected} \par 
+\par 
+{\f1\cb1\cf2 \b private final ALPHA_OF_ZERO} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 \sect 
 {\f1\fs28 \b Package Tag\par}
 {\par}
-{\f1\fs24 public class {\b Tag.TagHistory}\par\par}{Implémente les fonctions pour créer un fichier JSON contenant les tags ajoutés aux images pour pouvoir effectuer les statistiques sans parcourir toutes les images à chaque fois \par
+{\f1\fs24 public class {\b Tag.TagHistory}\par\par}{Implemente les fonctions pour creer un fichier JSON contenant les tags ajoutes aux images pour pouvoir effectuer les statistiques sans parcourir toutes les images à chaque fois \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
@@ -859,7 +1503,7 @@ Enregistre ou met à jour les tags pour une ou plusieurs images dans un fichier 
 File history, 
 ArrayList tags, 
 String imagesPath)} \par 
-Crée la base du fichier json avec les premier tags \par
+Cree la base du fichier json avec les premier tags \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab history - Fichier d'historique \par
 \tab tags - Liste des tags \par
@@ -870,7 +1514,7 @@ File history,
 ArrayList tags, 
 String imagesPath, 
 JsonElement json)} \par 
-Met à jour les tags pour une image déjà enregistrée \par
+Met a jour les tags pour une image deja enregistree \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab history - fichier d'historique \par
 \tab tags - liste des tags \par
@@ -879,23 +1523,32 @@ Met à jour les tags pour une image déjà enregistrée \par
 \par 
 {\f1\cb1\cf2 \b private static java.lang.String getFileExtension(
 File file)} \par 
-Récupère l'extension d'un fichier \par
+Recupere l'extension d'un fichier \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab file - Fichier \par
 {\f1\cb1\cf3 \b Returns} \par 
 \tab Retourne l'extension \par
 \par 
-{\f1\cb1\cf2 \b private static java.lang.String getRelativePath(
+{\f1\cb1\cf2 \b public static java.lang.String getRelativePath(
 String path)} \par 
 Retourne le chemin relatif d'une image \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab path - chemin absolu de l'image \par
 {\f1\cb1\cf3 \b Returns} \par 
 \tab chemin relatif \par
+\par 
+{\f1\cb1\cf2 \b public static boolean findTag(
+String path)} \par 
+\par 
+{\f1\cb1\cf2 \b public static void getPaths()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static paths} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b Tag.Tag}\par\par}{Classe servant à formater les tags au format CSV (;) et à les envoyer au parser. \par
+{\f1\fs24 public class {\b Tag.Tag}\par\par}{Classe servant a formater les tags au format CSV (;) et a les envoyer au parser. \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
@@ -906,10 +1559,10 @@ Retourne le chemin relatif d'une image \par
 {\f1\cb1\cf2 \b public void setTag(
 ArrayList tag, 
 Shapes shape)} \par 
-Ajout d'un tag à la liste des tags en le formatant \par
+Ajout d'un tag a la liste des tags en le formatant \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab tag - Tag à formater \par
-\tab shape - Forme à formater \par
+\tab tag - Tag a formater \par
+\tab shape - Forme a formater \par
 \par 
 {\f1\cb1\cf2 \b public java.lang.String formatTag(
 ArrayList tag)} \par 
@@ -917,7 +1570,7 @@ Format un tag en ligne csv \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab tag - Tag à formater \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab Tag formaté \par
+\tab Tag formate \par
 \par 
 {\f1\cb1\cf2 \b public java.lang.String formatShape(
 Shapes shape)} \par 
@@ -925,7 +1578,7 @@ Formate une forme en ligne CSV \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab shape - Forme à formter \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab Forme formatée \par
+\tab Forme formatee \par
 \par 
 {\f1\cb1\cf2 \b public void saveTags(
 ArrayList tags, 
@@ -954,10 +1607,10 @@ Formate la liste de tags et l'envoie au parser pour les sauver sur l'image ou le
 {\f1\cb1\cf2 \b public void setTags(
 ArrayList tags, 
 String imagesPath)} \par 
-Ajoute les tags sur une image ou sur toutes les images d'un répertoire \par
+Ajoute les tags sur une image ou sur toutes les images d'un repertoire \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab tags - Liste de tags \par
-\tab imagesPath - Chemin d'une image ou d'un répertoire \par
+\tab imagesPath - Chemin d'une image ou d'un repertoire \par
 \par 
 {\f1\cb1\cf2 \b private void writeTag(
 File file, 
@@ -969,7 +1622,7 @@ Ecrit les tags sur une image \par
 \par 
 {\f1\cb1\cf2 \b private java.lang.String getFileExtension(
 File file)} \par 
-Récupère l'extension d'un fichier \par
+Recupere l'extension d'un fichier \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab file - Fichier \par
 {\f1\cb1\cf3 \b Returns} \par 
@@ -979,10 +1632,10 @@ Récupère l'extension d'un fichier \par
 IIOMetadata metadata, 
 String key, 
 ArrayList value)} \par 
-Modifie les metadatas en ajoutant les tags. Si il y a déjà des tags présents sur l'image on les supprimes et on ajoute les nouveaux. \par
+Modifie les metadatas en ajoutant les tags. Si il y a deja des tags presents sur l'image on les supprimes et on ajoute les nouveaux. \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab metadata - Metadata de l'image \par
-\tab key - Valeur unique définissant un tag \par
+\tab key - Valeur unique definissant un tag \par
 \tab value - Liste de tags \par
 {\f1\cb1\cf3 \b Throws} \par 
 \tab - \par
@@ -991,12 +1644,12 @@ Modifie les metadatas en ajoutant les tags. Si il y a déjà des tags présents 
 {\f1\cb1\cf2 \b public java.util.ArrayList getTextEntry(
 IIOMetadata metadata, 
 String key)} \par 
-Récupère les tags présent sur l'image \par
+Recupere les tags present sur l'image \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab metadata - Metadata de l'image \par
-\tab key - Valeur unique définissant un tag \par
+\tab key - Valeur unique definissant un tag \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab Liste des tags présents \par
+\tab Liste des tags presents \par
 \par 
 {\f1\cb1\cf2 \b private boolean findTag(
 IIOMetadata metadata, 
@@ -1004,13 +1657,13 @@ String key)} \par
 Trouve la présence de tags sur l'image \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab metadata - Metadata de l'image \par
-\tab key - Valeur unique définissant un tag \par
+\tab key - Valeur unique definissant un tag \par
 {\f1\cb1\cf3 \b Returns} \par 
 \tab True si il y des tags sinon false \par
 \par 
 {\f1\cb1\cf2 \b public boolean isTagged(
 File file)} \par 
-Trouve la présence de tags sur l'image \par
+Trouve la presence de tags sur l'image \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab file - Image à tester \par
 {\f1\cb1\cf3 \b Returns} \par 
@@ -1020,17 +1673,17 @@ Trouve la présence de tags sur l'image \par
 \par 
 {\f1\cb1\cf2 \b public java.util.ArrayList getTag(
 String path)} \par 
-Récupère les tags d'une image \par
+Recupere les tags d'une image \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab path - Chemin de l'image \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab Liste des tags présents sur l'image \par
+\tab Liste des tags presents sur l'image \par
 {\f1\cb1\cf3 \b Throws} \par 
 \tab - \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 {\par\par}
 {\par}
-{\f1\fs24 public class {\b Tag.CsvParser}\par\par}{Classe découpant les tags en liste de String \par
+{\f1\fs24 public class {\b Tag.CsvParser}\par\par}{Classe decoupant les tags en liste de String \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
@@ -1044,8 +1697,458 @@ Découpe les tags en liste de String \par
 {\f1\cb1\cf3 \b Parameters} \par 
 \tab tags - Tags de l'image \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab Liste des tags découpés \par
+\tab Liste des tags decoupes \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+{\par\par}
+\sect 
+{\f1\fs28 \b Package animalType\par}
+{\par}
+{\f1\fs24 public final class {\b animalType.AnimalType} extends {\f1\cb1\cf2 java.lang.Enum}\par\par}{Enumeration des type d'animaux possible \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b private AnimalType(
+String animalName)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public static animalType.AnimalType[] values()} \par 
+\par 
+{\f1\cb1\cf2 \b public static animalType.AnimalType valueOf(
+String name)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getName()} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b public static final GRENOUILLE} \par 
+\par 
+{\f1\cb1\cf2 \b public static final CRAPAUD} \par 
+\par 
+{\f1\cb1\cf2 \b public static final TRITON} \par 
+\par 
+{\f1\cb1\cf2 \b public static final AUTRE} \par 
+\par 
+{\f1\cb1\cf2 \b private final animalName} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+\sect 
+{\f1\fs28 \b Package Shapes\par}
+{\par}
+{\f1\fs24 public abstract class {\b Shapes.Shapes}\par\par}{Classe implementant les formes \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Shapes(
+double x, 
+double y)} \par 
+Constructeur d'une forme \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab x - position en x \par
+\tab y - position en y \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public double getX()} \par 
+Accesseur de x \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la position x de la forme \par
+\par 
+{\f1\cb1\cf2 \b public double getY()} \par 
+Accesseur de y \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la position y de la forme \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private x} \par 
+\par 
+{\f1\cb1\cf2 \b private y} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b Shapes.Rectangle} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implementant les rectangles \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Rectangle(
+double x, 
+double y, 
+double h, 
+double l)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab x - position x \par
+\tab y - position y \par
+\tab h - hauteur \par
+\tab l - largeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public double getWidth()} \par 
+Accesseur de la largeur \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la largeur du rectangle \par
+\par 
+{\f1\cb1\cf2 \b public double getHeight()} \par 
+Accesseur de la hauteur \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la hauteur du rectangle \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private width} \par 
+\par 
+{\f1\cb1\cf2 \b private height} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b Shapes.Point} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implementant les points \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Point(
+double x, 
+double y)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab x - position x \par
+\tab y - position y \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+{\par\par}
+{\par}
+{\f1\fs24 public class {\b Shapes.Cercle} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implementant les Cercle \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public Cercle(
+double x, 
+double y, 
+double r)} \par 
+Constructeur \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab x - position x \par
+\tab y - position y \par
+\tab r - rayon du cercle \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public double getRadius()} \par 
+Accesseur du rayon \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab le rayon du cercle \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private radius} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+\sect 
+{\f1\fs28 \b Package Statistics.handler\par}
+{\par}
+{\f1\fs24 public class {\b Statistics.handler.StatisticsHandler}\par\par}{Sert a enregistrer toutes les donnees necessaires a la generation des statistiques \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public StatisticsHandler()} \par 
+Constructeur \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b private void initiasize()} \par 
+Initialisation des attributs \par
+\par 
+{\f1\cb1\cf2 \b private java.util.List createListOfAnimals()} \par 
+Enregistre combien d'animaux il y a pour chaque type dans une liste \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la liste generee \par
+\par 
+{\f1\cb1\cf2 \b private java.lang.Integer findLimitValueInMap(
+Map map, 
+String type)} \par 
+Cherche la valeur minimale ou maximale de la map \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab map - la map a sonder \par
+\tab type - min ou max \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la valeur minimale ou maximale \par
+\par 
+{\f1\cb1\cf2 \b private java.util.List findLimitKeysInMap(
+Map map, 
+int value)} \par 
+Cherche la cle donnant la valeur minimale ou maximale de la map \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab map - la map a sonder \par
+\tab value - la valeur min ou max de la map \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab la liste des cles trouvees \par
+\par 
+{\f1\cb1\cf2 \b private java.lang.String returnDataString(
+List list)} \par 
+\par 
+{\f1\cb1\cf2 \b private void countInMap(
+Map map, 
+Object key, 
+int value)} \par 
+Insere une valeur et potentiellement sa cle dans une map \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab map - la map ou faire l'insertion \par
+\tab key - la cle \par
+\tab value - la valeur \par
+\par 
+{\f1\cb1\cf2 \b public void countCameraObservation(
+String cameraName, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour une camera \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab cameraName - le nom de la camera \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle de la camera \par
+\par 
+{\f1\cb1\cf2 \b public void countDaysObservation(
+String dayName, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour un jour \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab dayName - le nom du jour \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle du jour \par
+\par 
+{\f1\cb1\cf2 \b public void countSequenceObservation(
+String sequenceName, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour une sequence \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab sequenceName - le nom de la sequence \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle de la sequence \par
+\par 
+{\f1\cb1\cf2 \b public void countMonthlyObservation(
+Month month, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour un mois \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab month - le nom du mois \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle du mois \par
+\par 
+{\f1\cb1\cf2 \b public void countDailyObservation(
+Month month, 
+int day, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour un jour \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab month - le nom du mois \par
+\tab day - le jour \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle du jour \par
+\par 
+{\f1\cb1\cf2 \b public void countHourlyObservation(
+Month month, 
+int day, 
+int hour, 
+int numberOfTagsForAnImage)} \par 
+Compte les observations pour une heure \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab month - le nom du mois \par
+\tab day - le jour \par
+\tab hour - l'heure \par
+\tab numberOfTagsForAnImage - la valeur a mettre dans la cle de l'heure \par
+\par 
+{\f1\cb1\cf2 \b public void countTotalObservationsByAnimalType(
+String animal)} \par 
+Compte le nombre d'observations totales d'un animal donne (peuple une map) \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab animal - l'animal a traiter \par
+\par 
+{\f1\cb1\cf2 \b public void countMonthlyObservationsByAnimalType(
+String animal, 
+Month month)} \par 
+Compte le nombre d'observations d'un animal donne (peuple une map) pour un mois donne \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab animal - l'animal a traiter \par
+\tab month - le mois a traiter \par
+\par 
+{\f1\cb1\cf2 \b public void countDailyObservationsByAnimalType(
+String animal, 
+Month month, 
+int day)} \par 
+Compte le nombre d'observations d'un animal donne (peuple une map) pour un jour donne \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab animal - l'animal a traiter \par
+\tab month - le mois a traiter \par
+\tab day - le jour a traiter \par
+\par 
+{\f1\cb1\cf2 \b public void countHourlyObservationsByAnimalType(
+String animal, 
+Month month, 
+int day, 
+int hour)} \par 
+Compte le nombre d'observations d'un animal donne (peuple une map) pour une heure donnee \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab animal - l'animal a traiter \par
+\tab month - le mois a traiter \par
+\tab day - le jour a traiter \par
+\tab hour - l'heure a traiter \par
+\par 
+{\f1\cb1\cf2 \b public void analyzeData()} \par 
+Genere les observations min et max pour les cameras, les sequences et les jours Si aucune image possede un tag, un message alternatif est affiche \par
+\par 
+{\f1\cb1\cf2 \b public void addImage(
+Image image)} \par 
+\par 
+{\f1\cb1\cf2 \b public void addNbAnimals(
+int n)} \par 
+\par 
+{\f1\cb1\cf2 \b public void addNbImages(
+int n)} \par 
+\par 
+{\f1\cb1\cf2 \b public void addNbSequences(
+int n)} \par 
+\par 
+{\f1\cb1\cf2 \b public void addNbTaggedSequences(
+int n)} \par 
+\par 
+{\f1\cb1\cf2 \b public int getNbImages()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getNbTaggedImages()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getNbSequences()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getNbTaggedSequences()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.Map getAnimalTypeCounter()} \par 
+\par 
+{\f1\cb1\cf2 \b public void setTotalNbOfAnimals(
+int n)} \par 
+\par 
+{\f1\cb1\cf2 \b public int getTaggedAnimals()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getTaggedImages()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getMostUsedCamera()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getLeastUsedCamera()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getMostFrequentDate()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getLeastFrequentDate()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getMostTaggedSequence()} \par 
+\par 
+{\f1\cb1\cf2 \b public java.lang.String getLeastTaggedSequence()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getTaggedSequenceNumber()} \par 
+\par 
+{\f1\cb1\cf2 \b public int getAnimalNbByMonth(
+Month month)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.Map getAnimalNbByHourMap(
+Month month, 
+int day)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.Map getAnimalNbByDayMap(
+Month month)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.List getAnimalNbByMonthByType(
+Month month)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.Map getAnimalTypeByDayMap(
+Month month)} \par 
+\par 
+{\f1\cb1\cf2 \b public java.util.Map getAnimalTypeByHourMap(
+Month month, 
+int day)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final HOURSINADAY} \par 
+\par 
+{\f1\cb1\cf2 \b private static final MIN} \par 
+\par 
+{\f1\cb1\cf2 \b private static final MAX} \par 
+\par 
+{\f1\cb1\cf2 \b private images} \par 
+\par 
+{\f1\cb1\cf2 \b private meteo} \par 
+\par 
+{\f1\cb1\cf2 \b private animalTypeCounter} \par 
+\par 
+{\f1\cb1\cf2 \b private cameraObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private dateObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private sequenceObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private monthlyObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private monthlyObservationsByAnimalType} \par 
+\par 
+{\f1\cb1\cf2 \b private dailyObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private dailyObservationsByAnimalType} \par 
+\par 
+{\f1\cb1\cf2 \b private hourlyObservations} \par 
+\par 
+{\f1\cb1\cf2 \b private hourlyObservationsByAnimalType} \par 
+\par 
+{\f1\cb1\cf2 \b private nbImages} \par 
+\par 
+{\f1\cb1\cf2 \b private nbSequences} \par 
+\par 
+{\f1\cb1\cf2 \b private nbTaggedImages} \par 
+\par 
+{\f1\cb1\cf2 \b private nbTaggedSequences} \par 
+\par 
+{\f1\cb1\cf2 \b private totalNbOfAnimals} \par 
+\par 
+{\f1\cb1\cf2 \b  cameraMaxKeys} \par 
+\par 
+{\f1\cb1\cf2 \b  cameraMinKeys} \par 
+\par 
+{\f1\cb1\cf2 \b  dateMaxKeys} \par 
+\par 
+{\f1\cb1\cf2 \b  dateMinKeys} \par 
+\par 
+{\f1\cb1\cf2 \b  sequenceMaxKeys} \par 
+\par 
+{\f1\cb1\cf2 \b  sequenceMinKeys} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
+{\par\par}
+\sect 
+{\f1\fs28 \b Package Statistics.parser\par}
+{\par}
+{\f1\fs24 public class {\b Statistics.parser.statParser}\par\par}{Parse le fichier history qui contient les informations json de la banque d'images \par
+\par}
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
+{\f1\cb1\cf2 \b public statParser(
+StatisticsHandler statHandler)} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
+{\f1\cb1\cf2 \b public com.google.gson.JsonParser parseFile()} \par 
+Parsage du fichier history \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab un objet JsonParse avec les informations generees \par
+\par 
+{\f1\cb1\cf2 \b private void parseImageContent(
+JsonArray content)} \par 
+Parse le contenu d'un JsonArray et remplit l'objet statHandler qui contiendra les informations necessaires a la generation des graphes \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab content - le JsonArray a parser \par
+\par 
+{\f1\cb1\cf2 \b private java.util.ArrayList parseContentTags(
+JsonArray tags)} \par 
+Parse le JsonArray des tags \par
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab tags - le JsonArray des tags \par
+{\f1\cb1\cf3 \b Returns} \par 
+\tab un ArrayList des tags recuperes \par
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
+\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
+\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
+{\f1\cb1\cf2 \b private static final HISTORIC} \par 
+\par 
+{\f1\cb1\cf2 \b private final statHandler} \par 
+\par 
+{\f1\cb1\cf2 \b private currentSequence} \par 
+\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 \sect 
 {\f1\fs28 \b Package jsontreeparse\par}
@@ -1058,151 +2161,66 @@ Découpe les tags en liste de String \par
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
 {\f1\cb1\cf2 \b public void parseHierarchyTag()} \par 
+Cette methode parse les tag (le type de dossier de l'arborescence) Exemple un dossier tage pourrai etre un dossier de date ou d'heure. Ceci nous permet de simplifier differentes op�ration sur le filtrage des images. \par
 \par 
-{\f1\cb1\cf2 \b public void createXML(
-File rootDirectory)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\par 
-{\f1\cb1\cf2 \b public com.google.gson.JsonArray setXML(
+{\f1\cb1\cf2 \b public void createJson(
 File rootDirectory, 
-int i)} \par 
+int history)} \par 
+Cette methode permet de generer un fichier json en explorant l'arborescence des fichiers \par
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
+\tab rootDirectory - Le dossier racine ou l'exploration de l'arborescence s'executera \par
+\par 
+{\f1\cb1\cf2 \b private com.google.gson.JsonArray setJson(
+File file, 
+int i, 
+int history)} \par 
+{\f1\cb1\cf3 \b Parameters} \par 
+\tab file - the file or the directory that will be explored \par
+\tab i - the index of the tag in the hierarchytag array \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab an JsonArray that containe the JPG, SubDirectory and subFile in the directory explored. \par
 {\f1\cb1\cf3 \b Throws} \par 
 \tab - \par
 \par 
 {\f1\cb1\cf2 \b public javax.swing.tree.DefaultMutableTreeNode setDirectoryTree(
 String path)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
+\tab path - chemin du fichier json contenant l'arborescence \par
 {\f1\cb1\cf3 \b Returns} \par 
-\tab \par
+\tab un arbre composer de treenode representant l'arborescance des fichiers \par
 \par 
 {\f1\cb1\cf2 \b public void createTree(
 JsonArray a, 
 TaggedTreeNode d)} \par 
 {\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
+\tab a - le json array contenant le dossier et les sousdossier \par
+\tab d - le noeud parent de ce dossier \par
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
 {\f1\cb1\cf2 \b private hierarchyTag} \par 
+\par 
+{\f1\cb1\cf2 \b  properties} \par 
+\par 
+{\f1\cb1\cf2 \b private histArray} \par 
+\par 
+{\f1\cb1\cf2 \b private counterhist} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
 {\par\par}
 \sect 
-{\f1\fs28 \b Package Shapes\par}
+{\f1\fs28 \b Package exceptionHandler\par}
 {\par}
-{\f1\fs24 public abstract class {\b Shapes.Shapes}\par\par}{Classe implémentant les formes \par
+{\f1\fs24 public class {\b exceptionHandler.LogFileWritingHandler}\par\par}{Classe qui gere les exceptions \par
 \par}
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 \nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public Shapes(
-double x, 
-double y)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
+{\f1\cb1\cf2 \b public LogFileWritingHandler()} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 \trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
 {\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public double getX()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public double getY()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private x} \par 
-\par 
-{\f1\cb1\cf2 \b private y} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b Shapes.Rectangle} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implémentant les rectangles \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public Rectangle(
-double x, 
-double y, 
-double h, 
-double l)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
-\tab - \par
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public double getWidth()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\par 
-{\f1\cb1\cf2 \b public double getHeight()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private width} \par 
-\par 
-{\f1\cb1\cf2 \b private height} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b Shapes.Point} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implémentant les points \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public Point(
-double x, 
-double y)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-{\par\par}
-{\par}
-{\f1\fs24 public class {\b Shapes.Cercle} extends {\f1\cb1\cf2 Shapes.Shapes}\par\par}{Classe implémentant les Cercle \par
-\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public Cercle(
-double x, 
-double y, 
-double r)} \par 
-{\f1\cb1\cf3 \b Parameters} \par 
-\tab - \par
-\tab - \par
-\tab - \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-{\nowidctlpar\widctlpar\intbl\adjustright Methods\cell 
-{\f1\cb1\cf2 \b public double getRadius()} \par 
-{\f1\cb1\cf3 \b Returns} \par 
-\tab \par
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Fields\cell 
-{\f1\cb1\cf2 \b private radius} \par 
-\cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard 
-{\par\par}
-\sect 
-{\f1\fs28 \b Package DFS\par}
-{\par}
-{\f1\fs24 public class {\b DFS.DFSDirectory}\par\par}{\par}
-\trowd \trgaph70 \cellx1536 \cellx9142\pard\qj 
-\nowidctlpar\widctlpar\intbl\adjustright {Constructors\cell 
-{\f1\cb1\cf2 \b public DFSDirectory()} \par 
+{\f1\cb1\cf2 \b public static void handleException(
+String m, 
+StackTraceElement[] s)} \par 
 \cell }\pard \nowidctlpar\widctlpar\intbl\adjustright {\row }\pard\qj 
 {\par\par}
 \sect 

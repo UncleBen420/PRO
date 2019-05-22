@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: WeatherFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
@@ -18,7 +12,7 @@ import java.awt.event.FocusListener;
 import searchfilters.TemperatureTreeFilter;
 
 /**
- * Classe implÃ©mentant l'interface pour le fitre meteo
+ * Classe implementant l'interface pour le fitre meteo
  *
  * @author Groupe PRO B-9
  */
@@ -40,7 +34,7 @@ public class TemperatureFilter extends TreeFilter {
     }
 
     /**
-     * specialisation des filtres pour la température
+     * specialisation des filtres pour la temperature
      */
         @Override
     protected void specialisation() {
@@ -53,12 +47,12 @@ public class TemperatureFilter extends TreeFilter {
         beginText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
         });
         final JTextField endText = new JTextField("36.7");
@@ -67,12 +61,12 @@ public class TemperatureFilter extends TreeFilter {
         endText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
         });
 

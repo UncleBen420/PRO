@@ -1,36 +1,22 @@
-/**
- * PRO
- * Authors: Bacso
- * File: ChangeFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import JTreeManager.JTreeManager;
-import searchfilters.DateTreeFilter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import searchfilters.RatioTreeFilter;
 
 /**
- * Implémentation de l'interface pour le filtre par changement d'image
+ * Implementation de l'interface pour le filtre par changement d'image
  *
  * @author Groupe PRO B-9
  */
@@ -55,14 +41,36 @@ public class ChangeFilter extends TreeFilter {
         JPanel minMax = new JPanel();
         minMax.setOpaque(false);
         JTextField min = new JTextField("min");
-       // min.setForeground(Color.WHITE);
-        JLabel ratio = new JLabel("ratio accepte");
-        ratio.setForeground(Color.WHITE);
-       // min.setForeground(GUIRender.getForeColor());
-        JTextField max = new JTextField("max");
-       // max.setForeground(Color.WHITE);
+        min.setBackground(GUIRender.getButtonColor());
+        min.setForeground(GUIRender.getForeColor());
+        min.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                min.setForeground(GUIRender.getForeColor());
+            }
 
-        //max.setForeground(GUIRender.getForeColor());
+            @Override
+            public void focusLost(FocusEvent fe) {
+                min.setForeground(GUIRender.getForeColor());
+            }
+        });
+        JLabel ratio = new JLabel("ratio accepte");
+        ratio.setForeground(GUIRender.getForeColor());
+        JTextField max = new JTextField("max");
+        max.setBackground(GUIRender.getButtonColor());
+        max.setForeground(GUIRender.getForeColor());
+        max.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                max.setForeground(GUIRender.getForeColor());
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                max.setForeground(GUIRender.getForeColor());
+            }
+        });
+        
         minMax.setLayout(new BoxLayout(minMax, BoxLayout.Y_AXIS));
         minMax.add(ratio);
     	minMax.add(min, BorderLayout.NORTH);
@@ -78,11 +86,11 @@ public class ChangeFilter extends TreeFilter {
         sliderTolerance.setPreferredSize(new Dimension(200,20));
         sliders.setLayout(new BoxLayout(sliders, BoxLayout.Y_AXIS));
         JLabel lprecision = new JLabel("precision");
-        lprecision.setForeground (Color.WHITE);
+        lprecision.setForeground (GUIRender.getForeColor());
         sliders.add(lprecision);
         sliders.add(sliderPrecision);
         JLabel ltolerance = new JLabel("tolerance");
-        ltolerance.setForeground(Color.WHITE);
+        ltolerance.setForeground(GUIRender.getForeColor());
         sliders.add(ltolerance);
         sliders.add(sliderTolerance);
         

@@ -14,7 +14,7 @@ import meteoAPI.MeteoPerDay;
 import meteoAPI.TYPEMETEO;
 
 /**
- * Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la météo ce jour la. 
+ * Extention de la classe abstractTreeFilter permetant de trier les noeuds de dates en fonction de la meteo ce jour la. 
  * @author Groupe PRO B-9
  */
 public class MeteoTreeFilter extends AbstractTreeFilter {
@@ -25,8 +25,8 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	private MeteoAPI ma = new MeteoAPI();
 
     /**
-     * Constructeur de filtre météo
-     * @param meteo la météo voulue
+     * Constructeur de filtre meteo
+     * @param meteo la meteo voulue
      */
     public MeteoTreeFilter(TYPEMETEO meteo) {
 		this.meteo = meteo;
@@ -34,9 +34,9 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     * analyse les noeuds, si c'est des noeuds de date, la méthode regarde si la date a la bonne météo (pluie, beau,...)  
-     * @param node le noeud étant analysé
-     * @return si oui ou non on doit l'enlevé de l'arbre
+     * analyse les noeuds, si c'est des noeuds de date, la methode regarde si la date a la bonne meteo (pluie, beau,...)  
+     * @param node le noeud etant analyse
+     * @return si oui ou non on doit l'enleve de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {
@@ -128,7 +128,7 @@ public class MeteoTreeFilter extends AbstractTreeFilter {
 	}
     
     public String toString() {
-		return "Filtre de Météo";
+		return "Filtre de Meteo";
 
 	}
 

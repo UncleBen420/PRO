@@ -1,9 +1,4 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Parser.java
- * IDE: NetBeans IDE 11
- */
+
 package Tag;
 
 import java.io.File;
@@ -35,10 +30,10 @@ import org.w3c.dom.NodeList;
 public class Parser {
 
     /**
-     * Ajoute les tags sur une image ou sur toutes les images d'un répertoire
+     * Ajoute les tags sur une image ou sur toutes les images d'un repertoire
      *
      * @param tags Liste de tags
-     * @param imagesPath Chemin d'une image ou d'un répertoire
+     * @param imagesPath Chemin d'une image ou d'un repertoire
      */
     public void setTags(ArrayList<String> tags, String imagesPath) {
         File inputFile = new File(imagesPath);
@@ -71,7 +66,7 @@ public class Parser {
             reader.setInput(input);
             IIOImage image = reader.readAll(0, null);
             addTextEntry(image.getMetadata(), "heigViewer", tags);
-            ImageWriter writer = ImageIO.getImageWriter(reader); // TODO: Validate that there are writers
+            ImageWriter writer = ImageIO.getImageWriter(reader); 
             writer.setOutput(output);
             writer.write(image);
             output.close();
@@ -82,7 +77,7 @@ public class Parser {
     }
 
     /**
-     * Récupère l'extension d'un fichier
+     * Recupere l'extension d'un fichier
      *
      * @param file Fichier
      * @return Retourne l'extension
@@ -95,11 +90,11 @@ public class Parser {
     }
 
     /**
-     * Modifie les metadatas en ajoutant les tags. Si il y a déjà des tags
-     * présents sur l'image on les supprimes et on ajoute les nouveaux.
+     * Modifie les metadatas en ajoutant les tags. Si il y a deja des tags
+     * presents sur l'image on les supprimes et on ajoute les nouveaux.
      *
      * @param metadata Metadata de l'image
-     * @param key Valeur unique définissant un tag
+     * @param key Valeur unique definissant un tag
      * @param value Liste de tags
      * @throws IIOInvalidTreeException
      * @throws UnsupportedEncodingException
@@ -132,11 +127,11 @@ public class Parser {
     }
 
     /**
-     * Récupère les tags présent sur l'image
+     * Recupere les tags present sur l'image
      *
      * @param metadata Metadata de l'image
-     * @param key Valeur unique définissant un tag
-     * @return Liste des tags présents
+     * @param key Valeur unique definissant un tag
+     * @return Liste des tags presents
      */
     public ArrayList<String> getTextEntry(final IIOMetadata metadata, final String key) {
         ArrayList<String> tags = new ArrayList<String>();
@@ -157,7 +152,7 @@ public class Parser {
      * Trouve la présence de tags sur l'image
      *
      * @param metadata Metadata de l'image
-     * @param key Valeur unique définissant un tag
+     * @param key Valeur unique definissant un tag
      * @return True si il y des tags sinon false
      */
     private boolean findTag(final IIOMetadata metadata, final String key) {
@@ -182,7 +177,7 @@ public class Parser {
     }
 
     /**
-     * Trouve la présence de tags sur l'image
+     * Trouve la presence de tags sur l'image
      *
      * @param file Image à tester
      * @return True si il y des tags sinon false
@@ -215,10 +210,10 @@ public class Parser {
     }
 
     /**
-     * Récupère les tags d'une image
+     * Recupere les tags d'une image
      *
      * @param path Chemin de l'image
-     * @return Liste des tags présents sur l'image
+     * @return Liste des tags presents sur l'image
      * @throws IOException
      */
     public ArrayList<String> getTag(String path) throws IOException {

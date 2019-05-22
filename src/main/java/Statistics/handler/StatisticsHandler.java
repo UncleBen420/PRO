@@ -41,7 +41,10 @@ public class StatisticsHandler {
     private Map<Month, Map<Integer, Map<Integer, Integer>>> hourlyObservations = new HashMap<>();
     private Map<Month, Map<Integer, Map<Integer, List<Integer>>>> hourlyObservationsByAnimalType = new HashMap<>();
 
-
+    private int nbImages;
+    private int nbSequences;
+    private int nbTaggedImages;
+    private int nbTaggedSequences;
     private int totalNbOfAnimals;
     
     List<String> cameraMaxKeys;
@@ -68,18 +71,18 @@ public class StatisticsHandler {
     private void initiasize() {   
   
         for (AnimalType a : AnimalType.values()) {
-            // initialisation de la liste pour animalTypeCounter�a 0 pour toute categorie categorie d'animaux
+            // initialisation de la liste pour animalTypeCountera 0 pour toute categorie categorie d'animaux
             animalTypeCounter.put(a, 0);
         }
 
         for (Month a : Month.values()) {
-            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType a�0 pour toute categorie d'animaux
+            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType a 0 pour toute categorie d'animaux
             List<Integer> list_byType_ForDaily = createListOfAnimals();
             
-            // declaration du mappage entre les observations des animaux observ�s et les jours d'un mois
+            // declaration du mappage entre les observations des animaux observes et les jours d'un mois
             Map<Integer, Integer> mapDay_Observations = new HashMap();
             
-            // declaration du mappage entre les observations des animaux PAR TYPE observ�s et les jours d'un mois
+            // declaration du mappage entre les observations des animaux PAR TYPE observes et les jours d'un mois
             Map<Integer, List<Integer>> mapDay_Observations_byType = new HashMap();
             
             //declaration du mappage entre le jour d'un mois et les observations d'un animal par heure
@@ -91,26 +94,26 @@ public class StatisticsHandler {
             
             for (int jour = 1; jour <= a.getNbDays(); jour++) {
            
-                // initialisation � 0 du mappage journalier 
+                // initialisation a 0 du mappage journalier 
                 mapDay_Observations.put(jour, 0);
                 
                 
-                // delcaration et initialisation de la liste pour dailyObservationsByAnimalType a�0 pour toute categorie d'animaux
+                // delcaration et initialisation de la liste pour dailyObservationsByAnimalType a 0 pour toute categorie d'animaux
                 List<Integer> listAnimals_byType_forDaily = createListOfAnimals(); 
                 mapDay_Observations_byType.put(jour, listAnimals_byType_forDaily);
              
                
-                // initialisation de le mappage pour connecter les animaux observ�s avec les heures d'un jour
+                // initialisation de le mappage pour connecter les animaux observes avec les heures d'un jour
                 Map <Integer, Integer> mapHour_Observations = new HashMap<>();
                 
-                // initialisation de le mappage pour connecter les animaux observ�s PAR TYPE avec les heures d'un jour
+                // initialisation de le mappage pour connecter les animaux observes PAR TYPE avec les heures d'un jour
                 Map<Integer, List<Integer>> mapHour_Observations_byType = new HashMap();
 
                 for (int hour = 0; hour < HOURSINADAY; hour++){
-                    // initialisaiton � 0 du mappage horaire
+                    // initialisaiton a 0 du mappage horaire
                     mapHour_Observations.put(hour,0);
                     
-                    //initialisation du mappage PAR TYPE des animaux observ�s par heure
+                    //initialisation du mappage PAR TYPE des animaux observes par heure
                     List<Integer> listAnimals_byType_forHourly = createListOfAnimals(); 
                     mapHour_Observations_byType.put(hour, listAnimals_byType_forHourly);
                 }  
@@ -136,6 +139,10 @@ public class StatisticsHandler {
         }
 
         totalNbOfAnimals = 0;
+        nbImages = 0;
+        nbSequences = 0;
+        nbTaggedImages = 0;
+        nbTaggedSequences = 0;
     }
 
     /**
@@ -347,23 +354,78 @@ public class StatisticsHandler {
 
     /**
      * Genere les observations min et max pour les cameras, les sequences et les jours
+     * Si aucune image possede un tag, un message alternatif est affiche
      */
     public void analyzeData() {
+        
+        if (nbTaggedImages != 0) {
         cameraMinKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MIN));
         cameraMaxKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MAX));
         dateMinKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MIN));
         dateMaxKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MAX));
         sequenceMinKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MIN));
         sequenceMaxKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MAX));
+        } else {
+             cameraMinKeys = new ArrayList<String>();
+             cameraMinKeys.add("no tagged images");
+             
+             cameraMaxKeys = new ArrayList<String>();
+             cameraMaxKeys.add("no tagged images");
+             
+             dateMinKeys = new ArrayList<String>();
+             dateMinKeys.add("no tagged images");
+             
+             dateMaxKeys = new ArrayList<String>();
+             dateMaxKeys.add("no tagged images");
+             
+             sequenceMinKeys = new ArrayList<String>();
+             sequenceMinKeys.add("no tagged images");
+                  
+             sequenceMaxKeys = new ArrayList<String>();
+             sequenceMaxKeys.add("no tagged images");
+        }
     }
 
-    public void addImage(Image image) {
+   public void addImage(Image image) {
         images.add(image);
     }
-    
+
     public void addNbAnimals(int n) {
-       this.totalNbOfAnimals += n;
+        this.totalNbOfAnimals += n;
     }
+
+    public void addNbImages(int n) {
+        this.nbImages += n;
+    }
+
+    public void addNbSequences(int n) {
+        this.nbSequences += n;
+    }
+
+    public void addNbTaggedSequences(int n) {
+        this.nbTaggedSequences += n;
+    }
+    
+     public int getNbImages() {
+        return nbImages;
+    }
+
+    public int getNbTaggedImages() {
+        return images.size();
+    }
+
+    public int getNbSequences() {
+        return nbSequences;
+    }
+
+    public int getNbTaggedSequences() {
+        return nbTaggedSequences;
+    }
+    
+    
+    
+    
+    
     
     public Map<AnimalType, Integer> getAnimalTypeCounter() {
         return this.animalTypeCounter;

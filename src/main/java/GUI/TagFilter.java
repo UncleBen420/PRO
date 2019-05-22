@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: TagFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +9,7 @@ import JTreeManager.JTreeManager;
 import searchfilters.TagTreeFilter;
 
 /**
- * Classe implémentant l'interface pour le filtre par tag
+ * Classe implementant l'interface pour le filtre par tag
  *
  * @author Groupe PRO B-9
  */
@@ -42,6 +36,9 @@ public class TagFilter extends TreeFilter {
     protected void specialisation() {
 
         JCheckBox taggedCheckBox = new JCheckBox("tagged");
+        taggedCheckBox.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chbox-checked-20.png")));
+        taggedCheckBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chbox-unchecked-20.png")));
+        
         taggedCheckBox.setForeground(GUIRender.getForeColor());
         taggedCheckBox.setBackground(GUIRender.getBackColor());
         

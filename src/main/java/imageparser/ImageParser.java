@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
 /**
- * Cette classe permet de faire des opérations d'analyse sur une image
+ * Cette classe permet de faire des operations d'analyse sur une image
  *
  * @author Groupe PRO B-9
  */

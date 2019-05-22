@@ -91,9 +91,11 @@
                   <Component id="Settings" alignment="1" max="32767" attributes="0"/>
                   <Component id="Navigate" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="filtersPanel1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="filtersPanel1" max="32767" attributes="0"/>
+                          </Group>
                           <Component id="Titre" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -126,13 +128,13 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;&#xa;            public void paintComponent(Graphics g){&#xa;                ImageIcon m = new ImageIcon(&quot;logo_allWhite.png&quot;);&#xa;                Image i = m.getImage();&#xa;&#xa;                g.drawImage(i,0,0, this.getSize().width, this.getSize().height, this);&#xa;            }&#xa;&#xa;        }"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    public void paintComponent(Graphics g){&#xa;        ImageIcon m = new javax.swing.ImageIcon(getClass().getResource(&quot;/images/logo_allWhite.png&quot;));&#xa;        Image i = m.getImage();&#xa;&#xa;        g.drawImage(i,0,0, this.getSize().width, this.getSize().height, this);&#xa;    }&#xa;&#xa;}"/>
               </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="394" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -233,7 +235,7 @@
                       <Component id="Navigate_Titre" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="394" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -529,7 +531,7 @@
             <Component class="javax.swing.JButton" name="save_button1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/images/icon-sequence.png&quot;))" type="code"/>
+                  <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/images/icon-sequence-24.png&quot;))" type="code"/>
                 </Property>
               </Properties>
               <Events>

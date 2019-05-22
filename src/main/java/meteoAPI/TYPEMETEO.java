@@ -1,7 +1,7 @@
 package meteoAPI;
 
 /**
- * Enumeration représentant les différentes conditions météorologique possible
+ * Enumeration representant les differentes conditions meteorologique possible
  *
  * @author Groupe PRO B-9
  */
@@ -37,7 +37,7 @@ public enum TYPEMETEO {
     }
 
     /**
-     * Retourne les bytes de la condition fournie en paramètre
+     * Retourne les bytes de la condition fournie en parametre
      *
      * @param condition
      * @return weather

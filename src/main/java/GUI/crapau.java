@@ -2,12 +2,8 @@ package GUI;
 
 
 import Tag.Tag;
-
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import mdlaf.*;
-import mdlaf.animation.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -53,9 +49,8 @@ public class crapau extends javax.swing.JFrame {
         BackGround = new javax.swing.JPanel();
         Side = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel(){
-
             public void paintComponent(Graphics g){
-                ImageIcon m = new ImageIcon("logo_allWhite.png");
+                ImageIcon m = new javax.swing.ImageIcon(getClass().getResource("/images/logo_allWhite.png"));
                 Image i = m.getImage();
 
                 g.drawImage(i,0,0, this.getSize().width, this.getSize().height, this);
@@ -110,7 +105,7 @@ public class crapau extends javax.swing.JFrame {
         Titre.setLayout(TitreLayout);
         TitreLayout.setHorizontalGroup(
             TitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         TitreLayout.setVerticalGroup(
             TitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +197,7 @@ public class crapau extends javax.swing.JFrame {
             .addComponent(Navigate_Titre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(NavigateLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
         );
         NavigateLayout.setVerticalGroup(
@@ -223,9 +218,10 @@ public class crapau extends javax.swing.JFrame {
             .addComponent(Settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Navigate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SideLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(SideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(filtersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SideLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(filtersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Titre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -352,7 +348,7 @@ public class crapau extends javax.swing.JFrame {
             }
         });
 
-        save_button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-sequence.png")));
+        save_button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-sequence-24.png")));
         save_button1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 save_button1MouseClicked(evt);
@@ -516,7 +512,7 @@ public class crapau extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void settings_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settings_labelMouseClicked
-        new statisticsPage();
+        stats = new statisticsPage();
     }//GEN-LAST:event_settings_labelMouseClicked
 
     private void save_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_button1ActionPerformed
@@ -553,7 +549,8 @@ public class crapau extends javax.swing.JFrame {
          }
       });
    }
-
+   
+   private GUI.statisticsPage stats;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Edit;

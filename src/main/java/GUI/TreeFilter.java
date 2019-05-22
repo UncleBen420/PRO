@@ -3,25 +3,19 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import JTreeManager.JTreeManager;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 import searchfilters.AbstractTreeFilter;
 
 /**
- * Cette classe est une représentation graphique des filtres sur le JTree
+ * Cette classe est une representation graphique des filtres sur le JTree
  * @author Groupe PRO B-9
  */
 abstract public class TreeFilter extends JPanel {
@@ -89,20 +83,20 @@ abstract public class TreeFilter extends JPanel {
     }
 
     /**
-     * Cet methode doit etre implémentée dans les sous classe extendant celle-ci
-     * Elle permet d'ajouter des éléments graphiques différents entre les filtres
+     * Cet methode doit etre implementee dans les sous classe extendant celle-ci
+     * Elle permet d'ajouter des elements graphiques differents entre les filtres
      */
     protected abstract void specialisation();
 
     /**
-     * Methode qui crée les éléments graphiques de base commun à chaque filtre
+     * Methode qui cree les elements graphiques de base commun a chaque filtre
      */
     private void common() {
 
-        filter = new SelButton("Filter", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        filter = new SelButton("Filter");
         filter.setForeground(GUIRender.getForeColor());
 
-        delete = new SelButton("Delete", GUIRender.getButtonColor(), GUIRender.getButtonSelectedColor());
+        delete = new SelButton("Delete");
         delete.setForeground(GUIRender.getForeColor());
 
         delete.addActionListener((ActionEvent e) -> {
@@ -114,49 +108,17 @@ abstract public class TreeFilter extends JPanel {
 
     }
 
-    private class SelButton extends JButton implements MouseListener {
+    private class SelButton extends JButton {
 
-        private Color defaultColor;
-        private Color mouseOverColor;
-
-        public SelButton(String text, Color defaultColor, Color mouseOverColor) {
-
+        public SelButton(String text) {
             super(text);
-            setBackground(defaultColor);
-            this.defaultColor = defaultColor;
-            this.mouseOverColor = mouseOverColor;
-            addMouseListener(this);
+            UIManager.put("Button.foreground", new ColorUIResource(GUIRender.getForeColor()));
+            UIManager.put("Button.mouseHoverColor", new ColorUIResource(GUIRender.getButtonSelectedColor()));
+            UIManager.put("Button.background", new ColorUIResource(GUIRender.getButtonColor()));
+            SwingUtilities.updateComponentTreeUI(this);
 
         }
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            if (e.getSource() == this) {
-                this.setBackground(this.mouseOverColor);
-            }
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            if (e.getSource() == this) {
-                this.setBackground(this.defaultColor);
-            }
-
-        }
-
-}
+    }
 
 }

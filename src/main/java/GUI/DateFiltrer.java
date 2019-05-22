@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: DateFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
@@ -19,7 +13,7 @@ import java.awt.event.*;
 import searchfilters.DateTreeFilter;
 
 /**
- * Classe implémentant l'interface pour le filtre par date
+ * Classe implementant l'interface pour le filtre par date
  *
  * @author Groupe PRO B-9
  */
@@ -49,12 +43,12 @@ public class DateFiltrer extends TreeFilter {
         beginText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                beginText.setForeground(Color.WHITE);
+                beginText.setForeground(GUIRender.getForeColor());
             }
         });
         
@@ -64,12 +58,12 @@ public class DateFiltrer extends TreeFilter {
         endText.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                endText.setForeground(Color.WHITE);
+                endText.setForeground(GUIRender.getForeColor());
             }
         });
 
