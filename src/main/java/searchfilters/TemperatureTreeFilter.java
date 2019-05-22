@@ -12,7 +12,7 @@ import JTreeManager.TaggedTreeNode;
 import meteoAPI.MeteoAPI;
 import meteoAPI.MeteoPerDay;
 /**
- * extension de abstractTreeFilter permettant de filtrer les noeud par rapport à la température
+ * extension de abstractTreeFilter permettant de filtrer les noeud par rapport a la température
  * @author Groupe PRO B-9
  */
 public class TemperatureTreeFilter extends AbstractTreeFilter {
@@ -34,9 +34,9 @@ public class TemperatureTreeFilter extends AbstractTreeFilter {
 	}
 
     /**
-     * regarde si le noeud est un noeud de date, regarde si l'heure correspond a la temp�rature voulue.
-     * @param node le noeud �tant analys�
-     * @return si oui ou non on doit l'enlev� de l'arbre
+     * regarde si le noeud est un noeud de date, regarde si l'heure correspond a la temperature voulue.
+     * @param node le noeud etant analyse
+     * @return si oui ou non on doit l'enleve de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {

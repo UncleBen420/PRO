@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Classe qui gère les exceptions
+ * Classe qui gere les exceptions
  * @author Groupe PRO B-9
  */
 public class LogFileWritingHandler {
@@ -20,7 +20,6 @@ public class LogFileWritingHandler {
 			pw = new PrintWriter(
 					new OutputStreamWriter(new FileOutputStream(new File("ErrorLog.txt")), StandardCharsets.UTF_16));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

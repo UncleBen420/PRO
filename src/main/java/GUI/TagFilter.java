@@ -1,9 +1,3 @@
-/**
- * PRO
- * Authors: Bacso
- * File: TagFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +9,7 @@ import JTreeManager.JTreeManager;
 import searchfilters.TagTreeFilter;
 
 /**
- * Classe implémentant l'interface pour le filtre par tag
+ * Classe implementant l'interface pour le filtre par tag
  *
  * @author Groupe PRO B-9
  */

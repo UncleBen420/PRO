@@ -1,13 +1,7 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Rectangle.java
- * IDE: NetBeans IDE 11
- */
 package Shapes;
 
 /**
- * Classe implémentant les rectangles
+ * Classe implementant les rectangles
  * 
  * @author Groupe PRO B-9
  */

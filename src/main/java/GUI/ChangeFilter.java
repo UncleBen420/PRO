@@ -1,26 +1,11 @@
-/**
- * PRO
- * Authors: Bacso
- * File: ChangeFilter.java
- * IDE: NetBeans IDE 11
- */
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -28,11 +13,10 @@ import javax.swing.JTextField;
 import JTreeManager.JTreeManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import searchfilters.DateTreeFilter;
 import searchfilters.RatioTreeFilter;
 
 /**
- * Implémentation de l'interface pour le filtre par changement d'image
+ * Implementation de l'interface pour le filtre par changement d'image
  *
  * @author Groupe PRO B-9
  */

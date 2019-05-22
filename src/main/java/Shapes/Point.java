@@ -1,13 +1,7 @@
-/**
- * PRO
- * Authors: Bacso
- * File: Point.java
- * IDE: NetBeans IDE 11
- */
 package Shapes;
 
 /**
- * Classe implémentant les points
+ * Classe implementant les points
  * 
  * @author Groupe PRO B-9
  */

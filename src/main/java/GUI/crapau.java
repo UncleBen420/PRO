@@ -2,12 +2,8 @@ package GUI;
 
 
 import Tag.Tag;
-
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import mdlaf.*;
-import mdlaf.animation.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -516,7 +512,7 @@ public class crapau extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void settings_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settings_labelMouseClicked
-        new statisticsPage();
+        stats = new statisticsPage();
     }//GEN-LAST:event_settings_labelMouseClicked
 
     private void save_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_button1ActionPerformed
@@ -553,7 +549,8 @@ public class crapau extends javax.swing.JFrame {
          }
       });
    }
-
+   
+   private GUI.statisticsPage stats;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Edit;

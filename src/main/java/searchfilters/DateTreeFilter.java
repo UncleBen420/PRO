@@ -18,7 +18,7 @@ public class DateTreeFilter extends AbstractTreeFilter {
 	
     /**
      * Constructeur du filtre
-     * @param startdate date de début du filtrage
+     * @param startdate date de debut du filtrage
      * @param endDate date de fin du filtrage
      */
     public DateTreeFilter(Date startdate, Date endDate) {
@@ -28,8 +28,8 @@ public class DateTreeFilter extends AbstractTreeFilter {
 
     /**
      * regarde si un noeud est un noeud de date et s'y il est compris dans les date min et max
-     * @param node le noeud étant analysé
-     * @return si oui ou non on doit l'enlevé de l'arbre
+     * @param node le noeud etant analyse
+     * @return si oui ou non on doit l'enleve de l'arbre
      */
     @Override
 	public boolean analyseNode(DefaultMutableTreeNode node) {

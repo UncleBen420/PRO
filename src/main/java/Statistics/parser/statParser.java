@@ -22,7 +22,7 @@ import Statistics.components.Tag;
  */
 public class statParser {
  
-    private static final String HISTORIC = "history.json";
+    private static final String HISTORIC = "jsonFiles/history.json";
     private final StatisticsHandler statHandler;
     private String currentSequence;
 
@@ -118,10 +118,10 @@ public class statParser {
             JsonArray jtag = (JsonArray) tag;
             Tag tagStructure = new Tag();
             
-            tagStructure.setTypeAnimal(jtag.get(0).getAsString());
-            tagStructure.setSize(jtag.get(1).getAsDouble());
-            tagStructure.setIsMale(jtag.get(2).getAsBoolean());
-            tagStructure.setIsEnteringTunnel(jtag.get(3).getAsBoolean());
+            tagStructure.setTypeAnimal(jtag.get(1).getAsString());
+            tagStructure.setSize(jtag.get(2).getAsDouble());
+            tagStructure.setIsMale(jtag.get(3).getAsBoolean());
+            tagStructure.setIsEnteringTunnel(jtag.get(4).getAsBoolean());
 
             result.add(tagStructure);
         }

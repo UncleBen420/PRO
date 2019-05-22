@@ -79,7 +79,7 @@ public class StatisticsHandler {
         }
 
         for (Month a : Month.values()) {
-            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType  a0 pour toute categorie d'animaux
+            // delcaration et initialisation de la liste pour monthlyObservationsByAnimalType a 0 pour toute categorie d'animaux
             List<Integer> list_byType_ForDaily = createListOfAnimals();
             
             // declaration du mappage entre les observations des animaux observes et les jours d'un mois
@@ -97,7 +97,7 @@ public class StatisticsHandler {
             
             for (int jour = 1; jour <= a.getNbDays(); jour++) {
            
-                // initialisation � 0 du mappage journalier 
+                // initialisation a 0 du mappage journalier 
                 mapDay_Observations.put(jour, 0);
                 
                 

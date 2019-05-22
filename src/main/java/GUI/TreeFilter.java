@@ -14,7 +14,7 @@ import javax.swing.plaf.ColorUIResource;
 import searchfilters.AbstractTreeFilter;
 
 /**
- * Cette classe est une représentation graphique des filtres sur le JTree
+ * Cette classe est une representation graphique des filtres sur le JTree
  * @author Groupe PRO B-9
  */
 abstract public class TreeFilter extends JPanel {
@@ -82,13 +82,13 @@ abstract public class TreeFilter extends JPanel {
     }
 
     /**
-     * Cet methode doit etre implémentée dans les sous classe extendant celle-ci
-     * Elle permet d'ajouter des éléments graphiques différents entre les filtres
+     * Cet methode doit etre implementee dans les sous classe extendant celle-ci
+     * Elle permet d'ajouter des elements graphiques differents entre les filtres
      */
     protected abstract void specialisation();
 
     /**
-     * Methode qui crée les éléments graphiques de base commun à chaque filtre
+     * Methode qui cree les elements graphiques de base commun a chaque filtre
      */
     private void common() {
 

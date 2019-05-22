@@ -12,14 +12,14 @@ import java.util.Properties;
 public class PropertiesHandler {
 	
     /**
-     * parse les propriétés du fichier.
-     * @return les propriétés du fichier
+     * parse les proprietes du fichier.
+     * @return les proprietes du fichier
      */
     static public Properties parseProperties() {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("conf.properties");
+			fr = new FileReader("config/conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 
