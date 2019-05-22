@@ -31,7 +31,7 @@ public class StatisticsHandler {
     private Map<String, Integer> cameraObservations = new HashMap<>();
     private Map<String, Integer> dateObservations = new HashMap<>();
     private Map<String, Integer> sequenceObservations = new HashMap<>();
-    private Map<Month, Integer> monthlyObservations = new HashMap<>();
+    private Map<Month, Integer> monthlyObservations = new HashMap<>();   
     private Map<Month, List<Integer>> monthlyObservationsByAnimalType = new TreeMap<Month, List<Integer>>(
             (Month o1, Month o2) -> o1.compareTo(o2));
 
@@ -60,9 +60,10 @@ public class StatisticsHandler {
     public StatisticsHandler() {
         initiasize();
         images.clear();
-        MeteoAPI mAPI = new MeteoAPI();
-        meteo = mAPI.getList();
-        System.out.println(meteo.toString());
+      //  MeteoAPI mAPI = new MeteoAPI();
+      //  meteo = mAPI.getList();
+      //  MeteoPerDay meteoDay = meteo.get(1);
+     //   System.out.println(meteoDay.toString());
     }
 
     /**
@@ -362,7 +363,7 @@ public class StatisticsHandler {
      */
     public void analyzeData() {
         
-        if (nbTaggedImages != 0) {
+        if (!images.isEmpty()) {
         cameraMinKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MIN));
         cameraMaxKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MAX));
         dateMinKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MIN));
@@ -474,10 +475,6 @@ public class StatisticsHandler {
 
     public String getLeastTaggedSequence() {
         return returnDataString(sequenceMinKeys);
-    }
-
-    public int getTaggedSequenceNumber() {
-        return sequenceObservations.size();
     }
 
     public int getAnimalNbByMonth(Month month) {

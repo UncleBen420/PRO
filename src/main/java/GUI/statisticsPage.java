@@ -1,7 +1,7 @@
 package GUI;
 
 import Statistics.components.Month;
-import Statistics.parser.statParser;
+import Statistics.parser.StatParser;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +35,7 @@ import javafx.scene.control.*;
  */
 public class statisticsPage extends JFrame {
     
-    private statParser parser;
+    private StatParser parser;
     private StatisticsHandler statHandler = new StatisticsHandler();
     private String dayConfig = "1";
     private Month monthConfig = Month.values()[0];
@@ -45,13 +45,9 @@ public class statisticsPage extends JFrame {
      */
     public statisticsPage() {
         // Recuperation des donnees du parser
-        parser = new statParser(statHandler);
+        parser = new StatParser(statHandler);
         parser.parseFile();
         statHandler.analyzeData();
-        //System.out.println(statHandler.test());
-        //Map <Integer, List<Integer>> test = statHandler.getAnimalTypeByHourMap(Month.FEB, 23);
-        
-        //System.out.println(test);
         statistics();
     }
 
@@ -220,19 +216,20 @@ public class statisticsPage extends JFrame {
         
         // Evenements suite aux choix du mois
         monthBox.getSelectionModel().selectedIndexProperty().addListener(new 
-            ChangeListener<Number>() {
+            ChangeListener<Number>() {   
             @Override
             public void changed(ObservableValue ov, Number value, 
-                    Number new_value) {
+                    Number new_value) {             
                 // Enregistrement du choix
                 monthConfig = Month.values()[new_value.intValue()];
                 // Update des numeros disponibles pour le choix du jour
                 daySelector.clear();
                 for (int day = 1; day <= monthConfig.getNbDays(); day++){
-                  daySelector.add(Integer.toString(day));
+                  daySelector.add(Integer.toString(day));   
                 }
+                 System.out.println(daySelector.size());
                 dayBox.setItems(FXCollections.observableArrayList(daySelector));
-                dayBox.getSelectionModel().selectFirst();
+                dayBox.getSelectionModel().selectFirst();   
                 // Clear des 2 charts mois
                 monthLineChart.getData().clear();
                 sbcMonth.getData().clear();
@@ -256,7 +253,9 @@ public class statisticsPage extends JFrame {
                 populateMonthBarChart(sbcMonth);
                 
                 /* Peuplage des graphiques jour avec 1er jour du mois par defaut */
-                dayConfig = "1";
+                
+                dayConfig = daySelector.get(0);
+                
                 dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName());
                 populateDayLineChart(dayLineChart);
                 populateDayBarChart(sbcDay);
@@ -276,20 +275,29 @@ public class statisticsPage extends JFrame {
             @Override
             public void changed(ObservableValue ov, Number value, 
                     Number new_value) {
-                // Enregistrement du choix
-                dayConfig = daySelector.get(new_value.intValue());
-                dayLineChart.getData().clear();
-                sbcDay.getData().clear();
-                /* Peuplage des graphiques de jour */
-                dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName());
-                populateDayLineChart(dayLineChart);
-                populateDayBarChart(sbcDay);
+                
+                // ce test est necessaire afin d eviter un evenement enclence par
+                // l'action de peupler la choiseBox 
+                if (!new_value.equals(-1)) { 
+                    // Enregistrement du choix
+                    dayConfig = daySelector.get(new_value.intValue());
+                    dayLineChart.getData().clear();
+                    sbcDay.getData().clear();
+                    yAxisBarDay.setAutoRanging(false);
+                    yAxisBarDay.setLowerBound(0);
+                    yAxisBarDay.setUpperBound(statHandler.getTaggedAnimals());
+                    yAxisBarDay.setTickUnit(10);
+                    /* Peuplage des graphiques de jour */
+                    dayLineChart.setTitle("Number of animals for the " + dayConfig + " of " + monthConfig.getName());
+                    populateDayLineChart(dayLineChart);
+                    populateDayBarChart(sbcDay);
+                }
             }
-        });        
-        
-        return dynamGroup;
-    }
-    
+        }
+        );
+    return dynamGroup ;
+}
+
     /**
      * Population du graphique animaux totaux par jour
      * @param dayLineChart la chart a peupler
@@ -333,6 +341,7 @@ public class statisticsPage extends JFrame {
         }
           
         Map<Integer, List<Integer>> mapThisMonthByType = statHandler.getAnimalTypeByDayMap(monthConfig); 
+        System.out.println(mapThisMonthByType);
          for (Map.Entry<Integer, List<Integer>> entry : mapThisMonthByType.entrySet()) {
             List<Integer> list = entry.getValue();
             for (AnimalType animal : AnimalType.values()) {
@@ -503,7 +512,7 @@ public class statisticsPage extends JFrame {
         Text imagesInfos = new Text();
         imagesInfos.setFont(new Font(10));
         imagesInfos.setText("tagged : "+ statHandler.getNbTaggedImages() +"\n" +
-                            "untagged : XXX\n" +
+                            "untagged "+ statHandler.getNbUntaggedImages() +"\n" +
                             "total count : "+ statHandler.getNbImages() +"\n");
         imagesInfos.setX(250);
         imagesInfos.setY(530);
@@ -521,8 +530,8 @@ public class statisticsPage extends JFrame {
 
         Text sequencesInfos = new Text();
         sequencesInfos.setFont(new Font(10));
-        sequencesInfos.setText("tagged : "+ statHandler.getTaggedSequenceNumber() +" and also " + statHandler.getNbTaggedSequences() + "\n" +
-                "untagged : XXX\n" +
+        sequencesInfos.setText("tagged : "+ statHandler.getNbTaggedSequences() + "\n" +
+                "untagged : " + statHandler.getNbUntaggedSequences() + "\n" +
                 "total count : "+ statHandler.getNbSequences()  +"\n" +
                 "most captures : "+ statHandler.getMostTaggedSequence() +"\n" +
                 "least captures : "+ statHandler.getLeastTaggedSequence() +"\n");
