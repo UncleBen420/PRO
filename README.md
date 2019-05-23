@@ -37,13 +37,13 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 *Pour Windows PowerShell: mvn clean install; rm .\jsonFiles\cheminPasser.json; rm .\jsonFiles\history.json*
 
-4.  Compléter le champ imageBankPath dans config/conf.properties, avec votre chemin d'accès jusqu'a la banque d'images.
+
+## Run
+1.  Compléter le champ imageBankPath dans config/conf.properties, avec votre chemin d'accès jusqu'a la banque d'images.
 
 *Pour Windows, mettre des doubles \\\, ex: C:\\\Users\\\John\\\Documents\\\PRO\\\config\\\conf.properties*
 
-## Run
-
-1. Depuis la racine du projet:  java -jar target/PRO_Crapauduc_viewer-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+2. Depuis la racine du projet:  java -jar target/PRO_Crapauduc_viewer-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ## Documentation
 
