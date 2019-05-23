@@ -21,7 +21,7 @@ public class JsonTreeParserTest {
 
 		Properties properties = PropertiesHandler.parseProperties();
 		JsonTreeParser js = new JsonTreeParser();
-		js.createJson(new File("src/test/java/jsonparser/testImages"), 1);
+		js.createJson(new File("src/test/java/jsonparser/testImages/"), 1);
 		DefaultMutableTreeNode temp = js
 				.setDirectoryTree((new File(properties.getProperty("JsonBankPath")).getAbsolutePath()));
 
