@@ -29,10 +29,10 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 1. Téléchargez le projet sur votre machine: git clone git@github.com:UncleBen420/PRO.git
 
-2. Déplacez vous à la ranice du projet: cd PRO/
+2. Déplacez vous à la racine du projet: cd PRO/
 
 3. Compilez le projet: mvn install
-      Si vous avez déja compilez le projet,
+      Si vous avez déjà compilez le projet,
       rajoutez l'option clean pour nettoyer des compilation précédentes:  mvn clean install
 
 ## Run
