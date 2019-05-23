@@ -290,6 +290,9 @@ public class JTreeManager extends JPanel {
 						ArrayList<ArrayList<String>> arraytemp = null;
 						try {
 							arraytemp = CsvParser.getTag(p.getTag((new File(value)).getAbsolutePath()));
+							for(ArrayList<String> a : arraytemp) {
+								a.remove(0);
+							}
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
