@@ -27,14 +27,16 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 ## Build and install
 
-1. Téléchargez le projet sur votre machine: git clone git@github.com:UncleBen420/PRO.git
+1.  Téléchargez le projet sur votre machine: git clone git@github.com:UncleBen420/PRO.git
 
-2. Déplacez vous à la racine du projet: cd PRO/
+2.  Déplacez vous à la racine du projet: cd PRO/
 
-3. Compilez le projet: mvn install
+3.  Compilez le projet: mvn install
 
-      Si vous avez déjà compilez le projet,
-      rajoutez l'option clean pour nettoyer des compilation précédentes:  mvn clean install
+3b. Si vous avez déjà compilez le projet, rajoutez l'option clean pour nettoyer des compilation précédentes et supprimer les fichiers history.json et cheminPasser.json :  mvn clean install; rm jsonFiles/history.json jsonFiles/cheminPasser.json
+*Pour Windows PowerShell: mvn clean install; rm .\jsonFiles\cheminPasser.json; rm .\jsonFiles\history.json*
+
+4.  Compléter le champ imageBankPath dans config/conf.properties, avec votre chemin d'accès jusqu'a la banque d'images.
 
 ## Run
 
