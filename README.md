@@ -14,37 +14,30 @@ Development team:
 | Edoardo Carpita                 | edoardo.carpita@heig-vd.ch      | ecarpita93  |
 | Rafael Da Cunha Garcia          | rafael.dacunhagarcia@heig-vd.ch | Rafiibro    |
 | Miguel Angelo Lopes Gouveia     | miguel.lopesgouveia@heig-vd.ch  | endmon      |
-| Marion Dutu Launay	          | marion.dutulaunay@heig-vd.ch    | MarionDL    |
+| Marion Dutu Launay	             | marion.dutulaunay@heig-vd.ch    | MarionDL    |
 
 ## Dependencies
 
-This software requires Java 8 or above and the following libraries:
+L'application requiert Java 8 ou plus et les librairies suivantes :
 
-* Lorem v. 4.3
-* Ipsum v. 48.3.p1
-* Dolor v. 22-3
+* Google Json 2.8.5
+* Junit 5.4.0
+* Maven 4.0.0
+* JavaFX
 
 ## Build and install
 
-1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-   nisi ut aliquip ex ea commodo consequat.
+1. Téléchargez le projet sur votre machine: git clone git@github.com:UncleBen420/PRO.git
 
-2. Duis aute irure dolor in reprehenderit in voluptate velit esse
-   cillum dolore eu fugiat nulla pariatur.
+2. Déplacez vous à la ranice du projet: cd PRO/
 
-3. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-   officia deserunt mollit anim id est laborum.
+3. Compilez le projet: mvn install
+      Si vous avez déja compilez le projet,
+      rajoutez l'option clean pour nettoyer des compilation précédentes:  mvn clean install
 
 ## Run
 
-1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-   nisi ut aliquip ex ea commodo consequat.
-
-2. Duis aute irure dolor in reprehenderit in voluptate velit esse
-   cillum dolore eu fugiat nulla pariatur.
-
-3. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-   officia deserunt mollit anim id est laborum.
+1. Depuis la racine du projet:  java -jar target/PRO_Crapauduc_viewer-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ## Documentation
 
