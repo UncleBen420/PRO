@@ -236,6 +236,7 @@ public class SliderDemo extends JPanel
      */
     public void addImage(String path) {
         int i = 0;
+		frameNumber = 0;
         if (path != null) {
 
             if (!imagesPath.contains(path)) {

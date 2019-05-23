@@ -118,10 +118,10 @@ public class StatParser {
             JsonArray jtag = (JsonArray) tag;
             Tag tagStructure = new Tag();
             
-            tagStructure.setTypeAnimal(jtag.get(1).getAsString());
-            tagStructure.setSize(jtag.get(2).getAsDouble());
-            tagStructure.setIsMale(jtag.get(3).getAsBoolean());
-            tagStructure.setIsEnteringTunnel(jtag.get(4).getAsBoolean());
+            tagStructure.setTypeAnimal(jtag.get(0).getAsString());
+            tagStructure.setSize(jtag.get(1).getAsDouble());
+            tagStructure.setIsMale(jtag.get(2).getAsBoolean());
+            tagStructure.setIsEnteringTunnel(jtag.get(3).getAsBoolean());
 
             result.add(tagStructure);
         }
