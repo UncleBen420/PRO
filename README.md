@@ -32,6 +32,7 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 2. Déplacez vous à la racine du projet: cd PRO/
 
 3. Compilez le projet: mvn install
+
       Si vous avez déjà compilez le projet,
       rajoutez l'option clean pour nettoyer des compilation précédentes:  mvn clean install
 
