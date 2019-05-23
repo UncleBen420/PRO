@@ -19,7 +19,7 @@ public class PropertiesHandler {
 		Properties properties = new Properties();
 		FileReader fr = null;
 		try {
-			fr = new FileReader("config/conf.properties");
+			fr = new FileReader("/mnt/Data/HEIG-VD/PRO/Code/PRO/config/conf.properties");
 			properties.load(fr);
 		} catch (FileNotFoundException e) {
 

@@ -50,10 +50,11 @@ public class crapau extends javax.swing.JFrame {
         Side = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel(){
             public void paintComponent(Graphics g){
-                ImageIcon m = new javax.swing.ImageIcon(getClass().getResource("/images/logo_allWhite.png"));
+                /*ImageIcon m = new javax.swing.ImageIcon(this.getClass().getResource("/images/logo_allWhite.png"));
                 Image i = m.getImage();
 
                 g.drawImage(i,0,0, this.getSize().width, this.getSize().height, this);
+                */
             }
 
         };
