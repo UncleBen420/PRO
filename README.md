@@ -39,7 +39,7 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 4.  Compléter le champ imageBankPath dans config/conf.properties, avec votre chemin d'accès jusqu'a la banque d'images.
 
-*Pour Windows, mettre des doubles \\, ex: C:\\Users\John\Documents\PRO\config/conf.properties*
+*Pour Windows, mettre des doubles \\\, ex: C:\\\Users\\\John\\\Documents\\\PRO\\\config\\\conf.properties*
 
 ## Run
 
