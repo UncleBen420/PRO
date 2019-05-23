@@ -209,7 +209,7 @@ public class StatisticsHandler {
 
     /**
      * Insere une valeur et potentiellement sa cle dans une map
-     * Permet de peupler facilement tous les mappages non initialisés
+     * Permet de peupler facilement tous les mappages non initialises
      * @param map la map ou faire l'insertion
      * @param key la cle
      * @param value la valeur
