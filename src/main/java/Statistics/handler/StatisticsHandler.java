@@ -31,7 +31,7 @@ public class StatisticsHandler {
     private Map<String, Integer> cameraObservations = new HashMap<>();
     private Map<String, Integer> dateObservations = new HashMap<>();
     private Map<String, Integer> sequenceObservations = new HashMap<>();
-    private Map<Month, Integer> monthlyObservations = new HashMap<>();
+    private Map<Month, Integer> monthlyObservations = new HashMap<>();   
     private Map<Month, List<Integer>> monthlyObservationsByAnimalType = new TreeMap<Month, List<Integer>>(
             (Month o1, Month o2) -> o1.compareTo(o2));
 
@@ -45,7 +45,7 @@ public class StatisticsHandler {
     private int nbSequences;
     private int nbTaggedImages;
     private int nbTaggedSequences;
-    private int totalNbOfAnimals;
+    private int nbAnimals;
     
     List<String> cameraMaxKeys;
     List<String> cameraMinKeys;
@@ -60,18 +60,22 @@ public class StatisticsHandler {
     public StatisticsHandler() {
         initiasize();
         images.clear();
-        MeteoAPI mAPI = new MeteoAPI();
-        meteo = mAPI.getList();
-        //System.out.println(meteo.toString());
+      //  MeteoAPI mAPI = new MeteoAPI();
+      //  meteo = mAPI.getList();
+      //  MeteoPerDay meteoDay = meteo.get(1);
+     //   System.out.println(meteoDay.toString());
     }
 
     /**
-     * Initialisation des attributs 
+     * Initialisation des attributs et des mappages
+     * Certains mappages et attributs necessitent la presence d'une valeur minimale (0) afin
+     * de peupler toutes les chartes graphiques, cette fonction intialise ces
+     * mappages et attributs
      */
     private void initiasize() {   
   
         for (AnimalType a : AnimalType.values()) {
-            // initialisation de la liste pour animalTypeCountera 0 pour toute categorie categorie d'animaux
+            // initialisation de la liste pour animalTypeCounter a 0 pour toute categorie categorie d'animaux
             animalTypeCounter.put(a, 0);
         }
 
@@ -138,7 +142,7 @@ public class StatisticsHandler {
             
         }
 
-        totalNbOfAnimals = 0;
+        nbAnimals = 0;
         nbImages = 0;
         nbSequences = 0;
         nbTaggedImages = 0;
@@ -205,6 +209,7 @@ public class StatisticsHandler {
 
     /**
      * Insere une valeur et potentiellement sa cle dans une map
+     * Permet de peupler facilement tous les mappages non initialisés
      * @param map la map ou faire l'insertion
      * @param key la cle
      * @param value la valeur
@@ -358,7 +363,7 @@ public class StatisticsHandler {
      */
     public void analyzeData() {
         
-        if (nbTaggedImages != 0) {
+        if (!images.isEmpty()) {
         cameraMinKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MIN));
         cameraMaxKeys = findLimitKeysInMap(cameraObservations, findLimitValueInMap(cameraObservations, MAX));
         dateMinKeys = findLimitKeysInMap(dateObservations, findLimitValueInMap(dateObservations, MIN));
@@ -366,6 +371,7 @@ public class StatisticsHandler {
         sequenceMinKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MIN));
         sequenceMaxKeys = findLimitKeysInMap(sequenceObservations, findLimitValueInMap(sequenceObservations, MAX));
         } else {
+            // si aucune image de la base possede un tag, on affiche un message alternatif
              cameraMinKeys = new ArrayList<String>();
              cameraMinKeys.add("no tagged images");
              
@@ -391,7 +397,7 @@ public class StatisticsHandler {
     }
 
     public void addNbAnimals(int n) {
-        this.totalNbOfAnimals += n;
+        this.nbAnimals += n;
     }
 
     public void addNbImages(int n) {
@@ -421,22 +427,26 @@ public class StatisticsHandler {
     public int getNbTaggedSequences() {
         return nbTaggedSequences;
     }
-    
-    
-    
-    
-    
-    
+
+    public int getNbUntaggedSequences() {
+        return nbSequences - nbTaggedSequences;
+    }
+
+    public int getNbUntaggedImages() {
+        return nbImages - images.size();
+    }
+
+  
     public Map<AnimalType, Integer> getAnimalTypeCounter() {
         return this.animalTypeCounter;
     }
 
     public void setTotalNbOfAnimals(int n) {
-        this.totalNbOfAnimals = n;
+        this.nbAnimals = n;
     }
 
     public int getTaggedAnimals() {
-        return this.totalNbOfAnimals;
+        return this.nbAnimals;
     }
     
     public int getTaggedImages() {
@@ -465,10 +475,6 @@ public class StatisticsHandler {
 
     public String getLeastTaggedSequence() {
         return returnDataString(sequenceMinKeys);
-    }
-
-    public int getTaggedSequenceNumber() {
-        return sequenceObservations.size();
     }
 
     public int getAnimalNbByMonth(Month month) {

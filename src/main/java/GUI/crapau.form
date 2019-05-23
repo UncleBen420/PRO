@@ -4,7 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="CrapauducViewer"/>
-    <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="59" green="21" red="35" type="rgb"/>
     </Property>
@@ -90,14 +89,10 @@
                   <Component id="Filters" alignment="0" max="32767" attributes="0"/>
                   <Component id="Settings" alignment="1" max="32767" attributes="0"/>
                   <Component id="Navigate" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="filtersPanel1" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="Titre" max="32767" attributes="0"/>
-                      </Group>
+                  <Component id="Titre" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="filtersPanel1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -105,9 +100,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="Titre" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="Navigate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="Filters" min="-2" max="-2" attributes="0"/>
@@ -127,22 +122,37 @@
                   <Color blue="59" green="21" red="35" type="rgb"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    public void paintComponent(Graphics g){&#xa;        /*ImageIcon m = new javax.swing.ImageIcon(this.getClass().getResource(&quot;/images/logo_allWhite.png&quot;));&#xa;        Image i = m.getImage();&#xa;&#xa;        g.drawImage(i,0,0, this.getSize().width, this.getSize().height, this);&#xa;*/    &#xa;}&#xa;&#xa;}"/>
-              </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;&quot;" type="code"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/images/logo_allwhite.png&quot;)));&#xa;jLabel1.setHorizontalAlignment(JLabel.CENTER);"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Filters">
               <Properties>

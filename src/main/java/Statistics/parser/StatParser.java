@@ -20,14 +20,14 @@ import Statistics.components.Tag;
  * Parse le fichier history qui contient les informations json de la banque d'images
  * @author Groupe PRO B-9
  */
-public class statParser {
+public class StatParser {
  
     private static final String HISTORIC = "jsonFiles/history.json";
     private final StatisticsHandler statHandler;
     private String currentSequence;
 
     
-    public statParser(StatisticsHandler statHandler) {
+    public StatParser(StatisticsHandler statHandler) {
         this.statHandler = statHandler;
         this.currentSequence = "";
     }
