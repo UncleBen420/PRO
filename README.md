@@ -47,6 +47,6 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 ## Documentation
 
-User manual: see file xxxxx.
+User manual: [see file](doc/Manuel_Utilisation.pdf)
 
 API documentation: [see file](doc/documentation.pdf)
