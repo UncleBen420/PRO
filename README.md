@@ -33,10 +33,13 @@ L'application requiert Java 8 ou plus et les librairies suivantes :
 
 3.  Compilez le projet: mvn install
 
-3b. Si vous avez déjà compilez le projet, rajoutez l'option clean pour nettoyer des compilation précédentes et supprimer les fichiers history.json et cheminPasser.json :  mvn clean install; rm jsonFiles/history.json jsonFiles/cheminPasser.json
+3b. Si vous avez déjà compilez le projet, rajoutez l'option clean pour nettoyer des compilation précédentes et supprimer les  fichiers history.json et cheminPasser.json :  mvn clean install; rm jsonFiles/history.json jsonFiles/cheminPasser.json
+
 *Pour Windows PowerShell: mvn clean install; rm .\jsonFiles\cheminPasser.json; rm .\jsonFiles\history.json*
 
 4.  Compléter le champ imageBankPath dans config/conf.properties, avec votre chemin d'accès jusqu'a la banque d'images.
+
+*Pour Windows, mettre des doubles \\, ex: C:\\Users\John\Documents\PRO\config/conf.properties*
 
 ## Run
 
